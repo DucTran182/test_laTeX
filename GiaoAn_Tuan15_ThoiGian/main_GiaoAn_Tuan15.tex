@@ -81,6 +81,41 @@
   \ifPDFTeX\usepackage[T5]{fontenc}\fi
 }
 \IfFileExists{MauKT.tex}{\input{MauKT}}{}
+%=======Dự phòng cho mẫu giáo án ============
+% Chỉ dùng khi KhoiTieuHoc.tex / MauKT.tex / ex_test.sty CHƯA có;
+% nếu đã upload các file đó thì định nghĩa thật của chúng được giữ nguyên.
+\usepackage{multicol}
+\makeatletter
+\@ifundefined{hktuan}{%
+  \renewcommand{\thesubsection}{\Roman{subsection}.}
+  \renewcommand{\thesubsubsection}{Hoạt động \arabic{subsubsection}:}
+  \setcounter{secnumdepth}{3}
+  \newcommand{\hktuan}[2]{%
+    \setcounter{subsection}{0}%
+    \setlength{\headheight}{37pt}\setlength{\headsep}{8pt}\setlength{\footskip}{1.2cm}%
+    \fancyhf{}%
+    \fancyhead[L]{\IfFileExists{Hinh_Tuan15/image28.png}{\includegraphics[height=0.9cm]{image28.png}}{\IfFileExists{Data_GiaoAn_HK0/Hinh_Tuan15/image28.png}{\includegraphics[height=0.9cm]{image28.png}}{}}}%
+    \fancyhead[R]{\begin{tabular}[b]{@{}r@{}}\textbf{\textcolor{mauchinh}{PHÁT TRIỂN TƯ DUY CẤP ĐỘ A}}\\\textit{HỌC KÌ #1 -- TUẦN #2}\end{tabular}}%
+    \fancyfoot[L]{Trang \thepage}%
+    \fancyfoot[C]{\textbf{TRUNG TÂM TOÁN TITAN THỦ ĐỨC}}%
+    \fancyfoot[R]{\IfFileExists{Hinh_Tuan15/image29.jpeg}{\includegraphics[height=0.8cm]{image29.jpeg}}{\IfFileExists{Data_GiaoAn_HK0/Hinh_Tuan15/image29.jpeg}{\includegraphics[height=0.8cm]{image29.jpeg}}{}}}%
+    \noindent{\color{mauchinh}\bfseries\large HỌC KÌ #1 -- TUẦN #2}\par\medskip}%
+}{}
+\@ifundefined{hd}{%
+  \newtcolorbox{hd}{enhanced,breakable,colback=mauchinh!5,colframe=mauchinh!60,
+    boxrule=0.6pt,arc=2pt,left=4pt,right=4pt,top=2pt,bottom=2pt,
+    before upper={\setlength{\itemsep}{0pt}\setlength{\topsep}{0pt}}}%
+}{}
+\@ifundefined{vd}{%
+  \newcounter{vd}
+  \newenvironment{vd}{\par\addvspace{4pt}\noindent\refstepcounter{vd}{\color{mauchinh}\bfseries Ví dụ \thevd.}\ }{\par\addvspace{4pt}}%
+}{}
+\@ifundefined{luuy}{%
+  \newtcolorbox{luuy}{enhanced,breakable,colback=orange!6,colframe=orange!70!black,
+    boxrule=0.5pt,arc=2pt,left=4pt,right=4pt,top=2pt,bottom=2pt,
+    title={\bfseries Lưu ý},fonttitle=\small,coltitle=white}%
+}{}
+\makeatother
 %=======Tắt bật đáp ============
 %\newcommand{\tatdapan}{}
 \newcommand{\tatdapan}{\end{document}}
