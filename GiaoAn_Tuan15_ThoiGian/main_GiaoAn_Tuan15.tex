@@ -2,7 +2,7 @@
 \usepackage{amsmath, amssymb, fancyhdr, wasysym,tabvar}
 \usepackage{tkz-euclide,tikz-3dplot, tikz,tkz-tab}
 \usepackage{fontawesome5}
-\usepackage{fontawesome}
+% \usepackage{fontawesome} % Font Awesome 4: xung đột với fontawesome5, không dùng cùng lúc
 \usepackage[many]{tcolorbox}
 \usepackage{pgf}
 \usepackage{qrcode} % Gói tạo mã QR
@@ -69,13 +69,18 @@
 \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
 %Ẩn hiện đáp án
 %\usepackage[loigiai]{ex_test}%Hiển đề, lời giải chi tiết, Tô màu đáp án 
-\usepackage[dethi]{ex_test}%Hiện đề và đáp án
+\IfFileExists{ex_test.sty}{\usepackage[dethi]{ex_test}}{}%Hiện đề và đáp án (bỏ qua nếu chưa upload ex_test.sty)
 %\usepackage[color]{ex_test} %tô màu đáp án và không in lời giải chi tiết
 
 %\newtheorem{bt}{Bài}
 %bật tắt mẫu TITAN
-\input{KhoiTieuHoc}
-\input{MauKT}
+% Các file dưới đây là tùy chọn: nếu chưa upload lên Overleaf thì bỏ qua để vẫn biên dịch được
+\IfFileExists{KhoiTieuHoc.tex}{\input{KhoiTieuHoc}}{%
+  % Dự phòng khi thiếu KhoiTieuHoc.tex: bật hỗ trợ chữ tiếng Việt
+  \usepackage{iftex}%
+  \ifPDFTeX\usepackage[T5]{fontenc}\fi
+}
+\IfFileExists{MauKT.tex}{\input{MauKT}}{}
 %=======Tắt bật đáp ============
 %\newcommand{\tatdapan}{}
 \newcommand{\tatdapan}{\end{document}}
@@ -85,6 +90,7 @@
 %\SHOWfalse
 %============================
 
+\providecommand{\lop}{}% phòng khi \lop chưa được định nghĩa
 \renewcommand{\lop}{A}
 \begin{document}
 \subfile{Data_GiaoAn_HK0/GiaoAn_Tuan_15_ThoiGian}
