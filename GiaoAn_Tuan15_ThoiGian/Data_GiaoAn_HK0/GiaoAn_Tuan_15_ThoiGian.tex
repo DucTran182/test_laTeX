@@ -1,0 +1,293 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+%=========================================================
+% TĐ_GiaoAn_IQA_HK1_Tuan15_Thoigian
+% Giáo án Toán tư duy cấp độ A - Chủ đề THỜI GIAN (Buổi 1, Buổi 2)
+% Hình đặt trong thư mục Hinh_Tuan15/ (các hình của giáo án có tiền tố ga_)
+\graphicspath{{Hinh_Tuan15/}{Data_GiaoAn_HK0/Hinh_Tuan15/}}%biên dịch riêng file này hoặc từ main.tex đều được
+%=========================================================
+
+%---------- Đầu trang / chân trang ----------
+\setlength{\headheight}{34pt}
+\setlength{\headsep}{8pt}
+\setlength{\footskip}{1.2cm}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=0.9cm]{image28.png}}
+\fancyhead[R]{\begin{tabular}[b]{@{}r@{}}\textbf{\textcolor{mauchinh}{PHÁT TRIỂN TƯ DUY CẤP ĐỘ A}}\\\textit{TUẦN 15\&16}\end{tabular}}
+\fancyfoot[L]{Trang \thepage}
+\fancyfoot[C]{\textbf{TRUNG TÂM TOÁN TITAN THỦ ĐỨC}}
+\fancyfoot[R]{\includegraphics[height=0.8cm]{image29.jpeg}}
+
+%---------- Lệnh dùng riêng cho giáo án ----------
+\newcounter{GAmuc}  % I., II.
+\newcounter{GAcon}  % a., b., c.
+% I. MỤC TIÊU / II. TIẾN TRÌNH DẠY HỌC
+\newcommand{\GAmuc}[1]{\par\addvspace{6pt}\noindent\stepcounter{GAmuc}\textbf{\Roman{GAmuc}.\ #1}\par\nopagebreak\addvspace{2pt}}
+% Tên hoạt động
+\newcommand{\GAhd}[1]{\par\addvspace{6pt}\noindent\textbf{#1}\par\nopagebreak\addvspace{2pt}}
+% a. Giờ đúng / b. Đọc giờ 24 / c. Giờ lẻ
+\newcommand{\GAcon}[1]{\par\addvspace{4pt}\noindent\stepcounter{GAcon}\textbf{\alph{GAcon}.\ #1}\par\nopagebreak\addvspace{2pt}}
+% Danh sách gạch đầu dòng (cấp 1: gạch, cấp 2: chấm tròn)
+\newenvironment{GAgach}{\begin{itemize}\renewcommand{\labelitemi}{\textendash}\renewcommand{\labelitemii}{$\bullet$}\setlength{\itemsep}{1pt}\setlength{\topsep}{2pt}\setlength{\parsep}{0pt}}{\end{itemize}}
+% Chèn hình (mặc định rộng 12cm, căn giữa)
+\providecommand{\TThinh}[2][12cm]{\begin{center}\includegraphics[width=#1,height=0.9\textheight,keepaspectratio]{#2}\end{center}}
+% Đồng hồ trống có ghi số phút 0, 5, ..., 55 xung quanh (hình vẽ trên bảng)
+\newcommand{\GAdonghophut}{%
+  \begin{center}
+    \begin{tikzpicture}
+      \node at (0,0) {\includegraphics[width=4.5cm]{ga_image8.png}};
+      \foreach \k in {0,...,11}{%
+        \node[font=\small\bfseries,text=mauchinh] at ({90-30*\k}:2.95cm) {\number\numexpr5*\k\relax};}
+    \end{tikzpicture}
+  \end{center}}
+
+%=========================================================
+%                       BUỔI 1
+%=========================================================
+\setcounter{GAmuc}{0}\setcounter{GAcon}{0}
+\noindent\textit{(Tuần 15, Buổi 1)}
+\begin{center}
+  {\large\bfseries CHỦ ĐỀ: THỜI GIAN (buổi 1)}
+\end{center}
+
+\GAmuc{MỤC TIÊU}
+\begin{GAgach}
+  \item HS phân biệt được các loại kim: kim giờ, kim phút, kim giây.
+  \item HS biết xem đồng hồ: biết cách đọc giờ đúng, giờ 24, giờ rưỡi và giờ lẻ (giờ có phút, đối với HS nhanh).
+  \item HS biết cách vẽ giờ đúng.
+\end{GAgach}
+
+\GAmuc{TIẾN TRÌNH DẠY HỌC}
+\begin{GAgach}
+  \item Đồ dùng dạy học: giáo án, PBT, bút, khăn ẩm, laptop, con dấu, đồng hồ.
+\end{GAgach}
+
+\GAhd{Hoạt động 1: Ổn định lớp. Sửa bài tập về nhà (10 phút)}
+
+\GAhd{Hoạt động 2: Xem đồng hồ (50 phút)}
+\begin{GAgach}
+  \item GV vấn đáp HS một số câu hỏi
+  \begin{GAgach}
+    \item Chúng ta xem giờ bằng gì?
+    \item Đồng hồ thường có hình dạng gì?
+  \end{GAgach}
+  \item Giới thiệu với HS một số loại đồng hồ: đồng hồ đeo tay, đồng hồ báo thức, đồng hồ treo tường,\dots
+\end{GAgach}
+\begin{center}
+  \includegraphics[width=4cm]{ga_image1.png}\hspace{1cm}\includegraphics[width=7.4cm]{ga_image2.png}
+\end{center}
+\begin{GAgach}
+  \item GV Chuẩn bị: đồng hồ treo tường 2 kim (hoặc đồng hồ mô hình), hình “Hai chiếc kim” bên dưới.
+  \item Cách chơi: GV kể: “Hai bạn kim cùng xuất phát ở số 12, thi chạy một vòng quanh đồng hồ. Con đoán xem ai về đích trước?”. HS đoán, giơ tay bình chọn. GV xoay kim phút một vòng, kim giờ nhích sang số kế tiếp để cả lớp kiểm chứng.
+  \item GV chốt: kim phút chạy nhanh hơn kim giờ. Kim ngắn chỉ giờ, kim dài chỉ phút.
+  \item GV vấn đáp: Nếu kim phút (kim dài quay một vòng thì kim ngắn di chuyển như thế nào? Nếu kim phút quay một vòng kim giờ sẽ di chuyển từ số nay đến số kế tiếp.
+  \item GV hướng dẫn và làm mẫu cho HS theo từng cấp độ.
+\end{GAgach}
+\TThinh[13.2cm]{ga_image3.png}
+\begin{GAgach}
+  \item GV cho HS chơi \textbf{“Điền số thần tốc”}: chia lớp 2 đội. GV vẽ đồng hồ lên cho HS quan sát, chú ý vị trí của các số 12, 3, 6, 9. GV xóa các số chỉ để lại các số 12, 3, 6, 9 và yêu cầu HS điền các số ở giữa.
+  \item Mỗi lượt, một bạn của mỗi đội chạy lên điền nhanh một số còn thiếu trên đồng hồ vẽ ở bảng (GV đã xóa dần). Đội điền đúng và nhanh hơn được 1 sao. Tiếp tục như vậy đến khi HS nắm được vị trí các số trên đồng hồ.
+  \item Mẹo nhớ: \textit{“12 ở đỉnh đầu, 6 ở dưới chân, 3 bên phải, 9 bên trái.}
+\end{GAgach}
+\TThinh[9.7cm]{ga_image4.png}
+
+\GAcon{Giờ đúng}
+\begin{GAgach}
+  \item Giữ kim phút ở số 12, di chuyển kim giờ qua các số 1, 2, 3, \dots hướng dẫn HS đây là giờ đúng và đọc là 1 giờ, 2 giờ, 3 giờ, \dots
+  \item GV chú ý một số trường hợp đặc biệt: 12 giờ (kim giờ và kim phút trùng nhau), 6 giờ (kim phút và kim giờ thẳng hàng).
+  \item GV xoay kim, lần lượt gọi từng HS đọc giờ, thực hiện nhiều lần để HS nhớ
+  \item Giới thiệu cho học sinh cách ghi giờ bằng dấu: 5:00, 9:00 \dots
+  \item GV cho HS chia thành nhóm 2 -- 3 HS thi đua xoay đồng hồ theo yêu cầu của GV để lấy điểm cộng.
+  \item Bài tập áp dụng: Bài 1, 2, 3 Phiếu bài tập
+\end{GAgach}
+
+\GAcon{Đọc giờ 24}
+\begin{GAgach}
+  \item Giới thiệu cho HS biết 1 ngày có 24 giờ.
+  \item[$\rightarrow$] Kim giờ sẽ chạy 2 vòng của đồng hồ.
+  \item Giới thiệu với HS các buổi trong ngày (sáng, trưa, chiều, tối). GV dựa vào việc quan sát không gian xung quanh, buổi sáng (trưa, chiều, tối) sẽ như thế nào?
+  \item GV cho HS chơi \textbf{“Một ngày của em”} (dán thẻ lên trục thời gian)
+  \item Chuẩn bị: 4 -- 6 thẻ tranh hoạt động (thức dậy, đi học, ăn trưa, tan học, ăn tối, đi ngủ); vẽ trục thời gian lên bảng như hình dưới.
+  \item Cách chơi: mỗi nhóm nhận 1 thẻ, cử đại diện dán thẻ vào đúng buổi (sáng -- chiều -- tối).
+\end{GAgach}
+\TThinh[16.4cm]{ga_image5.png}
+\begin{GAgach}
+  \item GV hướng dẫn qua 12 giờ trưa, kim phút chỉ số 12, kim giờ chỉ số 1 đọc là 1 giờ chiều hoặc là 13 giờ, tương tự với các giờ tiếp theo.
+  \item GV vừa hướng dẫn vừa điền vào bảng và vấn đáp để HS ghi nhớ.
+\end{GAgach}
+
+% Bảng SÁNG - CHIỀU - TỐI (chứa 2 bảng con)
+\begin{center}
+  \renewcommand{\arraystretch}{1.3}
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{|p{1.7cm}|p{8cm}|p{6.7cm}|}
+    \hline
+    \centering\textbf{SÁNG} & \centering\textbf{CHIỀU} & \centering\arraybackslash\textbf{TỐI} \\ \hline
+    0 giờ đến 12 giờ (1 vòng đồng hồ)
+    &
+    {\scriptsize\setlength{\tabcolsep}{1.5pt}\renewcommand{\arraystretch}{1.2}%
+     \begin{tabular}{|*{6}{>{\centering\arraybackslash}p{1.2cm}|}}
+       \hline
+       1 giờ chiều & 2 giờ chiều & 3 giờ chiều & 4 giờ chiều & 5 giờ chiều & 6 giờ chiều \\ \hline
+       13 giờ & 14 giờ & 15 giờ & 16 giờ & 17 giờ & 18 giờ \\ \hline
+     \end{tabular}}
+    &
+    {\scriptsize\setlength{\tabcolsep}{1.5pt}\renewcommand{\arraystretch}{1.2}%
+     \begin{tabular}{|*{5}{>{\centering\arraybackslash}p{1.2cm}|}}
+       \hline
+       7 giờ tối & 8 giờ tối & 9 giờ tối & 10 giờ tối & 11 giờ tối \\ \hline
+       19 giờ & 20 giờ & 21 giờ & 22 giờ & 23 giờ \\ \hline
+     \end{tabular}} \\ \hline
+  \end{tabular}
+\end{center}
+
+\begin{GAgach}
+  \item GV vấn đáp HS
+  \begin{GAgach}
+    \item 1 giờ chiều ứng với mấy giờ?
+    \item 14 giờ ứng với mấy giờ chiều?
+    \item 3 giờ chiều ứng với mấy giờ?
+    \item Con đi học về lúc 17 giờ tức là mấy giờ chiều?
+  \end{GAgach}
+\end{GAgach}
+\begin{center}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular}{|>{\centering\arraybackslash}p{4.5cm}|>{\centering\arraybackslash}p{4.5cm}|}
+    \hline
+    1 giờ chiều & ? \\ \hline
+    ? & 14 giờ \\ \hline
+    3 giờ chiều & ? \\ \hline
+  \end{tabular}
+\end{center}
+\begin{GAgach}
+  \item GV vấn đáp HS tới khi HS đổi giờ được.
+  \item Bài tập áp dụng: Bài 5 Phiếu bài tập
+  \item GV cho HS tập vẽ đồng hồ đúng và làm bài 6 trong PBT
+\end{GAgach}
+
+\begin{center}
+  \textbf{PHIẾU BÀI TẬP -- THỜI GIAN}
+\end{center}
+\TThinh[13cm]{ga_image6.png}
+\TThinh[13.3cm]{ga_image7.png}
+
+\GAcon{Giờ lẻ (giờ có phút). (Đối với HS nhanh)}
+\begin{GAgach}
+  \item GV ôn lại đếm cách 5.
+  \item GV cho HS chơi thi đua: Các bạn đếm lần lượt 5, 10, 15, \dots, 55 sao đó quay lại, bạn nào đếm sai sẽ lên hát, múa,\dots
+  \item Bạn nào sai ít nhất sẽ được cộng 3+, ít thứ hai được 2+, \dots
+  \item GV quay lại bài học, di chuyển kim phút đến các vị trí 1, 2, \dots Giới thiệu cho học sinh mỗi vị trị ứng với số phút 5, 10, \dots
+  \item GV vẽ đồng hồ và vị trí phút tương ứng để HS ghi nhớ. Chú ý cho học sinh các mốc đặc biệt cần nhớ để dễ đếm 15, 30, 45 phút.
+\end{GAgach}
+\GAdonghophut
+\TThinh[7.1cm]{ga_image9.png}
+\begin{GAgach}
+  \item GV di chuyển kim phút 1 vòng cho học sinh đọc phút và yêu cầu học sinh chú ý thêm về vị trí của kim giờ. Khi kim phút quay thì kim giờ cũng quay theo.
+  \item GV kết hợp với kim giờ để học sinh đọc giờ có phút.
+  \item Đầu tiên di chuyển kim phút đến số 6 (30 phút). Yêu cầu học sinh đọc phút và quan sát vị trí của kim giờ lần nữa (nằm giữa số 2 và 3), tiếp tục quay kim phút sẽ thấy kim giờ từ từ di chuyển lại gần số 3.
+  \item Chú ý cho HS vị trí của \textbf{\textit{kim giờ chưa đến số 3}} thì sẽ đọc là \textbf{\textit{2 giờ \dots\ phút}}. Di chuyển đồng hồ bất kì và gọi học sinh đọc nhiều lần cho đến khi lớp đọc ổn.
+  \item GV xoay kim phút trên đồng hồ rồi dừng tại một vài vị trí (20 phút, 35 phút\dots), cả lớp viết số phút lên bảng con. GV có thể vấn đáp học sinh, yêu cầu học sinh đọc giờ và phút đến khi cả lớp thành thạo.
+  \item GV hướng dẫn HS đổi giờ lẻ theo đọc giờ 24 tương tự giờ đúng: 3 giờ 15 phút chiều tức là 15 giờ 15 phút, 18 giờ 30 phút tức là 6 giờ 30 phút tối, \dots
+  \item GV vấn đáp HS
+  \begin{GAgach}
+    \item 1 giờ 45 phút chiều ứng với mấy giờ?
+    \item 14 giờ 30 phút ứng với mấy giờ chiều?
+    \item 7 giờ 20 phút tối ứng với mấy giờ?
+    \item Con đi học Titan lúc 17 giờ 30 phút tức là mấy giờ chiều?
+  \end{GAgach}
+  \item GV cho HS chơi: “Rung chuông vàng” (10 phút)
+  \item Cách chơi: mỗi HS một bảng con. GV đọc câu hỏi, HS viết đáp án và giơ bảng khi nghe hiệu lệnh. Bạn nào sai ngồi xuống, bạn nào còn đứng đến cuối cùng được rung chuông vàng và nhận 3 sao cho nhóm. (Lớp từ 10 -- 20 HS có thể chơi theo nhóm: mỗi nhóm một bảng.)
+  \item Câu hỏi gợi ý:
+  \begin{GAgach}
+    \item 7 giờ tối là mấy giờ? $\rightarrow$ 19 giờ.
+    \item Lúc 12 giờ, hai kim đồng hồ như thế nào? $\rightarrow$ Trùng nhau.
+    \item Lúc 6 giờ, hai kim như thế nào? $\rightarrow$ Thẳng hàng.
+    \item 20 giờ là mấy giờ tối? $\rightarrow$ 8 giờ tối.
+    \item (HS nhanh) Kim phút chỉ số 6 là bao nhiêu phút? $\rightarrow$ 30 phút
+    \item (HS nhanh) 3 giờ 15 phút chiều đọc theo giờ 24 là? $\rightarrow$ 15 giờ 15 phút.
+  \end{GAgach}
+  \item Bài tập áp dụng: Bài 7 Phiếu bài tập
+\end{GAgach}
+
+\GAhd{Hoạt động 3: Luyện tập (30 phút)}
+\begin{GAgach}
+  \item GV cho HS làm bài trong PBT để củng cố kiến thức.
+\end{GAgach}
+
+\GAhd{Hoạt động 5: BTVN (5 phút)}
+\begin{GAgach}
+  \item GV giao BTVN tuỳ vào tình hình lớp.
+\end{GAgach}
+
+%=========================================================
+%                       BUỔI 2
+%=========================================================
+\newpage
+\setcounter{GAmuc}{0}\setcounter{GAcon}{0}
+\noindent\textit{(Tuần 15, Buổi 2)}
+\begin{center}
+  {\large\bfseries CHỦ ĐỀ 29: THỜI GIAN (buổi 2)}
+\end{center}
+
+\GAmuc{MỤC TIÊU}
+\begin{GAgach}
+  \item HS thành thạo đọc giờ đúng, biết vẽ kim đồng hồ tương ứng với giờ đúng.
+  \item HS ước lượng được mốc thời gian thực hiện các hoạt động.
+  \item HS ước lượng được khoảng thời gian thực hiện một hoạt động.
+  \item HS tính được khoảng thời gian thực hiện một hoạt động theo yêu cầu.
+\end{GAgach}
+
+\GAmuc{TIẾN TRÌNH DẠY HỌC}
+\begin{GAgach}
+  \item Đồ dùng dạy học: giáo án, PBT, bút, khăn ẩm, laptop, con dấu, đồng hồ.
+\end{GAgach}
+
+\GAhd{Hoạt động 1: Ổn định lớp. Sửa bài tập về nhà (10 phút)}
+\begin{GAgach}
+  \item GV sửa bài tập về nhà cho HS, ôn lại cách đọc giờ và cho HS làm PBT buổi 2.
+\end{GAgach}
+
+\GAhd{Hoạt động 2: Ôn tập xem đồng hồ, vẽ kim đồng hồ với thời gian tương ứng (20 phút)}
+\begin{GAgach}
+  \item GV cho HS ôn tập bằng cách chiếu hình 4 đồng hồ bên dưới. Mỗi đồng hồ có một bạn nhỏ “phát biểu” giờ. \textbf{Bạn nào đúng, bạn nào sai?} Gọi HS trả lời, giải thích và sửa lại đáp án cho đúng.
+\end{GAgach}
+\TThinh[14.8cm]{ga_image10.png}
+\begin{GAgach}
+  \item Gọi HS lên bảng vẽ kim đồng hồ
+  \item Bài tập áp dụng: Bài 1, 2 Phiếu bài tập
+\end{GAgach}
+
+\GAhd{Hoạt động 3: Lập thời gian biểu. Ước lượng khoảng thời gian (15 phút)}
+\begin{GAgach}
+  \item GV chuẩn bị các thẻ hoạt động và các thẻ ghi thời gian để phát cho HS.
+  \item GV chia lớp thành nhóm 2 -- 3 HS để thi đua lấy điểm cộng.
+  \item GV yêu cầu HS dán các thẻ thời gian phù hợp với các hoạt động: Đi học, ăn cơm trưa, đi tắm, học bài, xem ti vi, đi ngủ,\dots
+  \item Nhóm nào dán nhanh nhất sẽ được điểm cộng.
+  \item[$\blacktriangleright$] \textbf{Ước lượng khoảng thời gian}: GV sử dụng đồng hồ bấm giờ cho HS ước lượng 10 giây, 1 phút, 5 phút,\dots Thời gian học của lớp mình là 1 giờ 30 phút, để HS ban đầu biết được 1 giây, 1 phút, 1 giờ là tầm bao nhiêu.
+  \item Bài tập áp dụng: Bài 4, 5 Phiếu bài tập
+\end{GAgach}
+
+\GAhd{Hoạt động 3: Luyện tập (25 phút)}
+\begin{GAgach}
+  \item GV cho HS làm bài trong PBT
+\end{GAgach}
+
+\GAhd{Hoạt động 4: Tính khoảng thời gian. (Tùy vào tình hình mỗi lớp) (10 phút)}
+\begin{GAgach}
+  \item GV sẽ cho một ví dụ đơn giản cho HS làm quen về cách tính thời gian. Vấn đáp học sinh, bạn nào trả lời đúng được 1 điểm thưởng.
+\end{GAgach}
+\TThinh[11.6cm]{ga_image13.png}
+\begin{GAgach}
+  \item Ví dụ (Tiệc của Tom): Buổi tiệc sinh nhật của bạn Tom bắt đầu lúc 16:00 và kết thúc lúc 18:30. Hỏi buổi tiệc sinh nhật của Tom kéo dài trong bao lâu?\\
+  (16:00 $\rightarrow$ 17:00 $\rightarrow$ 18:00 là 2 giờ; 18:00 $\rightarrow$ 18:30 là 30 phút. Tổng cộng \textbf{2 giờ 30 phút}.)
+  \item Mẹ nấu cơm lúc 10:00. Mẹ nấu xong lúc 11:00. Hỏi mẹ đã nấu cơm trong bao lâu?
+  \item Bộ phim bắt đầu chiếu lúc 18:00 tối và kết thúc lúc 20:00. Hỏi bộ phim đã chiếu trong bao lâu?
+  \item Bài tập áp dụng: Bài 10, 11 Phiếu bài tập.
+\end{GAgach}
+
+\GAhd{Hoạt động 5: Củng cố và giao BTVN (10 phút)}
+\begin{GAgach}
+  \item GV giao BTVN phù hợp với HS lớp mình.
+\end{GAgach}
+
+\end{document}

@@ -1,0 +1,91 @@
+\documentclass[12pt,a4paper,twoside,openright]{book}
+\usepackage{amsmath, amssymb, fancyhdr, wasysym,tabvar}
+\usepackage{tkz-euclide,tikz-3dplot, tikz,tkz-tab}
+\usepackage{fontawesome5}
+\usepackage{fontawesome}
+\usepackage[many]{tcolorbox}
+\usepackage{pgf}
+\usepackage{qrcode} % Gói tạo mã QR
+\usepackage{graphicx} % Để thu nhỏ QR
+\usepackage{atbegshi} % Thay thế everypage
+\usepackage{subfiles} % Gói hỗ trợ subfiles
+\usepackage{diagbox}
+\usepackage{float}
+\usepackage{pgfplots} %=====================================================
+\usepackage{longtable}
+\usepackage{arydshln} % <-- NẠP SAU longtable/array
+\usepackage{array}
+% Tăng độ dài vạch đứt
+%\setlength{\dashlinedash}{3pt}   % mặc định ≈ 2pt
+%\setlength{\dashlinegap}{2pt}    % khoảng trống giữa các nét
+%\setlength{\arrayrulewidth}{0.5pt}
+
+%========================================
+
+\usepgfplotslibrary{fillbetween} 
+\pgfplotsset{compat=1.18}%==================================================
+\usetikzlibrary{shapes.geometric,arrows,decorations,calc,intersections,angles}
+\usepackage[tikz]{bclogo} 
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns}
+\pgfplotsset{compat=1.9}
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=1.5cm] {geometry}
+\usepackage[hidelinks,unicode]{hyperref}
+\usepackage{esvect}
+\def\vec{\vv}
+\def\overrightarrow{\vv}
+%Lệnh của gói mathrsfs
+\DeclareSymbolFont{rsfs}{U}{rsfs}{m}{n}
+\DeclareSymbolFontAlphabet{\mathscr}{rsfs}
+%Lệnh cung
+\DeclareSymbolFont{largesymbols}{OMX}{yhex}{m}{n}
+\DeclareMathAccent{\wideparen}{\mathord}{largesymbols}{"F3}
+%Lệnh song song
+\DeclareSymbolFont{symbolsC}{U}{txsyc}{m}{n}
+\DeclareMathSymbol{\varparallel}{\mathrel}{symbolsC}{9}
+\DeclareMathSymbol{\parallel}{\mathrel}{symbolsC}{9}
+%Hệ hoặc, hệ và
+\newcommand{\hoac}[1]{ 
+\left[\begin{aligned}#1\end{aligned}\right.}
+\newcommand{\heva}[1]{
+\left\{\begin{aligned}#1\end{aligned}\right.}
+%màu
+\definecolor{mauchinh}{RGB}{46,49,127}
+%Đánh số trang (head)
+\pagestyle{fancy}
+\fancyhf{} % Xóa tất cả các định dạng header và footer mặc định
+\fancyfoot[L]{}
+\renewcommand{\headrulewidth}{0pt} % Không có dòng kẻ trên
+\fancyhead[R]{}
+\fancyhead[L]{}
+%\setlength{\headheight}{20pt}\linespread{1.7} % Tăng kích cở đầu trang tới \fancyhead
+%---------------
+%Đóng khung
+\newenvironment{khung}[2]
+{\vspace{0.5cm}\fcolorbox{#1}{mycolor}
+{\begin{minipage}{\linewidth} #2 \end{minipage}}}
+
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+%Ẩn hiện đáp án
+%\usepackage[loigiai]{ex_test}%Hiển đề, lời giải chi tiết, Tô màu đáp án 
+\usepackage[dethi]{ex_test}%Hiện đề và đáp án
+%\usepackage[color]{ex_test} %tô màu đáp án và không in lời giải chi tiết
+
+%\newtheorem{bt}{Bài}
+%bật tắt mẫu TITAN
+\input{KhoiTieuHoc}
+\input{MauKT}
+%=======Tắt bật đáp ============
+%\newcommand{\tatdapan}{}
+\newcommand{\tatdapan}{\end{document}}
+%=======Tắt đề=================
+\newif\ifSHOW
+\SHOWtrue  % Đổi thành \SHOWfalse để tắt đề
+%\SHOWfalse
+%============================
+
+\renewcommand{\lop}{A}
+\begin{document}
+\subfile{Data_GiaoAn_HK0/GiaoAn_Tuan_15_ThoiGian}
+\end{document}
