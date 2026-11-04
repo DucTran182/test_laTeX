@@ -30,8 +30,6 @@
 % Que tính: \TTbo{n} vẽ n bó một chục, \TTle{n} vẽ n que lẻ
 \providecommand{\TTbo}{}\renewcommand{\TTbo}[1]{\foreach \i in {1,...,#1}{\includegraphics[height=1.6cm]{t16_image7.png}\hspace{1pt}}}
 \providecommand{\TTle}{}\renewcommand{\TTle}[1]{\foreach \i in {1,...,#1}{\includegraphics[height=1.6cm]{t16_image8.png}\hspace{3pt}}}
-% Ô trống nhỏ để điền dấu so sánh
-\providecommand{\TToo}{}\renewcommand{\TToo}{\tikz[baseline=-0.6ex]\node[draw,thick,minimum size=0.7cm,inner sep=0pt]{};}
 % Số để khoanh, cách đều nhau
 \providecommand{\TTso}{}\renewcommand{\TTso}[1]{\makebox[1.5cm]{\textbf{#1}}}
 
@@ -493,12 +491,17 @@
 
 \begin{bt}
     Điền dấu $>$, $<$, $=$ thích hợp vào ô trống.
-    \par\nopagebreak\vspace{4pt}\nopagebreak{\centering\large
-        \renewcommand{\arraystretch}{2.2}
-        \begin{tabular}{r@{\ \ }c@{\ \ }l@{\hspace{1.8cm}}r@{\ \ }c@{\ \ }l@{\hspace{1.8cm}}r@{\ \ }c@{\ \ }l}
-            45 & \TToo & 54 & 38 & \TToo & 83 & 60 & \TToo & 59 \\
-            70 & \TToo & 7 chục & 9 chục & \TToo & 90 & 27 & \TToo & 72 \\
-        \end{tabular}\par}
+    \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
+    \begin{tikzpicture}[font=\sffamily\large]
+        % mỗi cặp: số bên trái / số bên phải; ô trống ở giữa để điền dấu
+        \foreach \a/\b [count=\k] in {45/54,38/83,60/59,70/7 chục,9 chục/90,27/72}{
+            \pgfmathtruncatemacro{\cot}{mod(\k-1,3)}\pgfmathtruncatemacro{\hang}{div(\k-1,3)}
+            \begin{scope}[shift={(5.6*\cot,-1.3*\hang)}]
+                \node[anchor=east] at (-0.6,0) {\a};
+                \node[draw,thick,minimum size=0.85cm,inner sep=0pt] at (0,0) {};
+                \node[anchor=west] at (0.6,0) {\b};
+            \end{scope}}
+    \end{tikzpicture}\par}
 \end{bt}
 
 \begin{bt}
