@@ -319,15 +319,17 @@
 \newpage % Bài 11 và Bài 12 nằm chung một trang
 \begin{bt}
     Đếm và viết số quả trứng vào ô trống.
-    \TThinh[4.5cm]{t16_image14.png}
+    \TThinh[6cm]{t16_image14.png}
 \end{bt}
 
 \begin{bt}
     Hoàn thành bức tranh sau bằng cách nối các số.
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
-        % Hai hình đặt cạnh nhau, mỗi hình rộng gần nửa trang
-        \includegraphics[width=0.49\linewidth,height=0.45\textheight,keepaspectratio]{t16_image16.png}\hfill
-        \includegraphics[width=0.49\linewidth,height=0.45\textheight,keepaspectratio]{t16_image17.png}\par}
+        % Hai hình xếp trên - dưới, chia đều phần còn lại của trang sau Bài 11
+        % (nếu hình bị đẩy sang trang sau thì tăng 10.5cm lên 11.5cm)
+        \includegraphics[width=\linewidth,height=\dimexpr(\textheight-10.5cm)/2\relax,keepaspectratio]{t16_image16.png}\par
+        \vspace{2pt}
+        \includegraphics[width=\linewidth,height=\dimexpr(\textheight-10.5cm)/2\relax,keepaspectratio]{t16_image17.png}\par}
 \end{bt}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
