@@ -181,24 +181,46 @@
   \foreach \h in {1,...,#2}{\foreach \c in {1,...,10}{\draw[gray!50] (0.36*\c-0.36,-0.36*\h) rectangle ++(0.36,0.36);}}
   \foreach \k in {1,...,#1}{\pgfmathtruncatemacro{\cot}{mod(\k-1,10)}\pgfmathtruncatemacro{\hang}{div(\k-1,10)}%
     \begin{scope}[shift={(0.36*\cot+0.18,-0.36*\hang-0.18)}]\TTiconkeo\end{scope}}}
-% Chú ếch con (tâm thân tại gốc tọa độ, rộng khoảng 1,3cm)
+% Chú ếch con ngồi (tâm tại gốc tọa độ, cao khoảng 1,4cm, rộng khoảng 1,6cm)
 \providecommand{\TTech}{}\renewcommand{\TTech}{%
-  % chân sau
-  \fill[green!55!black] (-0.5,-0.42) ellipse (0.24 and 0.1) (0.5,-0.42) ellipse (0.24 and 0.1);
-  % thân và đầu
-  \fill[TTla,draw=green!40!black,thick] (0,-0.05) ellipse (0.62 and 0.42);
-  \fill[green!20!white] (0,-0.17) ellipse (0.36 and 0.22);
-  % mắt
-  \foreach \x in {-0.3,0.3}{%
-    \fill[TTla,draw=green!40!black,thick] (\x,0.36) circle (0.2);
-    \fill[white] (\x,0.37) circle (0.13);
-    \fill[black] (\x+0.02,0.36) circle (0.07);
-    \fill[white] (\x+0.04,0.39) circle (0.022);}
-  % má hồng và miệng cười
-  \fill[pink!80] (-0.38,0.05) ellipse (0.09 and 0.05) (0.38,0.05) ellipse (0.09 and 0.05);
-  \draw[green!30!black,thick,line cap=round] (-0.2,0.08) .. controls (-0.1,-0.04) and (0.1,-0.04) .. (0.2,0.08);
-  % chân trước
-  \fill[green!55!black] (-0.2,-0.45) ellipse (0.1 and 0.06) (0.2,-0.45) ellipse (0.1 and 0.06);}
+  \begin{scope}[line join=round]
+  % --- chân sau gập hai bên ---
+  \foreach \s in {-1,1}{%
+    \begin{scope}[xscale=\s]
+      \fill[TTla!85!black,draw=green!35!black,thick] (0.28,-0.55) .. controls (0.95,-0.6) and (0.95,0.05) .. (0.55,0.02) .. controls (0.35,0.0) and (0.25,-0.3) .. cycle;
+      % bàn chân sau có 3 ngón
+      \fill[TTla!85!black,draw=green!35!black,thick] (0.45,-0.55) .. controls (0.7,-0.62) .. (0.92,-0.58)
+        .. controls (0.98,-0.62) and (0.96,-0.68) .. (0.9,-0.67) .. controls (0.75,-0.66) .. (0.62,-0.66)
+        .. controls (0.55,-0.7) .. (0.45,-0.68) -- cycle;
+    \end{scope}}
+  % --- thân ---
+  \fill[TTla,draw=green!35!black,thick] (0,-0.62) .. controls (-0.55,-0.62) and (-0.6,-0.1) .. (-0.5,0.15)
+     -- (0.5,0.15) .. controls (0.6,-0.1) and (0.55,-0.62) .. (0,-0.62);
+  % bụng
+  \fill[yellow!35!green!25] (0,-0.28) ellipse (0.28 and 0.3);
+  % --- chân trước ---
+  \foreach \s in {-1,1}{%
+    \begin{scope}[xscale=\s]
+      \fill[TTla,draw=green!35!black,thick] (0.24,0.0) .. controls (0.32,-0.3) .. (0.28,-0.58) -- (0.16,-0.58) .. controls (0.18,-0.3) .. (0.14,-0.05) -- cycle;
+      \fill[TTla,draw=green!35!black,thick] (0.22,-0.6) ellipse (0.12 and 0.05);
+    \end{scope}}
+  % --- đầu ---
+  \fill[TTla,draw=green!35!black,thick] (0,0.33) ellipse (0.66 and 0.36);
+  % mắt lồi
+  \foreach \x in {-0.33,0.33}{%
+    \fill[TTla,draw=green!35!black,thick] (\x,0.68) circle (0.21);
+    \fill[white] (\x,0.69) circle (0.14);
+    \fill[black] (\x+0.02,0.68) circle (0.075);
+    \fill[white] (\x+0.05,0.71) circle (0.025);}
+  % đốm trên đầu
+  \fill[green!45!black,opacity=0.5] (-0.08,0.52) circle (0.045) (0.1,0.55) circle (0.035) (0.0,0.6) circle (0.03);
+  % má hồng
+  \fill[pink!85] (-0.45,0.27) ellipse (0.1 and 0.06) (0.45,0.27) ellipse (0.1 and 0.06);
+  % miệng cười rộng
+  \draw[green!25!black,thick,line cap=round] (-0.42,0.33) .. controls (-0.2,0.08) and (0.2,0.08) .. (0.42,0.33);
+  % lỗ mũi
+  \fill[green!25!black] (-0.06,0.45) circle (0.018) (0.06,0.45) circle (0.018);
+  \end{scope}}
 % Viên gạch tháp số
 \tikzset{TTgach/.style={draw=TTcamdam,thick,fill=TTcam!40,minimum width=1.5cm,minimum height=0.75cm,inner sep=0pt,font=\sffamily\bfseries\Large}}
 
@@ -405,8 +427,8 @@
     \begin{tikzpicture}[font=\sffamily\bfseries\large]
         \foreach \hang [count=\i] in {{12,13,58,60,72,25},{24,30,46,31,84,47},{59,61,73,38,96,85},{97,39,51,50,65,77},{89,15,27,64,76,88}}{
             \foreach \so [count=\j] in \hang{\node[draw=gray!70,very thick,fill=TTxam,ellipse,minimum width=1.25cm,minimum height=1.0cm] at (1.45*\j,-1.15*\i) {\so};}}
-        \begin{scope}[shift={(-0.25,-1.0)},scale=1.25]\TTech\end{scope}
-        \node[font=\sffamily\bfseries\small,text=green!40!black] at (-0.25,-1.9) {Ếch con};
+        \begin{scope}[shift={(-0.4,-1.05)},scale=0.85]\TTech\end{scope}
+        \node[font=\sffamily\bfseries\small,text=green!40!black] at (-0.4,-1.95) {Ếch con};
         \fill[TTla,draw=green!40!black,very thick] (10.15,-5.75) -- ++(25:0.6) arc (25:335:0.6) -- cycle;
         \node[font=\sffamily\bfseries\small,text=green!40!black] at (10.15,-6.6) {Lá sen};
     \end{tikzpicture}\par}
