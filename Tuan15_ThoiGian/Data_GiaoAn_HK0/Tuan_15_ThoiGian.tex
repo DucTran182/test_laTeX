@@ -10,8 +10,9 @@
 %=========================================================
 
 %---------- Lệnh dùng riêng cho phiếu ----------
-% Chèn hình (mặc định rộng 12cm, căn giữa)
-\providecommand{\TThinh}[2][12cm]{\begin{center}\includegraphics[width=#1,height=0.9\textheight,keepaspectratio]{#2}\end{center}}
+% Chèn hình căn giữa, dính liền với đề bài phía trên (không bị tách trang)
+% Tham số tùy chọn = chiều cao tối đa của hình (mặc định 8cm); hình không rộng quá khổ giấy
+\providecommand{\TThinh}{}\renewcommand{\TThinh}[2][8cm]{\par\nopagebreak\vspace{2pt}\nopagebreak{\centering\includegraphics[height=#1,width=\linewidth,keepaspectratio]{#2}\par}\vspace{2pt}}
 % Chỗ chấm điền
 \providecommand{\TTcham}[1][3cm]{\makebox[#1]{\dotfill}}
 % Phương án trắc nghiệm A, B, C / A, B
@@ -34,36 +35,36 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\setcounter{section}{3} % không chỉnh sửa
 \hktuan{1}{15}
-\begin{center}
+{\centering
         {\color{mauchinh!120}\bfseries\Large PHIẾU BÀI TẬP TOÁN TƯ DUY CẤP ĐỘ A}\\[3pt]
-        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: THỜI GIAN (BUỔI 1)}
-\end{center}
+        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: THỜI GIAN (BUỔI 1)}\par}
+\vspace{6pt}
 \TTthongtin
 
 \begin{bt}
     Đồng hồ chỉ mấy giờ?
-    \TThinh[11cm]{image1.png}
+    \TThinh[9cm]{image1.png}
 \end{bt}
 
 \begin{bt}
     Nối các thời gian sau.
-    \TThinh[11cm]{image2.png}
+    \TThinh[9.5cm]{image2.png}
 \end{bt}
 
 \begin{bt}
     Viết các thời gian sau.
-    \TThinh[11cm]{image3.png}
+    \TThinh[9.5cm]{image3.png}
 \end{bt}
 
 \begin{bt}
     Viết các thời gian sau.
-    \TThinh[11cm]{image4.png}
+    \TThinh[10cm]{image4.png}
 \end{bt}
 
 \begin{bt}
     Điền số thích hợp vào chỗ trống.
-    \begin{center}
-        \renewcommand{\arraystretch}{1.6}
+    \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
+        \renewcommand{\arraystretch}{1.5}
         \begin{tabular}{|>{\centering\arraybackslash}p{4.5cm}|>{\centering\arraybackslash}p{4.5cm}|}
             \hline
             1 giờ chiều & 13 giờ \\ \hline
@@ -74,31 +75,32 @@
             9 giờ tối & \TTcham[1.2cm] giờ \\ \hline
             \TTcham[1.2cm] giờ tối & 20 giờ \\ \hline
             11 giờ tối & \TTcham[1.2cm] giờ \\ \hline
-        \end{tabular}
-    \end{center}
+        \end{tabular}\par}
 \end{bt}
 
 \begin{bt}
     Em hãy vẽ kim giờ, kim phút theo yêu cầu.
-    \TThinh[12cm]{image5.png}
+    \TThinh[7.5cm]{image5.png}
 \end{bt}
 
 \begin{bt}
     Nối đồng hồ với thời gian tương ứng.
-    \begin{listEX}
-        \item \TThinh[13cm]{image6.png}
-        \item \TThinh[11cm]{image7.png}
-    \end{listEX}
+
+
+    \noindent a)
+    \TThinh[6.3cm]{image6.png}
+    \noindent b)
+    \TThinh[5.5cm]{image7.png}
 \end{bt}
 
 \begin{bt}
     Em hãy viết giờ tương ứng với đồng hồ.
-    \TThinh[13cm]{image8.png}
+    \TThinh[7cm]{image8.png}
 \end{bt}
 
 \begin{bt}
     Đúng ghi Đ, sai ghi S vào ô trống.
-    \TThinh[11cm]{image9.png}
+    \TThinh[7.5cm]{image9.png}
 \end{bt}
 
 \begin{bt}
@@ -115,8 +117,8 @@
 
 \begin{bt}
     Đánh số thứ tự từ 1 đến 6 để sắp xếp các hoạt động của Minh từ sớm đến muộn.
-    \begin{center}
-        \renewcommand{\arraystretch}{1.6}
+    \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
+        \renewcommand{\arraystretch}{1.5}
         \begin{tabular}{|>{\centering\arraybackslash}p{4.5cm}|>{\centering\arraybackslash}p{4.5cm}|>{\centering\arraybackslash}p{3.5cm}|}
             \hline
             \textbf{Hoạt động} & \textbf{Thời gian} & \textbf{Thứ tự} \\ \hline
@@ -126,8 +128,7 @@
             Đi ngủ & 21 giờ & \TTcham[1.5cm] \\ \hline
             Ăn trưa & 11 giờ 30 phút & \TTcham[1.5cm] \\ \hline
             Đi học & 7 giờ sáng & \TTcham[1.5cm] \\ \hline
-        \end{tabular}
-    \end{center}
+        \end{tabular}\par}
 \end{bt}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -135,41 +136,41 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \TTdatlaibai
-\begin{center}
+{\centering
         {\color{mauchinh!120}\bfseries\Large PHIẾU BÀI TẬP TOÁN TƯ DUY CẤP ĐỘ A}\\[3pt]
-        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: THỜI GIAN (BUỔI 2)}
-\end{center}
+        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: THỜI GIAN (BUỔI 2)}\par}
+\vspace{6pt}
 \TTthongtin
 
 \begin{bt}
     Đồng hồ chỉ mấy giờ?
-    \TThinh[11cm]{image10.png}
+    \TThinh[9cm]{image10.png}
 \end{bt}
 
 \begin{bt}
     Viết các thời gian tương ứng.
-    \TThinh[12cm]{image11.png}
+    \TThinh[9.5cm]{image11.png}
 \end{bt}
 
 \begin{bt}
     Viết các thời gian tương ứng.
-    \TThinh[13cm]{image12.png}
+    \TThinh[7cm]{image12.png}
 \end{bt}
 
 \begin{bt}
     Nối đồng hồ với hoạt động tương ứng.
-    \TThinh[7cm]{image13.png}
+    \TThinh[8cm]{image13.png}
 \end{bt}
 
 \begin{bt}
     Chọn khoảng thời gian thích hợp.
     \begin{listEX}
         \item Buổi sáng An đi học. Lúc đó khoảng mấy giờ?
-        \TThinh[11cm]{image14.png}
+        \TThinh[1.6cm]{image14.png}
         \item Buổi trưa, An ăn cơm. Lúc đó khoảng mấy giờ?
-        \TThinh[11cm]{image15.png}
+        \TThinh[1.6cm]{image15.png}
         \item Buổi tối, An học bài. Lúc đó khoảng mấy giờ?
-        \TThinh[11cm]{image16.png}
+        \TThinh[1.6cm]{image16.png}
     \end{listEX}
 \end{bt}
 
@@ -177,11 +178,11 @@
     Khoanh vào chữ đặt dưới đồng hồ chỉ đúng thời gian.
     \begin{listEX}
         \item Lan thức dậy lúc 6 giờ sáng.
-        \TThinh[13cm]{image17.png}
+        \TThinh[3.6cm]{image17.png}
         \item Bố đi làm về lúc 5 giờ rưỡi chiều.
-        \TThinh[13cm]{image18.png}
+        \TThinh[3.6cm]{image18.png}
         \item Cả nhà ăn cơm tối lúc 19 giờ.
-        \TThinh[13cm]{image19.png}
+        \TThinh[3.6cm]{image19.png}
     \end{listEX}
 \end{bt}
 
@@ -189,9 +190,9 @@
     Khoanh tròn đáp án đúng.
     \begin{listEX}
         \item Mẹ của Bình chuẩn bị cơm tối cho gia đình. Lúc đó khoảng mấy giờ?
-        \TThinh[14cm]{image20.png}
+        \TThinh[3.2cm]{image20.png}
         \item An đi chơi công viên vào sáng chủ nhật. Lúc đó khoảng mấy giờ?
-        \TThinh[14cm]{image21.png}
+        \TThinh[3.2cm]{image21.png}
     \end{listEX}
 \end{bt}
 
@@ -199,15 +200,15 @@
     Chọn câu trả lời đúng.
     \begin{listEX}
         \item Đồng hồ chỉ thời gian các bạn An, Bình và Châu thức dậy vào sáng chủ nhật vừa rồi.
-        \TThinh[12cm]{image22.png}
+        \TThinh[2.8cm]{image22.png}
         Ai là người thức dậy \textbf{sớm nhất}?
         \TTchonba{An}{Bình}{Châu}
         \item Đồng hồ chỉ thời gian các bạn An, Bình và Châu đến lớp vào sáng nay.
-        \TThinh[11cm]{image23.png}
+        \TThinh[2.5cm]{image23.png}
         Ai là người đến lớp \textbf{muộn nhất}?
         \TTchonba{An}{Bình}{Châu}
         \item Đồng hồ chỉ thời gian An học bài và xem ti vi.
-        \TThinh[7cm]{image24.png}
+        \TThinh[3.8cm]{image24.png}
         An làm việc gì trước?
         \TTchonhai{Học bài}{Xem ti vi}
     \end{listEX}
@@ -233,15 +234,15 @@
     Trả lời các câu hỏi sau:
     \begin{listEX}
         \item An đi học từ 7 giờ sáng đến 11 giờ trưa. Hỏi An đi học bao lâu?
-        \TThinh[6cm]{image25.png}
+        \TThinh[1.5cm]{image25.png}
         \item An học bài từ 19 giờ đến 20 giờ. Hỏi An học bài bao lâu?
-        \TThinh[6cm]{image26.png}
+        \TThinh[1.5cm]{image26.png}
     \end{listEX}
 \end{bt}
 
 \begin{bt}
     Vẽ kim cho đồng hồ thứ hai và viết giờ vào ô trống.
-    \TThinh[12cm]{image27.png}
+    \TThinh[6cm]{image27.png}
 \end{bt}
 
 \begin{center}
