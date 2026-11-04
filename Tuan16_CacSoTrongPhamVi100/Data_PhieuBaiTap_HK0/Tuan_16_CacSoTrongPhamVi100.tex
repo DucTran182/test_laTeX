@@ -118,6 +118,69 @@
     \foreach \hang [count=\i] in {#2}{\foreach \o [count=\j] in \hang{%
       \node[draw,thick,rounded corners=3pt,fill=white,minimum width=1.05cm,minimum height=0.75cm] at (1.25*\j-0.4,-0.1-1.0*\i) {\o};}}
   \end{tikzpicture}}
+% ---- Biểu tượng nhỏ để đếm (vẽ tại gốc tọa độ, rộng khoảng 0,5cm) ----
+\providecommand{\TTiconkeogay}{}\renewcommand{\TTiconkeogay}{%
+  \draw[line width=3.6pt,gray!60,line cap=round] (0,-0.27)--(0,0.12) arc(180:0:0.11)--++(0,-0.09);
+  \draw[line width=2.8pt,white,line cap=round] (0,-0.27)--(0,0.12) arc(180:0:0.11)--++(0,-0.09);
+  \draw[line width=2.8pt,red!85!black,dash pattern=on 2.2pt off 2.2pt] (0,-0.27)--(0,0.12) arc(180:0:0.11)--++(0,-0.09);
+  \fill[green!50!black] (0.02,-0.05) ellipse (0.09 and 0.05);}
+\providecommand{\TTicontao}{}\renewcommand{\TTicontao}{%
+  \fill[red!85!black] (-0.09,0) circle (0.15) (0.09,0) circle (0.15) (0,-0.08) circle (0.15);
+  \draw[brown!70!black,thick] (0,0.1)--(0.03,0.27);
+  \fill[green!55!black,rotate around={30:(0.12,0.24)}] (0.12,0.24) ellipse (0.09 and 0.04);
+  \fill[white,opacity=0.6] (-0.12,0.05) ellipse (0.04 and 0.06);}
+\providecommand{\TTiconbo}{}\renewcommand{\TTiconbo}{%
+  \fill[green!35!black,rotate=-10] (0,0) ellipse (0.3 and 0.2);
+  \fill[green!25!yellow!55,rotate=-10] (0,0) ellipse (0.25 and 0.155);
+  \fill[brown!60!black] (-0.06,0.01) circle (0.085);}
+\providecommand{\TTiconchuong}{}\renewcommand{\TTiconchuong}{%
+  \fill[orange!90!yellow,draw=orange!60!black,thin] (-0.19,-0.17) .. controls (-0.13,-0.12) .. (-0.12,0.03) arc (180:0:0.12) .. controls (0.13,-0.12) .. (0.19,-0.17) -- cycle;
+  \fill[orange!60!black] (0,-0.2) circle (0.045);
+  \fill[green!50!black] (-0.12,0.2) ellipse (0.09 and 0.04) (0.12,0.2) ellipse (0.09 and 0.04);
+  \fill[red] (0,0.2) circle (0.045);}
+\providecommand{\TTiconkem}{}\renewcommand{\TTiconkem}{%
+  \fill[orange!45,draw=orange!70!black,thin] (-0.13,0)--(0.13,0)--(0,-0.4)--cycle;
+  \draw[orange!70!black,very thin] (-0.07,0)--(0.04,-0.25) (0.07,0)--(-0.04,-0.25);
+  \fill[pink!60,draw=pink!80!black,thin] (-0.15,0) arc (180:0:0.15) -- cycle;
+  \fill[red!80!black] (0,0.18) circle (0.05);}
+\providecommand{\TTiconkeo}{}\renewcommand{\TTiconkeo}{%
+  \fill[red!75] (0,0) circle (0.1);
+  \draw[white,line width=0.8pt] (-0.07,-0.07)--(0.07,0.07) (-0.07,0.07)--(0.07,-0.07);}
+% Đếm theo hàng 10: \TTdemhang{\biểu tượng}{số lượng}
+\providecommand{\TTdemhang}{}\renewcommand{\TTdemhang}[2]{%
+  \begin{tikzpicture}
+    \pgfmathtruncatemacro{\sohang}{div(#2+9,10)}
+    \foreach \k in {1,...,#2}{\pgfmathtruncatemacro{\cot}{mod(\k-1,10)}\pgfmathtruncatemacro{\hang}{div(\k-1,10)}%
+      \begin{scope}[shift={(0.7*\cot,-0.78*\hang)}]#1\end{scope}}
+    \pgfmathtruncatemacro{\sovach}{\sohang-1}
+    \ifnum\sovach>0 \foreach \h in {1,...,\sovach}{\draw[thin] (-0.4,-0.78*\h+0.4)--(6.7,-0.78*\h+0.4);}\fi
+    \node[anchor=west,font=\bfseries] (d) at (-0.4,-0.78*\sohang) {Đáp số};
+    \draw[thick] ([xshift=3pt]d.east)++(0,-0.25) rectangle ++(1.4,0.5);
+  \end{tikzpicture}}
+% Đếm theo cột 8: \TTdemcot{\biểu tượng}{số lượng}
+\providecommand{\TTdemcot}{}\renewcommand{\TTdemcot}[2]{%
+  \begin{tikzpicture}
+    \pgfmathtruncatemacro{\socot}{div(#2+7,8)}
+    \foreach \k in {1,...,#2}{\pgfmathtruncatemacro{\hang}{mod(\k-1,8)}\pgfmathtruncatemacro{\cot}{div(\k-1,8)}%
+      \begin{scope}[shift={(1.0*\cot,-0.62*\hang)}]#1\end{scope}}
+    \pgfmathtruncatemacro{\sovach}{\socot-1}
+    \ifnum\sovach>0 \foreach \c in {1,...,\sovach}{\draw[thin] (1.0*\c-0.5,0.35)--(1.0*\c-0.5,-4.75);}\fi
+    \node[anchor=west,font=\bfseries] (d) at (-0.4,-5.2) {Đáp số};
+    \draw[thick] ([xshift=3pt]d.east)++(0,-0.25) rectangle ++(1.4,0.5);
+  \end{tikzpicture}}
+% Ngôi nhà ghi số (tâm đáy tại gốc)
+\providecommand{\TTnha}{}\renewcommand{\TTnha}[1]{%
+  \draw[thick] (-0.8,0) rectangle (0.8,1.55);
+  \draw[thick] (-1.0,1.45)--(0,2.25)--(1.0,1.45);
+  \draw[thick] (-0.6,1.77)--(-0.6,2.3)--(-0.42,2.3)--(-0.42,1.92);
+  \draw[thick] (-0.55,0) rectangle (-0.15,0.75);
+  \draw[thick] (0.2,0.3) rectangle (0.6,0.7) (0.4,0.3)--(0.4,0.7) (0.2,0.5)--(0.6,0.5);
+  \node[font=\bfseries\Large] at (0,1.15) {#1};}
+% Bảng kẹo 10 cột: \TTbangkeo{số kẹo}{số hàng}
+\providecommand{\TTbangkeo}{}\renewcommand{\TTbangkeo}[2]{%
+  \foreach \h in {1,...,#2}{\foreach \c in {1,...,10}{\draw[gray!50] (0.36*\c-0.36,-0.36*\h) rectangle ++(0.36,0.36);}}
+  \foreach \k in {1,...,#1}{\pgfmathtruncatemacro{\cot}{mod(\k-1,10)}\pgfmathtruncatemacro{\hang}{div(\k-1,10)}%
+    \begin{scope}[shift={(0.36*\cot+0.18,-0.36*\hang-0.18)}]\TTiconkeo\end{scope}}}
 % Viên gạch tháp số
 \tikzset{TTgach/.style={draw=TTcamdam,thick,fill=TTcam!40,minimum width=1.5cm,minimum height=0.75cm,inner sep=0pt,font=\sffamily\bfseries\Large}}
 
@@ -135,16 +198,28 @@
 
 \begin{bt}
     Đếm và điền số vào chỗ trống.
-    \TThinh[4.2cm]{t16_image1.png}
-    \TThinh[4.4cm]{t16_image2.png}
-    \TThinh[4.6cm]{t16_image3.png}
-    \TThinh[5cm]{t16_image4.png}
-    \TThinh[7cm]{t16_image5.png}
+    \par\nopagebreak\vspace{4pt}\nopagebreak
+    \noindent\begin{minipage}[t]{0.49\linewidth}\noindent a) Kẹo gậy\par\smallskip\centering\TTdemhang{\TTiconkeogay}{27}\end{minipage}\hfill
+    \begin{minipage}[t]{0.49\linewidth}\noindent b) Quả táo\par\smallskip\centering\TTdemhang{\TTicontao}{44}\end{minipage}\par\bigskip
+    \noindent\begin{minipage}[t]{0.49\linewidth}\noindent c) Quả bơ\par\smallskip\centering\TTdemhang{\TTiconbo}{47}\end{minipage}\hfill
+    \begin{minipage}[t]{0.49\linewidth}\noindent d) Chuông\par\smallskip\centering\TTdemhang{\TTiconchuong}{63}\end{minipage}\par\bigskip
+    \noindent\begin{minipage}[t]{0.49\linewidth}\noindent e) Que kem\par\smallskip\centering\TTdemcot{\TTiconkem}{44}\end{minipage}\par
 \end{bt}
 
 \begin{bt}
     Nối với số đúng.
-    \TThinh[8cm]{t16_image6.png}
+    \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
+    \begin{tikzpicture}[font=\sffamily]
+        % Bên trái: nhóm kẹo của từng bạn (Mèo 73, Gấu trúc 46, Sóc 69)
+        \foreach \ten/\so/\hang/\y in {Mèo/73/8/0,Gấu trúc/46/5/-3.6,Sóc/69/7/-6.0}{
+            \node[draw,thick,rounded corners=6pt,fill=TTvangnhat,font=\sffamily\bfseries,minimum width=1.9cm,minimum height=0.7cm] at (-1.4,\y-0.18*\hang) {\ten};
+            \begin{scope}[shift={(0,\y)}]\TTbangkeo{\so}{\hang}\end{scope}
+            \fill (3.9,\y-0.18*\hang) circle (2.5pt);}
+        % Bên phải: các ngôi nhà
+        \foreach \so/\y in {46/-2.2,73/-5.1,69/-8.0}{
+            \begin{scope}[shift={(11,\y)}]\TTnha{\so}\end{scope}
+            \fill (9.75,\y+0.8) circle (2.5pt);}
+    \end{tikzpicture}\par}
 \end{bt}
 
 \begin{bt}
