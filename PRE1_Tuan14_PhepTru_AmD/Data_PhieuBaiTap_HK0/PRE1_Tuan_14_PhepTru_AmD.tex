@@ -69,6 +69,36 @@
   \fill[#1,draw=#1!60!black,thick] (0.45,0) .. controls (0.3,0.32) and (-0.25,0.32) .. (-0.35,0) .. controls (-0.25,-0.32) and (0.3,-0.32) .. (0.45,0);
   \fill[#1!80!black,draw=#1!60!black,thick] (-0.33,0) -- (-0.62,0.25) -- (-0.58,-0.25) -- cycle;
   \fill[white] (0.25,0.07) circle (0.07); \fill[black] (0.27,0.07) circle (0.035);}
+% Con cá vẽ chi tiết (đầu quay sang phải, dài khoảng 1,3cm): \PKcadep{màu}
+\providecommand{\PKcadep}{}\renewcommand{\PKcadep}[1]{%
+  \begin{scope}[line join=round]
+  % đuôi chẻ đôi có sọc
+  \fill[#1!85!black,draw=#1!45!black,thick] (-0.38,0) .. controls (-0.5,0.12) .. (-0.76,0.34) .. controls (-0.66,0.14) and (-0.56,0.05) .. (-0.53,0)
+     .. controls (-0.56,-0.05) and (-0.66,-0.14) .. (-0.76,-0.34) .. controls (-0.5,-0.12) .. (-0.38,0) -- cycle;
+  \draw[#1!45!black,thin] (-0.44,0.02)--(-0.66,0.2) (-0.44,-0.02)--(-0.66,-0.2) (-0.45,0)--(-0.6,0);
+  % vây lưng và vây bụng
+  \fill[#1!80!black,draw=#1!45!black,thick] (-0.3,0.15) .. controls (-0.22,0.36) and (0.02,0.38) .. (0.2,0.24) -- cycle;
+  \fill[#1!80!black,draw=#1!45!black,thick] (-0.08,-0.2) .. controls (-0.05,-0.34) and (0.06,-0.34) .. (0.1,-0.21) -- cycle;
+  % thân (màu đậm ở lưng, nhạt dần xuống bụng)
+  \path[top color=#1,bottom color=#1!25!white,draw=#1!45!black,thick]
+     (0.58,0) .. controls (0.5,0.3) and (-0.1,0.34) .. (-0.4,0.06) -- (-0.4,-0.06) .. controls (-0.1,-0.32) and (0.5,-0.28) .. (0.58,0);
+  % vảy cá
+  \begin{scope}
+    \clip (0.58,0) .. controls (0.5,0.3) and (-0.1,0.34) .. (-0.4,0.06) -- (-0.4,-0.06) .. controls (-0.1,-0.32) and (0.5,-0.28) .. (0.58,0);
+    \foreach \x in {-0.3,-0.16,-0.02,0.12}{\foreach \y in {-0.16,0,0.16}{%
+      \draw[#1!50!black,opacity=0.35,thin] (\x,\y+0.07) arc (90:-90:0.07);}}
+  \end{scope}
+  % mang cá
+  \draw[#1!45!black,thick] (0.27,0.2) .. controls (0.21,0.08) and (0.21,-0.08) .. (0.27,-0.19);
+  % vây ngực
+  \fill[#1!70!black,opacity=0.85] (0.2,-0.05) .. controls (0.05,-0.02) and (0.02,-0.14) .. (0.06,-0.17) .. controls (0.12,-0.14) .. (0.2,-0.05);
+  % mắt
+  \fill[white,draw=#1!45!black,thin] (0.4,0.06) circle (0.075);
+  \fill[black] (0.415,0.06) circle (0.045);
+  \fill[white] (0.43,0.08) circle (0.015);
+  % miệng
+  \draw[#1!45!black,thick,line cap=round] (0.58,0) -- (0.52,-0.03);
+  \end{scope}}
 % Quả táo có ghi chữ
 \providecommand{\PKtao}{}\renewcommand{\PKtao}[1]{%
   \fill[PKdo,draw=red!60!black,thick] (0,0.42) .. controls (-0.25,0.6) and (-0.75,0.45) .. (-0.72,0) .. controls (-0.7,-0.5) and (-0.3,-0.68) .. (0,-0.55)
@@ -246,11 +276,11 @@
         % b) 4 con cá, 1 con bơi đi
         \begin{scope}[shift={(8.2,0)}]
             \node[font=\bfseries] at (-0.6,2.1) {b)};
-            \draw[PKxanhnuoc,thick,fill=PKxanhnuoc!12,rounded corners=12pt] (-0.4,-0.3) rectangle (3.3,2.2);
-            \foreach \x/\y/\mau in {0.5/1.5/PKcam,1.9/1.6/PKvang,0.6/0.4/PKhong,2.0/0.5/PKxanhla}{
-                \begin{scope}[shift={(\x,\y)}]\PKca{\mau}\end{scope}}
-            \begin{scope}[shift={(4.3,1.2)}]\PKca{PKcam}\end{scope}
-            \draw[->,gray,thick,dashed] (3.0,1.0) -- (3.5,1.1);
+            \draw[PKxanhnuoc,thick,fill=PKxanhnuoc!12,rounded corners=12pt] (-0.4,-0.3) rectangle (3.25,2.3);
+            \foreach \x/\y/\mau in {0.75/1.55/PKcam,2.3/1.65/PKvang,0.85/0.45/PKhong,2.4/0.5/PKxanhla}{
+                \begin{scope}[shift={(\x,\y)},scale=1.1]\PKcadep{\mau}\end{scope}}
+            \begin{scope}[shift={(4.65,1.2)},scale=1.1]\PKcadep{PKcam}\end{scope}
+            \draw[->,gray,thick,dashed] (3.35,1.05) -- (3.75,1.15);
             \foreach \x in {0,1.7,3.4}{\node[draw,thick,rounded corners=3pt,minimum size=0.9cm] at (\x+0.4,-1.3) {};}
             \node at (1.25,-1.3) {$-$}; \node at (2.95,-1.3) {$=$};
         \end{scope}
