@@ -210,9 +210,8 @@
     Nối với số đúng.
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
     \begin{tikzpicture}[font=\sffamily]
-        % Bên trái: nhóm kẹo của từng bạn (Mèo 73, Gấu trúc 46, Sóc 69)
-        \foreach \ten/\so/\hang/\y in {Mèo/73/8/0,Gấu trúc/46/5/-3.6,Sóc/69/7/-6.0}{
-            \node[draw,thick,rounded corners=6pt,fill=TTvangnhat,font=\sffamily\bfseries,minimum width=1.9cm,minimum height=0.7cm] at (-1.4,\y-0.18*\hang) {\ten};
+        % Bên trái: các nhóm kẹo (73, 46, 69 cái)
+        \foreach \so/\hang/\y in {73/8/0,46/5/-3.6,69/7/-6.0}{
             \begin{scope}[shift={(0,\y)}]\TTbangkeo{\so}{\hang}\end{scope}
             \fill (3.9,\y-0.18*\hang) circle (2.5pt);}
         % Bên phải: các ngôi nhà
