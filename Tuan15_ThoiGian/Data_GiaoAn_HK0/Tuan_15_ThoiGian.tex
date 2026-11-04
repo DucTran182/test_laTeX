@@ -1,214 +1,249 @@
-\documentclass[../main_Tuan15.tex]{subfiles}
+\documentclass[../main.tex]{subfiles}
 \begin{document}
 %=========================================================
 % TĐ_PBT_IQA_HK1_Tuan15_ThoiGian
 % Phiếu bài tập Toán tư duy cấp độ A - Chủ đề THỜI GIAN (Buổi 1, Buổi 2)
+% Soạn theo mẫu (\hktuan, bt, listEX)
 % Hình đặt trong thư mục Hinh_Tuan15/ (cùng cấp với file này)
 \graphicspath{{Hinh_Tuan15/}{Data_GiaoAn_HK0/Hinh_Tuan15/}}%biên dịch riêng file này hoặc từ main.tex đều được
 %=========================================================
 
-%---------- Đầu trang / chân trang ----------
-\setlength{\headheight}{37pt}
-\setlength{\headsep}{8pt}
-\setlength{\footskip}{1.2cm}
-\fancyhf{}
-\fancyhead[L]{\includegraphics[height=0.9cm]{image28.png}}
-\fancyhead[R]{\begin{tabular}[b]{@{}r@{}}\textbf{\textcolor{mauchinh}{PHÁT TRIỂN TƯ DUY CẤP ĐỘ A}}\\\textit{TUẦN 15}\end{tabular}}
-\fancyfoot[L]{Trang \thepage}
-\fancyfoot[C]{\textbf{TRUNG TÂM TOÁN TITAN THỦ ĐỨC}}
-\fancyfoot[R]{\includegraphics[height=0.8cm]{image29.jpeg}}
-
 %---------- Lệnh dùng riêng cho phiếu ----------
-\newcounter{TTbai}
-% Đề bài: Bài 1., Bài 2., ...
-\newcommand{\TTbai}[1]{\par\addvspace{8pt}\noindent\refstepcounter{TTbai}\textbf{Bài \theTTbai.}\ #1\par\nopagebreak\addvspace{2pt}}
 % Chèn hình (mặc định rộng 12cm, căn giữa)
 \providecommand{\TThinh}[2][12cm]{\begin{center}\includegraphics[width=#1,height=0.9\textheight,keepaspectratio]{#2}\end{center}}
 % Chỗ chấm điền
-\newcommand{\TTcham}[1][3cm]{\makebox[#1]{\dotfill}}
-% Các ý a), b), c), ...
-\newenvironment{TTabc}{\begin{enumerate}\renewcommand{\labelenumi}{\alph{enumi})}\setlength{\itemsep}{2pt}}{\end{enumerate}}
+\providecommand{\TTcham}[1][3cm]{\makebox[#1]{\dotfill}}
 % Phương án trắc nghiệm A, B, C / A, B
-\newcommand{\TTchonba}[3]{\par\noindent\hspace*{1cm}\textbf{A.}~#1\hfill\textbf{B.}~#2\hfill\textbf{C.}~#3\hspace*{1cm}\par}
-\newcommand{\TTchonhai}[2]{\par\noindent\hspace*{1cm}\textbf{A.}~#1\hfill\textbf{B.}~#2\hspace*{4cm}\par}
+\providecommand{\TTchonba}[3]{\par\noindent\hspace*{1cm}\textbf{A.}~#1\hfill\textbf{B.}~#2\hfill\textbf{C.}~#3\hspace*{1cm}\par}
+\providecommand{\TTchonhai}[2]{\par\noindent\hspace*{1cm}\textbf{A.}~#1\hfill\textbf{B.}~#2\hspace*{4cm}\par}
 % Dòng thông tin học sinh
-\newcommand{\TTthongtin}{%
+\providecommand{\TTthongtin}{%
   \noindent\begin{tabular}{|p{7.6cm}|p{4cm}|p{4cm}|}
     \hline
     \textbf{Họ và Tên HS:}\dotfill & \textbf{Lớp:}\dotfill & \textbf{Ngày:}\dotfill \\
     \hline
   \end{tabular}\par\medskip}
-% Cột bảng căn giữa
-\newcolumntype{Z}[1]{>{\centering\arraybackslash}p{#1}}
+% Đánh lại số bài từ 1 cho buổi 2 (chỉ khi môi trường bt có bộ đếm tên bt)
+\makeatletter
+\providecommand{\TTdatlaibai}{\@ifundefined{c@bt}{}{\setcounter{bt}{0}}}
+\makeatother
 
-%=========================================================
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                       BUỔI 1
-%=========================================================
-\setcounter{TTbai}{0}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setcounter{section}{3} % không chỉnh sửa
+\hktuan{1}{15}
 \begin{center}
-  {\large\bfseries PHIẾU BÀI TẬP TOÁN TƯ DUY CẤP ĐỘ A}\\[3pt]
-  {\large\bfseries CHỦ ĐỀ: THỜI GIAN (BUỔI 1)}
+        {\color{mauchinh!120}\bfseries\Large PHIẾU BÀI TẬP TOÁN TƯ DUY CẤP ĐỘ A}\\[3pt]
+        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: THỜI GIAN (BUỔI 1)}
 \end{center}
 \TTthongtin
 
-\TTbai{Đồng hồ chỉ mấy giờ.}
-\TThinh[11cm]{image1.png}
+\begin{bt}
+    Đồng hồ chỉ mấy giờ?
+    \TThinh[11cm]{image1.png}
+\end{bt}
 
-\TTbai{Nối các thời gian sau.}
-\TThinh[11cm]{image2.png}
+\begin{bt}
+    Nối các thời gian sau.
+    \TThinh[11cm]{image2.png}
+\end{bt}
 
-\TTbai{Viết các thời gian sau.}
-\TThinh[11cm]{image3.png}
+\begin{bt}
+    Viết các thời gian sau.
+    \TThinh[11cm]{image3.png}
+\end{bt}
 
-\TTbai{Viết các thời gian sau.}
-\TThinh[11cm]{image4.png}
+\begin{bt}
+    Viết các thời gian sau.
+    \TThinh[11cm]{image4.png}
+\end{bt}
 
-\TTbai{Điền số thích hợp vào chỗ trống.}
-\begin{center}
-  \renewcommand{\arraystretch}{1.6}
-  \begin{tabular}{|Z{4.5cm}|Z{4.5cm}|}
-    \hline
-    1 giờ chiều & 13 giờ \\ \hline
-    2 giờ chiều & \TTcham[1.2cm] giờ \\ \hline
-    \TTcham[1.2cm] giờ chiều & 16 giờ \\ \hline
-    3 giờ chiều & \TTcham[1.2cm] giờ \\ \hline
-    \TTcham[1.2cm] giờ tối & 19 giờ \\ \hline
-    9 giờ tối & \TTcham[1.2cm] giờ \\ \hline
-    \TTcham[1.2cm] giờ tối & 20 giờ \\ \hline
-    11 giờ tối & \TTcham[1.2cm] giờ \\ \hline
-  \end{tabular}
-\end{center}
+\begin{bt}
+    Điền số thích hợp vào chỗ trống.
+    \begin{center}
+        \renewcommand{\arraystretch}{1.6}
+        \begin{tabular}{|>{\centering\arraybackslash}p{4.5cm}|>{\centering\arraybackslash}p{4.5cm}|}
+            \hline
+            1 giờ chiều & 13 giờ \\ \hline
+            2 giờ chiều & \TTcham[1.2cm] giờ \\ \hline
+            \TTcham[1.2cm] giờ chiều & 16 giờ \\ \hline
+            3 giờ chiều & \TTcham[1.2cm] giờ \\ \hline
+            \TTcham[1.2cm] giờ tối & 19 giờ \\ \hline
+            9 giờ tối & \TTcham[1.2cm] giờ \\ \hline
+            \TTcham[1.2cm] giờ tối & 20 giờ \\ \hline
+            11 giờ tối & \TTcham[1.2cm] giờ \\ \hline
+        \end{tabular}
+    \end{center}
+\end{bt}
 
-\TTbai{Em hãy vẽ kim giờ, kim phút theo yêu cầu.}
-\TThinh[12cm]{image5.png}
+\begin{bt}
+    Em hãy vẽ kim giờ, kim phút theo yêu cầu.
+    \TThinh[12cm]{image5.png}
+\end{bt}
 
-\TTbai{Nối đồng hồ với thời gian tương ứng.}
-\begin{TTabc}
-  \item \TThinh[13cm]{image6.png}
-  \item \TThinh[11cm]{image7.png}
-\end{TTabc}
+\begin{bt}
+    Nối đồng hồ với thời gian tương ứng.
+    \begin{listEX}
+        \item \TThinh[13cm]{image6.png}
+        \item \TThinh[11cm]{image7.png}
+    \end{listEX}
+\end{bt}
 
-\TTbai{Em hãy viết giờ tương ứng với đồng hồ.}
-\TThinh[13cm]{image8.png}
+\begin{bt}
+    Em hãy viết giờ tương ứng với đồng hồ.
+    \TThinh[13cm]{image8.png}
+\end{bt}
 
-\TTbai{Đúng ghi Đ, sai ghi S vào ô trống}
-\TThinh[11cm]{image9.png}
+\begin{bt}
+    Đúng ghi Đ, sai ghi S vào ô trống.
+    \TThinh[11cm]{image9.png}
+\end{bt}
 
-\TTbai{Viết \textit{sáng}, \textit{trưa}, \textit{chiều} hoặc \textit{tối} vào chỗ chấm}
-\begin{TTabc}
-  \item An thức dậy lúc 6 giờ \TTcham[3cm]
-  \item An ăn cơm cùng các bạn ở trường lúc 11 giờ \TTcham[3cm]
-  \item An đá bóng lúc 16 giờ, tức là 4 giờ \TTcham[3cm]
-  \item Bố đi làm về lúc 17 giờ, tức là 5 giờ \TTcham[3cm]
-  \item An đi ngủ lúc 9 giờ \TTcham[3cm]
-  \item Cả nhà xem phim lúc 20 giờ, tức là 8 giờ \TTcham[3cm]
-\end{TTabc}
+\begin{bt}
+    Viết \textit{sáng}, \textit{trưa}, \textit{chiều} hoặc \textit{tối} vào chỗ chấm.
+    \begin{listEX}
+        \item An thức dậy lúc 6 giờ \TTcham[3cm]
+        \item An ăn cơm cùng các bạn ở trường lúc 11 giờ \TTcham[3cm]
+        \item An đá bóng lúc 16 giờ, tức là 4 giờ \TTcham[3cm]
+        \item Bố đi làm về lúc 17 giờ, tức là 5 giờ \TTcham[3cm]
+        \item An đi ngủ lúc 9 giờ \TTcham[3cm]
+        \item Cả nhà xem phim lúc 20 giờ, tức là 8 giờ \TTcham[3cm]
+    \end{listEX}
+\end{bt}
 
-\TTbai{Đánh số thứ tự từ 1 đến 6 để sắp xếp các hoạt động của Minh từ sớm đến muộn.}
-\begin{center}
-  \renewcommand{\arraystretch}{1.6}
-  \begin{tabular}{|Z{4.5cm}|Z{4.5cm}|Z{3.5cm}|}
-    \hline
-    \textbf{Hoạt động} & \textbf{Thời gian} & \textbf{Thứ tự} \\ \hline
-    Ăn tối & 18 giờ & \TTcham[1.5cm] \\ \hline
-    Thức dậy & 6 giờ sáng & \TTcham[1.5cm] \\ \hline
-    Đi học về & 16 giờ & \TTcham[1.5cm] \\ \hline
-    Đi ngủ & 21 giờ & \TTcham[1.5cm] \\ \hline
-    Ăn trưa & 11 giờ 30 phút & \TTcham[1.5cm] \\ \hline
-    Đi học & 7 giờ sáng & \TTcham[1.5cm] \\ \hline
-  \end{tabular}
-\end{center}
+\begin{bt}
+    Đánh số thứ tự từ 1 đến 6 để sắp xếp các hoạt động của Minh từ sớm đến muộn.
+    \begin{center}
+        \renewcommand{\arraystretch}{1.6}
+        \begin{tabular}{|>{\centering\arraybackslash}p{4.5cm}|>{\centering\arraybackslash}p{4.5cm}|>{\centering\arraybackslash}p{3.5cm}|}
+            \hline
+            \textbf{Hoạt động} & \textbf{Thời gian} & \textbf{Thứ tự} \\ \hline
+            Ăn tối & 18 giờ & \TTcham[1.5cm] \\ \hline
+            Thức dậy & 6 giờ sáng & \TTcham[1.5cm] \\ \hline
+            Đi học về & 16 giờ & \TTcham[1.5cm] \\ \hline
+            Đi ngủ & 21 giờ & \TTcham[1.5cm] \\ \hline
+            Ăn trưa & 11 giờ 30 phút & \TTcham[1.5cm] \\ \hline
+            Đi học & 7 giờ sáng & \TTcham[1.5cm] \\ \hline
+        \end{tabular}
+    \end{center}
+\end{bt}
 
-%=========================================================
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                       BUỔI 2
-%=========================================================
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\setcounter{TTbai}{0}
+\TTdatlaibai
 \begin{center}
-  {\large\bfseries PHIẾU BÀI TẬP TOÁN TƯ DUY CẤP ĐỘ A}\\[3pt]
-  {\large\bfseries CHỦ ĐỀ: THỜI GIAN (BUỔI 2)}
+        {\color{mauchinh!120}\bfseries\Large PHIẾU BÀI TẬP TOÁN TƯ DUY CẤP ĐỘ A}\\[3pt]
+        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: THỜI GIAN (BUỔI 2)}
 \end{center}
 \TTthongtin
 
-\TTbai{Đồng hồ chỉ mấy giờ}
-\TThinh[11cm]{image10.png}
+\begin{bt}
+    Đồng hồ chỉ mấy giờ?
+    \TThinh[11cm]{image10.png}
+\end{bt}
 
-\TTbai{Viết các thời gian tương ứng.}
-\TThinh[12cm]{image11.png}
+\begin{bt}
+    Viết các thời gian tương ứng.
+    \TThinh[12cm]{image11.png}
+\end{bt}
 
-\TTbai{Viết các thời gian tương ứng.}
-\TThinh[13cm]{image12.png}
+\begin{bt}
+    Viết các thời gian tương ứng.
+    \TThinh[13cm]{image12.png}
+\end{bt}
 
-\TTbai{Nối đồng hồ với hoạt động tương ứng.}
-\TThinh[7cm]{image13.png}
+\begin{bt}
+    Nối đồng hồ với hoạt động tương ứng.
+    \TThinh[7cm]{image13.png}
+\end{bt}
 
-\TTbai{Chọn khoảng thời gian thích hợp.}
-\begin{TTabc}
-  \item Buổi sáng An đi học. Lúc đó khoảng mấy giờ?
-  \TThinh[11cm]{image14.png}
-  \item Buổi trưa, An ăn cơm. Lúc đó khoảng mấy giờ?
-  \TThinh[11cm]{image15.png}
-  \item Buổi tối, An học bài. Lúc đó khoảng mấy giờ?
-  \TThinh[11cm]{image16.png}
-\end{TTabc}
+\begin{bt}
+    Chọn khoảng thời gian thích hợp.
+    \begin{listEX}
+        \item Buổi sáng An đi học. Lúc đó khoảng mấy giờ?
+        \TThinh[11cm]{image14.png}
+        \item Buổi trưa, An ăn cơm. Lúc đó khoảng mấy giờ?
+        \TThinh[11cm]{image15.png}
+        \item Buổi tối, An học bài. Lúc đó khoảng mấy giờ?
+        \TThinh[11cm]{image16.png}
+    \end{listEX}
+\end{bt}
 
-\TTbai{Khoanh vào chữ đặt dưới đồng hồ chỉ đúng thời gian.}
-\begin{TTabc}
-  \item Lan thức dậy lúc 6 giờ sáng.
-  \TThinh[13cm]{image17.png}
-  \item Bố đi làm về lúc 5 giờ rưỡi chiều.
-  \TThinh[13cm]{image18.png}
-  \item Cả nhà ăn cơm tối lúc 19 giờ.
-  \TThinh[13cm]{image19.png}
-\end{TTabc}
+\begin{bt}
+    Khoanh vào chữ đặt dưới đồng hồ chỉ đúng thời gian.
+    \begin{listEX}
+        \item Lan thức dậy lúc 6 giờ sáng.
+        \TThinh[13cm]{image17.png}
+        \item Bố đi làm về lúc 5 giờ rưỡi chiều.
+        \TThinh[13cm]{image18.png}
+        \item Cả nhà ăn cơm tối lúc 19 giờ.
+        \TThinh[13cm]{image19.png}
+    \end{listEX}
+\end{bt}
 
-\TTbai{Khoanh tròn đáp án đúng.}
-\begin{TTabc}
-  \item Mẹ của Bình chuẩn bị cơm tối cho gia đình. Lúc đó khoảng mấy giờ?
-  \TThinh[14cm]{image20.png}
-  \item An đi chơi công viên vào sáng chủ nhật. Lúc đó khoảng mấy giờ?
-  \TThinh[14cm]{image21.png}
-\end{TTabc}
+\begin{bt}
+    Khoanh tròn đáp án đúng.
+    \begin{listEX}
+        \item Mẹ của Bình chuẩn bị cơm tối cho gia đình. Lúc đó khoảng mấy giờ?
+        \TThinh[14cm]{image20.png}
+        \item An đi chơi công viên vào sáng chủ nhật. Lúc đó khoảng mấy giờ?
+        \TThinh[14cm]{image21.png}
+    \end{listEX}
+\end{bt}
 
-\TTbai{Chọn câu trả lời đúng.}
-\begin{TTabc}
-  \item Đồng hồ chỉ thời gian các bạn An, Bình và Châu thức dậy vào sáng chủ nhật vừa rồi.
-  \TThinh[12cm]{image22.png}
-  Ai là người thức dậy \textbf{sớm nhất}?
-  \TTchonba{An}{Bình}{Châu}
-  \item Đồng hồ chỉ thời gian các bạn An, Bình và Châu đến lớp vào sáng nay.
-  \TThinh[11cm]{image23.png}
-  Ai là người đến lớp \textbf{muộn nhất}?
-  \TTchonba{An}{Bình}{Châu}
-  \item Đồng hồ chỉ thời gian An học bài và xem ti vi.
-  \TThinh[7cm]{image24.png}
-  An làm việc gì trước?
-  \TTchonhai{Học bài}{Xem tivi}
-\end{TTabc}
+\begin{bt}
+    Chọn câu trả lời đúng.
+    \begin{listEX}
+        \item Đồng hồ chỉ thời gian các bạn An, Bình và Châu thức dậy vào sáng chủ nhật vừa rồi.
+        \TThinh[12cm]{image22.png}
+        Ai là người thức dậy \textbf{sớm nhất}?
+        \TTchonba{An}{Bình}{Châu}
+        \item Đồng hồ chỉ thời gian các bạn An, Bình và Châu đến lớp vào sáng nay.
+        \TThinh[11cm]{image23.png}
+        Ai là người đến lớp \textbf{muộn nhất}?
+        \TTchonba{An}{Bình}{Châu}
+        \item Đồng hồ chỉ thời gian An học bài và xem ti vi.
+        \TThinh[7cm]{image24.png}
+        An làm việc gì trước?
+        \TTchonhai{Học bài}{Xem ti vi}
+    \end{listEX}
+\end{bt}
 
-\TTbai{Chọn câu trả lời đúng.}
-\begin{TTabc}
-  \item Em ăn một cái bánh trong khoảng bao nhiêu lâu?
-  \TTchonba{2 phút}{1 giờ}{10 giờ}
-  \item Em đánh răng trong khoảng bao lâu?
-  \TTchonba{1 giờ}{5 phút}{30 phút}
-  \item Em xem ti vi trong khoảng bao lâu?
-  \TTchonba{30 phút}{2 phút}{10 giờ}
-  \item Em học bài trong khoảng bao lâu?
-  \TTchonba{5 phút}{1 giờ}{8 giờ}
-  \item Em tắm trong khoảng bao lâu?
-  \TTchonba{1 phút}{3 giờ}{15 phút}
-\end{TTabc}
+\begin{bt}
+    Chọn câu trả lời đúng.
+    \begin{listEX}
+        \item Em ăn một cái bánh trong khoảng bao lâu?
+        \TTchonba{2 phút}{1 giờ}{10 giờ}
+        \item Em đánh răng trong khoảng bao lâu?
+        \TTchonba{1 giờ}{5 phút}{30 phút}
+        \item Em xem ti vi trong khoảng bao lâu?
+        \TTchonba{30 phút}{2 phút}{10 giờ}
+        \item Em học bài trong khoảng bao lâu?
+        \TTchonba{5 phút}{1 giờ}{8 giờ}
+        \item Em tắm trong khoảng bao lâu?
+        \TTchonba{1 phút}{3 giờ}{15 phút}
+    \end{listEX}
+\end{bt}
 
-\TTbai{Trả lời các câu hỏi sau:}
-\begin{TTabc}
-  \item An đi học từ 7 giờ sáng đến 11 giờ trưa. Hỏi An đi học bao nhiêu lâu?
-  \TThinh[6cm]{image25.png}
-  \item An học bài từ 19 giờ đến 20 giờ. Hỏi An học bài bao nhiêu lâu?
-  \TThinh[6cm]{image26.png}
-\end{TTabc}
+\begin{bt}
+    Trả lời các câu hỏi sau:
+    \begin{listEX}
+        \item An đi học từ 7 giờ sáng đến 11 giờ trưa. Hỏi An đi học bao lâu?
+        \TThinh[6cm]{image25.png}
+        \item An học bài từ 19 giờ đến 20 giờ. Hỏi An học bài bao lâu?
+        \TThinh[6cm]{image26.png}
+    \end{listEX}
+\end{bt}
 
-\TTbai{Vẽ kim cho đồng hồ thứ hai và viết giờ vào ô trống.}
-\TThinh[12cm]{image27.png}
+\begin{bt}
+    Vẽ kim cho đồng hồ thứ hai và viết giờ vào ô trống.
+    \TThinh[12cm]{image27.png}
+\end{bt}
 
+\begin{center}
+       \faGg\faGg\quad Hết \quad\faGg\faGg
+\end{center}
 \end{document}
