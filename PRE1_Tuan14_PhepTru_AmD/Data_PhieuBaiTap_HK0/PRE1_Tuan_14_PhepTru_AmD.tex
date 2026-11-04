@@ -135,6 +135,19 @@
     \node at (3,2.4) {#2};
     \node at (2,0.8) {\textcolor{PKdo}{#1}#2};
   \end{tikzpicture}}
+% Bốn tranh quanh một chữ cái: \PKbontranh{chữ}{hình 1}{tên 1}{hình 2}{tên 2}{hình 3}{tên 3}{hình 4}{tên 4}
+% (tên dưới tranh dùng font chữ của bài)
+\providecommand{\PKtentranh}{}\renewcommand{\PKtentranh}[3]{% #1 = vị trí, #2 = hình, #3 = tên
+  \node[anchor=south,inner sep=0pt] (h) at (#1) {\includegraphics[height=1.9cm,width=2.6cm,keepaspectratio]{#2}};
+  \node[draw,thick,rounded corners=4pt,fill=PKvangnhat,font=\large,anchor=north,inner sep=3pt,minimum width=2.2cm] at ([yshift=-3pt]h.south) {#3};}
+\providecommand{\PKbontranh}{}\renewcommand{\PKbontranh}[9]{%
+  \begin{tikzpicture}
+    \PKtentranh{0,2.2}{#2}{#3}
+    \PKtentranh{5.6,2.2}{#4}{#5}
+    \PKtentranh{0,-1.9}{#6}{#7}
+    \PKtentranh{5.6,-1.9}{#8}{#9}
+    \node[draw,thick,circle,fill=PKvangnhat!70,minimum size=2.1cm,font=\fontsize{40}{40}\selectfont] at (2.8,1.2) {#1};
+  \end{tikzpicture}}
 % Giọt nước có chữ
 \providecommand{\PKgiot}{}\renewcommand{\PKgiot}[1]{%
   \draw[very thick,fill=PKxanhnuoc!12] (0,1.05) .. controls (0.12,0.65) and (0.62,0.25) .. (0.62,-0.15) arc (0:-180:0.62) .. controls (-0.62,0.25) and (-0.12,0.65) .. (0,1.05);
@@ -335,7 +348,7 @@
     \TThinh[2.6cm]{p14_image20.png}
     \TTbatdauhinh
     {\centering
-        \includegraphics[height=6.2cm]{p14_image21.png}\hfill
+        \PKbontranh{d}{p14_de.png}{con dê}{p14_hatde.png}{hạt dẻ}{p14_quediem.png}{que diêm}{p14_conde2.png}{con dế}\hfill
         \begin{minipage}[b]{0.42\linewidth}\centering\PKghep{d}{ê}{dê}\\[8pt]\PKghep{d}{ế}{dế}\end{minipage}\par}
 \end{bt}
 
@@ -344,7 +357,7 @@
     \TThinh[2.6cm]{p14_image23.png}
     \TTbatdauhinh
     {\centering
-        \includegraphics[height=6.2cm]{p14_image24.png}\hfill
+        \PKbontranh{đ}{p14_duong.png}{con đường}{p14_do.png}{con đò}{p14_cayda.png}{cây đa}{p14_hatdieu.png}{hạt điều}\hfill
         \begin{minipage}[b]{0.42\linewidth}\centering\PKghep{đ}{o}{đo}\\[8pt]\PKghep{đ}{ò}{đò}\end{minipage}\par}
 \end{bt}
 
