@@ -15,9 +15,15 @@
 \providecommand{\TThinh}{}\renewcommand{\TThinh}[2][8cm]{\par\nopagebreak\vspace{2pt}\nopagebreak{\centering\includegraphics[height=#1,width=\linewidth,keepaspectratio]{#2}\par}\vspace{2pt}}
 % Chỗ chấm điền
 \providecommand{\TTcham}[1][3cm]{\makebox[#1]{\dotfill}}
-% Phương án trắc nghiệm A, B, C / A, B
-\providecommand{\TTchonba}[3]{\par\noindent\hspace*{1cm}\textbf{A.}~#1\hfill\textbf{B.}~#2\hfill\textbf{C.}~#3\hspace*{1cm}\par}
-\providecommand{\TTchonhai}[2]{\par\noindent\hspace*{1cm}\textbf{A.}~#1\hfill\textbf{B.}~#2\hspace*{4cm}\par}
+% Phương án trắc nghiệm A, B, C / A, B: mỗi phương án nằm trong một cột rộng cố định
+% nên các chữ A., B., C. luôn thẳng hàng giữa các câu
+\providecommand{\TTchonba}{}\renewcommand{\TTchonba}[3]{\par\noindent\hspace*{1cm}%
+  \makebox[0.3\linewidth][l]{\textbf{A.}~#1}%
+  \makebox[0.3\linewidth][l]{\textbf{B.}~#2}%
+  \makebox[0.3\linewidth][l]{\textbf{C.}~#3}\par}
+\providecommand{\TTchonhai}{}\renewcommand{\TTchonhai}[2]{\par\noindent\hspace*{1cm}%
+  \makebox[0.3\linewidth][l]{\textbf{A.}~#1}%
+  \makebox[0.3\linewidth][l]{\textbf{B.}~#2}\par}
 % Dòng thông tin học sinh
 \providecommand{\TTthongtin}{%
   \noindent\begin{tabular}{|p{7.6cm}|p{4cm}|p{4cm}|}
