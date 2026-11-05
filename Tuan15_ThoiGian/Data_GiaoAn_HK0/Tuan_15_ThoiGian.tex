@@ -4,10 +4,12 @@
 % TĐ_PBT_IQA_HK1_Tuan15_ThoiGian
 % Phiếu bài tập Toán tư duy cấp độ A - Chủ đề THỜI GIAN (Buổi 1, Buổi 2)
 % Soạn theo mẫu (\hktuan, bt, listEX)
-% Hình đặt trong thư mục Hinh_Tuan15_PBT/ (cùng cấp với file này)
-% Đường dẫn tính từ thư mục của main.tex khi biên dịch main.tex
-\graphicspath{{Hinh_Tuan15_PBT/}{Data_PhieuBaiTap_HK0/Hinh_Tuan15_PBT/}{Data_GiaoAn_HK0/Hinh_Tuan15_PBT/}}
+% Toàn bộ hình vẽ (đồng hồ kim, đồng hồ điện tử, đồng hồ báo thức...) được vẽ
+% bằng TikZ ngay trong file này, không cần thư mục hình ảnh.
 %=========================================================
+
+% Không giãn khoảng trắng dọc để lấp đầy trang (tránh khoảng hở lớn giữa đề và hình)
+\raggedbottom
 
 %---------- Lệnh dùng riêng cho phiếu ----------
 % Chèn hình căn giữa, dính liền với đề bài phía trên (không bị tách trang)
@@ -36,6 +38,236 @@
 \providecommand{\TTdatlaibai}{\@ifundefined{c@bt}{}{\setcounter{bt}{0}}}
 \makeatother
 
+%=========================================================
+%          THƯ VIỆN HÌNH VẼ TIKZ DÙNG RIÊNG CHO PHIẾU
+%=========================================================
+\usetikzlibrary{arrows.meta,calc}
+%---------- Bảng màu (hài hòa với màu chính của phiếu) ----------
+\definecolor{TTden}{RGB}{38,40,48}       % viền, kim đồng hồ
+\definecolor{TTxanh}{RGB}{25,118,210}    % kim phút xanh
+\definecolor{TTnavy}{RGB}{20,58,122}     % vỏ đồng hồ điện tử
+\definecolor{TTdo}{RGB}{214,48,49}       % chữ nhấn, kim phút đỏ
+\definecolor{TTcam}{RGB}{240,160,48}     % viền đồng hồ cam
+\definecolor{TTkem}{RGB}{255,250,236}    % mặt đồng hồ màu kem
+\definecolor{TTman}{RGB}{10,24,46}       % màn hình LCD
+\definecolor{TTsang}{RGB}{140,232,255}   % chữ số LCD phát sáng
+\definecolor{TThong}{RGB}{247,98,170}
+\definecolor{TTtim}{RGB}{139,92,246}
+\definecolor{TTcamdat}{RGB}{255,138,61}
+\definecolor{TTchanh}{RGB}{165,198,60}
+\definecolor{TTdotuoi}{RGB}{242,85,85}
+\definecolor{TTlam}{RGB}{38,190,206}
+\definecolor{TTxanhtim}{RGB}{88,104,240}
+\definecolor{TTngoc}{RGB}{0,137,123}
+\definecolor{TTlacay}{RGB}{110,190,140}
+\colorlet{TTtimnhat}{violet!45}   % (tùy chọn vien= phải là tên màu đơn)
+
+\makeatletter
+%---------- Đồng hồ kim: \TTdongho[tùy chọn]{giờ}{phút} ----------
+% Vẽ tại gốc tọa độ hiện tại (đặt trong scope có shift để dời vị trí).
+% Tùy chọn:
+%   r       bán kính ngoài (cm)            day     độ dày viền (tỉ lệ theo r)
+%   vien    màu viền                       mat     màu mép mặt số (tâm luôn trắng)
+%   kimgio  màu kim giờ                    kimphut màu kim phút
+%   tam     màu nắp tâm                    kim     classic | bar | leaf | arrow | none
+%   so      all | four | none (số 1-12 / chỉ 12,3,6,9 / không số)
+%   vach    ticks | dots | hour (60 vạch phút / chấm tròn / 12 vạch giờ)
+%   hinh    circle | poly | star  (canh = số cạnh/cánh, xoay = góc đỉnh đầu, lom = độ lõm của sao)
+%   vitriso bán kính đặt số (tỉ lệ theo mặt số); hoso = khoảng hở (cm) giữa đầu kim phút và số
+%           (kim tự co theo để không đè lên số)
+%   chu     cỡ chữ số                      mauso, mauvach  màu số, màu vạch/chấm
+\pgfkeys{/TTdh/.is family,/TTdh/.cd,
+  r/.store in=\TTdh@R,             r=1.3,
+  day/.store in=\TTdh@day,         day=0.09,
+  vien/.store in=\TTdh@vien,       vien=TTden,
+  mat/.store in=\TTdh@mat,         mat=black!6,
+  kimgio/.store in=\TTdh@kg,       kimgio=TTden,
+  kimphut/.store in=\TTdh@kp,      kimphut=TTden,
+  tam/.store in=\TTdh@tam,         tam=TTden,
+  kim/.store in=\TTdh@kim,         kim=classic,
+  so/.store in=\TTdh@so,           so=all,
+  vach/.store in=\TTdh@vach,       vach=ticks,
+  hinh/.store in=\TTdh@hinh,       hinh=circle,
+  canh/.store in=\TTdh@canh,       canh=6,
+  xoay/.store in=\TTdh@xoay,       xoay=90,
+  lom/.store in=\TTdh@lom,         lom=0.2,
+  vitriso/.store in=\TTdh@vs,      vitriso=0.68,
+  hoso/.store in=\TTdh@hs,         hoso=0.24,
+  chu/.store in=\TTdh@chu,         chu=\sffamily\bfseries\scriptsize,
+  mauso/.store in=\TTdh@mauso,     mauso=black!85,
+  mauvach/.store in=\TTdh@mauvach, mauvach=black!80,
+  bong/.store in=\TTdh@bong,       bong=0.16,
+}
+\def\TTdh@s@circle{circle}\def\TTdh@s@star{star}
+\def\TTdh@s@all{all}\def\TTdh@s@four{four}
+\def\TTdh@s@ticks{ticks}\def\TTdh@s@dots{dots}\def\TTdh@s@hour{hour}
+\def\TTdh@s@bar{bar}\def\TTdh@s@leaf{leaf}\def\TTdh@s@arrow{arrow}\def\TTdh@s@none{none}
+% Đường bao vỏ đồng hồ (tròn / đa giác đều / ngôi sao): #1 kiểu vẽ, #2 bán kính
+\newcommand\TTdh@duong[2]{%
+  \ifx\TTdh@hinh\TTdh@s@circle
+    \path[#1] (0,0) circle ({#2});%
+  \else\ifx\TTdh@hinh\TTdh@s@star
+    \pgfmathtruncatemacro\TTdh@n{2*\TTdh@canh-1}%
+    \path[#1] plot[samples at={0,...,\TTdh@n}]
+      ({\TTdh@xoay+\x*180/\TTdh@canh}:{(#2)*(1-\TTdh@lom*mod(\x,2))}) -- cycle;%
+  \else
+    \pgfmathtruncatemacro\TTdh@n{\TTdh@canh-1}%
+    \path[#1] plot[samples at={0,...,\TTdh@n}]
+      ({\TTdh@xoay+\x*360/\TTdh@canh}:{#2}) -- cycle;%
+  \fi\fi}
+% Một chiếc kim: #1 góc, #2 chiều dài, #3 bề rộng, #4 màu
+\newcommand\TTdh@kimve[4]{%
+  \ifx\TTdh@kim\TTdh@s@bar
+    \draw[black, opacity=.18, line width=#3 cm, line cap=round, shift={(0.025,-0.035)}, rotate=#1] (0,0) -- (#2,0);%
+    \draw[#4, line width=#3 cm, line cap=round, rotate=#1] (0,0) -- (#2,0);%
+  \else\ifx\TTdh@kim\TTdh@s@leaf
+    \fill[black, opacity=.15, shift={(0.025,-0.035)}, rotate=#1]
+      (-0.1*#2,0) .. controls (0.1*#2,0.6*#3) and (0.3*#2,0.62*#3) .. (0.45*#2,0.5*#3)
+      -- (#2,0) -- (0.45*#2,-0.5*#3) .. controls (0.3*#2,-0.62*#3) and (0.1*#2,-0.6*#3) .. cycle;%
+    \fill[#4, rotate=#1]
+      (-0.1*#2,0) .. controls (0.1*#2,0.6*#3) and (0.3*#2,0.62*#3) .. (0.45*#2,0.5*#3)
+      -- (#2,0) -- (0.45*#2,-0.5*#3) .. controls (0.3*#2,-0.62*#3) and (0.1*#2,-0.6*#3) .. cycle;%
+    \draw[white, opacity=.45, line width=.35pt, rotate=#1] (0.05*#2,0) -- (0.85*#2,0);%
+  \else\ifx\TTdh@kim\TTdh@s@arrow
+    \draw[#4, line width=#3 cm, rotate=#1, -{Stealth[length=2.3mm,width=2mm]}] (0,0) -- (#2,0);%
+  \else
+    \fill[black, opacity=.18, shift={(0.03,-0.04)}, rotate=#1, rounded corners=.5pt]
+      (-0.18*#2,-0.5*#3) -- (#2-1.4*#3,-0.34*#3) -- (#2,0) -- (#2-1.4*#3,0.34*#3) -- (-0.18*#2,0.5*#3) -- cycle;%
+    \fill[#4, rotate=#1, rounded corners=.5pt]
+      (-0.18*#2,-0.5*#3) -- (#2-1.4*#3,-0.34*#3) -- (#2,0) -- (#2-1.4*#3,0.34*#3) -- (-0.18*#2,0.5*#3) -- cycle;%
+  \fi\fi\fi}
+\newcommand\TTdongho[3][]{%
+  \begin{scope}
+    \pgfkeys{/TTdh/.cd,#1}%
+    \pgfmathsetmacro\TTdh@Rf{\TTdh@R*(1-\TTdh@day)}%
+    \pgfmathsetmacro\TTdh@ag{90-30*(#2)-0.5*(#3)}%
+    \pgfmathsetmacro\TTdh@ap{90-6*(#3)}%
+    % bóng đổ, vỏ (đổ màu chuyển sáng - tối như kim loại), mặt số
+    \TTdh@duong{fill=black, opacity=\TTdh@bong, shift={(0.05*\TTdh@R,-0.07*\TTdh@R)}}{\TTdh@R}%
+    \TTdh@duong{top color=\TTdh@vien!62!white, bottom color=\TTdh@vien!88!black,
+                draw=\TTdh@vien!65!black, line width=.4pt, line join=round}{\TTdh@R}%
+    \TTdh@duong{inner color=white, outer color=\TTdh@mat, draw=\TTdh@vien!55!black,
+                line width=.45pt, line join=round}{\TTdh@Rf}%
+    % vạch chia
+    \ifx\TTdh@vach\TTdh@s@ticks
+      \foreach \i in {0,...,59}
+        \draw[\TTdh@mauvach, line width=.3pt] ({\i*6}:{0.91*\TTdh@Rf}) -- ({\i*6}:{0.965*\TTdh@Rf});%
+      \foreach \i in {0,...,11}
+        \draw[\TTdh@mauvach, line width=.9pt] ({\i*30}:{0.865*\TTdh@Rf}) -- ({\i*30}:{0.965*\TTdh@Rf});%
+      \foreach \i in {0,...,3}
+        \draw[\TTdh@mauvach, line width=1.4pt] ({\i*90}:{0.84*\TTdh@Rf}) -- ({\i*90}:{0.965*\TTdh@Rf});%
+    \else\ifx\TTdh@vach\TTdh@s@hour
+      \foreach \i in {0,...,11}
+        \draw[\TTdh@mauvach, line width=1pt, line cap=round] ({\i*30}:{0.84*\TTdh@Rf}) -- ({\i*30}:{0.95*\TTdh@Rf});%
+    \else\ifx\TTdh@vach\TTdh@s@dots
+      \foreach \i in {1,2,4,5,7,8,10,11}
+        \fill[\TTdh@mauvach] ({90-\i*30}:{\TTdh@vs*\TTdh@Rf}) circle ({0.04*\TTdh@R});%
+    \fi\fi\fi
+    % số
+    \ifx\TTdh@so\TTdh@s@all
+      \foreach \i in {1,...,12}
+        \node[font=\TTdh@chu, text=\TTdh@mauso, inner sep=0pt] at ({90-\i*30}:{\TTdh@vs*\TTdh@Rf}) {\i};%
+    \else\ifx\TTdh@so\TTdh@s@four
+      \foreach \i in {3,6,9,12}
+        \node[font=\TTdh@chu, text=\TTdh@mauso, inner sep=0pt] at ({90-\i*30}:{\TTdh@vs*\TTdh@Rf}) {\i};%
+    \fi\fi
+    % kim (kim phút dừng trước vòng số nên không đè lên số)
+    \ifx\TTdh@kim\TTdh@s@none
+      \fill[\TTdh@tam] (0,0) circle ({0.035*\TTdh@R});%
+    \else
+      \pgfmathsetmacro\TTdh@Lp{\TTdh@vs*\TTdh@Rf-\TTdh@hs}%
+      \pgfmathsetmacro\TTdh@Lg{0.64*\TTdh@Lp}%
+      \ifx\TTdh@kim\TTdh@s@leaf
+        \pgfmathsetmacro\TTdh@Wg{0.13*\TTdh@R}\pgfmathsetmacro\TTdh@Wp{0.095*\TTdh@R}%
+      \else\ifx\TTdh@kim\TTdh@s@arrow
+        \pgfmathsetmacro\TTdh@Wg{0.042*\TTdh@R}\pgfmathsetmacro\TTdh@Wp{0.03*\TTdh@R}%
+      \else\ifx\TTdh@kim\TTdh@s@bar
+        \pgfmathsetmacro\TTdh@Wg{0.08*\TTdh@R}\pgfmathsetmacro\TTdh@Wp{0.055*\TTdh@R}%
+      \else
+        \pgfmathsetmacro\TTdh@Wg{0.1*\TTdh@R}\pgfmathsetmacro\TTdh@Wp{0.07*\TTdh@R}%
+      \fi\fi\fi
+      \TTdh@kimve{\TTdh@ag}{\TTdh@Lg}{\TTdh@Wg}{\TTdh@kg}%
+      \TTdh@kimve{\TTdh@ap}{\TTdh@Lp}{\TTdh@Wp}{\TTdh@kp}%
+      \fill[\TTdh@tam] (0,0) circle ({0.065*\TTdh@R});%
+      \fill[white!70!gray] (0,0) circle ({0.022*\TTdh@R});%
+    \fi
+  \end{scope}}
+
+%---------- Đồng hồ báo thức hai chuông: \TTbaothuc[bán kính]{giờ}{phút} ----------
+\newcommand\TTbaothuc[3][1]{%
+  \begin{scope}[scale=#1]
+    \fill[black, opacity=.12] (0.05,-1.32) ellipse (1.05 and 0.1);
+    \foreach \s in {1,-1}{%
+      \draw[TTden, line width=2.6pt, line cap=round] (\s*0.5,-0.82) -- (\s*0.82,-1.27);
+      \begin{scope}[shift={(\s*0.6,0.84)}, rotate=-\s*38]
+        \fill[top color=white!85!gray, bottom color=gray!60!black, draw=black!55, line width=.4pt]
+          (-0.4,0) arc (180:0:0.4 and 0.36) -- cycle;
+        \fill[white, opacity=.6] (-0.22,0.12) arc (160:110:0.3 and 0.25) -- (-0.1,0.14) -- cycle;
+        \fill[black!70, rounded corners=.6pt] (-0.44,-0.07) rectangle (0.44,0.03);
+        \fill[black!70] (0,0.38) circle (0.05);
+      \end{scope}}
+    \draw[black!65, line width=1.6pt] (0,0.95) -- (0,1.2);
+    \fill[black!75, rounded corners=1pt] (-0.2,1.16) rectangle (0.2,1.27);
+  \end{scope}
+  \TTdongho[r=#1, day=0.15, vien=TTdo, mat=TTkem, so=four, vach=hour, vitriso=0.66,
+            chu=\sffamily\bfseries\scriptsize]{#2}{#3}}
+
+%---------- Ô điền đáp án trong hình: \TTo[rộng]{x}{y}{nội dung} ----------
+\newcommand\TTo[4][2.1]{%
+  \fill[black, opacity=.1, rounded corners=4pt] ({#2-#1/2+0.04},{#3-0.33}) rectangle ({#2+#1/2+0.04},{#3+0.23});
+  \draw[TTden, line width=.7pt, fill=white, rounded corners=4pt] ({#2-#1/2},{#3-0.29}) rectangle ({#2+#1/2},{#3+0.29});
+  \node[font=\bfseries] at (#2,#3) {#4};}
+% Chấm tròn để nối
+\newcommand\TTcham@noi[2]{\fill[TTden] (#1,#2) circle (0.075);}
+
+%---------- Chữ số điện tử 7 đoạn ----------
+\@namedef{TTseg@0}{abcdef}\@namedef{TTseg@1}{bc}\@namedef{TTseg@2}{abged}
+\@namedef{TTseg@3}{abgcd}\@namedef{TTseg@4}{fgbc}\@namedef{TTseg@5}{afgcd}
+\@namedef{TTseg@6}{afgedc}\@namedef{TTseg@7}{abc}\@namedef{TTseg@8}{abcdefg}
+\@namedef{TTseg@9}{abcdfg}\@namedef{TTseg@x}{}
+% \TTso{x}{y}{màu sáng}{màu mờ}{chữ số}: một chữ số cao 1 đơn vị, góc dưới trái (x,y)
+% (đoạn không sáng vẫn hiện mờ giống màn hình LCD thật)
+\newcommand\TTso[5]{%
+  \begin{scope}[shift={(#1,#2)}, xslant=0.1]
+    \edef\TT@sang{\csname TTseg@#5\endcsname}%
+    \foreach \sg/\cx/\cy/\huong in {a/0.27/1/0,b/0.54/0.75/1,c/0.54/0.25/1,d/0.27/0/0,e/0/0.25/1,f/0/0.75/1,g/0.27/0.5/0}{%
+      \edef\TT@thu{\noexpand\in@{\sg}{\TT@sang}}\TT@thu
+      \ifin@\def\TT@mau{#3}\else\def\TT@mau{#4}\fi
+      \ifnum\huong=0
+        \fill[\TT@mau] (\cx-0.215,\cy) -- (\cx-0.15,\cy+0.065) -- (\cx+0.15,\cy+0.065) -- (\cx+0.215,\cy)
+          -- (\cx+0.15,\cy-0.065) -- (\cx-0.15,\cy-0.065) -- cycle;
+      \else
+        \fill[\TT@mau] (\cx,\cy-0.215) -- (\cx+0.065,\cy-0.15) -- (\cx+0.065,\cy+0.15) -- (\cx,\cy+0.215)
+          -- (\cx-0.065,\cy+0.15) -- (\cx-0.065,\cy-0.15) -- cycle;
+      \fi}%
+  \end{scope}}
+% \TTgiodt{x}{y}{cao}{màu sáng}{màu mờ}{HH:MM}: dãy giờ điện tử căn giữa tại (x,y)
+% (dùng chữ x cho chữ số để trống, ví dụ x9:15)
+\def\TT@tach#1#2:#3#4\@nil{\def\TT@a{#1}\def\TT@b{#2}\def\TT@c{#3}\def\TT@d{#4}}
+\newcommand\TTgiodt[6]{%
+  \edef\TT@chuoi{#6}\expandafter\TT@tach\TT@chuoi\@nil
+  \begin{scope}[shift={(#1,#2)}, scale=#3]
+    \TTso{-1.62}{-0.5}{#4}{#5}{\TT@a}%
+    \TTso{-0.86}{-0.5}{#4}{#5}{\TT@b}%
+    \fill[#4] (-0.06,-0.26) rectangle ++(0.13,0.13);
+    \fill[#4] (0.0,0.16) rectangle ++(0.13,0.13);
+    \TTso{0.28}{-0.5}{#4}{#5}{\TT@c}%
+    \TTso{1.04}{-0.5}{#4}{#5}{\TT@d}%
+  \end{scope}}
+% Đồng hồ điện tử dạng thẻ (vỏ xanh, màn hình tối, số phát sáng)
+\newcommand\TTmanhinh[1]{%
+  \fill[black, opacity=.18, rounded corners=7pt] (-1.27,-0.62) rectangle (1.37,0.5);
+  \fill[top color=TTxanh!75!white, bottom color=TTnavy, rounded corners=7pt] (-1.32,-0.56) rectangle (1.32,0.56);
+  \draw[TTnavy!60!black, line width=1.1pt, rounded corners=7pt] (-1.32,-0.56) rectangle (1.32,0.56);
+  \fill[TTman, rounded corners=3pt] (-1.1,-0.37) rectangle (1.1,0.37);
+  \fill[white, opacity=.07, rounded corners=3pt] (-1.1,0.02) rectangle (1.1,0.37);
+  \TTgiodt{0.02}{0}{0.46}{TTsang}{TTsang!9!TTman}{#1}}
+\newcommand\TTlcd[2][1]{\begin{tikzpicture}[scale=#1, baseline=(current bounding box.center)]\TTmanhinh{#2}\end{tikzpicture}}
+\makeatother
+% Môi trường đặt hình: căn giữa, dính liền với đề bài phía trên
+\newenvironment{TTve}{\par\nopagebreak\vspace{3pt}\nopagebreak\centering}{\par\vspace{3pt}}
+%=========================================================
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                       BUỔI 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -45,29 +277,113 @@
 {\centering
         {\color{mauchinh!120}\bfseries\Large PHIẾU BÀI TẬP TOÁN TƯ DUY CẤP ĐỘ A}\\[3pt]
         {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: THỜI GIAN (BUỔI 1)}\par}
-\vspace{6pt}
 \TTthongtin
 
+%---------------------------------------------------------
 \begin{bt}
     Đồng hồ chỉ mấy giờ?
-    \TThinh[9cm]{image1.png}
+    \begin{TTve}
+    \begin{tikzpicture}
+        \foreach \h [count=\k from 0] in {3,6,8,5,11,10,2,9,1}{
+            \pgfmathtruncatemacro\cot{mod(\k,3)}\pgfmathtruncatemacro\hang{div(\k,3)}
+            \begin{scope}[shift={(\cot*4.6,-\hang*4.05)}]
+                \TTdongho[r=1.35]{\h}{0}
+                \TTo{0}{-1.9}{:}
+            \end{scope}}
+    \end{tikzpicture}
+    \end{TTve}
 \end{bt}
 
+%---------------------------------------------------------
 \begin{bt}
     Nối các thời gian sau.
-    \TThinh[9.5cm]{image2.png}
+    \begin{TTve}
+    \begin{tikzpicture}
+        % ---- cột trái ----
+        \begin{scope}[shift={(0,0)}]
+            \TTdongho[r=1.15, day=0.13, mat=white, so=four, vach=dots, kim=bar, chu=\sffamily\bfseries\footnotesize,
+                      hinh=poly, canh=6, xoay=90, vien=TThong, mauvach=TThong, tam=TThong]{6}{0}
+        \end{scope}
+        \begin{scope}[shift={(0,-2.8)}]
+            \TTdongho[r=1.12, day=0.13, mat=white, so=four, vach=dots, kim=bar, chu=\sffamily\bfseries\footnotesize,
+                      vien=TTtim, mauvach=TTtim, tam=TTtim]{8}{0}
+        \end{scope}
+        \begin{scope}[shift={(0,-5.6)}]
+            \TTdongho[r=1.4, day=0.11, mat=white, so=four, vach=dots, kim=bar, chu=\sffamily\bfseries\footnotesize, vitriso=0.56,
+                      hinh=poly, canh=4, xoay=45, vien=TTcamdat, mauvach=TTcamdat, tam=TTcamdat]{11}{0}
+        \end{scope}
+        \begin{scope}[shift={(0,-8.4)}]
+            \TTdongho[r=1.2, day=0.13, mat=white, so=four, vach=dots, kim=bar, chu=\sffamily\bfseries\footnotesize, vitriso=0.66,
+                      hinh=poly, canh=8, xoay=22.5, vien=TTchanh, mauvach=TTchanh, tam=TTchanh]{3}{0}
+        \end{scope}
+        % ---- cột phải ----
+        \begin{scope}[shift={(9.4,0)}]
+            \TTdongho[r=1.4, day=0.12, mat=white, so=four, vach=dots, kim=bar, chu=\sffamily\bfseries\footnotesize, vitriso=0.58,
+                      hinh=star, canh=8, lom=0.2, xoay=90, vien=TTdotuoi, mauvach=TTdotuoi, tam=TTdotuoi]{2}{0}
+        \end{scope}
+        \begin{scope}[shift={(9.4,-2.8)}]
+            \TTdongho[r=1.2, day=0.13, mat=white, so=four, vach=dots, kim=bar, chu=\sffamily\bfseries\footnotesize, vitriso=0.66,
+                      hinh=poly, canh=6, xoay=0, vien=TTlam, mauvach=TTlam, tam=TTlam]{1}{0}
+        \end{scope}
+        \begin{scope}[shift={(9.4,-5.6)}]
+            \TTdongho[r=1.3, day=0.12, mat=white, so=four, vach=dots, kim=bar, chu=\sffamily\bfseries\footnotesize, vitriso=0.6,
+                      hinh=poly, canh=5, xoay=90, vien=TTxanhtim, mauvach=TTxanhtim, tam=TTxanhtim]{10}{0}
+        \end{scope}
+        \begin{scope}[shift={(9.4,-8.4)}]
+            \TTdongho[r=1.38, day=0.12, mat=white, so=four, vach=dots, kim=bar, chu=\sffamily\bfseries\footnotesize, vitriso=0.6,
+                      hinh=poly, canh=4, xoay=90, vien=TTngoc, mauvach=TTngoc, tam=TTngoc]{4}{0}
+        \end{scope}
+        % ---- chấm nối cạnh đồng hồ ----
+        \foreach \y in {0,-2.8,-5.6,-8.4}{
+            \fill[TTden] (1.55,\y) circle (0.075);
+            \fill[TTden] (7.85,\y) circle (0.075);}
+        % ---- cột thời gian ở giữa ----
+        \foreach \t [count=\k from 0] in {4:00,10:00,8:00,6:00,1:00,11:00,3:00,2:00}{
+            \pgfmathsetmacro\y{0.6-\k*1.285}
+            \fill[black, opacity=.1, rounded corners=9pt] (3.83,\y-0.36) rectangle (5.63,\y+0.28);
+            \draw[TTnavy!80, line width=.7pt, fill=TTnavy!6, rounded corners=9pt] (3.8,\y-0.32) rectangle (5.6,\y+0.32);
+            \node[font=\sffamily\bfseries\large, text=TTnavy] at (4.7,\y) {\t};
+            \fill[TTden] (3.55,\y) circle (0.075);
+            \fill[TTden] (5.85,\y) circle (0.075);}
+    \end{tikzpicture}
+    \end{TTve}
 \end{bt}
 
+%---------------------------------------------------------
 \begin{bt}
     Viết các thời gian sau.
-    \TThinh[9.5cm]{image3.png}
+    \begin{TTve}
+    \begin{tikzpicture}
+        \foreach \h [count=\k from 0] in {8,6,1,4,7,5,2,3,9}{
+            \pgfmathtruncatemacro\cot{mod(\k,3)}\pgfmathtruncatemacro\hang{div(\k,3)}
+            \begin{scope}[shift={(\cot*4.2,-\hang*3.75)}]
+                \TTdongho[r=1.2, day=0.15, vien=TTcam, mat=TTkem, so=four, vach=dots, kim=bar,
+                          vitriso=0.68, hoso=0.3, mauvach=black!55, tam=black!75, chu=\sffamily\bfseries\small]{\h}{0}
+                \fill[black, opacity=.1, rounded corners=0.28cm] (-1.0,-1.98) rectangle (1.08,-1.38);
+                \draw[TTden, line width=.7pt, fill=white, rounded corners=0.28cm] (-1.04,-1.94) rectangle (1.04,-1.38);
+                \node[font=\bfseries] at (0,-1.66) {:};
+            \end{scope}}
+    \end{tikzpicture}
+    \end{TTve}
 \end{bt}
 
+%---------------------------------------------------------
 \begin{bt}
     Viết các thời gian sau.
-    \TThinh[10cm]{image4.png}
+    \begin{TTve}
+    \begin{tikzpicture}
+        \foreach \h/\m [count=\k from 0] in {7/0,3/0,10/0,11/0,1/0,12/0,8/30,11/30,3/30,9/30,6/30,1/30}{
+            \pgfmathtruncatemacro\cot{mod(\k,4)}\pgfmathtruncatemacro\hang{div(\k,4)}
+            \begin{scope}[shift={(\cot*3.9,-\hang*3.75)}]
+                \TTdongho[r=1.25, kim=leaf, kimgio=TTxanh, kimphut=TTdo, tam=TTden, hoso=0.16,
+                          chu=\rmfamily\bfseries\scriptsize]{\h}{\m}
+                \TTo[2.1]{0}{-1.8}{}
+            \end{scope}}
+    \end{tikzpicture}
+    \end{TTve}
 \end{bt}
 
+%---------------------------------------------------------
 \begin{bt}
     Điền số thích hợp vào chỗ trống.
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
@@ -85,31 +401,156 @@
         \end{tabular}\par}
 \end{bt}
 
+%---------------------------------------------------------
+% Đồng hồ để trống kim, học sinh tự vẽ kim theo giờ ghi bên dưới
 \begin{bt}
     Em hãy vẽ kim giờ, kim phút theo yêu cầu.
-    \TThinh[7.5cm]{image5.png}
+    \begin{TTve}
+    \begin{tikzpicture}
+        \foreach \t [count=\k from 0] in {01:00,05:00,03:00,11:00,08:00,12:00}{
+            \pgfmathtruncatemacro\cot{mod(\k,3)}\pgfmathtruncatemacro\hang{div(\k,3)}
+            \begin{scope}[shift={(\cot*4.9,-\hang*4.45)}]
+                \TTdongho[r=1.5, kim=none, chu=\sffamily\bfseries\footnotesize]{0}{0}
+                \fill[black, opacity=.1, rounded corners=5pt] (-1.06,-2.42) rectangle (1.14,-1.72);
+                \draw[TTnavy, line width=.8pt, fill=TTnavy!7, rounded corners=5pt] (-1.1,-2.38) rectangle (1.1,-1.76);
+                \node[font=\sffamily\bfseries\large, text=TTnavy] at (0,-2.07) {\t};
+            \end{scope}}
+    \end{tikzpicture}
+    \end{TTve}
 \end{bt}
 
+%---------------------------------------------------------
 \begin{bt}
     Nối đồng hồ với thời gian tương ứng.
-
-
-    \noindent a)
-    \TThinh[6.3cm]{image6.png}
-    \noindent b)
-    \TThinh[5.5cm]{image7.png}
+    \begin{listEX}
+        \item \mbox{}
+        \begin{TTve}
+        \begin{tikzpicture}
+            % ---- hàng trên: đồng hồ kim ----
+            \begin{scope}[shift={(-4.6,3.3)}]
+                \TTdongho[r=1.15, kimgio=TTxanh]{9}{0}
+            \end{scope}
+            \begin{scope}[shift={(0,3.3)}]
+                \TTdongho[r=1.15, day=0.13, vien=TTlacay, kimgio=TTlacay!45!black, kimphut=TTlam!80!black,
+                          tam=TTlacay!45!black]{10}{30}
+            \end{scope}
+            \begin{scope}[shift={(4.6,3.3)}]
+                \TTdongho[r=1.15, kimgio=TTxanh]{10}{0}
+            \end{scope}
+            \foreach \x in {-4.6,0,4.6} \fill[TTden] (\x,1.87) circle (0.075);
+            % ---- hàng giữa: đồng hồ điện tử ----
+            % (1) đồng hồ báo thức màn hình đen
+            \begin{scope}[shift={(-6,0)}]
+                \fill[black, opacity=.18, rounded corners=5pt] (-1.12,-0.66) rectangle (1.28,0.56);
+                \fill[black!80, rounded corners=1.5pt] (-0.45,0.58) rectangle (0.45,0.7);
+                \fill[top color=black!65, bottom color=black, rounded corners=5pt] (-1.2,-0.6) rectangle (1.2,0.6);
+                \draw[black!40, line width=.5pt, rounded corners=3pt] (-1.05,-0.45) rectangle (1.05,0.47);
+                \TTgiodt{0.02}{0.07}{0.42}{white}{white!8!black}{09:00}
+                \draw[white, line width=.4pt] (-0.92,-0.24) -- (0.92,-0.24);
+                \node[font=\sffamily\tiny, text=white] at (0,-0.35) {\faBell\ 06:00};
+            \end{scope}
+            % (2) khung gỗ, màn hình xanh nhạt
+            \begin{scope}[shift={(-3,0)}]
+                \fill[black, opacity=.18, rounded corners=3pt] (-1.02,-0.72) rectangle (1.18,0.58);
+                \fill[top color=TTcam!65!white, bottom color=brown!75!black, rounded corners=3pt] (-1.1,-0.65) rectangle (1.1,0.65);
+                \fill[cyan!20!white, rounded corners=1.5pt] (-0.88,-0.44) rectangle (0.88,0.44);
+                \draw[brown!50!black, line width=.5pt, rounded corners=1.5pt] (-0.88,-0.44) rectangle (0.88,0.44);
+                \TTgiodt{0}{0}{0.48}{TTnavy!90!black}{TTnavy!10!cyan!20!white}{x9:15}
+            \end{scope}
+            % (3) đồng hồ để bàn đèn LED đỏ
+            \begin{scope}[shift={(0,0)}]
+                \fill[black, opacity=.18, rounded corners=6pt] (-1.12,-0.68) rectangle (1.28,0.6);
+                \fill[black!85] (-0.8,-0.72) rectangle (-0.5,-0.6) (0.5,-0.72) rectangle (0.8,-0.6);
+                \fill[top color=black!70, bottom color=black, rounded corners=6pt] (-1.2,-0.62) rectangle (1.2,0.66);
+                \fill[black, rounded corners=3pt] (-1.02,-0.44) rectangle (1.02,0.48);
+                \TTgiodt{0.02}{0.02}{0.5}{red!90!yellow}{red!14!black}{10:00}
+            \end{scope}
+            % (4) đồng hồ báo thức màu ngọc, chuông cam
+            \begin{scope}[shift={(3,0)}]
+                \fill[black, opacity=.15] (0.05,-0.82) ellipse (1.1 and 0.08);
+                \foreach \s in {1,-1}{
+                    \fill[TTcam!80!black] (\s*0.75,-0.8) rectangle (\s*0.55,-0.6);
+                    \fill[top color=TTcam!60!white, bottom color=TTcam!90!black] (\s*0.7-0.28,0.6) arc (180:0:0.28 and 0.24) -- cycle;
+                    \draw[TTcam!60!black, line width=.6pt] (\s*1.1,0.95) arc (\s*-40+90:\s*-10+90:0.4);}
+                \fill[top color=TTlam!70!white, bottom color=TTngoc, rounded corners=6pt] (-1.05,-0.66) rectangle (1.05,0.62);
+                \fill[white!92!gray, rounded corners=2.5pt] (-0.82,-0.4) rectangle (0.82,0.38);
+                \draw[TTngoc!60!black, line width=.5pt, rounded corners=2.5pt] (-0.82,-0.4) rectangle (0.82,0.38);
+                \TTgiodt{0}{-0.01}{0.42}{black!85}{black!7}{10:30}
+            \end{scope}
+            % (5) đồng hồ cổ điển khung vàng kem
+            \begin{scope}[shift={(6,0)}]
+                \fill[black, opacity=.18, rounded corners=6pt] (-1.07,-0.66) rectangle (1.23,0.58);
+                \fill[top color=yellow!30!brown!60, bottom color=brown!70!black, rounded corners=6pt] (-1.15,-0.6) rectangle (1.15,0.64);
+                \fill[TTkem!90!brown, rounded corners=3pt] (-0.95,-0.42) rectangle (0.95,0.46);
+                \fill[brown!30!black, rounded corners=2pt] (-0.86,-0.34) rectangle (0.86,0.38);
+                \TTgiodt{0.02}{0.02}{0.46}{TTkem}{TTkem!10!brown!30!black}{12:00}
+            \end{scope}
+            \foreach \x in {-6,-3,0,3,6}{
+                \fill[TTden] (\x,0.98) circle (0.075);
+                \fill[TTden] (\x,-1.03) circle (0.075);}
+            % ---- hàng dưới: đồng hồ kim ----
+            \begin{scope}[shift={(-2.3,-3.35)}]
+                \TTdongho[r=1.15, kimgio=TTxanh]{12}{0}
+            \end{scope}
+            \begin{scope}[shift={(2.3,-3.35)}]
+                \TTdongho[r=1.15, day=0.13, vien=TTtimnhat, kimgio=TTcam!90!black, kimphut=violet!70!black,
+                          tam=violet!70!black]{9}{15}
+            \end{scope}
+            \foreach \x in {-2.3,2.3} \fill[TTden] (\x,-1.93) circle (0.075);
+        \end{tikzpicture}
+        \end{TTve}
+        \item \mbox{}
+        \begin{TTve}
+        \begin{tikzpicture}
+            \foreach \h/\m [count=\k from 0] in {6/0,8/30,3/0,12/30,5/0}{
+                \begin{scope}[shift={(\k*3.25,0)}]
+                    \TTdongho[r=1.2, kimphut=TTxanh]{\h}{\m}
+                \end{scope}
+                \fill[TTden] (\k*3.25,-1.5) circle (0.075);}
+            \foreach \t [count=\k from 0] in {05:00,12:30,08:30,06:00,03:00}{
+                \fill[TTden] (\k*3.25,-3.0) circle (0.075);
+                \begin{scope}[shift={(\k*3.25,-3.9)}, scale=0.9]
+                    \TTmanhinh{\t}
+                \end{scope}}
+        \end{tikzpicture}
+        \end{TTve}
+    \end{listEX}
 \end{bt}
 
+%---------------------------------------------------------
 \begin{bt}
     Em hãy viết giờ tương ứng với đồng hồ.
-    \TThinh[7cm]{image8.png}
+    \begin{TTve}
+    \begin{tikzpicture}
+        \foreach \h/\m [count=\k from 0] in {2/0,7/30,10/10,2/15,3/55,10/55,9/0,6/0}{
+            \pgfmathtruncatemacro\cot{mod(\k,4)}\pgfmathtruncatemacro\hang{div(\k,4)}
+            \begin{scope}[shift={(\cot*3.95,-\hang*3.85)}]
+                \TTdongho[r=1.3, kim=arrow]{\h}{\m}
+                \TTo[2.2]{0}{-1.85}{}
+            \end{scope}}
+    \end{tikzpicture}
+    \end{TTve}
 \end{bt}
 
+%---------------------------------------------------------
 \begin{bt}
     Đúng ghi Đ, sai ghi S vào ô trống.
-    \TThinh[7.5cm]{image9.png}
+    \begin{TTve}
+    \begin{tikzpicture}
+        \foreach \h/\m/\nhan [count=\k from 0] in
+            {4/0/4 giờ, 12/30/6 giờ, 9/30/9 giờ 30 phút, 2/0/10 giờ, 3/30/4 giờ 30 phút, 8/30/8 giờ rưỡi}{
+            \pgfmathtruncatemacro\cot{mod(\k,3)}\pgfmathtruncatemacro\hang{div(\k,3)}
+            \begin{scope}[shift={(\cot*5.3,-\hang*4.2)}]
+                \TTdongho[r=1.3, kimphut=TTxanh]{\h}{\m}
+                \node[anchor=east, font=\bfseries] at (0.95,-1.95) {\nhan};
+                \fill[black, opacity=.1, rounded corners=2pt] (1.19,-2.29) rectangle (1.79,-1.67);
+                \draw[TTden, line width=.8pt, fill=white, rounded corners=2pt] (1.15,-2.25) rectangle (1.75,-1.65);
+            \end{scope}}
+    \end{tikzpicture}
+    \end{TTve}
 \end{bt}
-
+\newpage
+%---------------------------------------------------------
 \begin{bt}
     Viết \textit{sáng}, \textit{trưa}, \textit{chiều} hoặc \textit{tối} vào chỗ chấm.
     \begin{listEX}
@@ -122,6 +563,7 @@
     \end{listEX}
 \end{bt}
 
+%---------------------------------------------------------
 \begin{bt}
     Đánh số thứ tự từ 1 đến 6 để sắp xếp các hoạt động của Minh từ sớm đến muộn.
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
@@ -149,78 +591,210 @@
 \vspace{6pt}
 \TTthongtin
 
+%---------------------------------------------------------
 \begin{bt}
     Đồng hồ chỉ mấy giờ?
-    \TThinh[9cm]{image10.png}
+    \begin{TTve}
+    \begin{tikzpicture}
+        \fill[black, opacity=.08, rounded corners=8pt] (0.08,-0.1) rectangle (14.88,10.2);
+        \fill[white, rounded corners=8pt] (0,0) rectangle (14.8,10.3);
+        \foreach \h [count=\k from 0] in {2,8,9,1,3,6,7,12,10,5,4,11}{
+            \pgfmathtruncatemacro\cot{mod(\k,4)}\pgfmathtruncatemacro\hang{div(\k,4)}
+            \begin{scope}[shift={(1.85+\cot*3.7,8.75-\hang*3.4)}]
+                \TTdongho[r=1.05, day=0.1, vach=hour, vitriso=0.7, chu=\sffamily\bfseries\scriptsize]{\h}{0}
+                \TTo[2.9]{0}{-1.55}{}
+            \end{scope}}
+        \foreach \x in {3.7,7.4,11.1} \draw[TTnavy!45, line width=.6pt] (\x,0) -- (\x,10.3);
+        \foreach \y in {3.43,6.87} \draw[TTnavy!45, line width=.6pt] (0,\y) -- (14.8,\y);
+        \draw[TTnavy!70, line width=1pt, rounded corners=8pt] (0,0) rectangle (14.8,10.3);
+    \end{tikzpicture}
+    \end{TTve}
 \end{bt}
 
+%---------------------------------------------------------
 \begin{bt}
     Viết các thời gian tương ứng.
-    \TThinh[9.5cm]{image11.png}
+    \begin{TTve}
+    \begin{tikzpicture}
+        \foreach \h/\m [count=\k from 0] in {6/0,2/30,9/0,4/30,12/0,7/30,11/0,1/30,10/30}{
+            \pgfmathtruncatemacro\cot{mod(\k,3)}\pgfmathtruncatemacro\hang{div(\k,3)}
+            \begin{scope}[shift={(\cot*4.5,-\hang*3.85)}]
+                \TTdongho[r=1.3, kimphut=TTxanh]{\h}{\m}
+                \TTo[2.4]{0}{-1.85}{:}
+            \end{scope}}
+    \end{tikzpicture}
+    \end{TTve}
 \end{bt}
 
+%---------------------------------------------------------
 \begin{bt}
     Viết các thời gian tương ứng.
-    \TThinh[7cm]{image12.png}
+    \begin{TTve}
+    \begin{tikzpicture}
+        \foreach \h [count=\k from 0] in {2,12,6,11,4,3}{
+            \pgfmathtruncatemacro\cot{mod(\k,3)}\pgfmathtruncatemacro\hang{div(\k,3)}
+            \begin{scope}[shift={(\cot*4.6,-\hang*4.25)}]
+                \TTbaothuc[1.08]{\h}{0}
+                \TTo[2.2]{0}{-1.92}{:}
+            \end{scope}}
+    \end{tikzpicture}
+    \end{TTve}
 \end{bt}
 
+%---------------------------------------------------------
 \begin{bt}
     Nối đồng hồ với hoạt động tương ứng.
-    \TThinh[8cm]{image13.png}
+    \begin{TTve}
+    \begin{tikzpicture}
+        \foreach \h [count=\k from 0] in {7,4,9,11}{
+            \begin{scope}[shift={(0,-\k*2.55)}]
+                \TTdongho[r=1.05, kim=leaf, kimgio=TTxanh, kimphut=TTden, chu=\rmfamily\bfseries\tiny]{\h}{0}
+            \end{scope}
+            \fill[TTden] (1.4,-\k*2.55) circle (0.075);}
+        \foreach \ten/\icon/\mau [count=\k from 0] in
+            {Đi học/\faSchool/TTxanh, Ăn cơm trưa/\faUtensils/TTcamdat, Đi học về/\faHome/TTngoc, Đi ngủ/\faBed/TTtim}{
+            \pgfmathsetmacro\y{-\k*2.55}
+            \fill[TTden] (6.1,\y) circle (0.075);
+            \fill[black, opacity=.1, rounded corners=10pt] (6.54,\y-0.5) rectangle (10.64,\y+0.42);
+            \draw[\mau, line width=.9pt, fill=\mau!8, rounded corners=10pt] (6.5,\y-0.46) rectangle (10.6,\y+0.46);
+            \node[text=\mau, font=\large] at (7.1,\y) {\icon};
+            \node[anchor=west, font=\bfseries] at (7.55,\y) {\ten};}
+    \end{tikzpicture}
+    \end{TTve}
 \end{bt}
 
+%---------------------------------------------------------
 \begin{bt}
     Chọn khoảng thời gian thích hợp.
     \begin{listEX}
         \item Buổi sáng An đi học. Lúc đó khoảng mấy giờ?
-        \TThinh[1.6cm]{image14.png}
+        \begin{TTve}
+        \begin{tikzpicture}
+            \foreach \t [count=\k from 0] in {07:00,21:00,10:00}{
+                \begin{scope}[shift={(\k*4.3,0)}, scale=0.95]\TTmanhinh{\t}\end{scope}}
+        \end{tikzpicture}
+        \end{TTve}
         \item Buổi trưa, An ăn cơm. Lúc đó khoảng mấy giờ?
-        \TThinh[1.6cm]{image15.png}
+        \begin{TTve}
+        \begin{tikzpicture}
+            \foreach \t [count=\k from 0] in {08:00,11:00,17:00}{
+                \begin{scope}[shift={(\k*4.3,0)}, scale=0.95]\TTmanhinh{\t}\end{scope}}
+        \end{tikzpicture}
+        \end{TTve}
         \item Buổi tối, An học bài. Lúc đó khoảng mấy giờ?
-        \TThinh[1.6cm]{image16.png}
+        \begin{TTve}
+        \begin{tikzpicture}
+            \foreach \t [count=\k from 0] in {10:00,14:00,20:00}{
+                \begin{scope}[shift={(\k*4.3,0)}, scale=0.95]\TTmanhinh{\t}\end{scope}}
+        \end{tikzpicture}
+        \end{TTve}
     \end{listEX}
 \end{bt}
 
+%---------------------------------------------------------
 \begin{bt}
     Khoanh vào chữ đặt dưới đồng hồ chỉ đúng thời gian.
     \begin{listEX}
         \item Lan thức dậy lúc 6 giờ sáng.
-        \TThinh[3.6cm]{image17.png}
+        \begin{TTve}
+        \begin{tikzpicture}
+            \foreach \h/\m/\chu [count=\k from 0] in {12/30/A,6/0/B,6/30/C}{
+                \begin{scope}[shift={(\k*4.4,0)}]
+                    \TTdongho[r=1.15, kimphut=TTxanh]{\h}{\m}
+                    \node[font=\sffamily\bfseries\Large] at (0,-1.7) {\chu};
+                \end{scope}}
+        \end{tikzpicture}
+        \end{TTve}
         \item Bố đi làm về lúc 5 giờ rưỡi chiều.
-        \TThinh[3.6cm]{image18.png}
+        \begin{TTve}
+        \begin{tikzpicture}
+            \foreach \h/\m/\chu [count=\k from 0] in {5/0/A,6/30/B,5/30/C}{
+                \begin{scope}[shift={(\k*4.4,0)}]
+                    \TTdongho[r=1.15, kimphut=TTxanh]{\h}{\m}
+                    \node[font=\sffamily\bfseries\Large] at (0,-1.7) {\chu};
+                \end{scope}}
+        \end{tikzpicture}
+        \end{TTve}
         \item Cả nhà ăn cơm tối lúc 19 giờ.
-        \TThinh[3.6cm]{image19.png}
+        \begin{TTve}
+        \begin{tikzpicture}
+            \foreach \h/\m/\chu [count=\k from 0] in {7/0/A,9/0/B,7/30/C}{
+                \begin{scope}[shift={(\k*4.4,0)}]
+                    \TTdongho[r=1.15, kimphut=TTxanh]{\h}{\m}
+                    \node[font=\sffamily\bfseries\Large] at (0,-1.7) {\chu};
+                \end{scope}}
+        \end{tikzpicture}
+        \end{TTve}
     \end{listEX}
 \end{bt}
 
+%---------------------------------------------------------
 \begin{bt}
     Khoanh tròn đáp án đúng.
     \begin{listEX}
         \item Mẹ của Bình chuẩn bị cơm tối cho gia đình. Lúc đó khoảng mấy giờ?
-        \TThinh[3.2cm]{image20.png}
+        \begin{TTve}
+        \begin{tikzpicture}
+            \foreach \h/\chu [count=\k from 0] in {10/A,8/B,6/C}{
+                \begin{scope}[shift={(\k*4.4,0)}]
+                    \TTdongho[r=1.15, kim=leaf, kimgio=TTxanh, chu=\rmfamily\bfseries\scriptsize]{\h}{0}
+                    \node[font=\sffamily\bfseries\Large] at (0,-1.7) {\chu};
+                \end{scope}}
+        \end{tikzpicture}
+        \end{TTve}
         \item An đi chơi công viên vào sáng chủ nhật. Lúc đó khoảng mấy giờ?
-        \TThinh[3.2cm]{image21.png}
+        \begin{TTve}
+        \begin{tikzpicture}
+            \foreach \h/\chu [count=\k from 0] in {10/A,8/B,3/C}{
+                \begin{scope}[shift={(\k*4.4,0)}]
+                    \TTdongho[r=1.15, kim=leaf, kimgio=TTxanh, chu=\rmfamily\bfseries\scriptsize]{\h}{0}
+                    \node[font=\sffamily\bfseries\Large] at (0,-1.7) {\chu};
+                \end{scope}}
+        \end{tikzpicture}
+        \end{TTve}
     \end{listEX}
 \end{bt}
-
+\newpage
+%---------------------------------------------------------
 \begin{bt}
     Chọn câu trả lời đúng.
     \begin{listEX}
         \item Đồng hồ chỉ thời gian các bạn An, Bình và Châu thức dậy vào sáng chủ nhật vừa rồi.
-        \TThinh[2.8cm]{image22.png}
+        \begin{TTve}
+        \begin{tikzpicture}
+            \foreach \ten/\t [count=\k from 0] in {An/07:00,Bình/06:45,Châu/08:00}{
+                \node[font=\bfseries] at (\k*4.3,0.95) {\ten};
+                \begin{scope}[shift={(\k*4.3,0)}, scale=0.9]\TTmanhinh{\t}\end{scope}}
+        \end{tikzpicture}
+        \end{TTve}
         Ai là người thức dậy \textbf{sớm nhất}?
         \TTchonba{An}{Bình}{Châu}
         \item Đồng hồ chỉ thời gian các bạn An, Bình và Châu đến lớp vào sáng nay.
-        \TThinh[2.5cm]{image23.png}
+        \begin{TTve}
+        \begin{tikzpicture}
+            \foreach \ten/\t [count=\k from 0] in {An/07:10,Bình/07:05,Châu/07:20}{
+                \node[font=\bfseries] at (\k*4.3,0.95) {\ten};
+                \begin{scope}[shift={(\k*4.3,0)}, scale=0.9]\TTmanhinh{\t}\end{scope}}
+        \end{tikzpicture}
+        \end{TTve}
         Ai là người đến lớp \textbf{muộn nhất}?
         \TTchonba{An}{Bình}{Châu}
         \item Đồng hồ chỉ thời gian An học bài và xem ti vi.
-        \TThinh[3.8cm]{image24.png}
+        \begin{TTve}
+        \begin{tikzpicture}
+            \foreach \ten/\h [count=\k from 0] in {Học bài/8,Xem ti vi/6}{
+                \node[font=\bfseries] at (\k*5,1.6) {\ten};
+                \begin{scope}[shift={(\k*5,0)}]
+                    \TTdongho[r=1.2, kim=leaf, kimgio=TTxanh, chu=\rmfamily\bfseries\scriptsize]{\h}{0}
+                \end{scope}}
+        \end{tikzpicture}
+        \end{TTve}
         An làm việc gì trước?
         \TTchonhai{Học bài}{Xem ti vi}
     \end{listEX}
 \end{bt}
 
+%---------------------------------------------------------
 \begin{bt}
     Chọn câu trả lời đúng.
     \begin{listEX}
@@ -232,24 +806,56 @@
         \TTchonba{30 phút}{2 phút}{10 giờ}
         \item Em học bài trong khoảng bao lâu?
         \TTchonba{5 phút}{1 giờ}{8 giờ}
-        \item Em tắm trong khoảng bao lâu?
-        \TTchonba{1 phút}{3 giờ}{15 phút}
     \end{listEX}
 \end{bt}
-
+\newpage
+%---------------------------------------------------------
 \begin{bt}
     Trả lời các câu hỏi sau:
     \begin{listEX}
         \item An đi học từ 7 giờ sáng đến 11 giờ trưa. Hỏi An đi học bao lâu?
-        \TThinh[1.5cm]{image25.png}
+        \begin{TTve}
+        \begin{tikzpicture}
+            \begin{scope}[scale=0.9]\TTmanhinh{07:00}\end{scope}
+            \draw[TTden, line width=1.4pt, -{Stealth[length=3mm,width=2.6mm]}] (1.5,0) -- (3.7,0);
+            \begin{scope}[shift={(5.2,0)}, scale=0.9]\TTmanhinh{11:00}\end{scope}
+        \end{tikzpicture}
+        \end{TTve}
         \item An học bài từ 19 giờ đến 20 giờ. Hỏi An học bài bao lâu?
-        \TThinh[1.5cm]{image26.png}
+        \begin{TTve}
+        \begin{tikzpicture}
+            \begin{scope}[scale=0.9]\TTmanhinh{19:00}\end{scope}
+            \draw[TTden, line width=1.4pt, -{Stealth[length=3mm,width=2.6mm]}] (1.5,0) -- (3.7,0);
+            \begin{scope}[shift={(5.2,0)}, scale=0.9]\TTmanhinh{20:00}\end{scope}
+        \end{tikzpicture}
+        \end{TTve}
     \end{listEX}
 \end{bt}
 
+%---------------------------------------------------------
 \begin{bt}
     Vẽ kim cho đồng hồ thứ hai và viết giờ vào ô trống.
-    \TThinh[6cm]{image27.png}
+    \begin{TTve}
+    \begin{tikzpicture}
+        % \TTcapdh{x}{y}{giờ}{phút}{nhãn}: một cặp "Bây giờ" -> "?"
+        \newcommand\TTcapdh[5]{%
+            \begin{scope}[shift={(#1,#2)}]
+                \fill[black, opacity=.06, rounded corners=9pt] (-1.38,-2.62) rectangle (6.38,1.9);
+                \fill[TTnavy!4, draw=TTnavy!40, line width=.7pt, rounded corners=9pt] (-1.45,-2.55) rectangle (6.3,1.97);
+                \node[font=\bfseries] at (0,1.6) {Bây giờ};
+                \TTdongho[r=1.2, kimphut=TTxanh]{#3}{#4}
+                \draw[TTden, line width=1.3pt, -{Stealth[length=3mm,width=2.6mm]}] (1.45,0) -- (3.4,0);
+                \node[font=\bfseries\small, text=TTdo, above] at (2.42,0.08) {#5};
+                \node[font=\bfseries\large] at (4.85,1.6) {?};
+                \begin{scope}[shift={(4.85,0)}]\TTdongho[r=1.2, kim=none]{0}{0}\end{scope}
+                \TTo[2.3]{4.85}{-1.95}{:}
+            \end{scope}}
+        \TTcapdh{0}{0}{3}{0}{Sau 2 giờ}
+        \TTcapdh{8.25}{0}{8}{30}{Sau 1 giờ}
+        \TTcapdh{0}{-4.85}{11}{0}{Sau 3 giờ}
+        \TTcapdh{8.25}{-4.85}{7}{0}{1 giờ trước}
+    \end{tikzpicture}
+    \end{TTve}
 \end{bt}
 
 \begin{center}
