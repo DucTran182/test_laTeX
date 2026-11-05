@@ -149,7 +149,9 @@
     \draw[thick,draw=TTxanhdam,fill=TTxanh!8,rounded corners=10pt] (0,0.2) rectangle (4.3,-4.9);
     \foreach \pt [count=\k] in {#1}{\node[anchor=west] at (0.25,-0.92*\k+0.13) {$\pt = $\ \rule{1.3cm}{0.6pt}};}
   \end{tikzpicture}}
-% Bảng số liền sau: \TTlien{số cột}{hàng 1/hàng 2/...} với mỗi hàng là a,b,...
+% Số đáp án mẫu (màu đỏ)
+\providecommand{\TTmauso}{}\renewcommand{\TTmauso}[1]{\textcolor{red}{#1}}
+% Bảng số liền sau: \TTlien{số cột}{hàng 1/hàng 2/...} với mỗi hàng là a,b,...; hàng 1 là hàng mẫu (nền vàng, chữ "Mẫu")
 \providecommand{\TTlien}{}\renewcommand{\TTlien}[2]{%
   \begin{tikzpicture}[font=\sffamily\bfseries\large]
     \pgfmathsetmacro{\rong}{#1*1.25+0.2}
@@ -158,7 +160,9 @@
     \pgfmathtruncatemacro{\somui}{#1-1}
     \foreach \m in {1,...,\somui}{\draw[-latex,very thick,TTxanhdam] (1.25*\m-0.75,-0.4) to[bend left=35] (1.25*\m+0.25,-0.4);}
     \foreach \hang [count=\i] in {#2}{\foreach \o [count=\j] in \hang{%
-      \node[draw,thick,rounded corners=3pt,fill=white,minimum width=1.05cm,minimum height=0.75cm] at (1.25*\j-0.4,-0.1-1.0*\i) {\o};}}
+      \ifnum\i=1 \def\TTnen{TTvangnhat}\else\def\TTnen{white}\fi
+      \node[draw,thick,rounded corners=3pt,fill=\TTnen,minimum width=1.05cm,minimum height=0.75cm] at (1.25*\j-0.4,-0.1-1.0*\i) {\o};}}
+    \node[anchor=east,orange,font=\sffamily\bfseries\small] at (-0.1,-1.1) {Mẫu};
   \end{tikzpicture}}
 
 %---------- Biểu tượng nhỏ để đếm (Bài 1, buổi 1; vẽ tại gốc tọa độ, rộng khoảng 0,5cm) ----------
@@ -750,8 +754,8 @@
     Điền vào chỗ trống.
     \TThinhduoi
     {\centering
-        \TTlien{2}{{,39},{,31},{40,},{,63},{59,},{,84},{90,}}\hspace{2.5cm}
-        \TTlien{3}{{16,17,},{30,,32},{,41,},{,,44},{,52,},{,60,61},{85,,},{,,100}}\par}
+        \TTlien{2}{{\TTmauso{38},39},{,31},{40,},{,63},{59,},{,84},{90,}}\hspace{2.5cm}
+        \TTlien{3}{{16,17,\TTmauso{18}},{30,,32},{,41,},{,,44},{,52,},{,60,61},{85,,},{,,100}}\par}
 \end{bt}
 
 \begin{bt}
@@ -761,9 +765,10 @@
     \begin{tikzpicture}
         \begin{scope}
             \node[TTgach] at (0,0) {10};\node[TTgach] at (1.5,0) {30};\node[TTgach] at (3,0) {20};
-            \node[TTgach] at (0.75,0.75) {};\node[TTgach] at (2.25,0.75) {};
+            \node[TTgach,top color=TTvangnhat,bottom color=TTvangnhat,draw=orange] at (0.75,0.75) {\TTmauso{40}};\node[TTgach] at (2.25,0.75) {};
             \node[TTgach] at (1.5,1.5) {};
             \node[font=\bfseries] at (1.5,-0.75) {a)};
+            \node[font=\sffamily\small,orange!80!black] at (1.5,-1.25) {Mẫu: 10 + 30 = \textcolor{red}{\bfseries 40}};
         \end{scope}
         \begin{scope}[shift={(6.5,0)}]
             \node[TTgach] at (0,0) {20};\node[TTgach] at (1.5,0) {};\node[TTgach] at (3,0) {10};
