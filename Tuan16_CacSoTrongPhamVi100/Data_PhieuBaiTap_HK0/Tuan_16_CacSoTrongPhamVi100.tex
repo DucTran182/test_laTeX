@@ -248,10 +248,11 @@
 % Bảng kẹo 10 cột: \TTbangkeo{số kẹo}{số hàng}; hàng xen kẽ hai màu để dễ đếm theo chục
 \providecommand{\TTbangkeo}{}\renewcommand{\TTbangkeo}[2]{%
   \fill[white,draw=gray!55,thick,rounded corners=3pt] (-0.06,0.06) rectangle (6.26,-0.62*#2-0.06);
-  \foreach \h in {1,...,#2}{\foreach \c in {1,...,10}{\draw[gray!25] (0.62*\c-0.62,-0.62*\h) rectangle ++(0.62,0.62);}}
+  \foreach \h in {1,...,#2}{\foreach \c in {1,...,10}{\draw[gray!20] (0.62*\c-0.62,-0.62*\h) rectangle ++(0.62,0.62);}}
+  \draw[gray!55,thick] (3.1,0.06)--(3.1,-0.62*#2-0.06);
   \foreach \k in {1,...,#1}{\pgfmathtruncatemacro{\cot}{mod(\k-1,10)}\pgfmathtruncatemacro{\hang}{div(\k-1,10)}%
     \ifodd\hang\def\TTmau{TTkeo2}\else\def\TTmau{TTkeo1}\fi
-    \begin{scope}[shift={(0.62*\cot+0.31,-0.62*\hang-0.31)},scale=1.35]\TTkeo{\TTmau}\end{scope}}}
+    \begin{scope}[shift={(0.62*\cot+0.31,-0.62*\hang-0.31)},scale=1.05]\TTkeo{\TTmau}\end{scope}}}
 
 %---------- Bài 11 (buổi 1): khay trứng nhìn từ trên ----------
 % Một quả trứng nhìn từ trên tại (#1,#2)
