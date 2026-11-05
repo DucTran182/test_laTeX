@@ -36,6 +36,8 @@
 \definecolor{TTgo}{RGB}{252,220,180}\definecolor{TTgodam}{RGB}{222,160,100}\definecolor{TTgovien}{RGB}{150,95,50}
 \definecolor{TTnuoc}{RGB}{214,238,252}
 \definecolor{TTtrung}{RGB}{255,250,236}\definecolor{TTkhay}{RGB}{218,200,176}\definecolor{TTkhaydam}{RGB}{140,112,88}
+\definecolor{TTvotrung}{RGB}{238,208,170}\definecolor{TTgiay}{RGB}{200,192,180}\definecolor{TTgiaydam}{RGB}{150,140,128}
+\definecolor{TTkeo1}{RGB}{232,98,82}\definecolor{TTkeo2}{RGB}{38,158,160}\definecolor{TTngoi}{RGB}{206,88,66}
 \definecolor{TTtat}{RGB}{88,104,168}\definecolor{TTtimtau}{RGB}{165,125,225}\definecolor{TTtim}{RGB}{180,168,228}\definecolor{TTlam}{RGB}{88,186,250}
 \tikzset{
   TTo/.style={draw,thick,minimum width=0.9cm,minimum height=0.75cm,inner sep=0pt,font=\sffamily\large},
@@ -44,21 +46,23 @@
 }
 
 %---------- Que tính ----------
-% Một que tính: chân que tại (#1,#2), cao #3
-\providecommand{\TTmotque}{}\renewcommand{\TTmotque}[3]{%
-  \shade[left color=TTgodam,right color=TTgodam,middle color=TTgo!55!white,draw=TTgovien,line width=0.35pt]
-    (#1-0.045,#2) rectangle (#1+0.045,#2+#3);
-  \fill[TTgodam!75!TTgovien] (#1,#2+#3) ellipse (0.045 and 0.015);}
-% Một bó que (10 que xếp sát, buộc chun ở giữa), góc trái dưới tại gốc, rộng khoảng 0,55cm
+% Một que tính: \TTmotque[nửa bề rộng]{x chân que}{y chân que}{chiều cao}
+\providecommand{\TTmotque}{}\renewcommand{\TTmotque}[4][0.045]{%
+  \shade[left color=TTgodam,right color=TTgodam,middle color=TTgo!55!white,draw=TTgovien,line width=0.3pt]
+    (#2-#1,#3) rectangle (#2+#1,#3+#4);
+  \fill[TTgodam!75!TTgovien] (#2,#3+#4) ellipse (#1 and 0.015);}
+% Một bó que: đủ 10 que xếp sát nhau, hơi xòe hai đầu, buộc chun ở giữa; góc trái dưới tại gốc, rộng khoảng 0,62cm
 \providecommand{\TTvebo}{}\renewcommand{\TTvebo}{%
-  \foreach \q in {0,...,6}{\TTmotque{0.045+0.07*\q}{0}{1.4}}%
+  \foreach \q in {0,...,9}{\begin{scope}[rotate around={(4.5-\q)*0.4:(0.31,0.7)}]\TTmotque[0.031]{0.04+0.0602*\q}{0}{1.4}\end{scope}}%
   \shade[top color=TTxanhdam!55!white,bottom color=TTxanhdam!75!black,draw=TTxanhdam!50!black,thin,rounded corners=1.2pt]
-    (-0.03,0.6) rectangle (0.545,0.76);
-  \draw[white,opacity=0.55,line width=0.6pt] (0.0,0.72)--(0.51,0.72);}
+    (0.0,0.62) rectangle (0.62,0.78);
+  \draw[white,opacity=0.55,line width=0.6pt] (0.03,0.74)--(0.59,0.74);}
 % \TTbo{n}: n bó một chục; \TTle{n}: n que lẻ
-\providecommand{\TTbo}{}\renewcommand{\TTbo}[1]{\begin{tikzpicture}[baseline=(current bounding box.center)]
-  \path (0,-0.2) (0,1.6);\foreach \i in {1,...,#1}{\begin{scope}[shift={(0.66*\i-0.66,0)}]\TTvebo\end{scope}}\end{tikzpicture}}
-\providecommand{\TTle}{}\renewcommand{\TTle}[1]{\begin{tikzpicture}[baseline=(current bounding box.center)]
+\providecommand{\TTbo}{}\renewcommand{\TTbo}[1]{\begin{tikzpicture}[baseline=(current bounding box.center),yscale=1.7]
+  \path (0,-0.2) (0,1.6);\foreach \i in {1,...,#1}{\begin{scope}[shift={(0.74*\i-0.74,0)}]\TTvebo\end{scope}}\end{tikzpicture}}
+\providecommand{\TTsoque}{}\renewcommand{\TTsoque}[1]{\begin{tikzpicture}[baseline=(current bounding box.center),yscale=1.7]
+  \path (0,-0.2) (0,1.6);\node[font=\bfseries\Large] at (0,0.7) {#1};\end{tikzpicture}}
+\providecommand{\TTle}{}\renewcommand{\TTle}[1]{\begin{tikzpicture}[baseline=(current bounding box.center),yscale=1.7]
   \path (0,-0.2) (0,1.6);\foreach \i in {1,...,#1}{\TTmotque{0.4*\i-0.4}{0}{1.4}}\end{tikzpicture}}
 
 %---------- Khối chục - đơn vị ----------
@@ -195,15 +199,10 @@
   \fill[pink!90!red] (-0.16,0.02) -- (0.16,0.02) -- (0.16,-0.03) .. controls (0.1,-0.06) and (0.08,0.0) .. (0.04,-0.05) .. controls (0.0,0.0) and (-0.06,-0.07) .. (-0.1,-0.03) .. controls (-0.13,-0.06) .. (-0.16,-0.03) -- cycle;
   \shade[ball color=red] (0.02,0.2) circle (0.045);
   \draw[green!40!black,thin] (0.03,0.24) -- (0.07,0.3);}
-% Kẹo bọc giấy, màu thay đổi theo hàng: \TTiconkeo{màu}
-\providecommand{\TTiconkeo}{}\renewcommand{\TTiconkeo}[1]{%
-  \fill[#1!70!white,draw=#1!50!black,very thin] (-0.07,0)--(-0.155,0.065)--(-0.155,-0.065)--cycle (0.07,0)--(0.155,0.065)--(0.155,-0.065)--cycle;
-  \shade[ball color=#1] (0,0) circle (0.085);}
 % Đếm theo hàng 10: \TTdemhang{\biểu tượng}{số lượng}
 \providecommand{\TTdemhang}{}\renewcommand{\TTdemhang}[2]{%
   \begin{tikzpicture}
     \pgfmathtruncatemacro{\sohang}{div(#2+9,10)}
-    \fill[TTvangnhat!45,rounded corners=6pt] (-0.42,0.42) rectangle (6.72,-0.78*\sohang+0.36);
     \foreach \k in {1,...,#2}{\pgfmathtruncatemacro{\cot}{mod(\k-1,10)}\pgfmathtruncatemacro{\hang}{div(\k-1,10)}%
       \begin{scope}[shift={(0.7*\cot,-0.78*\hang)}]#1\end{scope}}
     \pgfmathtruncatemacro{\sovach}{\sohang-1}
@@ -215,59 +214,69 @@
 \providecommand{\TTdemcot}{}\renewcommand{\TTdemcot}[2]{%
   \begin{tikzpicture}
     \pgfmathtruncatemacro{\socot}{div(#2+7,8)}
-    \fill[TTvangnhat!45,rounded corners=6pt] (-0.42,0.42) rectangle (1.0*\socot-0.55,-4.75);
     \foreach \k in {1,...,#2}{\pgfmathtruncatemacro{\hang}{mod(\k-1,8)}\pgfmathtruncatemacro{\cot}{div(\k-1,8)}%
-      \begin{scope}[shift={(1.0*\cot,-0.62*\hang)}]#1\end{scope}}
+      \begin{scope}[shift={(1.0*\cot,-0.74*\hang)}]#1\end{scope}}
     \pgfmathtruncatemacro{\sovach}{\socot-1}
-    \ifnum\sovach>0 \foreach \c in {1,...,\sovach}{\draw[gray!60,thin,dashed] (1.0*\c-0.5,0.4)--(1.0*\c-0.5,-4.7);}\fi
-    \node[anchor=west,font=\bfseries] (d) at (-0.4,-5.3) {Đáp số:};
+    \ifnum\sovach>0 \foreach \c in {1,...,\sovach}{\draw[gray!60,thin,dashed] (1.0*\c-0.5,0.4)--(1.0*\c-0.5,-5.6);}\fi
+    \node[anchor=west,font=\bfseries] (d) at (-0.4,-6.15) {Đáp số:};
     \draw[very thick,rounded corners=3pt] ([xshift=4pt]d.east)++(0,-0.3) rectangle ++(1.5,0.6);
   \end{tikzpicture}}
 
 %---------- Bài 2 (buổi 1): ngôi nhà và bảng kẹo ----------
 % Ngôi nhà ghi số (tâm đáy tại gốc)
 \providecommand{\TTnha}{}\renewcommand{\TTnha}[1]{%
-  \fill[green!45!black!60] (0,0.02) ellipse (1.25 and 0.1);
-  \shade[top color=red!45!brown,bottom color=red!60!black,draw=red!25!black,thick] (0.42,1.6) rectangle (0.68,2.3);
+  \fill[TTla!70!black,opacity=0.55] (0,0.02) ellipse (1.3 and 0.11);
+  \shade[top color=TTngoi!80!black,bottom color=TTngoi!60!black,draw=TTngoi!40!black,thick] (0.42,1.6) rectangle (0.68,2.3);
   \fill[gray!55] (0.37,2.27) rectangle (0.73,2.38);
-  \shade[top color=TTvangnhat,bottom color=TTvang,draw=TTcamdam!60!black,thick] (-0.85,0) rectangle (0.85,1.55);
-  \shade[top color=red!60!white,bottom color=red!80!black,draw=red!35!black,thick,rounded corners=1.5pt] (-1.12,1.42)--(0,2.28)--(1.12,1.42)--cycle;
-  \draw[red!30!black!60,thin] (-0.75,1.53)--(0.75,1.53) (-0.45,1.76)--(0.45,1.76) (-0.17,1.98)--(0.17,1.98);
-  \shade[top color=brown!60!orange,bottom color=brown!70!black,draw=brown!40!black,thick,rounded corners=4pt] (-0.62,0) -- (-0.62,0.8) -- (-0.18,0.8) -- (-0.18,0) -- cycle;
+  \shade[top color=TTvangnhat!60!white,bottom color=TTvang!70!TTvangnhat,draw=TTcamdam!50!black,thick] (-0.85,0) rectangle (0.85,1.55);
+  \shade[top color=TTngoi!75!white,bottom color=TTngoi!90!black,draw=TTngoi!45!black,thick,rounded corners=1.5pt] (-1.12,1.42)--(0,2.28)--(1.12,1.42)--cycle;
+  \draw[TTngoi!45!black,thin,opacity=0.5] (-0.75,1.53)--(0.75,1.53) (-0.45,1.76)--(0.45,1.76) (-0.17,1.98)--(0.17,1.98);
+  \shade[top color=brown!55!orange,bottom color=brown!70!black,draw=brown!40!black,thick,rounded corners=4pt] (-0.62,0) -- (-0.62,0.8) -- (-0.18,0.8) -- (-0.18,0) -- cycle;
   \fill[TTvang] (-0.26,0.38) circle (0.035);
   \fill[white,draw=brown!50!black,thick] (0.15,0.3) rectangle (0.62,0.75);
-  \fill[TTxanh!45] (0.19,0.34) rectangle (0.58,0.71);
+  \fill[TTxanh!40] (0.19,0.34) rectangle (0.58,0.71);
   \draw[white,thick] (0.385,0.32)--(0.385,0.73) (0.17,0.525)--(0.6,0.525);
-  \node[draw=TTcamdam,thick,fill=white,rounded corners=2pt,inner sep=1.5pt,font=\sffamily\bfseries\Large] at (0,1.13) {#1};}
-% Bảng kẹo 10 cột: \TTbangkeo{số kẹo}{số hàng}
+  \node[draw=TTngoi!60!black,thick,fill=white,rounded corners=2pt,inner sep=1.5pt,font=\sffamily\bfseries\Large] at (0,1.13) {#1};}
+% Viên kẹo bọc giấy (rộng khoảng 0,4cm): \TTkeo{màu}
+\providecommand{\TTkeo}{}\renewcommand{\TTkeo}[1]{%
+  \foreach \s in {-1,1}{\begin{scope}[xscale=\s]
+    \fill[#1!65!white,draw=#1!55!black,very thin] (0.1,0)--(0.2,0.085) .. controls (0.215,0.03) and (0.215,-0.03) .. (0.2,-0.085)--cycle;
+    \draw[#1!55!black,very thin] (0.12,0)--(0.2,0.04) (0.12,0)--(0.2,-0.04);\end{scope}}
+  \shade[inner color=#1!55!white,outer color=#1!85!black,draw=#1!55!black,very thin] (0,0) ellipse (0.12 and 0.095);
+  \draw[white,opacity=0.5,line width=0.7pt] (-0.04,0.075) .. controls (0.0,-0.02) .. (0.04,-0.075);
+  \fill[white,opacity=0.8] (-0.06,0.04) ellipse (0.025 and 0.016);}
+% Bảng kẹo 10 cột: \TTbangkeo{số kẹo}{số hàng}; hàng xen kẽ hai màu để dễ đếm theo chục
 \providecommand{\TTbangkeo}{}\renewcommand{\TTbangkeo}[2]{%
-  \fill[white,draw=gray!60,rounded corners=2pt] (-0.04,0.04) rectangle (3.64,-0.36*#2-0.04);
-  \foreach \h in {1,...,#2}{\foreach \c in {1,...,10}{\draw[gray!35] (0.36*\c-0.36,-0.36*\h) rectangle ++(0.36,0.36);}}
+  \fill[white,draw=gray!55,thick,rounded corners=3pt] (-0.06,0.06) rectangle (6.26,-0.62*#2-0.06);
+  \foreach \h in {1,...,#2}{\foreach \c in {1,...,10}{\draw[gray!25] (0.62*\c-0.62,-0.62*\h) rectangle ++(0.62,0.62);}}
   \foreach \k in {1,...,#1}{\pgfmathtruncatemacro{\cot}{mod(\k-1,10)}\pgfmathtruncatemacro{\hang}{div(\k-1,10)}%
-    \pgfmathparse{{"red","orange","TTxanhdam","violet","green!60!black","magenta","teal","blue"}[\hang]}\let\TTmau\pgfmathresult
-    \begin{scope}[shift={(0.36*\cot+0.18,-0.36*\hang-0.18)}]\TTiconkeo{\TTmau}\end{scope}}}
+    \ifodd\hang\def\TTmau{TTkeo2}\else\def\TTmau{TTkeo1}\fi
+    \begin{scope}[shift={(0.62*\cot+0.31,-0.62*\hang-0.31)},scale=1.35]\TTkeo{\TTmau}\end{scope}}}
 
 %---------- Bài 11 (buổi 1): khay trứng nhìn từ trên ----------
 % Một quả trứng nhìn từ trên tại (#1,#2)
 \providecommand{\TTtrung}{}\renewcommand{\TTtrung}[2]{%
-  \shade[inner color=white,outer color=TTkhay!80,draw=TTkhaydam!70,very thin] (#1,#2) ellipse (0.105 and 0.125);}
-% Khay 10 quả (2 hàng x 5), góc trái dưới tại gốc, rộng 1,5cm
+  \fill[black,opacity=0.18] (#1+0.025,#2-0.03) ellipse (0.15 and 0.175);
+  \shade[inner color=TTvotrung!35!white,outer color=TTvotrung!85!brown,draw=TTvotrung!50!brown,thin] (#1,#2) ellipse (0.15 and 0.175);
+  \fill[white,opacity=0.75] (#1-0.05,#2+0.065) ellipse (0.04 and 0.055);}
+% Khay giấy 10 quả, đặt đứng (5 hàng x 2 cột), góc trái dưới tại gốc, rộng 0,98cm, cao 2,2cm
 \providecommand{\TTkhaytrung}{}\renewcommand{\TTkhaytrung}{%
-  \shade[top color=TTkhay!70!white,bottom color=TTkhay!85!black,draw=TTkhaydam,thick,rounded corners=3pt] (0,0) rectangle (1.5,0.68);
-  \foreach \c in {0,...,4}{\foreach \r in {0,1}{%
-    \fill[TTkhaydam!55] (0.19+0.28*\c,0.19+0.3*\r) ellipse (0.125 and 0.14);
-    \TTtrung{0.19+0.28*\c}{0.2+0.3*\r}}}}
+  \fill[black,opacity=0.15,rounded corners=4pt] (0.05,-0.05) rectangle (1.03,2.15);
+  \shade[top color=TTgiay!80!white,bottom color=TTgiay,draw=TTgiaydam,thick,rounded corners=4pt] (0,0) rectangle (0.98,2.2);
+  \foreach \c in {0,1}{\foreach \r in {0,...,4}{%
+    \shade[inner color=TTgiaydam,outer color=TTgiay!90!black] (0.28+0.42*\c,0.28+0.41*\r) circle (0.19);
+    \TTtrung{0.28+0.42*\c}{0.29+0.41*\r}}}}
 % Một hàng của bài: \TThangtrung{chữ}{số khay}{số trứng lẻ}
 \providecommand{\TThangtrung}{}\renewcommand{\TThangtrung}[3]{%
   \begin{tikzpicture}[font=\sffamily]
-    \draw[gray!55,thick,fill=TTvangnhat!35,rounded corners=8pt] (0,0) rectangle (17.2,1.75);
-    \node[font=\sffamily\bfseries] at (0.35,1.45) {#1};
-    \ifnum#2>0 \foreach \i in {1,...,#2}{\begin{scope}[shift={(0.6+1.66*\i-1.66,0.45)}]\TTkhaytrung\end{scope}}\fi
-    \ifnum#3>0 \foreach \u in {1,...,#3}{\pgfmathtruncatemacro{\cot}{div(\u-1,2)}\pgfmathtruncatemacro{\hang}{mod(\u-1,2)}%
-      \TTtrung{0.6+1.66*#2+0.1+0.3*\cot}{0.94-0.3*\hang}}\fi
-    \node[font=\large] at (13.6,0.88) {Có};
-    \node[TTodapan,minimum width=1.5cm,minimum height=1.1cm] at (14.95,0.88) {};
-    \node[font=\large] at (16.3,0.88) {quả};
+    \draw[gray!50,thick,fill=TTvangnhat!25,rounded corners=8pt] (0,0) rectangle (17.2,2.75);
+    \node[font=\sffamily\bfseries] at (0.35,2.45) {#1};
+    \ifnum#2>0 \foreach \i in {1,...,#2}{\begin{scope}[shift={(0.75+1.18*\i-1.18,0.28)}]\TTkhaytrung\end{scope}}\fi
+    \ifnum#3>0 \foreach \u in {1,...,#3}{\pgfmathtruncatemacro{\cot}{mod(\u-1,2)}\pgfmathtruncatemacro{\hang}{div(\u-1,2)}%
+      \TTtrung{0.75+1.18*#2+0.25+0.4*\cot}{2.07-0.42*\hang}}\fi
+    \node[font=\large] at (13.6,1.38) {Có};
+    \node[TTodapan,minimum width=1.6cm,minimum height=1.25cm] at (14.95,1.38) {};
+    \node[font=\large] at (16.3,1.38) {quả};
   \end{tikzpicture}}
 
 %---------- Bài 12 (buổi 1): tranh nối số ----------
@@ -411,24 +420,24 @@
     {\centering
     \begin{tikzpicture}[font=\sffamily]
         % Bên trái: các nhóm kẹo (73, 46, 69 cái)
-        \foreach \so/\hang/\y in {73/8/0,46/5/-3.6,69/7/-6.0}{
-            \begin{scope}[shift={(0,\y)}]\TTbangkeo{\so}{\hang}\end{scope}
-            \fill (3.95,\y-0.18*\hang) circle (2.5pt);}
+        \foreach \so/\soh/\y in {73/8/0,46/5/-7.0,69/7/-12.1}{
+            \begin{scope}[shift={(0,\y)}]\TTbangkeo{\so}{\soh}\end{scope}
+            \fill (6.65,\y-0.31*\soh) circle (3.5pt);}
         % Bên phải: các ngôi nhà
-        \foreach \so/\y in {46/-2.2,73/-5.1,69/-8.0}{
-            \begin{scope}[shift={(11,\y)}]\TTnha{\so}\end{scope}
-            \fill (9.6,\y+0.8) circle (2.5pt);}
+        \foreach \so/\y in {46/-5.0,73/-10.9,69/-16.6}{
+            \begin{scope}[shift={(14.3,\y)},scale=1.5,transform shape]\TTnha{\so}\end{scope}
+            \fill (12.0,\y+1.2) circle (3.5pt);}
     \end{tikzpicture}\par}
 \end{bt}
-
+\newpage
 \begin{bt}
     Viết số tương ứng với số lượng que tính.
     \TThinhduoi
     {\centering
         \renewcommand{\arraystretch}{1.0}
-        \begin{tabular}{|>{\centering\arraybackslash}m{6.2cm}|>{\centering\arraybackslash}m{4.2cm}|>{\centering\arraybackslash}m{3cm}|}
+        \begin{tabular}{|>{\centering\arraybackslash}m{6.9cm}|>{\centering\arraybackslash}m{3.9cm}|>{\centering\arraybackslash}m{2.6cm}|}
             \hline
-            \TTbo{4} & \TTle{4} & \textbf{\Large 44} \\ \hline
+            \TTbo{4} & \TTle{4} & \TTsoque{44} \\ \hline
             \TTbo{6} & \TTle{6} & \\ \hline
             \TTbo{3} & \TTle{9} & \\ \hline
             \TTbo{7} & \TTle{4} & \\ \hline
@@ -451,16 +460,16 @@
     \TThinhduoi
     {\centering
         \renewcommand{\arraystretch}{1.6}
-        \begin{tabular}{|>{\centering\arraybackslash}p{2.2cm}|>{\centering\arraybackslash}p{2.8cm}|>{\centering\arraybackslash}p{2.8cm}|>{\centering\arraybackslash}p{5.5cm}|}
+        \begin{tabular}{|>{\centering\arraybackslash}p{3.4cm}|>{\centering\arraybackslash}p{3.8cm}|>{\centering\arraybackslash}p{3.8cm}|}
             \hline
-            \textbf{Số} & \textbf{Hàng chục} & \textbf{Hàng đơn vị} & \textbf{Cách đọc} \\ \hline
-            43 & & & \\ \hline
-             & 5 & 7 & \\ \hline
-             & & & Bảy mươi sáu \\ \hline
-            98 & & & \\ \hline
-            27 & & & \\ \hline
-             & & & Sáu mươi chín \\ \hline
-             & 7 & 2 & \\ \hline
+            \textbf{Số} & \textbf{Hàng chục} & \textbf{Hàng đơn vị} \\ \hline
+            43 & & \\ \hline
+             & 5 & 7 \\ \hline
+             & 7 & 6 \\ \hline
+            98 & & \\ \hline
+            27 & & \\ \hline
+            69 & & \\ \hline
+             & 7 & 2 \\ \hline
         \end{tabular}\par}
 \end{bt}
 
@@ -626,7 +635,7 @@
         \TThinhduoi
         {\centering
         \begin{tikzpicture}
-            \fill[TTxanh!8,rounded corners=8pt] (-0.4,-0.35) rectangle (13.6,4.65);
+            \path (-0.4,-0.35) rectangle (13.6,0);
             \foreach \k in {1,...,15}{\pgfmathtruncatemacro{\cot}{mod(\k-1,6)}\pgfmathtruncatemacro{\hang}{div(\k-1,6)}%
                 \begin{scope}[shift={(1.5*\cot,2.95-1.5*\hang)}]\TTdoitat\end{scope}}
             \node[TTodapan] at (11.8,2.15) {};
@@ -635,7 +644,7 @@
         \TThinhduoi
         {\centering
         \begin{tikzpicture}
-            \fill[TTxanh!8,rounded corners=8pt] (-0.4,-0.35) rectangle (13.6,3.75);
+            \path (-0.4,-0.35) rectangle (13.6,0);
             \foreach \x/\y in {0.6/2.6,5.4/2.6,0.6/0.75,5.4/0.75}{\begin{scope}[shift={(\x,\y)}]\TTnhomqua\end{scope}}
             \node[TTodapan] at (11.8,1.7) {};
         \end{tikzpicture}\par}
@@ -643,7 +652,7 @@
         \TThinhduoi
         {\centering
         \begin{tikzpicture}
-            \fill[TTxanh!8,rounded corners=8pt] (-0.4,-0.35) rectangle (13.6,5.6);
+            \path (-0.4,-0.35) rectangle (13.6,0);
             \foreach \x/\y in {0/3.65,3.1/3.65,6.2/3.65,0/1.85,3.1/1.85,6.2/1.85,1.55/0.05,4.65/0.05}{\begin{scope}[shift={(\x,\y)}]\TThoptrung\end{scope}}
             \node[TTodapan] at (11.8,2.6) {};
         \end{tikzpicture}\par}
