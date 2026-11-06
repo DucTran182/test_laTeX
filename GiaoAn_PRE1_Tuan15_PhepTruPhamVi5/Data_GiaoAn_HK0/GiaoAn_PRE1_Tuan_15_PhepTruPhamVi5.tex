@@ -57,8 +57,103 @@
   \shade[ball color=#1] (0,0) ellipse (0.3 and 0.22);
   \draw[white,thick,opacity=0.8] (-0.12,-0.19) -- (0.04,0.21) (0.06,-0.21) -- (0.2,0.15);
   \fill[white,opacity=0.6] (-0.13,0.08) ellipse (0.05 and 0.07);}
-% Một con vật bằng tranh màu: \GPanh{hình}
-\providecommand{\GPanh}{}\renewcommand{\GPanh}[1]{\node[inner sep=0pt] at (0,0) {\includegraphics[height=0.62cm,width=0.68cm,keepaspectratio]{#1}};}
+%---------- Tranh con vật: tự tìm ảnh, không có ảnh thì tự vẽ bằng TikZ ----------
+% \GPtimanh{tên}: tìm ảnh tên.png ở các thư mục dưới đây (thư mục ảnh của giáo án này, hoặc thư mục ảnh
+% của phiếu PRE1 Tuần 14); đường dẫn tìm được lưu trong \GPduongdan (để trống nếu không thấy ảnh).
+\def\GProng{}
+\makeatletter
+\providecommand{\GPtimanh}{}\renewcommand{\GPtimanh}[1]{%
+  \gdef\GPduongdan{}%
+  \@for\GP@thu:={Hinh_GiaoAn_PRE1_Tuan15/ga15p_,Data_GiaoAn_HK0/Hinh_GiaoAn_PRE1_Tuan15/ga15p_,%
+                 Hinh_PRE1_Tuan14/p14_,Data_PhieuBaiTap_HK0/Hinh_PRE1_Tuan14/p14_,%
+                 ../Data_PhieuBaiTap_HK0/Hinh_PRE1_Tuan14/p14_,PRE1_Tuan14_PhepTru_AmD/Data_PhieuBaiTap_HK0/Hinh_PRE1_Tuan14/p14_}\do{%
+    \ifx\GPduongdan\GProng\IfFileExists{\GP@thu#1.png}{\xdef\GPduongdan{\GP@thu#1.png}}{}\fi}}
+\makeatother
+% \GPvat{tên}{chiều cao (cm)}{chiều rộng tối đa (cm)}: chèn ảnh nếu có, nếu không vẽ hình \GPve<tên>
+\providecommand{\GPvat}{}\renewcommand{\GPvat}[3]{%
+  \GPtimanh{#1}%
+  \ifx\GPduongdan\GProng
+    \begin{scope}[scale=0.85*#2/0.62]\csname GPve#1\endcsname\end{scope}%
+  \else
+    \node[inner sep=0pt] at (0,0) {\includegraphics[height=#2cm,width=#3cm,keepaspectratio]{\GPduongdan}};%
+  \fi}
+% Một con vật nhỏ trong hàng phép tính: \GPanh{tên}  (tên: ca, ong, rua, cua, borua, buom, cu, conde_dung)
+\providecommand{\GPanh}{}\renewcommand{\GPanh}[1]{\GPvat{#1}{0.62}{0.68}}
+% ---- Hình vẽ dự phòng (cao khoảng 0,62cm, vẽ tại gốc tọa độ) ----
+\providecommand{\GPcadep}{}\renewcommand{\GPcadep}[1]{% con cá chi tiết (dài khoảng 1,3cm)
+  \begin{scope}[line join=round]
+  \fill[#1!85!black,draw=#1!45!black,thick] (-0.38,0) .. controls (-0.5,0.12) .. (-0.76,0.34) .. controls (-0.66,0.14) and (-0.56,0.05) .. (-0.53,0)
+     .. controls (-0.56,-0.05) and (-0.66,-0.14) .. (-0.76,-0.34) .. controls (-0.5,-0.12) .. (-0.38,0) -- cycle;
+  \fill[#1!80!black,draw=#1!45!black,thick] (-0.3,0.15) .. controls (-0.22,0.36) and (0.02,0.38) .. (0.2,0.24) -- cycle;
+  \fill[#1!80!black,draw=#1!45!black,thick] (-0.08,-0.2) .. controls (-0.05,-0.34) and (0.06,-0.34) .. (0.1,-0.21) -- cycle;
+  \path[top color=#1,bottom color=#1!25!white,draw=#1!45!black,thick]
+     (0.58,0) .. controls (0.5,0.3) and (-0.1,0.34) .. (-0.4,0.06) -- (-0.4,-0.06) .. controls (-0.1,-0.32) and (0.5,-0.28) .. (0.58,0);
+  \draw[#1!45!black,thick] (0.27,0.2) .. controls (0.21,0.08) and (0.21,-0.08) .. (0.27,-0.19);
+  \fill[white,draw=#1!45!black,thin] (0.4,0.06) circle (0.075);
+  \fill[black] (0.415,0.06) circle (0.045);
+  \fill[white] (0.43,0.08) circle (0.015);
+  \end{scope}}
+\providecommand{\GPveca}{}\renewcommand{\GPveca}{\begin{scope}[scale=0.5]\GPcadep{PKcam}\end{scope}}
+\providecommand{\GPveong}{}\renewcommand{\GPveong}{% con ong
+  \shade[ball color=PKvang] (0,-0.02) ellipse (0.3 and 0.2);
+  \begin{scope}\clip (0,-0.02) ellipse (0.3 and 0.2);
+    \fill[black!80] (-0.13,-0.3) rectangle (-0.05,0.3) (0.04,-0.3) rectangle (0.12,0.3);\end{scope}
+  \draw[black!70,thin] (0,-0.02) ellipse (0.3 and 0.2);
+  \fill[black] (-0.29,-0.05) -- (-0.38,-0.02) -- (-0.29,0.01) -- cycle;
+  \draw[gray!60!black,thin,fill=white,fill opacity=0.85] (-0.07,0.2) ellipse (0.09 and 0.13) (0.07,0.21) ellipse (0.08 and 0.11);
+  \fill[white] (0.2,0.03) circle (0.05); \fill[black] (0.215,0.03) circle (0.026);
+  \draw[black,thin] (0.16,-0.08) arc (200:340:0.05);
+  \draw[black,thin] (0.22,0.15) -- (0.27,0.27); \fill (0.27,0.27) circle (0.02);}
+\providecommand{\GPverua}{}\renewcommand{\GPverua}{% con rùa
+  \fill[green!55!black] (-0.2,-0.17) ellipse (0.07 and 0.05) (0.14,-0.17) ellipse (0.07 and 0.05) (-0.33,-0.1) -- (-0.4,-0.13) -- (-0.32,-0.14) -- cycle;
+  \shade[ball color=green!60!black] (0.3,0.0) circle (0.1);
+  \fill[white] (0.33,0.03) circle (0.035); \fill[black] (0.34,0.03) circle (0.018);
+  \shade[ball color=PKnau!70!orange] (-0.3,-0.12) arc[start angle=180,end angle=0,x radius=0.27,y radius=0.32] -- cycle;
+  \draw[PKnau!40!black,thin] (-0.13,-0.12) -- (-0.08,0.06) -- (0.02,0.06) -- (0.07,-0.12) (-0.08,0.06) -- (-0.14,0.14) (0.02,0.06) -- (0.08,0.14);
+  \fill[green!45!yellow,draw=green!35!black,thin,rounded corners=1pt] (-0.33,-0.16) rectangle (0.27,-0.1);}
+\providecommand{\GPvecua}{}\renewcommand{\GPvecua}{% con cua
+  \foreach \s in {-1,1}{\foreach \y in {-0.04,-0.12,-0.2}{\draw[PKdo!75!black,thick,line cap=round] (0.18*\s,\y) -- (0.33*\s,\y-0.07);}
+    \draw[PKdo!80!black,thick] (0.14*\s,0.02) -- (0.26*\s,0.14);
+    \shade[ball color=PKdo] (0.28*\s,0.2) circle (0.085);
+    \fill[white] (0.3*\s,0.27) -- (0.36*\s,0.2) -- (0.24*\s,0.24) -- cycle;
+    \draw[PKdo!70!black,thin] (0.06*\s,0.08) -- (0.07*\s,0.2);
+    \fill[white,draw=black,thin] (0.07*\s,0.22) circle (0.045); \fill[black] (0.07*\s,0.22) circle (0.022);}
+  \shade[ball color=PKdo] (0,-0.06) ellipse (0.23 and 0.16);
+  \draw[black,thin] (-0.06,-0.08) arc (200:340:0.065);}
+\providecommand{\GPveborua}{}\renewcommand{\GPveborua}{% con bọ rùa
+  \draw[black,thin] (-0.04,0.27) -- (-0.1,0.34) (0.04,0.27) -- (0.1,0.34);
+  \fill[black] (0,0.2) circle (0.1);
+  \shade[ball color=PKdo] (0,-0.04) ellipse (0.21 and 0.25);
+  \draw[black,thin] (0,0.21) -- (0,-0.29);
+  \fill[black] (-0.1,0.07) circle (0.04) (0.1,0.07) circle (0.04) (-0.12,-0.08) circle (0.035) (0.12,-0.08) circle (0.035) (-0.07,-0.2) circle (0.03) (0.07,-0.2) circle (0.03);
+  \fill[white] (-0.04,0.23) circle (0.02) (0.04,0.23) circle (0.02);}
+\providecommand{\GPvebuom}{}\renewcommand{\GPvebuom}{% con bướm
+  \foreach \s in {-1,1}{%
+    \shade[ball color=PKcam] (0.17*\s,0.1) ellipse (0.17 and 0.15);
+    \shade[ball color=PKvang] (0.12*\s,-0.14) ellipse (0.11 and 0.1);
+    \fill[white,opacity=0.8] (0.2*\s,0.14) circle (0.035) (0.12*\s,-0.15) circle (0.025);
+    \draw[black,thin] (0.02*\s,0.22) .. controls (0.05*\s,0.3) .. (0.1*\s,0.31);}
+  \fill[black!80] (0,0) ellipse (0.035 and 0.23);}
+\providecommand{\GPvecu}{}\renewcommand{\GPvecu}{% chim cú mèo
+  \fill[PKnau!75!black] (-0.2,0.15) -- (-0.17,0.32) -- (-0.07,0.21) -- cycle (0.2,0.15) -- (0.17,0.32) -- (0.07,0.21) -- cycle;
+  \shade[ball color=PKnau] (0,-0.02) ellipse (0.22 and 0.28);
+  \fill[brown!30!white] (0,-0.12) ellipse (0.13 and 0.14);
+  \fill[white,draw=PKnau!60!black,thin] (-0.085,0.1) circle (0.08) (0.085,0.1) circle (0.08);
+  \fill[black] (-0.085,0.1) circle (0.04) (0.085,0.1) circle (0.04);
+  \fill[orange] (-0.03,0.04) -- (0.03,0.04) -- (0,-0.03) -- cycle;
+  \fill[orange] (-0.08,-0.3) ellipse (0.05 and 0.025) (0.08,-0.3) ellipse (0.05 and 0.025);}
+\providecommand{\GPvede}{}\renewcommand{\GPvede}{% con dê
+  \draw[gray!50!black,thick,line cap=round] (-0.2,-0.08) -- (-0.21,-0.3) (-0.1,-0.08) -- (-0.1,-0.3) (0.06,-0.08) -- (0.07,-0.3) (0.15,-0.08) -- (0.16,-0.3);
+  \draw[gray!50!black,thin] (-0.27,0.02) -- (-0.33,0.09);
+  \shade[ball color=gray!8,draw=gray!50!black,thin] (-0.03,-0.01) ellipse (0.25 and 0.13);
+  \shade[ball color=gray!8] (0.16,0.04) -- (0.24,0.22) -- (0.3,0.16) -- (0.22,0.0) -- cycle;
+  \draw[gray!60!black,thick] (0.22,0.27) .. controls (0.2,0.36) .. (0.12,0.37);
+  \shade[ball color=gray!8,draw=gray!50!black,thin] (0.27,0.2) ellipse (0.09 and 0.08);
+  \fill[PKhong] (0.34,0.17) ellipse (0.04 and 0.035);
+  \fill[gray!35,draw=gray!50!black,thin] (0.2,0.24) -- (0.1,0.22) -- (0.19,0.19) -- cycle;
+  \fill[black] (0.28,0.22) circle (0.016);
+  \draw[gray!50!black,thin] (0.3,0.13) -- (0.29,0.05);}
+\expandafter\def\csname GPveconde_dung\endcsname{\GPvede}
 % Ô số bo góc: \GPo{nội dung}
 \providecommand{\GPo}{}\renewcommand{\GPo}[1]{node[draw,thick,rounded corners=3pt,minimum size=0.85cm,inner sep=0pt] {#1}}
 % Một hàng phép trừ có sẵn phép tính: \GPhangtru{hình}{số hình}{số hình bị gạch}{phép tính}{kết quả}
@@ -210,9 +305,9 @@
     \begin{scope}[shift={(0,0.35)}]#1\end{scope}
     \node[font=\Large] at (0,-1.1) {#2};
   \end{tikzpicture}}
-% Thẻ tranh có tên bên dưới: \GPthe{hình}{tên}
+% Thẻ tranh có tên bên dưới: \GPthe{tên hình (ca, ong, ...)}{tên ghi trên thẻ}
 \providecommand{\GPthe}{}\renewcommand{\GPthe}[2]{%
-  \node[inner sep=0pt] (h) at (0,0) {\includegraphics[height=1.4cm,width=2.1cm,keepaspectratio]{#1}};
+  \GPvat{#1}{1.4}{2.1}
   \node[draw,thick,rounded corners=4pt,fill=PKvangnhat,anchor=north,inner sep=2.5pt,minimum width=1.9cm,text height=1.7ex,text depth=0.5ex] at (0,-0.85) {#2};}
 % Giỏ mây đan có gắn nhãn chữ: \GPgio{chữ}
 \providecommand{\GPgio}{}\renewcommand{\GPgio}[1]{%
@@ -391,13 +486,13 @@
 \GPcanchotrong{5cm}\noindent\textbf{Lượt 1 -- điền kết quả} (hàng đóng khung là mẫu):
 \GPhinh{%
     \fbox{\GPhangtru{\GPqua{PKdo}}{3}{1}{3 $-$ 1}{\textcolor{PKdo}{\bfseries 2}}}\\*[8pt]
-    \GPhangtru{\GPanh{ga15p_ca.png}}{4}{2}{4 $-$ 2}{}\\*[8pt]
-    \GPhangtru{\GPanh{ga15p_ong.png}}{5}{1}{5 $-$ 1}{}}
+    \GPhangtru{\GPanh{ca}}{4}{2}{4 $-$ 2}{}\\*[8pt]
+    \GPhangtru{\GPanh{ong}}{5}{1}{5 $-$ 1}{}}
 \GPcanchotrong{5cm}\noindent\textbf{Lượt 2 -- điền cả phép tính} (hàng đóng khung là mẫu):
 \GPhinh{%
     \fbox{\GPhanglap{\GPqua{PKxanhnuoc}}{4}{1}{\textcolor{PKdo}{\bfseries 4}}{\textcolor{PKdo}{\bfseries 1}}{\textcolor{PKdo}{\bfseries 3}}}\\*[8pt]
-    \GPhanglap{\GPanh{ga15p_buom.png}}{5}{3}{}{}{}\\*[8pt]
-    \GPhanglap{\GPanh{ga15p_rua.png}}{3}{2}{}{}{}}
+    \GPhanglap{\GPanh{buom}}{5}{3}{}{}{}\\*[8pt]
+    \GPhanglap{\GPanh{rua}}{3}{2}{}{}{}}
 \begin{itemize}
     \item[-] \textbf{Bài tập áp dụng:} Bài 1, Bài 2 Phiếu bài tập.
 \end{itemize}
@@ -446,9 +541,9 @@
 \end{itemize}
 \GAmucnho{Đúng hay sai? (HS giơ thẻ \textbf{Đ} hoặc \textbf{S})}
 \GPhinh{%
-    \GPdungsai{\GPanh{ga15p_rua.png}}{3}{1}{3 $-$ 1 = 2}\\*[6pt]
-    \GPdungsai{\GPanh{ga15p_borua.png}}{4}{2}{4 $-$ 2 = 1}\\*[6pt]
-    \GPdungsai{\GPanh{ga15p_cua.png}}{5}{3}{5 $-$ 3 = 2}}
+    \GPdungsai{\GPanh{rua}}{3}{1}{3 $-$ 1 = 2}\\*[6pt]
+    \GPdungsai{\GPanh{borua}}{4}{2}{4 $-$ 2 = 1}\\*[6pt]
+    \GPdungsai{\GPanh{cua}}{5}{3}{5 $-$ 3 = 2}}
 \begin{itemize}
     \item[-] GV cho HS nhắc lại nội dung bài học trước khi về: \GAloi{Muốn biết còn lại bao nhiêu, ta làm phép tính gì?}
     \item[-] GV tổng kết điểm thi đua, khen ngợi đội thắng và các bạn tích cực.
@@ -508,7 +603,7 @@
 \end{itemize}
 \GPhinh{%
     \GPdienam{\GPre}{\underline{\hspace{0.7cm}}ễ}\hfill
-    \GPdienam{\node[inner sep=0pt] at (0,-0.05) {\includegraphics[height=1.7cm]{ga15p_conde_dung.png}};}{\underline{\hspace{0.7cm}}ê}\hfill
+    \GPdienam{\begin{scope}[shift={(0,-0.05)}]\GPvat{conde_dung}{1.7}{2.6}\end{scope}}{\underline{\hspace{0.7cm}}ê}\hfill
     \GPdienam{\GPtu}{\underline{\hspace{0.7cm}}ủ}\hfill
     \GPdienam{\GPmi}{\underline{\hspace{0.7cm}}ì}}
 \begin{itemize}
@@ -536,11 +631,11 @@
 \end{itemize}
 \GPhinh{%
 \begin{tikzpicture}[scale=0.92,every node/.style={transform shape}]
-    \foreach \hinh/\ten [count=\k] in {ga15p_ca.png/cá,ga15p_ong.png/ong,ga15p_rua.png/rùa,ga15p_cua.png/cua}{%
+    \foreach \hinh/\ten [count=\k] in {ca/cá,ong/ong,rua/rùa,cua/cua}{%
         \begin{scope}[shift={(3.6*\k-3.6,0)}]\GPthe{\hinh}{\ten}\fill (0,-1.65) circle (2.5pt);\end{scope}}
     \begin{scope}[shift={(2.7,-3.6)}]\GPgio{c}\end{scope}
     \begin{scope}[shift={(8.1,-3.6)}]\GPgio{r}\end{scope}
-    \foreach \hinh/\ten [count=\k] in {ga15p_borua.png/bọ rùa,ga15p_buom.png/bướm,ga15p_cu.png/cú mèo,ga15p_conde_dung.png/dê}{%
+    \foreach \hinh/\ten [count=\k] in {borua/bọ rùa,buom/bướm,cu/cú mèo,conde_dung/dê}{%
         \begin{scope}[shift={(3.6*\k-3.6,-6.9)}]\fill (0,1.05) circle (2.5pt);\GPthe{\hinh}{\ten}\end{scope}}
 \end{tikzpicture}}
 \begin{itemize}
