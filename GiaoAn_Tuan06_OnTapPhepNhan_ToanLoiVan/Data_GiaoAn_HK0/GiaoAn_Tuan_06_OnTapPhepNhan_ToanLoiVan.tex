@@ -59,7 +59,7 @@
 % Thanh thời lượng 90 phút: \GAthoigian{bắt đầu/số phút/nhãn/màu, ...}
 \newlength{\GAphut}
 \providecommand{\GAthoigian}{}\renewcommand{\GAthoigian}[1]{\par\smallskip\noindent
-  \setlength{\GAphut}{\linewidth}\addtolength{\GAphut}{-1pt}\divide\GAphut by 90
+  \setlength{\GAphut}{\linewidth}\addtolength{\GAphut}{-4pt}\divide\GAphut by 90
   \begin{tikzpicture}[x=\GAphut,y=1cm]
     \foreach \bd/\sp/\nhan/\mau in {#1}{
       \fill[\mau] (\bd,0) rectangle (\bd+\sp,0.62);
@@ -173,7 +173,7 @@ GV dẫn chuyện: \GAloi{Sáng nay bà đi chợ mua cam về bày lên bàn th
 \begin{enumerate}[a)]
     \item Mẹ mua 3 lốc sữa, mỗi lốc 4 hộp.
     \TThinh[1.9cm]{ga06_locsua.png}
-    \TTcham[3.5cm] $+$ \TTcham[1.5cm] $+$ \TTcham[1.5cm] $=$ \TTcham[1.5cm] $\Rightarrow$ \TTcham[1.5cm] $\times$ \TTcham[1.5cm] $=$ \TTcham[1.5cm] \hfill \GAdapan{$4+4+4=12$; $4 \times 3 = 12$}
+    \TTcham[1.5cm] $+$ \TTcham[1.5cm] $+$ \TTcham[1.5cm] $=$ \TTcham[1.5cm] $\Rightarrow$ \TTcham[1.5cm] $\times$ \TTcham[1.5cm] $=$ \TTcham[1.5cm] \hfill \GAdapan{$4+4+4=12$; $4 \times 3 = 12$}
     \item Cô bày 4 lọ hoa, mỗi lọ 5 bông.
     \TThinh[3cm]{ga06_lohoa.png}
     \TTcham[1.5cm] $+$ \TTcham[1.5cm] $+$ \TTcham[1.5cm] $+$ \TTcham[1.5cm] $=$ \TTcham[1.5cm] $\Rightarrow$ \TTcham[1.5cm] $\times$ \TTcham[1.5cm] $=$ \TTcham[1.5cm] \hfill \GAdapan{$5 \times 4 = 20$}
@@ -490,7 +490,7 @@ GV dán lẫn lộn các thẻ từ. Hai đội lần lượt lên gắn thẻ v
     \item \GAloi{Có thêm bao nhiêu người?} \hfill (8)
     \item \GAloi{Số người trên xe nhiều lên hay ít đi?} \hfill (nhiều lên $\Rightarrow$ phép cộng)
 \end{itemize}
-\begin{minipage}[t]{0.38\linewidth}
+\noindent\begin{minipage}[t]{0.38\linewidth}
     \textbf{Tóm tắt:}
     \GAvo{Có: 25 hành khách\\ Thêm: 8 hành khách\\ Có tất cả: \dots\ hành khách?}
 \end{minipage}\hfill
@@ -588,13 +588,13 @@ GV dùng hai băng giấy: băng xanh của Lan dài 23 ô; băng của Hoa dài
 \begin{vd}
     Thùng to đựng 45 l nước. Thùng nhỏ đựng ít hơn thùng to 12 l nước. Hỏi thùng nhỏ đựng bao nhiêu lít nước?
 \end{vd}
-\begin{minipage}[c]{0.44\linewidth}
+\noindent\begin{minipage}[c]{0.44\linewidth}
     \centering\includegraphics[width=\linewidth]{ga06_thungnuoc.png}\\[2pt]
     {\small\textit{Hình 12. Thùng to và thùng nhỏ.}}
 \end{minipage}\hfill
 \begin{minipage}[c]{0.53\linewidth}
     \centering
-    \begin{tikzpicture}[x=0.17cm,y=1cm]
+    \begin{tikzpicture}[x=0.14cm,y=1cm]
         \node[anchor=east,font=\bfseries\small] at (-1,1.5) {Thùng to};
         \node[anchor=east,font=\bfseries\small] at (-1,0) {Thùng nhỏ};
         \fill[gaBangGiay,rounded corners=2pt] (0,1.35) rectangle (45,1.65);
