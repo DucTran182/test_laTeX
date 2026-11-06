@@ -1,0 +1,608 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+\renewcommand{\lop}{PRE}
+%=========================================================
+% TĐ_GiaoAn_PRE1_HK1_Tuan15
+% Giáo án PRE1 - Tuần 15 (bản biên soạn lại: thêm trò chơi, câu hỏi gợi mở, hình minh họa)
+%   Buổi 1 - Toán: Phép trừ trong phạm vi 5
+%   Buổi 2 - Tiếng Việt: Ôn tập
+% Hình vẽ theo cùng phong cách với Phiếu bài tập PRE1 Tuần 14 (bóng có đổ bóng, gạch chéo,
+% ô kết quả bo góc, tranh màu, thẻ tranh có tên, giỏ chữ, giọt nước, khung "điền âm").
+% Hình đặt trong thư mục Hinh_GiaoAn_PRE1_Tuan15/ (cùng cấp với file này), tên hình có tiền tố ga15p_
+\graphicspath{{Hinh_GiaoAn_PRE1_Tuan15/}{Data_GiaoAn_HK0/Hinh_GiaoAn_PRE1_Tuan15/}}
+%=========================================================
+
+%---------- Lệnh dùng chung cho giáo án ----------
+% Không kéo giãn khoảng trắng giữa các đoạn khi một hình lớn phải sang trang (giữ khoảng cách đều)
+\raggedbottom
+% Sang trang mới nếu phần còn lại của trang thấp hơn #1 (giữ đề mục đi liền với hình phía sau)
+\makeatletter
+\providecommand{\GPcanchotrong}{}\renewcommand{\GPcanchotrong}[1]{\par\penalty-100\begingroup
+  \setlength{\dimen@}{#1}\dimen@ii\pagegoal\advance\dimen@ii-\pagetotal
+  \ifdim\dimen@>\dimen@ii\ifdim\dimen@ii>\z@\vfil\fi\break\fi\endgroup}
+\makeatother
+% Tiêu đề mục nhỏ trong một hoạt động (tên trò chơi, các bước)
+\providecommand{\GAmucnho}{}\renewcommand{\GAmucnho}[1]{\GPcanchotrong{3cm}\addvspace{4pt}\noindent{\color{mauchinh}\bfseries #1}\par\nopagebreak\addvspace{2pt}}
+% Lời GV nói với HS (in nghiêng, có dấu ngoặc kép)
+\providecommand{\GAloi}{}\renewcommand{\GAloi}[1]{\textit{“#1”}}
+% Hình minh họa căn giữa, dính liền với đoạn phía trên
+\providecommand{\GPhinh}{}\renewcommand{\GPhinh}[1]{\par\nopagebreak\vspace{6pt}\nopagebreak{\centering #1\par}\vspace{6pt}}
+
+%---------- Màu dùng cho hình vẽ (giống phiếu PRE1 Tuần 14) ----------
+\definecolor{PKdo}{RGB}{230,60,60}\definecolor{PKxanhla}{RGB}{90,180,80}
+\definecolor{PKxanhdam}{RGB}{20,90,190}\definecolor{PKvang}{RGB}{255,205,60}
+\definecolor{PKvangnhat}{RGB}{255,243,190}\definecolor{PKcam}{RGB}{255,150,60}
+\definecolor{PKhong}{RGB}{255,140,180}\definecolor{PKnau}{RGB}{140,85,45}
+\definecolor{PKxanhnuoc}{RGB}{90,170,235}
+
+%---------- Hình vẽ nhỏ (vẽ tại gốc tọa độ) ----------
+% Quả bóng có đổ bóng: \GPqua{màu}
+\providecommand{\GPqua}{}\renewcommand{\GPqua}[1]{%
+  \shade[ball color=#1] (0,0) circle (0.26);
+  \draw[#1!55!black,thin] (0,0) circle (0.26);
+  \fill[white,opacity=0.55] (-0.09,0.1) ellipse (0.06 and 0.09);}
+% Ly nhựa trong suốt (vẽ SAU các quả bóng để bóng nằm bên trong ly)
+\providecommand{\GPly}{}\renewcommand{\GPly}{%
+  \fill[PKxanhnuoc!30,opacity=0.35] (-0.75,1.5) -- (-0.5,0) arc[start angle=180,end angle=360,x radius=0.5,y radius=0.08] -- (0.75,1.5) -- cycle;
+  \fill[white,opacity=0.55] (-0.6,1.32) -- (-0.43,0.12) -- (-0.34,0.12) -- (-0.49,1.32) -- cycle;
+  \draw[PKxanhnuoc!45!black,thick,line join=round] (-0.75,1.5) -- (-0.5,0) arc[start angle=180,end angle=360,x radius=0.5,y radius=0.08] -- (0.75,1.5);
+  \draw[PKxanhnuoc!45!black,thick,fill=white,fill opacity=0.35] (0,1.5) ellipse (0.75 and 0.12);}
+% Gạch chéo một hình
+\providecommand{\GPgach}{}\renewcommand{\GPgach}{\draw[very thick,line cap=round] (-0.3,-0.3)--(0.3,0.32);}
+% Viên kẹo bọc giấy: \GPkeo{màu}
+\providecommand{\GPkeo}{}\renewcommand{\GPkeo}[1]{%
+  \fill[#1!75!black] (-0.26,0) -- (-0.5,0.2) .. controls (-0.46,0.06) and (-0.46,-0.06) .. (-0.5,-0.2) -- cycle;
+  \fill[#1!75!black] (0.26,0) -- (0.5,0.2) .. controls (0.46,0.06) and (0.46,-0.06) .. (0.5,-0.2) -- cycle;
+  \shade[ball color=#1] (0,0) ellipse (0.3 and 0.22);
+  \draw[white,thick,opacity=0.8] (-0.12,-0.19) -- (0.04,0.21) (0.06,-0.21) -- (0.2,0.15);
+  \fill[white,opacity=0.6] (-0.13,0.08) ellipse (0.05 and 0.07);}
+% Một con vật bằng tranh màu: \GPanh{hình}
+\providecommand{\GPanh}{}\renewcommand{\GPanh}[1]{\node[inner sep=0pt] at (0,0) {\includegraphics[height=0.62cm,width=0.68cm,keepaspectratio]{#1}};}
+% Ô số bo góc: \GPo{nội dung}
+\providecommand{\GPo}{}\renewcommand{\GPo}[1]{node[draw,thick,rounded corners=3pt,minimum size=0.85cm,inner sep=0pt] {#1}}
+% Một hàng phép trừ có sẵn phép tính: \GPhangtru{hình}{số hình}{số hình bị gạch}{phép tính}{kết quả}
+\providecommand{\GPhangtru}{}\renewcommand{\GPhangtru}[5]{%
+  \begin{tikzpicture}[font=\sffamily\Large]
+    \foreach \k in {1,...,#2}{\begin{scope}[shift={(0.75*\k,0)}]#1\pgfmathtruncatemacro{\bigach}{#2-#3}\ifnum\k>\bigach\GPgach\fi\end{scope}}
+    \node[anchor=west] at (4.6,0) {#4\ =};
+    \path (7.55,0) \GPo{#5};
+  \end{tikzpicture}}
+% Một hàng HS tự lập phép trừ: \GPhanglap{hình}{số hình}{số hình bị gạch}{số 1}{số 2}{kết quả}
+\providecommand{\GPhanglap}{}\renewcommand{\GPhanglap}[6]{%
+  \begin{tikzpicture}[font=\sffamily\Large]
+    \foreach \k in {1,...,#2}{\begin{scope}[shift={(0.75*\k,0)}]#1\pgfmathtruncatemacro{\bigach}{#2-#3}\ifnum\k>\bigach\GPgach\fi\end{scope}}
+    \path (5.1,0) \GPo{#4} (6.0,0) node {$-$} (6.9,0) \GPo{#5} (7.8,0) node {$=$} (8.7,0) \GPo{#6};
+  \end{tikzpicture}}
+% Một hàng Đúng/Sai: \GPdungsai{hình}{số hình}{số hình bị gạch}{phép tính có kết quả}
+\providecommand{\GPdungsai}{}\renewcommand{\GPdungsai}[4]{%
+  \begin{tikzpicture}[font=\sffamily\Large]
+    \foreach \k in {1,...,#2}{\begin{scope}[shift={(0.75*\k,0)}]#1\pgfmathtruncatemacro{\bigach}{#2-#3}\ifnum\k>\bigach\GPgach\fi\end{scope}}
+    \node[anchor=west] at (4.6,0) {#4};
+    \path (8.4,0) \GPo{};
+  \end{tikzpicture}}
+% Quả táo có ghi phép tính
+\providecommand{\GPtao}{}\renewcommand{\GPtao}[1]{%
+  \shade[ball color=red!85!black] (0,0.42) .. controls (-0.25,0.6) and (-0.75,0.45) .. (-0.72,0) .. controls (-0.7,-0.5) and (-0.3,-0.68) .. (0,-0.55)
+    .. controls (0.3,-0.68) and (0.7,-0.5) .. (0.72,0) .. controls (0.75,0.45) and (0.25,0.6) .. (0,0.42);
+  \draw[red!45!black,thin] (0,0.42) .. controls (-0.25,0.6) and (-0.75,0.45) .. (-0.72,0) .. controls (-0.7,-0.5) and (-0.3,-0.68) .. (0,-0.55)
+    .. controls (0.3,-0.68) and (0.7,-0.5) .. (0.72,0) .. controls (0.75,0.45) and (0.25,0.6) .. (0,0.42);
+  \draw[PKnau,very thick] (0,0.42)--(0.06,0.68);
+  \shade[top color=green!60!black,bottom color=green!40!yellow,rotate around={25:(0.2,0.62)}] (0.2,0.62) ellipse (0.18 and 0.07);
+  \node[white,font=\sffamily\bfseries\large] at (0,-0.05) {#1};}
+% Ngôi sao có ghi số
+\providecommand{\GPsao}{}\renewcommand{\GPsao}[1]{%
+  \node[star,star points=5,star point ratio=2.3,top color=yellow!70,bottom color=orange!85,draw=orange!80!black,thick,minimum size=1.35cm,inner sep=0pt] at (0,0) {};
+  \node[font=\sffamily\bfseries\Large] at (0,-0.04) {#1};}
+% Chú ếch con (dùng cho trò chơi "Ếch con nhảy lùi")
+\providecommand{\GPech}{}\renewcommand{\GPech}{%
+  \shade[ball color=green!65!black] (-0.3,-0.24) ellipse (0.17 and 0.08);
+  \shade[ball color=green!65!black] (0.3,-0.24) ellipse (0.17 and 0.08);
+  \shade[ball color=green!65!black] (0,0) ellipse (0.42 and 0.3);
+  \fill[green!25!yellow,opacity=0.85] (0,-0.12) ellipse (0.22 and 0.12);
+  \foreach \s in {-1,1}{%
+    \shade[ball color=green!65!black] (0.2*\s,0.27) circle (0.14);
+    \fill[white] (0.2*\s,0.29) circle (0.09);
+    \fill[black] (0.2*\s+0.02,0.29) circle (0.05);
+    \fill[white] (0.2*\s+0.035,0.31) circle (0.015);
+    \fill[PKhong,opacity=0.7] (0.27*\s,0.05) ellipse (0.06 and 0.035);}
+  \draw[green!25!black,thick,line cap=round] (-0.12,0.1) .. controls (-0.05,0.03) and (0.05,0.03) .. (0.12,0.1);}
+% Lá sen
+\providecommand{\GPlasen}{}\renewcommand{\GPlasen}{%
+  \path[fill=green!55!black,draw=green!35!black,thick] (0,0) -- ({0.6*cos(25)},{0.2*sin(25)}) arc[start angle=25,end angle=335,x radius=0.6,y radius=0.2] -- cycle;
+  \draw[green!30!black,thin] (0,0) -- (-0.45,0.08) (0,0) -- (-0.4,-0.1) (0,0) -- (0.1,0.17) (0,0) -- (0.1,-0.17);}
+
+%---------- Hình cho buổi Tiếng Việt ----------
+% Con đò có mui (giống phiếu Tuần 14)
+\providecommand{\GPdo}{}\renewcommand{\GPdo}{%
+  \fill[PKxanhnuoc!35] (-1.05,-0.45) rectangle (1.05,-0.2);
+  \foreach \x in {-0.9,-0.45,0,0.45}{\draw[PKxanhnuoc!80!black,thin] (\x,-0.3) .. controls (\x+0.1,-0.24) and (\x+0.2,-0.24) .. (\x+0.3,-0.3);}
+  \fill[PKnau,draw=PKnau!50!black,thick] (-1.0,0.05) .. controls (-0.7,-0.32) and (0.7,-0.32) .. (1.0,0.05) -- (0.75,0.0) -- (-0.75,0.0) -- cycle;
+  \draw[PKnau!50!black,thin] (-0.85,-0.07) .. controls (-0.4,-0.2) and (0.4,-0.2) .. (0.85,-0.07);
+  \fill[yellow!50!brown!80,draw=PKnau!60!black,thick] (-0.45,0.0) -- (-0.45,0.25) .. controls (-0.3,0.5) and (0.3,0.5) .. (0.45,0.25) -- (0.45,0.0) -- cycle;
+  \foreach \x in {-0.3,-0.15,0,0.15,0.3}{\draw[PKnau!60!black,thin] (\x,0.0) -- (\x,0.37);}
+  \fill[black!70] (0.72,0.33) circle (0.07);
+  \fill[yellow!50!brown] (0.6,0.38) -- (0.84,0.38) -- (0.72,0.48) -- cycle;
+  \draw[black!70,thick] (0.72,0.26) -- (0.72,0.02);
+  \draw[PKnau!50!black,thick] (0.6,0.4) -- (0.95,-0.35);}
+% Cái nơ chấm bi
+\providecommand{\GPno}{}\renewcommand{\GPno}{%
+  \begin{scope}[scale=0.62]
+  \fill[red!70!black,draw=red!40!black,thick] (-0.2,-0.1) -- (-0.75,-1.05) -- (-0.45,-0.95) -- (-0.35,-1.2) -- (0.05,-0.15) -- cycle;
+  \fill[red!70!black,draw=red!40!black,thick] (0.2,-0.1) -- (0.75,-1.05) -- (0.45,-0.95) -- (0.35,-1.2) -- (-0.05,-0.15) -- cycle;
+  \shade[left color=red!55,right color=red!85!black,draw=red!40!black,thick] (-0.2,0) .. controls (-0.6,0.8) and (-1.3,0.8) .. (-1.4,0.5) .. controls (-1.5,0) .. (-1.4,-0.5) .. controls (-1.3,-0.8) and (-0.6,-0.8) .. (-0.2,0);
+  \shade[left color=red!85!black,right color=red!55,draw=red!40!black,thick] (0.2,0) .. controls (0.6,0.8) and (1.3,0.8) .. (1.4,0.5) .. controls (1.5,0) .. (1.4,-0.5) .. controls (1.3,-0.8) and (0.6,-0.8) .. (0.2,0);
+  \draw[red!45!black,thin] (-0.3,0.05) .. controls (-0.7,0.35) .. (-1.1,0.3) (-0.3,-0.05) .. controls (-0.7,-0.35) .. (-1.1,-0.3);
+  \draw[red!45!black,thin] (0.3,0.05) .. controls (0.7,0.35) .. (1.1,0.3) (0.3,-0.05) .. controls (0.7,-0.35) .. (1.1,-0.3);
+  \shade[ball color=red!80!black,rounded corners=2pt] (-0.25,-0.3) rectangle (0.25,0.3);
+  \draw[red!40!black,thick,rounded corners=2pt] (-0.25,-0.3) rectangle (0.25,0.3);
+  \foreach \x/\y in {-0.75/0.35,-1.05/0,-0.75/-0.35,0.75/0.35,1.05/0,0.75/-0.35}{\fill[white] (\x,\y) circle (2pt);}
+  \end{scope}}
+% Cái ná (súng cao su)
+\providecommand{\GPna}{}\renewcommand{\GPna}{%
+  \begin{scope}[scale=0.62]
+  \shade[left color=brown!45!yellow,right color=PKnau,draw=PKnau!50!black,thick,rounded corners=2pt]
+      (-0.25,-1.2) -- (-0.25,-0.2) -- (-0.7,0.8) -- (-0.4,0.9) -- (-0.05,0.1) -- (0.05,0.1) -- (0.4,0.9) -- (0.7,0.8) -- (0.25,-0.2) -- (0.25,-1.2) -- cycle;
+  \draw[PKnau!40!black,thin] (-0.15,-1.05) -- (0.15,-1.05) (-0.15,-0.85) -- (0.15,-0.85) (-0.15,-0.65) -- (0.15,-0.65);
+  \draw[red!75!black,very thick] (-0.55,0.8) .. controls (-0.45,0.35) .. (-0.18,0.3);
+  \draw[red!75!black,very thick] (0.55,0.8) .. controls (0.45,0.35) .. (0.18,0.3);
+  \shade[ball color=black!70,rounded corners=1pt] (-0.2,0.18) rectangle (0.2,0.4);
+  \end{scope}}
+% Quả cà tím
+\providecommand{\GPcatim}{}\renewcommand{\GPcatim}{%
+  \begin{scope}[scale=0.75,rotate=-20]
+  \shade[ball color=purple!75!black] (-0.25,0.5) .. controls (-0.6,0.1) and (-0.75,-0.7) .. (-0.35,-1.15)
+      .. controls (-0.1,-1.4) and (0.45,-1.35) .. (0.65,-1.0) .. controls (0.85,-0.55) and (0.55,0.05) .. (0.25,0.5) -- cycle;
+  \fill[white,opacity=0.35] (-0.3,-0.1) .. controls (-0.42,-0.4) and (-0.35,-0.75) .. (-0.2,-0.9) .. controls (-0.28,-0.6) and (-0.3,-0.35) .. (-0.3,-0.1);
+  \fill[green!55!black,draw=green!30!black,thin] (-0.05,0.5) -- (-0.1,0.95) -- (0.08,0.95) -- (0.08,0.5) -- cycle;
+  \fill[green!55!black,draw=green!30!black,thin] (-0.35,0.45) to[out=-40,in=120] (-0.1,0.05) to[out=60,in=-120] (0.1,0.45)
+      to[out=-60,in=160] (0.38,0.1) to[out=100,in=-30] (0.3,0.5) -- cycle;
+  \end{scope}}
+% Rễ cây (mặt cắt đất: cây non phía trên, rễ phía dưới)
+\providecommand{\GPre}{}\renewcommand{\GPre}{%
+  \shade[top color=brown!55!orange,bottom color=PKnau!80!black] (-1.1,-0.85) rectangle (1.1,0.2);
+  \foreach \x/\y in {-0.8/-0.6,0.75/-0.25,0.55/-0.7,-0.6/-0.15}{\fill[PKnau!60!black] (\x,\y) ellipse (0.06 and 0.04);}
+  \fill[green!50!black] (-1.1,0.2) -- (-1.0,0.35) -- (-0.9,0.2) -- (-0.75,0.32) -- (-0.65,0.2) -- (0.65,0.2) -- (0.75,0.33) -- (0.85,0.2) -- (1.0,0.34) -- (1.1,0.2) -- cycle;
+  \draw[green!40!black,very thick] (0,0.2) -- (0,0.75);
+  \shade[top color=green!70,bottom color=green!50!black] (0,0.6) .. controls (-0.25,0.85) and (-0.5,0.75) .. (-0.55,0.62) .. controls (-0.35,0.5) and (-0.15,0.5) .. (0,0.6);
+  \shade[top color=green!70,bottom color=green!50!black] (0,0.72) .. controls (0.25,0.97) and (0.5,0.87) .. (0.55,0.74) .. controls (0.35,0.62) and (0.15,0.62) .. (0,0.72);
+  \draw[yellow!80!white,line width=1.6pt,line cap=round] (0,0.2) .. controls (0,-0.2) .. (-0.45,-0.7) (0,0.2) .. controls (0.02,-0.3) .. (0.05,-0.78) (0,0.2) .. controls (0.05,-0.15) .. (0.5,-0.6);
+  \draw[yellow!80!white,thick,line cap=round] (-0.2,-0.3) -- (-0.55,-0.3) (0.2,-0.25) -- (0.6,-0.2) (0.03,-0.5) -- (-0.22,-0.68) (0.03,-0.45) -- (0.3,-0.75);}
+% Tủ gỗ hai cánh
+\providecommand{\GPtu}{}\renewcommand{\GPtu}{%
+  \begin{scope}[scale=0.62]
+  \shade[left color=brown!55!yellow,right color=PKnau,draw=PKnau!50!black,thick] (-0.9,-1.1) rectangle (0.9,1.2);
+  \shade[top color=PKnau!80,bottom color=PKnau!60!black,draw=PKnau!50!black,thick] (-1.0,1.15) rectangle (1.0,1.32);
+  \fill[brown!45!yellow,draw=PKnau!50!black,thick] (-0.8,-1.0) rectangle (0.8,-0.5);
+  \fill[PKnau!40!black] (-0.25,-0.75) circle (1.5pt) (0.25,-0.75) circle (1.5pt);
+  \fill[brown!35!yellow,draw=PKnau!50!black,thick] (-0.8,-0.4) rectangle (-0.04,1.05);
+  \fill[brown!35!yellow,draw=PKnau!50!black,thick] (0.04,-0.4) rectangle (0.8,1.05);
+  \draw[PKnau!50!black,thin] (-0.68,-0.28) rectangle (-0.16,0.93) (0.16,-0.28) rectangle (0.68,0.93);
+  \draw[line width=1.8pt,PKnau!30!black,line cap=round] (-0.12,0.2) -- (-0.12,0.45) (0.12,0.2) -- (0.12,0.45);
+  \fill[PKnau!60!black] (-0.8,-1.25) rectangle (-0.55,-1.1) (0.55,-1.25) rectangle (0.8,-1.1);
+  \end{scope}}
+% Bát mì có đũa, bốc khói
+\providecommand{\GPmi}{}\renewcommand{\GPmi}{%
+  \begin{scope}[scale=0.75]
+  \draw[gray!60,thick,line cap=round] (-0.4,0.6) .. controls (-0.55,0.8) and (-0.25,0.95) .. (-0.4,1.15) (0.05,0.62) .. controls (-0.1,0.85) and (0.2,0.95) .. (0.05,1.2);
+  \draw[PKnau!70!black,line width=2pt,line cap=round] (0.15,0.25) -- (1.05,1.1) (0.35,0.25) -- (1.2,0.98);
+  \shade[top color=PKvang!60!white,bottom color=PKvang!80!orange] (0,0.3) ellipse (1.1 and 0.22);
+  \begin{scope}\clip (0,0.3) ellipse (1.1 and 0.22);
+    \foreach \y in {0.18,0.26,0.34,0.42}{\draw[orange!70!black,thin] (-1.1,\y) \foreach \i in {1,...,11}{ -- ++(0.1,0.04) -- ++(0.1,-0.04)};}
+  \end{scope}
+  \fill[green!60!black] (-0.55,0.35) ellipse (0.12 and 0.05) (0.5,0.27) ellipse (0.1 and 0.05);
+  \shade[top color=PKcam!70!white,bottom color=PKcam!80!black,draw=orange!50!black,thick] (-1.1,0.3) .. controls (-1.0,-0.7) and (1.0,-0.7) .. (1.1,0.3) arc[start angle=0,end angle=-180,x radius=1.1,y radius=0.22];
+  \draw[white,thick,opacity=0.8] (-0.75,-0.05) .. controls (-0.4,-0.2) and (0.4,-0.2) .. (0.75,-0.05);
+  \fill[orange!70!black,draw=orange!40!black,thin] (-0.45,-0.58) rectangle (0.45,-0.72);
+  \end{scope}}
+% Thẻ chọn tiếng đúng (khung, tranh, 2 tiếng, 2 ô): \GPthechon{hình}{tiếng 1}{tiếng 2}{1 = đánh dấu mẫu ô 1, 0 = không}
+\providecommand{\GPthechon}{}\renewcommand{\GPthechon}[4]{%
+  \draw[thick,rounded corners=8pt,fill=PKvangnhat!35] (-1.85,-1.75) rectangle (1.85,1.45);
+  \begin{scope}[shift={(0,0.5)}]#1\end{scope}
+  \node[font=\Large\bfseries] at (-0.8,-0.75) {#2};
+  \node[font=\Large\bfseries] at (0.8,-0.75) {#3};
+  \draw[thick,fill=white] (-1.0,-1.55) rectangle (-0.6,-1.15) (0.6,-1.55) rectangle (1.0,-1.15);
+  \ifnum#4=1 \draw[PKdo,very thick,line cap=round,line join=round] (-0.94,-1.35) -- (-0.82,-1.48) -- (-0.6,-1.1);\fi}
+% Khung "điền âm còn thiếu": \GPdienam{hình}{chữ có chỗ trống}
+\providecommand{\GPdienam}{}\renewcommand{\GPdienam}[2]{%
+  \begin{tikzpicture}
+    \draw[thick,rounded corners=8pt,fill=PKvangnhat!40] (-1.6,-1.6) rectangle (1.6,1.35);
+    \begin{scope}[shift={(0,0.35)}]#1\end{scope}
+    \node[font=\Large] at (0,-1.1) {#2};
+  \end{tikzpicture}}
+% Thẻ tranh có tên bên dưới: \GPthe{hình}{tên}
+\providecommand{\GPthe}{}\renewcommand{\GPthe}[2]{%
+  \node[inner sep=0pt] (h) at (0,0) {\includegraphics[height=1.4cm,width=2.1cm,keepaspectratio]{#1}};
+  \node[draw,thick,rounded corners=4pt,fill=PKvangnhat,anchor=north,inner sep=2.5pt,minimum width=1.9cm,text height=1.7ex,text depth=0.5ex] at (0,-0.85) {#2};}
+% Giỏ mây đan có gắn nhãn chữ: \GPgio{chữ}
+\providecommand{\GPgio}{}\renewcommand{\GPgio}[1]{%
+  \draw[PKnau!70!black,line width=3pt] (-0.9,0.55) .. controls (-0.9,1.6) and (0.9,1.6) .. (0.9,0.55);
+  \begin{scope}
+    \clip (-1.2,0.6) -- (1.2,0.6) -- (0.9,-0.9) -- (-0.9,-0.9) -- cycle;
+    \fill[yellow!45!brown!85] (-1.3,-1) rectangle (1.3,0.7);
+    \foreach \y in {-0.9,-0.65,...,0.6}{\draw[PKnau!80!black,thick] (-1.3,\y) -- (1.3,\y);}
+    \foreach \x in {-1.2,-0.95,...,1.3}{\draw[PKnau!60!black,thin] (\x,-1) -- (\x*0.8,0.7);}
+  \end{scope}
+  \draw[PKnau!50!black,thick,rounded corners=2pt] (-1.2,0.6) -- (1.2,0.6) -- (0.9,-0.9) -- (-0.9,-0.9) -- cycle;
+  \fill[yellow!45!brown,draw=PKnau!50!black,thick,rounded corners=3pt] (-1.28,0.52) rectangle (1.28,0.72);
+  \node[draw=PKnau!50!black,thick,circle,fill=white,minimum size=0.95cm,font=\bfseries\huge] at (0,-0.15) {#1};}
+% Giọt nước có chữ: \GPgiot{màu}{chữ}
+\providecommand{\GPgiot}{}\renewcommand{\GPgiot}[2]{%
+  \draw[very thick,fill=#1!15] (0,1.05) .. controls (0.12,0.65) and (0.62,0.25) .. (0.62,-0.15) arc (0:-180:0.62) .. controls (-0.62,0.25) and (-0.12,0.65) .. (0,1.05);
+  \draw[white,line width=2pt] (-0.38,-0.1) arc (190:240:0.45);
+  \node[font=\sffamily\Large] at (0,-0.15) {#2};}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                  BUỔI 1: TOÁN
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hktuan{1}{15}
+\par\medskip
+\begin{center}
+    {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ 15: PHÉP TRỪ TRONG PHẠM VI 5 -- BUỔI 1}
+\end{center}
+
+\subsection{MỤC TIÊU}
+\begin{itemize}
+    \item[-] \textbf{Kiến thức:} Học sinh biết cách đếm phần còn lại (đếm lùi) để thực hiện phép trừ.
+    \item[-] \textbf{Kiến thức:} Học sinh thực hiện được phép trừ các số trong phạm vi 5 thông qua hình ảnh, đồ vật thật.
+    \item[-] \textbf{Kĩ năng:} Học sinh lập được phép trừ từ tình huống, hình vẽ và tính đúng kết quả.
+    \item[-] \textbf{Thái độ:} Học sinh hào hứng tham gia trò chơi, mạnh dạn lên bảng, biết chờ lượt và cổ vũ bạn.
+\end{itemize}
+
+\subsection{CHUẨN BỊ}
+\begin{itemize}
+    \item[-] \textbf{Đồ dùng dạy học:} Bút, khăn ẩm, phiếu bài tập, giáo án, con dấu, hộp màu, bóng nhỏ, ly nhựa trong (ly giấy), kẹo (hoặc hình kẹo cắt giấy), bảng con, sticker ngôi sao.
+    \item[-] Thẻ số từ 0 đến 5, thẻ dấu \textbf{$-$} và \textbf{$=$}; 6 hình lá sen dán trên sàn (hoặc vẽ trên bảng) đánh số từ 0 đến 5.
+\end{itemize}
+
+\subsection{TIẾN TRÌNH DẠY HỌC}
+\begin{luuy}
+    \textbf{Cách tính điểm cả buổi:} Lớp chia thành 2 đội \textbf{Ếch Xanh} và \textbf{Ếch Vàng}. Mỗi lần trả lời đúng, làm nhanh, hợp tác tốt, đội được dán 1 ngôi sao lên bảng. Cuối buổi đội nhiều sao hơn được nhận sticker và được chọn bài hát khởi động cho buổi sau.
+\end{luuy}
+
+% ------------------------------------------------------------------------------
+% Hoạt động 1
+% ------------------------------------------------------------------------------
+\subsubsection{KHỞI ĐỘNG -- SỬA BÀI TẬP VỀ NHÀ}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 10 phút.
+        \item Mục tiêu: Tạo không khí vui vẻ; sửa và giải đáp bài tập về nhà của buổi học trước.
+    \end{itemize}
+\end{hd}
+\GAmucnho{Trò chơi “Tên lửa đếm lùi” (3 phút)}
+\begin{itemize}
+    \item[-] Cả lớp ngồi xổm làm “tên lửa”. GV đếm cùng HS: \GAloi{5 -- 4 -- 3 -- 2 -- 1 -- 0 \dots Phóng!} -- đến “Phóng!” cả lớp bật nhảy lên, giơ hai tay qua đầu.
+    \item[-] Chơi 2 -- 3 lần, lần sau đếm nhanh hơn hoặc GV bắt đầu từ số khác (4, 3). HS làm quen với việc \textbf{đếm lùi} trước khi học phép trừ.
+\end{itemize}
+\GAmucnho{Sửa bài tập về nhà (7 phút)}
+\begin{itemize}
+    \item[-] \textit{\color{red!80!black}Giáo viên sửa bài tập về nhà, số lượng tùy tình hình mỗi lớp.}
+    \item[-] GV chọn 1 -- 2 bài HS hay sai, hỏi cả lớp: \GAloi{Bạn nhỏ nào tìm ra chỗ chưa đúng?} HS phát hiện lỗi được dán sao cho đội.
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+% Hoạt động 2
+% ------------------------------------------------------------------------------
+\subsubsection{HÌNH THÀNH PHÉP TRỪ}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 20 phút.
+        \item Mục tiêu: Giúp học sinh hình thành khái niệm phép trừ (bớt đi, còn lại) và trừ bằng cách đếm lùi.
+    \end{itemize}
+\end{hd}
+\GAmucnho{a) Khởi động bằng bài hát}
+\begin{itemize}
+    \item[-] GV cho HS khởi động bằng bài hát \textit{Chú ếch con} (vừa hát vừa làm động tác nhảy như ếch): \url{https://youtu.be/VLmDPFij2GE?si=A-fklkx1wVT8YdMK}
+    \item[-] GV giới thiệu vào bài: \GAloi{Hôm nay các chú ếch con sẽ cùng nhau học một phép tính mới -- phép tính “bớt đi”, đó là \textbf{phép trừ}!}
+\end{itemize}
+\GAmucnho{b) Câu chuyện “Những viên kẹo của bạn An”}
+\begin{itemize}
+    \item[-] GV mời 2 HS đóng vai \textbf{An} và \textbf{My}. GV đưa cho “An” 3 viên kẹo, cả lớp cùng đếm: \GAloi{1, 2, 3 -- An có 3 viên kẹo.}
+    \item[-] “An” cho “My” 2 viên. GV hỏi: \GAloi{An đã cho bạn mấy viên? Bây giờ An còn lại bao nhiêu viên kẹo?} HS đếm số kẹo còn lại trên tay An.
+    \item[-] GV vẽ lên bảng, gạch đi số kẹo đã cho và giới thiệu phép tính: \textbf{3 $-$ 2 = 1}, đọc là \GAloi{ba trừ hai bằng một}. Dấu \textbf{$-$} gọi là \textbf{dấu trừ}.
+\end{itemize}
+\GPhinh{%
+\begin{tikzpicture}[font=\sffamily]
+    \node[font=\small\bfseries] at (1.75,0.75) {An có 3 viên kẹo};
+    \foreach \x/\mau in {0/PKdo,1.9/PKxanhla,3.2/PKcam}{\begin{scope}[shift={(\x,0)}]\GPkeo{\mau}\end{scope}}
+    \foreach \x in {1.9,3.2}{\begin{scope}[shift={(\x,0)}]\GPgach\end{scope}}
+    \draw[thick,PKxanhla!60!black] (-0.55,-0.4) -- (-0.55,-0.5) -- (0.55,-0.5) node[midway,below,font=\small\bfseries] {còn lại} -- (0.55,-0.4);
+    \draw[thick,PKdo] (1.35,-0.4) -- (1.35,-0.5) -- (3.75,-0.5) node[midway,below,font=\small\bfseries] {cho bạn My} -- (3.75,-0.4);
+    \draw[-stealth,very thick,gray] (4.15,0) -- (5.05,0);
+    \node[draw,thick,rounded corners=4pt,fill=PKvangnhat,font=\sffamily\bfseries\LARGE,inner sep=6pt,anchor=west] at (5.25,0) {3 $-$ 2 = 1};
+\end{tikzpicture}}
+\begin{itemize}
+    \item[-] Hoặc GV vẽ 3 hình vuông lên bảng, gạch bớt đi 2 hình vuông và hỏi: \GAloi{Cô còn lại bao nhiêu hình vuông?} GV thay đổi số lượng (4 bớt 1, 5 bớt 3, \dots) và thực hiện một vài lần cho HS hiểu.
+\end{itemize}
+\GAmucnho{c) Trò chơi “Ếch con nhảy lùi” -- trừ bằng cách đếm lùi}
+\begin{itemize}
+    \item[-] GV đặt 6 lá sen (đánh số 0 -- 5) thành một hàng trên sàn. Một HS đóng vai “ếch con” đứng ở lá sen số 5.
+    \item[-] GV đọc phép tính \textbf{5 $-$ 2}: \GAloi{Trừ 2 nghĩa là ếch nhảy lùi 2 bước!} “Ếch con” nhảy lùi từng lá, cả lớp đếm to: \GAloi{4, 3}. Ếch dừng ở lá số 3, vậy \textbf{5 $-$ 2 = 3}.
+    \item[-] Đổi lượt cho các “ếch con” của hai đội với các phép tính: 4 $-$ 1, 3 $-$ 2, 5 $-$ 3, 4 $-$ 4. Ếch nhảy đúng được 1 sao cho đội.
+\end{itemize}
+\GPhinh{%
+\begin{tikzpicture}[font=\sffamily]
+    \fill[PKxanhnuoc!18,rounded corners=10pt] (-0.9,-0.55) rectangle (8.9,1.75);
+    \foreach \k in {0,...,5}{%
+        \begin{scope}[shift={(1.6*\k,0)}]\GPlasen\end{scope}
+        \node[draw,thick,circle,fill=white,font=\sffamily\bfseries\large,inner sep=1pt,minimum size=0.62cm] at (1.6*\k,-0.95) {\k};}
+    \begin{scope}[shift={(8,0.28)},opacity=0.35]\GPech\end{scope}
+    \begin{scope}[shift={(4.8,0.28)}]\GPech\end{scope}
+    \draw[-stealth,PKdo,very thick] (7.75,0.75) to[bend right=65] node[above,font=\sffamily\bfseries] {$-1$} (6.55,0.75);
+    \draw[-stealth,PKdo,very thick] (6.15,0.75) to[bend right=65] node[above,font=\sffamily\bfseries] {$-1$} (5.05,0.75);
+    \node[draw,thick,rounded corners=4pt,fill=PKvangnhat,font=\sffamily\bfseries\LARGE,inner sep=6pt] at (11.3,0.4) {5 $-$ 2 = 3};
+\end{tikzpicture}}
+
+% ------------------------------------------------------------------------------
+% Hoạt động 3
+% ------------------------------------------------------------------------------
+\subsubsection{THỰC HIỆN PHÉP TRỪ THÔNG QUA HÌNH ẢNH}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 20 phút.
+        \item Mục tiêu: Học sinh thực hiện phép trừ và lập phép tính qua đồ vật, hình ảnh trực quan.
+    \end{itemize}
+\end{hd}
+\GAmucnho{a) Trò chơi “Chiếc ly thần kì”}
+\begin{itemize}
+    \item[-] GV bỏ lần lượt 3 quả bóng vào ly trong, cả lớp đếm. GV “làm phép”: \GAloi{Úm ba la!} rồi lấy ra 1 quả bóng.
+    \item[-] GV hỏi: \GAloi{Lúc đầu trong ly có mấy quả bóng? Cô lấy ra mấy quả? Trong ly còn lại mấy quả?} HS trả lời và nêu phép tính \textbf{3 $-$ 1 = 2}.
+    \item[-] GV có thể dùng bút lông, que tính thay cho bóng; mời HS lên làm “ảo thuật gia” và đố cả lớp.
+\end{itemize}
+\GPhinh{%
+\begin{tikzpicture}[font=\sffamily]
+    % Ly 1: có 3 quả bóng
+    \begin{scope}[shift={(0,0)}]
+        \begin{scope}[shift={(-0.22,0.32)}]\GPqua{PKdo}\end{scope}
+        \begin{scope}[shift={(0.22,0.32)}]\GPqua{PKxanhla}\end{scope}
+        \begin{scope}[shift={(0,0.76)}]\GPqua{PKvang}\end{scope}
+        \GPly
+        \node[draw,thick,rounded corners=4pt,fill=PKvangnhat,font=\small\bfseries] at (0,-0.5) {Có 3 quả bóng};
+    \end{scope}
+    \draw[gray,dashed] (2.2,-0.8) -- (2.2,2.4);
+    % Ly 2: lấy ra 1 quả bóng
+    \begin{scope}[shift={(4.4,0)}]
+        \begin{scope}[shift={(-0.22,0.32)}]\GPqua{PKdo}\end{scope}
+        \begin{scope}[shift={(0.22,0.32)}]\GPqua{PKxanhla}\end{scope}
+        \GPly
+        \begin{scope}[shift={(1.35,2.05)}]\GPqua{PKvang}\end{scope}
+        \draw[-stealth,very thick,gray!70!black,dashed] (0.25,1.75) to[bend left=35] (1.05,2.15);
+        \node[draw,thick,rounded corners=4pt,fill=PKvangnhat,font=\small\bfseries] at (0,-0.5) {Lấy ra 1 quả bóng};
+    \end{scope}
+    \draw[gray,dashed] (6.6,-0.8) -- (6.6,2.4);
+    % Ly 3: còn lại 2 quả bóng
+    \begin{scope}[shift={(8.8,0)}]
+        \begin{scope}[shift={(-0.22,0.32)}]\GPqua{PKdo}\end{scope}
+        \begin{scope}[shift={(0.22,0.32)}]\GPqua{PKxanhla}\end{scope}
+        \GPly
+        \node[draw,thick,rounded corners=4pt,fill=PKvangnhat,font=\small\bfseries] at (0,-0.5) {Còn lại 2 quả bóng};
+    \end{scope}
+    % Phép tính: 3 - 1 = 2
+    \begin{scope}[font=\sffamily\bfseries\LARGE]
+        \path (0,-1.55) \GPo{3} (2.2,-1.55) node {$-$} (4.4,-1.55) \GPo{1} (6.6,-1.55) node {$=$} (8.8,-1.55) \GPo{\textcolor{PKdo}{2}};
+    \end{scope}
+\end{tikzpicture}}
+\GAmucnho{b) Thi “Ai điền nhanh, ai điền đúng”}
+\begin{itemize}
+    \item[-] GV vẽ (hoặc dán) các hàng hình lên bảng, gạch bớt một số hình. Mỗi đội cử 1 bạn lên điền: \textbf{lượt đầu} chỉ điền \textbf{kết quả}; \textbf{lượt sau} HS tự điền \textbf{cả phép tính} (số ban đầu, số bớt đi, số còn lại).
+    \item[-] HS thực hiện đúng được dán sao. GV cố gắng để mỗi HS đều được lên bảng ít nhất 1 lần.
+\end{itemize}
+\GPcanchotrong{5cm}\noindent\textbf{Lượt 1 -- điền kết quả} (hàng đóng khung là mẫu):
+\GPhinh{%
+    \fbox{\GPhangtru{\GPqua{PKdo}}{3}{1}{3 $-$ 1}{\textcolor{PKdo}{\bfseries 2}}}\\*[8pt]
+    \GPhangtru{\GPanh{ga15p_ca.png}}{4}{2}{4 $-$ 2}{}\\*[8pt]
+    \GPhangtru{\GPanh{ga15p_ong.png}}{5}{1}{5 $-$ 1}{}}
+\GPcanchotrong{5cm}\noindent\textbf{Lượt 2 -- điền cả phép tính} (hàng đóng khung là mẫu):
+\GPhinh{%
+    \fbox{\GPhanglap{\GPqua{PKxanhnuoc}}{4}{1}{\textcolor{PKdo}{\bfseries 4}}{\textcolor{PKdo}{\bfseries 1}}{\textcolor{PKdo}{\bfseries 3}}}\\*[8pt]
+    \GPhanglap{\GPanh{ga15p_buom.png}}{5}{3}{}{}{}\\*[8pt]
+    \GPhanglap{\GPanh{ga15p_rua.png}}{3}{2}{}{}{}}
+\begin{itemize}
+    \item[-] \textbf{Bài tập áp dụng:} Bài 1, Bài 2 Phiếu bài tập.
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+% Hoạt động 4
+% ------------------------------------------------------------------------------
+\subsubsection{LUYỆN TẬP}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 10 phút.
+        \item Mục tiêu: Học sinh rèn luyện kĩ năng làm bài tập phép trừ trong phạm vi 5.
+    \end{itemize}
+\end{hd}
+\GAmucnho{Trò chơi “Hái táo tìm sao”}
+\begin{itemize}
+    \item[-] GV dán 5 quả táo ghi phép trừ và 5 ngôi sao ghi kết quả lên bảng. Hai đội lần lượt cử bạn lên \textbf{nối quả táo với ngôi sao ghi kết quả đúng}.
+    \item[-] Đội nối đúng và nhanh hơn được 2 sao. Các bạn ở dưới làm “trọng tài”, giơ ngón cái nếu bạn nối đúng.
+\end{itemize}
+\GPhinh{%
+\begin{tikzpicture}
+    \foreach \pt/\x in {5 $-$ 1/0,3 $-$ 2/3,4 $-$ 2/6,5 $-$ 2/9,2 $-$ 2/12}{%
+        \begin{scope}[shift={(\x,2.6)},scale=1.2]\GPtao{\pt}\end{scope}
+        \fill (\x,1.8) circle (2.5pt);}
+    \foreach \so/\x in {2/0,0/3,4/6,3/9,1/12}{%
+        \begin{scope}[shift={(\x,0)}]\GPsao{\so}\end{scope}
+        \fill (\x,0.78) circle (2.5pt);}
+\end{tikzpicture}}
+\begin{itemize}
+    \item[-] GV cho HS thực hiện các bài tập còn lại có trong PBT; GV đi từng bàn hướng dẫn, nhắc HS \textbf{gạch bớt} rồi \textbf{đếm phần còn lại}.
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+% Hoạt động 5
+% ------------------------------------------------------------------------------
+\subsubsection{CỦNG CỐ, DẶN BTVN}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 10 phút.
+        \item Mục tiêu: Củng cố nội dung bài học và giao nhiệm vụ bài tập về nhà.
+    \end{itemize}
+\end{hd}
+\GAmucnho{Trò chơi “Bàn tay kì diệu”}
+\begin{itemize}
+    \item[-] GV: \GAloi{Cô có 5 ngón tay, cô gập 2 ngón. Còn mấy ngón?} HS làm theo trên bàn tay mình và giơ đáp án. Đổi vai: HS đố GV, đố bạn.
+\end{itemize}
+\GAmucnho{Đúng hay sai? (HS giơ thẻ \textbf{Đ} hoặc \textbf{S})}
+\GPhinh{%
+    \GPdungsai{\GPanh{ga15p_rua.png}}{3}{1}{3 $-$ 1 = 2}\\*[6pt]
+    \GPdungsai{\GPanh{ga15p_borua.png}}{4}{2}{4 $-$ 2 = 1}\\*[6pt]
+    \GPdungsai{\GPanh{ga15p_cua.png}}{5}{3}{5 $-$ 3 = 2}}
+\begin{itemize}
+    \item[-] GV cho HS nhắc lại nội dung bài học trước khi về: \GAloi{Muốn biết còn lại bao nhiêu, ta làm phép tính gì?}
+    \item[-] GV tổng kết điểm thi đua, khen ngợi đội thắng và các bạn tích cực.
+    \item[-] GV có thể tuỳ vào tình hình HS mỗi lớp để cho các BT phù hợp.
+\end{itemize}
+
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                  BUỔI 2: TIẾNG VIỆT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+    {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: ÔN TẬP TIẾNG VIỆT -- BUỔI 2}
+\end{center}
+\setcounter{subsection}{0}
+\subsection{MỤC TIÊU}
+\begin{itemize}
+    \item[-] Học sinh ôn tập lại một số âm đã học; đánh vần và đọc đúng tiếng tương ứng với hình ảnh.
+    \item[-] Học sinh tìm được đồ vật, con vật có tên chứa chữ cái được yêu cầu.
+    \item[-] Học sinh phân biệt được dấu huyền và dấu hỏi.
+    \item[-] Học sinh nghe kể chuyện và nhớ được một số nhân vật trong truyện.
+\end{itemize}
+
+\subsection{CHUẨN BỊ}
+\begin{itemize}
+    \item[-] Giáo án, bút bảng, PPT trình chiếu, PBT, tranh, bảng con, hình ảnh\dots
+    \item[-] Thẻ tranh con vật -- đồ vật, 2 chiếc giỏ có gắn chữ cái, thẻ chữ \textbf{Đ}/\textbf{S}, sticker ngôi sao.
+\end{itemize}
+
+\subsection{TIẾN TRÌNH DẠY HỌC}
+
+% ------------------------------------------------------------------------------
+% Hoạt động 1
+% ------------------------------------------------------------------------------
+\subsubsection{HỌC SINH ÔN TẬP LẠI MỘT SỐ ÂM ĐÃ HỌC}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 15 phút.
+        \item Mục tiêu: Ôn tập nhận biết các âm và điền âm còn thiếu tương ứng với hình ảnh.
+    \end{itemize}
+\end{hd}
+\GAmucnho{a) Trò chơi “Chiếc hộp bí mật”}
+\begin{itemize}
+    \item[-] GV giấu từng tranh trong hộp, rút ra từ từ (hé dần từng phần) để HS đoán tên. HS đoán đúng được đánh vần to tiếng đó cho cả lớp đọc theo.
+    \item[-] GV cho HS đánh vần các tiếng và chọn tiếng đúng tương ứng với hình ảnh (đánh dấu \tikz[baseline=-0.5ex]\draw[PKdo,very thick,line cap=round,line join=round] (0,0) -- (0.1,-0.11) -- (0.28,0.15); vào ô bên dưới) -- thẻ đầu tiên là mẫu:
+\end{itemize}
+\GPhinh{%
+\begin{tikzpicture}
+    \begin{scope}[shift={(0,0)}]\GPthechon{\begin{scope}[scale=1.3]\GPdo\end{scope}}{đò}{lò}{1}\end{scope}
+    \begin{scope}[shift={(4.2,0)}]\GPthechon{\GPno}{mơ}{nơ}{0}\end{scope}
+    \begin{scope}[shift={(8.4,0)}]\GPthechon{\GPna}{ná}{cá}{0}\end{scope}
+    \begin{scope}[shift={(12.6,0)}]\GPthechon{\GPcatim}{cà}{trà}{0}\end{scope}
+\end{tikzpicture}}
+\GPcanchotrong{5cm}\GAmucnho{b) Điền âm còn thiếu}
+\begin{itemize}
+    \item[-] GV cho HS đọc tên và điền âm còn thiếu của các từ phía dưới. GV gợi ý bằng câu hỏi: \GAloi{Tiếng “rễ” bắt đầu bằng âm gì?}
+\end{itemize}
+\GPhinh{%
+    \GPdienam{\GPre}{\underline{\hspace{0.7cm}}ễ}\hfill
+    \GPdienam{\node[inner sep=0pt] at (0,-0.05) {\includegraphics[height=1.7cm]{ga15p_conde_dung.png}};}{\underline{\hspace{0.7cm}}ê}\hfill
+    \GPdienam{\GPtu}{\underline{\hspace{0.7cm}}ủ}\hfill
+    \GPdienam{\GPmi}{\underline{\hspace{0.7cm}}ì}}
+\begin{itemize}
+    \item[-] GV chia nhóm cho HS đọc. Nhóm nào đọc đúng các âm đã học sẽ được cộng 2 điểm.
+\end{itemize}
+\begin{luuy}
+    Đáp án: \textbf{đò, nơ, ná, cà}; \textbf{r}ễ, \textbf{d}ê, \textbf{t}ủ, \textbf{m}ì. Với HS còn chậm, GV cho đánh vần từng âm (\textit{rờ -- ê -- rê -- ngã -- rễ}) trước khi đọc trơn.
+\end{luuy}
+
+% ------------------------------------------------------------------------------
+% Hoạt động 2
+% ------------------------------------------------------------------------------
+\subsubsection{TÌM TỪ BẮT CHỮ}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 10 phút.
+        \item Mục tiêu: Rèn luyện khả năng liên tưởng và nhận biết chữ cái qua trò chơi vận động.
+    \end{itemize}
+\end{hd}
+\GAmucnho{Trò chơi “Bỏ thẻ vào giỏ”}
+\begin{itemize}
+    \item[-] GV chuẩn bị các thẻ tranh và 2 chiếc giỏ, mỗi giỏ gắn một chữ cái (ví dụ \textbf{c} và \textbf{r}).
+    \item[-] GV chia lớp thành hai đội. Mỗi đội lần lượt cử 1 bạn chạy lên chọn thẻ có \textbf{tên chứa chữ cái} của giỏ đội mình, đọc to tên rồi bỏ vào giỏ. Thẻ không chứa chữ cái nào thì để lại trên bàn.
+    \item[-] Đội tìm được nhanh và nhiều thẻ đúng nhất sẽ được cộng điểm. GV đổi chữ cái trên giỏ để chơi thêm lượt mới.
+\end{itemize}
+\GPhinh{%
+\begin{tikzpicture}[scale=0.92,every node/.style={transform shape}]
+    \foreach \hinh/\ten [count=\k] in {ga15p_ca.png/cá,ga15p_ong.png/ong,ga15p_rua.png/rùa,ga15p_cua.png/cua}{%
+        \begin{scope}[shift={(3.6*\k-3.6,0)}]\GPthe{\hinh}{\ten}\fill (0,-1.65) circle (2.5pt);\end{scope}}
+    \begin{scope}[shift={(2.7,-3.6)}]\GPgio{c}\end{scope}
+    \begin{scope}[shift={(8.1,-3.6)}]\GPgio{r}\end{scope}
+    \foreach \hinh/\ten [count=\k] in {ga15p_borua.png/bọ rùa,ga15p_buom.png/bướm,ga15p_cu.png/cú mèo,ga15p_conde_dung.png/dê}{%
+        \begin{scope}[shift={(3.6*\k-3.6,-6.9)}]\fill (0,1.05) circle (2.5pt);\GPthe{\hinh}{\ten}\end{scope}}
+\end{tikzpicture}}
+\begin{itemize}
+    \item[-] \textbf{Bài tập áp dụng:} Bài 3, 4, 5 trong Phiếu bài tập.
+    \item[-] \textbf{\textit{Giải lao:}} HS vẽ tranh ở cuối PBT.
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+% Hoạt động 3
+% ------------------------------------------------------------------------------
+\subsubsection{ÔN TẬP CÁC DẤU THANH}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 10 phút.
+        \item Mục tiêu: Ôn tập và phân biệt dấu hỏi, dấu huyền thông qua trò chơi vận động và đối đáp.
+    \end{itemize}
+\end{hd}
+\GAmucnho{a) Khởi động “Vẽ dấu trên không”}
+\begin{itemize}
+    \item[-] GV hướng dẫn: nghe tiếng có \textbf{dấu huyền} thì đưa tay vẽ một nét xiên từ trên xuống; nghe tiếng có \textbf{dấu hỏi} thì vẽ hình “móc câu” trên không.
+    \item[-] GV đọc nhanh: \textit{gà, cỏ, bò, tủ, mè, hổ, \dots} -- cả lớp vẽ dấu theo. Bạn nào vẽ đúng và nhanh được khen.
+\end{itemize}
+\GAmucnho{b) Trò chơi “Hỏi nhanh đáp nhanh”}
+\begin{itemize}
+    \item[-] GV chia lớp thành 2 đội: \textbf{đội Huyền} và \textbf{đội Hỏi}.
+    \item[-] Đội Huyền nói một tiếng có dấu huyền (ví dụ \textbf{cò}), đội Hỏi phải đáp ngay tiếng tương ứng có dấu hỏi (\textbf{cỏ}) và ngược lại. GV có thể gợi ý bằng các cặp “đôi bạn dấu thanh” dưới đây.
+    \item[-] Đội nào nói được nhiều từ đúng hơn sẽ được cộng 2 điểm.
+\end{itemize}
+\GPhinh{%
+\begin{tikzpicture}
+    \foreach \a/\b [count=\k] in {cò/cỏ,đò/đỏ,hồ/hổ,bò/bỏ}{%
+        \begin{scope}[shift={(4.2*\k-4.2,0)}]
+            \draw[thick,rounded corners=8pt,fill=PKvangnhat!35] (-1.7,-1.05) rectangle (1.7,1.35);
+            \begin{scope}[shift={(-0.78,0)}]\GPgiot{PKxanhnuoc}{\a}\end{scope}
+            \begin{scope}[shift={(0.78,0)}]\GPgiot{PKhong}{\b}\end{scope}
+        \end{scope}}
+    \fill[PKxanhnuoc!40,draw=black] (4.0,-1.5) circle (0.13) node[right=3pt,font=\small,text=black] {dấu huyền};
+    \fill[PKhong!40,draw=black] (7.2,-1.5) circle (0.13) node[right=3pt,font=\small,text=black] {dấu hỏi};
+\end{tikzpicture}}
+\begin{itemize}
+    \item[-] \textbf{Bài tập áp dụng:} Bài 6 trong Phiếu bài tập.
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+% Hoạt động 4
+% ------------------------------------------------------------------------------
+\subsubsection{CỦNG CỐ VÀ GIAO BTVN}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 10 phút.
+        \item Mục tiêu: Nhắc lại kiến thức trọng tâm và giao bài tập về nhà.
+    \end{itemize}
+\end{hd}
+\GAmucnho{Kể chuyện “Chú ếch con tìm bạn”}
+\begin{itemize}
+    \item[-] GV kể ngắn: \textit{Chú ếch con đi tìm bạn, gặp bạn \textbf{dê} bên bờ \textbf{hồ}, bạn \textbf{cua} dưới \textbf{rễ} cây và bạn \textbf{cò} đang ngồi trên \textbf{đò}\dots}
+    \item[-] GV hỏi: \GAloi{Ếch con đã gặp những bạn nào? Tiếng nào có dấu huyền, tiếng nào có dấu hỏi?} HS nhớ lại nhân vật và các âm, dấu thanh vừa ôn.
+\end{itemize}
+\begin{itemize}
+    \item[-] GV cho HS nhắc lại nội dung bài học trước khi về.
+    \item[-] GV tổng kết điểm thi đua, khen ngợi các nhóm tích cực.
+    \item[-] GV giao BTVN phù hợp với tình hình HS lớp mình.
+\end{itemize}
+
+\end{document}
