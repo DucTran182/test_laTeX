@@ -20,7 +20,8 @@
 \providecommand{\GAbatdauhinh}{}\renewcommand{\GAbatdauhinh}{\par\nopagebreak\vspace{4pt}\nopagebreak}
 % Danh sách gọn (đặt ngay sau \begin{itemize}): giảm khoảng cách giữa các dòng
 \providecommand{\GAgon}{}\renewcommand{\GAgon}{\setlength{\itemsep}{4pt}\setlength{\parsep}{0pt}\setlength{\parskip}{0pt}}
-% Chèn hình: tự tìm trong các thư mục hình; nếu chưa tải hình lên thì hiện khung "Thiếu hình" (không làm lỗi biên dịch)
+% Chèn hình: tranh nào đã vẽ bằng TikZ (danh sách \GAdangky bên dưới) thì vẽ luôn, KHÔNG cần file ảnh;
+% tranh khác mới tìm file ảnh, thiếu thì hiện khung "Thiếu hình" (không làm lỗi biên dịch)
 %   \GAhinh[tuỳ chọn]{tên đầy đủ}        ví dụ \GAhinh[height=2cm]{p14_de.png}
 %   \GAhinhx[tuỳ chọn]{tên không tiền tố} tìm p14_tên rồi ga14_tên, ví dụ \GAhinhx[height=2cm]{ba.png}
 \makeatletter
@@ -37,8 +38,10 @@
   \ifx\GA@duong\@empty
     \edef\GA@ten{#2}\fbox{\parbox{2.2cm}{\centering\scriptsize\color{red}Thiếu hình\\\detokenize\expandafter{\GA@ten}}}%
   \else\expandafter\GA@chen\expandafter{\GA@duong}{#1}\fi}
-\providecommand{\GAhinh}{}\renewcommand{\GAhinh}[2][]{\def\GA@duong{}\GA@tim{#2}\GA@ketqua{#1}{#2}}
-\providecommand{\GAhinhx}{}\renewcommand{\GAhinhx}[2][]{\def\GA@duong{}\GA@tim{p14_#2}\GA@tim{ga14_#2}\GA@ketqua{#1}{p14_#2}}
+\providecommand{\GAhinh}{}\renewcommand{\GAhinh}[2][]{%
+  \ifcsname GAve@#2\endcsname\GA@vetranh{#1}{#2}\else\def\GA@duong{}\GA@tim{#2}\GA@ketqua{#1}{#2}\fi}
+\providecommand{\GAhinhx}{}\renewcommand{\GAhinhx}[2][]{%
+  \ifcsname GAve@p14_#2\endcsname\GA@vetranh{#1}{p14_#2}\else\def\GA@duong{}\GA@tim{p14_#2}\GA@tim{ga14_#2}\GA@ketqua{#1}{p14_#2}\fi}
 % Đánh lại số bài từ 1 (cho Bài 1, Bài 2 lấy từ PBT)
 \providecommand{\GAdatlaibai}{}\renewcommand{\GAdatlaibai}{\@ifundefined{c@bt}{}{\setcounter{bt}{0}}}
 \makeatother
@@ -55,6 +58,481 @@
 \definecolor{GAkem}{RGB}{255,248,225}\definecolor{GAoli}{RGB}{70,150,220}
 \definecolor{GAsau}{RGB}{165,208,100}
 \definecolor{GAdochu}{RGB}{238,28,36}\definecolor{GAsoke}{RGB}{25,35,140}
+
+% ===================== TRANH VẼ BẰNG TIKZ (thay cho ảnh) =====================
+% Mỗi tranh vẽ quanh gốc toạ độ, khung khoảng [-1.2;1.2] x [-1;1.2]
+\tikzset{GAvien/.style={draw=black!60,line width=0.5pt,line join=round,line cap=round}}
+% bóng đổ dưới chân: \GAbongdo{x}{y}{rx}
+\providecommand{\GAbongdo}{}\renewcommand{\GAbongdo}[3]{\fill[black,opacity=0.13] (#1,#2) ellipse (#3 and #3*0.14);}
+% khối tròn có sáng tối (ánh sáng từ trên trái): \GAkhoi{x}{y}{r}{màu}
+\providecommand{\GAkhoi}{}\renewcommand{\GAkhoi}[4]{%
+  \begin{scope}\clip (#1,#2) circle (#3);
+  \shade[inner color=#4!55!white,outer color=#4!75!black] ({#1-0.35*#3},{#2+0.35*#3}) circle ({1.5*#3});\end{scope}
+  \draw[#4!45!black,line width=0.45pt] (#1,#2) circle (#3);}
+\definecolor{GAda}{RGB}{255,214,180}\definecolor{GAdam}{RGB}{226,160,120}
+\definecolor{GAtoc}{RGB}{60,40,30}\definecolor{GAtrau}{RGB}{78,84,96}
+\definecolor{GAnaudo}{RGB}{150,85,40}\definecolor{GAxanhla2}{RGB}{70,150,60}
+% ---------- con dê ----------
+\providecommand{\GAveDe}{}\renewcommand{\GAveDe}{%
+  \begin{scope}[GAvien]
+  \GAbongdo{0.15}{-0.97}{0.95}
+  \foreach \gx in {-0.9,0.2,0.85}{\fill[green!55!black] (\gx-0.15,-0.98) -- (\gx-0.08,-0.75) -- (\gx-0.02,-0.95) -- (\gx+0.04,-0.72) -- (\gx+0.1,-0.95) -- (\gx+0.17,-0.8) -- (\gx+0.2,-0.98) -- cycle;}
+  \foreach \gx in {0.78,-0.22}{\filldraw[fill=gray!30] (\gx-0.07,-0.1) rectangle (\gx+0.07,-0.85); \filldraw[fill=black!70] (\gx-0.08,-0.85) rectangle (\gx+0.08,-0.97);}
+  \begin{scope}\clip (0.2,0.05) ellipse (0.78 and 0.4); \fill[white] (0.2,0.05) ellipse (0.78 and 0.4);
+    \shade[top color=white,bottom color=gray!40] (-0.7,-0.4) rectangle (1.1,0.5);
+    \foreach \gx in {-0.4,-0.2,...,0.8}{\draw[gray!45,line width=0.4pt] (\gx,0.15) .. controls (\gx+0.05,0.0) .. (\gx,-0.2);}\end{scope}
+  \draw (0.2,0.05) ellipse (0.78 and 0.4);
+  \foreach \gx in {0.55,-0.42}{\filldraw[fill=gray!10] (\gx-0.07,-0.15) rectangle (\gx+0.07,-0.88); \filldraw[fill=black!70] (\gx-0.08,-0.88) rectangle (\gx+0.08,-0.99);}
+  \filldraw[fill=white] (0.95,0.3) .. controls (1.15,0.45) and (1.15,0.25) .. (1.0,0.15) -- cycle;
+  \filldraw[fill=PKhong!60] (0.45,-0.33) ellipse (0.12 and 0.07);
+  \filldraw[fill=white] (-0.6,0.25) -- (-0.82,0.62) -- (-0.45,0.72) -- (-0.3,0.3) -- cycle;
+  \shade[left color=yellow!55!brown,right color=brown!70!black,draw=brown!50!black,line width=0.4pt] (-0.66,0.84) .. controls (-0.55,1.12) and (-0.25,1.12) .. (-0.16,0.9) .. controls (-0.3,1.0) and (-0.5,0.98) .. (-0.56,0.82) -- cycle;
+  \shade[left color=yellow!65!brown,right color=brown!60!black,draw=brown!50!black,line width=0.4pt] (-0.8,0.86) .. controls (-0.72,1.16) and (-0.42,1.2) .. (-0.3,0.98) .. controls (-0.45,1.06) and (-0.62,1.04) .. (-0.7,0.84) -- cycle;
+  \shade[inner color=white,outer color=gray!30,rotate around={-30:(-0.78,0.68)}] (-0.78,0.68) ellipse (0.34 and 0.22);
+  \draw[rotate around={-30:(-0.78,0.68)}] (-0.78,0.68) ellipse (0.34 and 0.22);
+  \filldraw[fill=white,rotate around={25:(-0.48,0.78)}] (-0.42,0.78) ellipse (0.16 and 0.06);
+  \fill[PKhong!70,rotate around={25:(-0.48,0.78)}] (-0.42,0.78) ellipse (0.1 and 0.03);
+  \filldraw[fill=PKhong!45] (-1.02,0.5) ellipse (0.13 and 0.1);
+  \fill[black] (-1.06,0.52) circle (0.018) (-0.98,0.53) circle (0.018);
+  \filldraw[fill=white] (-0.95,0.4) -- (-0.85,0.42) -- (-0.92,0.18) -- cycle;
+  \fill[black] (-0.8,0.74) circle (0.055); \fill[white] (-0.79,0.76) circle (0.018);
+  \draw (-0.98,0.42) .. controls (-0.94,0.38) .. (-0.88,0.42);
+  \end{scope}}
+% ---------- con cò ----------
+\providecommand{\GAveCo}{}\renewcommand{\GAveCo}{%
+  \begin{scope}[GAvien]
+  \draw[red!75!black,line width=1.6pt] (0.05,-0.2) -- (0.0,-0.55) -- (0.05,-0.97) (0.25,-0.2) -- (0.3,-0.55) -- (0.25,-0.97);
+  \draw[red!75!black,line width=1.2pt] (-0.1,-0.97) -- (0.15,-0.97) (0.12,-0.97) -- (0.4,-0.97);
+  \filldraw[fill=black!85] (0.45,-0.05) -- (0.95,-0.45) -- (0.62,-0.12) -- (0.9,-0.3) -- (0.55,0.05) -- cycle;
+  \GAbongdo{0.15}{-0.98}{0.45}
+  \shade[top color=white,bottom color=gray!30,rotate around={-20:(0.2,0.05)}] (0.2,0.05) ellipse (0.48 and 0.27);
+  \draw[rotate around={-20:(0.2,0.05)}] (0.2,0.05) ellipse (0.48 and 0.27);
+  \filldraw[fill=black!85] (0.25,0.08) .. controls (0.5,0.15) and (0.7,0.0) .. (0.78,-0.25) .. controls (0.55,-0.15) and (0.4,-0.12) .. (0.25,0.08);
+  \draw[gray!60] (0.0,0.05) .. controls (0.2,-0.05) .. (0.45,-0.05) (0.05,-0.05) .. controls (0.25,-0.12) .. (0.5,-0.12);
+  \draw[gray!80,thin] (0.45,0.0) -- (0.62,-0.18) (0.52,0.05) -- (0.7,-0.12);
+  \draw[black!75,line width=7.5pt] (-0.12,0.22) .. controls (-0.3,0.45) and (0.0,0.6) .. (-0.18,0.85);
+  \draw[white,line width=6pt] (-0.12,0.22) .. controls (-0.3,0.45) and (0.0,0.6) .. (-0.18,0.85);
+  \filldraw[fill=white] (-0.18,0.87) circle (0.13);
+  \filldraw[fill=orange!85!red] (-0.27,0.9) -- (-0.85,0.66) -- (-0.26,0.8) -- cycle;
+  \fill[black] (-0.2,0.9) circle (0.03);
+  \end{scope}}
+% ---------- hòn đá ----------
+\providecommand{\GAveDa}{}\renewcommand{\GAveDa}{%
+  \begin{scope}[GAvien]
+  \fill[black!10] (0,-0.62) ellipse (1.2 and 0.12);
+  \filldraw[top color=gray!40!brown!25!white,bottom color=gray!75!brown] (-0.75,-0.6) -- (-0.85,-0.2) -- (-0.45,0.15) -- (-0.05,0.05) -- (0.05,-0.6) -- cycle;
+  \filldraw[top color=gray!30!white,bottom color=gray!70!black] (-0.2,-0.6) -- (-0.25,0.05) -- (0.2,0.45) -- (0.65,0.25) -- (0.75,-0.6) -- cycle;
+  \fill[gray!20] (-0.25,0.05) -- (0.2,0.45) -- (0.3,0.1) -- cycle;
+  \filldraw[top color=gray!50!brown!40!white,bottom color=gray!85!black] (0.45,-0.6) -- (0.55,-0.15) -- (0.95,0.0) -- (1.15,-0.6) -- cycle;
+  \foreach \gx/\gy/\gr in {-1.05/-0.55/0.12,-0.6/-0.72/0.09,0.3/-0.75/0.1,0.95/-0.72/0.08,-0.15/-0.78/0.07}{\filldraw[fill=gray!55] (\gx,\gy) ellipse (\gr*1.4 and \gr);}
+  \draw[gray!75!black,line width=0.4pt] (-0.6,-0.1) -- (-0.45,-0.2) -- (-0.35,-0.35) (0.25,0.2) -- (0.35,0.0) -- (0.45,-0.15) (0.75,-0.2) -- (0.85,-0.4);
+  \fill[white,opacity=0.35] (-0.7,-0.15) -- (-0.45,0.1) -- (-0.4,0.0) -- cycle (0.62,-0.12) -- (0.92,-0.02) -- (0.85,-0.1) -- cycle;
+  \end{scope}}
+% ---------- bé và bể cá ----------
+\providecommand{\GAveBeCa}{}\renewcommand{\GAveBeCa}{%
+  \begin{scope}[GAvien]
+  % bàn và bể cá
+  \draw[GAnaudo,line width=2pt] (0.2,-0.25) -- (0.75,-0.98) (0.75,-0.25) -- (0.2,-0.98) (0.47,-0.25) -- (0.47,-0.98);
+  \GAbongdo{0.0}{-0.98}{0.95}
+  \filldraw[top color=yellow!50!brown!60,bottom color=brown!70!black] (0.47,-0.22) ellipse (0.5 and 0.1);
+  \draw[brown!50!black,thin] (0.1,-0.22) .. controls (0.4,-0.18) .. (0.8,-0.23);
+  \filldraw[fill=PKxanhnuoc!20,fill opacity=0.9] (0.47,0.15) circle (0.36);
+  \begin{scope}\clip (0.47,0.15) circle (0.36); \fill[PKxanhnuoc!55] (0,-0.3) rectangle (1,0.22);
+    \fill[yellow!50!brown] (0,-0.3) rectangle (1,-0.12);
+    \draw[green!50!black,line width=1.4pt] (0.3,-0.15) .. controls (0.25,0.0) .. (0.32,0.12) (0.65,-0.15) .. controls (0.7,0.0) .. (0.63,0.08);\end{scope}
+  \draw (0.47,0.15) circle (0.36);
+  \filldraw[fill=PKxanhnuoc!35] (0.47,0.48) ellipse (0.24 and 0.05);
+  \filldraw[fill=orange!90] (0.4,0.06) ellipse (0.12 and 0.07); \filldraw[fill=orange!90] (0.52,0.06) -- (0.62,0.12) -- (0.62,0.0) -- cycle;
+  \fill[white,opacity=0.6] (0.25,0.3) ellipse (0.05 and 0.1);
+  % bé trai
+  \filldraw[fill=orange!90] (-0.78,-0.98) rectangle (-0.6,-0.9) (-0.48,-0.98) rectangle (-0.3,-0.9);
+  \filldraw[fill=GAda] (-0.72,-0.9) rectangle (-0.62,-0.6) (-0.46,-0.9) rectangle (-0.36,-0.6);
+  \filldraw[fill=GAnaudo!80!black] (-0.78,-0.62) -- (-0.8,-0.25) -- (-0.28,-0.25) -- (-0.3,-0.62) -- (-0.5,-0.62) -- (-0.54,-0.45) -- (-0.58,-0.62) -- cycle;
+  \filldraw[top color=green!35!white,bottom color=green!55!black!70,rounded corners=4pt] (-0.85,-0.28) -- (-0.88,0.22) -- (-0.22,0.22) -- (-0.25,-0.28) -- cycle;
+  \filldraw[fill=green!45!white] (-0.28,0.18) -- (-0.05,0.12) -- (-0.05,0.0) -- (-0.28,0.02) -- cycle;
+  \filldraw[fill=GAda] (-0.05,0.1) -- (0.08,0.1) .. controls (0.12,0.2) .. (0.05,0.28) -- (0.02,0.12) -- (-0.05,0.02) -- cycle;
+  \filldraw[fill=green!45!white] (-0.85,0.15) -- (-1.0,-0.15) -- (-0.88,-0.2) -- (-0.8,-0.02) -- cycle;
+  \filldraw[fill=GAda] (-0.98,-0.17) circle (0.07);
+  \begin{scope}\clip (-0.55,0.55) circle (0.32);\fill[white] (-0.55,0.55) circle (0.32);\shade[inner color=GAda!60!white,outer color=GAdam] (-0.65,0.65) circle (0.45);\end{scope}
+  \draw (-0.55,0.55) circle (0.32);
+  \filldraw[fill=GAtoc] (-0.88,0.62) .. controls (-0.9,0.95) and (-0.3,1.05) .. (-0.22,0.7) .. controls (-0.35,0.78) and (-0.5,0.72) .. (-0.55,0.8) .. controls (-0.62,0.7) and (-0.8,0.72) .. (-0.88,0.62);
+  \fill[black] (-0.66,0.56) circle (0.04) (-0.44,0.56) circle (0.04);
+  \fill[PKhong!80] (-0.74,0.44) circle (0.05) (-0.36,0.44) circle (0.05);
+  \filldraw[fill=red!70!black] (-0.65,0.4) .. controls (-0.6,0.28) and (-0.5,0.28) .. (-0.45,0.4) -- cycle;
+  \end{scope}}
+% ---------- dưa hấu ----------
+\providecommand{\GAveDuaHau}{}\renewcommand{\GAveDuaHau}{%
+  \begin{scope}[GAvien]
+  \GAbongdo{0.1}{-0.95}{1.05}
+  \begin{scope}\clip (-0.3,0.15) circle (0.82); \fill[white] (-1.2,-0.7) rectangle (0.6,1.0);
+    \shade[inner color=green!65!yellow!80!black,outer color=green!30!black] (-0.55,0.42) circle (1.15);\end{scope}
+  \begin{scope}\clip (-0.3,0.15) circle (0.82);
+    \foreach \gx in {-1.0,-0.65,-0.3,0.05,0.4}{\fill[green!20!black,opacity=0.75] (\gx,0.97) .. controls (\gx-0.12,0.6) and (\gx+0.1,0.4) .. (\gx-0.05,0.15) .. controls (\gx+0.1,-0.2) and (\gx-0.12,-0.4) .. (\gx,-0.7) -- (\gx+0.1,-0.7) .. controls (\gx-0.02,-0.4) and (\gx+0.2,-0.2) .. (\gx+0.05,0.15) .. controls (\gx+0.2,0.4) and (\gx-0.02,0.6) .. (\gx+0.1,0.97) -- cycle;}
+    \fill[white,opacity=0.25] (-0.6,0.55) ellipse (0.25 and 0.15);
+  \end{scope}
+  \draw (-0.3,0.15) circle (0.82);
+  \draw[green!35!black,line width=1.2pt] (-0.3,0.97) .. controls (-0.25,1.1) and (-0.1,1.1) .. (-0.15,1.0);
+  \filldraw[fill=green!60!black] (-0.45,-0.25) -- (1.2,-0.25) arc (0:-180:0.825 and 0.75) -- cycle;
+  \fill[green!25!white] (-0.38,-0.25) -- (1.13,-0.25) arc (0:-180:0.755 and 0.68) -- cycle;
+  \shade[top color=red!85!PKdo,bottom color=red!65!pink] (-0.3,-0.25) -- (1.05,-0.25) arc (0:-180:0.675 and 0.6) -- cycle;
+  \foreach \gx/\gy in {0.0/-0.45,0.3/-0.55,0.6/-0.45,0.45/-0.7,0.15/-0.7,0.85/-0.4,-0.15/-0.35}{\fill[black!85] (\gx,\gy) ellipse (0.025 and 0.045);}
+  \end{scope}}
+% ---------- đu đủ ----------
+\providecommand{\GAveDuDu}{}\renewcommand{\GAveDuDu}{%
+  \begin{scope}[GAvien]
+  \filldraw[fill=green!45!black] (-0.42,0.95) -- (-0.38,1.12) -- (-0.32,0.95) -- cycle;
+  \shade[top color=yellow!80!orange,bottom color=orange!85!red,shading angle=20] (-0.38,0.95) .. controls (-0.1,0.9) and (0.05,0.4) .. (0.05,0.0) .. controls (0.05,-0.6) and (-0.2,-0.85) .. (-0.45,-0.85) .. controls (-0.75,-0.85) and (-0.9,-0.5) .. (-0.85,0.0) .. controls (-0.8,0.45) and (-0.65,0.9) .. (-0.38,0.95);
+  \draw (-0.38,0.95) .. controls (-0.1,0.9) and (0.05,0.4) .. (0.05,0.0) .. controls (0.05,-0.6) and (-0.2,-0.85) .. (-0.45,-0.85) .. controls (-0.75,-0.85) and (-0.9,-0.5) .. (-0.85,0.0) .. controls (-0.8,0.45) and (-0.65,0.9) .. (-0.38,0.95);
+  \fill[green!40!black,opacity=0.35] (-0.5,0.85) .. controls (-0.6,0.5) .. (-0.55,0.2) -- (-0.45,0.25) .. controls (-0.48,0.5) .. (-0.4,0.88) -- cycle;
+  \fill[white,opacity=0.4] (-0.65,0.3) ellipse (0.06 and 0.22);
+  \begin{scope}[rotate around={-25:(0.45,-0.35)}]
+  \filldraw[fill=yellow!70!orange] (0.45,-0.35) ellipse (0.68 and 0.42);
+  \fill[orange!85!red] (0.45,-0.35) ellipse (0.6 and 0.35);
+  \fill[orange!50!red!70!black] (0.45,-0.35) ellipse (0.4 and 0.16);
+  \foreach \gx/\gy in {0.15/-0.35,0.25/-0.3,0.25/-0.4,0.35/-0.28,0.35/-0.42,0.45/-0.3,0.45/-0.4,0.55/-0.28,0.55/-0.42,0.65/-0.32,0.65/-0.4,0.75/-0.35,0.35/-0.35,0.55/-0.35}{\fill[black!85] (\gx,\gy) circle (0.045);}
+  \end{scope}
+  \end{scope}}
+% ---------- hạt đậu ----------
+\providecommand{\GAveHatDau}{}\renewcommand{\GAveHatDau}{%
+  \begin{scope}[GAvien]
+  \filldraw[top color=green!55!black!80,bottom color=green!30!black] (-1.05,-0.05) .. controls (-0.6,0.45) and (0.3,0.6) .. (0.95,0.45) .. controls (0.6,0.25) and (-0.3,0.05) .. (-1.05,-0.05);
+  \filldraw[fill=green!30!black] (-1.05,-0.05) .. controls (-0.5,-0.05) and (0.4,0.15) .. (0.95,0.45) .. controls (0.5,0.0) and (-0.4,-0.25) .. (-1.05,-0.05);
+  \foreach \gx/\gy in {-0.65,-0.35,-0.05,0.25,0.55}{}
+  \foreach \gx/\gy in {-0.7/0.08,-0.42/0.15,-0.13/0.22,0.16/0.28,0.45/0.33}{\GAkhoi{\gx}{\gy}{0.1}{green!60!yellow!80!black}}
+  \draw[green!25!black,line width=1.6pt] (0.95,0.45) .. controls (1.05,0.55) and (1.05,0.75) .. (1.12,0.8);
+  \foreach \gx/\gy in {-0.75/-0.55,-0.45/-0.7,-0.15/-0.5,0.15/-0.75,0.4/-0.55,0.7/-0.75,0.85/-0.4,-0.95/-0.8,0.05/-0.95}{%
+    \GAkhoi{\gx}{\gy}{0.13}{green!55!yellow!85!black}}
+  \end{scope}}
+% ---------- quả dừa ----------
+\providecommand{\GAveQuaDua}{}\renewcommand{\GAveQuaDua}{%
+  \begin{scope}[GAvien]
+  \shade[ball color=green!60!black!80] (0.3,0.2) circle (0.72); \draw (0.3,0.2) circle (0.72);
+  \filldraw[fill=yellow!50!brown] (0.52,0.85) -- (0.62,1.05) -- (0.75,0.98) -- (0.65,0.8) -- cycle;
+  \draw[green!30!black,line width=1.4pt] (0.68,1.0) .. controls (0.85,1.1) .. (1.05,1.0);
+  \GAbongdo{0.0}{-0.9}{1.0}
+  \filldraw[top color=green!60!black,bottom color=green!35!black] (-0.35,-0.45) ellipse (0.72 and 0.42);
+  \filldraw[fill=yellow!30!white] (-0.35,-0.38) ellipse (0.62 and 0.32);
+  \filldraw[fill=white] (-0.35,-0.35) ellipse (0.48 and 0.24);
+  \fill[PKxanhnuoc!10] (-0.35,-0.33) ellipse (0.3 and 0.13);
+  \end{scope}}
+% ---------- hạt dẻ ----------
+\providecommand{\GAhatdenho}{}\renewcommand{\GAhatdenho}[3]{% x, y, cỡ
+  \begin{scope}[shift={(#1,#2)},scale=#3]
+  \def\GAhd{(0,0.45) .. controls (0.35,0.38) and (0.5,0.05) .. (0.42,-0.2) .. controls (0.32,-0.45) and (-0.32,-0.45) .. (-0.42,-0.2) .. controls (-0.5,0.05) and (-0.35,0.38) .. (0,0.45)}
+  \shade[top color=GAnaudo!90!red,bottom color=GAnaudo!55!black] \GAhd;
+  \begin{scope}\clip \GAhd; \fill[yellow!35!brown!70] (-0.6,-0.6) rectangle (0.6,-0.18); \end{scope}
+  \draw \GAhd;
+  \fill[white,opacity=0.45] (-0.18,0.15) ellipse (0.07 and 0.16);
+  \filldraw[fill=yellow!40!brown] (-0.04,0.44) -- (0,0.55) -- (0.04,0.44) -- cycle;
+  \end{scope}}
+\providecommand{\GAveHatDe}{}\renewcommand{\GAveHatDe}{%
+  \begin{scope}[GAvien]
+  \foreach \ga in {0,15,...,345}{\draw[olive!70!black,line width=0.8pt] (0,0.15) -- ++(\ga:0.75);}
+  \filldraw[fill=olive!60!black] (0,0.15) circle (0.55);
+  \foreach \ga in {7,22,...,352}{\draw[yellow!60!brown,line width=0.6pt] (0,0.15) ++(\ga:0.45) -- ++(\ga:0.25);}
+  \GAhatdenho{-0.65}{-0.45}{0.95}\GAhatdenho{0.65}{-0.48}{0.9}\GAhatdenho{0.0}{-0.35}{1.05}
+  \end{scope}}
+% ---------- que diêm ----------
+\providecommand{\GAveQueDiem}{}\renewcommand{\GAveQueDiem}{%
+  \begin{scope}[GAvien]
+  \filldraw[fill=PKdo!75!black] (-1.0,0.15) -- (-0.25,-0.2) -- (-0.25,-0.5) -- (-1.0,-0.15) -- cycle;
+  \filldraw[fill=GAnaudo!70!black] (-0.25,-0.2) -- (1.05,0.3) -- (1.05,0.0) -- (-0.25,-0.5) -- cycle;
+  \filldraw[fill=PKdo] (-1.0,0.15) -- (0.3,0.65) -- (1.05,0.3) -- (-0.25,-0.2) -- cycle;
+  \filldraw[fill=yellow!20!white] (-0.55,0.17) -- (0.25,0.48) -- (0.62,0.3) -- (-0.18,0.0) -- cycle;
+  \filldraw[fill=orange!90!yellow] (0.05,0.2) .. controls (-0.05,0.3) and (0.05,0.4) .. (0.1,0.42) .. controls (0.12,0.33) and (0.25,0.3) .. (0.18,0.2) -- cycle;
+  \foreach \gs in {0,0.25}{%
+    \draw[black!70,line width=3.2pt] (-0.95+\gs,-0.62-\gs) -- (0.55+\gs,-0.32-\gs);
+    \draw[yellow!55!brown!80,line width=2.2pt] (-0.95+\gs,-0.62-\gs) -- (0.55+\gs,-0.32-\gs);
+    \filldraw[fill=red!70!black] (0.6+\gs,-0.31-\gs) ellipse (0.09 and 0.06);}
+  \end{scope}}
+% ---------- con dế ----------
+\providecommand{\GAveDeMen}{}\renewcommand{\GAveDeMen}{%
+  \begin{scope}[GAvien]
+  \draw[GAnaudo!70!black,line width=0.8pt] (-0.55,0.15) .. controls (-0.8,0.7) and (-1.0,0.9) .. (-1.15,0.95) (-0.5,0.2) .. controls (-0.6,0.8) and (-0.75,1.0) .. (-0.85,1.1);
+  \draw[GAnaudo!80!black,line width=1.6pt] (-0.15,-0.05) -- (-0.4,-0.4) -- (-0.7,-0.55) (0.05,-0.08) -- (0.0,-0.45) -- (-0.2,-0.65);
+  \GAbongdo{0.2}{-0.62}{0.9}\filldraw[top color=orange!70!brown,bottom color=brown!75!black] (0.4,-0.05) ellipse (0.62 and 0.25);
+  \filldraw[fill=GAnaudo!85!black] (0.05,0.12) .. controls (0.4,0.32) and (0.9,0.25) .. (1.15,-0.05) .. controls (0.8,0.05) and (0.4,0.05) .. (0.05,0.12);
+  \filldraw[fill=orange!65!brown] (0.18,0.0) .. controls (0.3,0.35) and (0.6,0.6) .. (0.86,0.64) .. controls (0.9,0.55) and (0.6,0.2) .. (0.38,-0.1) -- cycle;
+  \draw[GAnaudo!70!black,thin] (0.35,0.1) -- (0.7,0.5);
+  \draw[GAnaudo!80!black,line width=1.6pt] (0.86,0.6) -- (1.15,-0.55) -- (1.3,-0.6);
+  \foreach \gt in {0.95,1.03,1.11}{\draw[GAnaudo!80!black] (\gt*0.25+0.84,-\gt*0.5+0.0) -- ++(0.06,0.04);}
+  \filldraw[fill=orange!55!brown] (-0.2,0.05) ellipse (0.25 and 0.22);
+  \filldraw[fill=orange!65!brown] (-0.52,0.08) circle (0.2);
+  \filldraw[fill=white] (-0.6,0.12) circle (0.08); \fill[black] (-0.62,0.12) circle (0.045);
+  \draw (-0.68,-0.02) .. controls (-0.62,-0.07) .. (-0.55,-0.04);
+  \end{scope}}
+% ---------- con đường ----------
+\providecommand{\GAveDuong}{}\renewcommand{\GAveDuong}{%
+  \begin{scope}[line join=round]
+  \fill[green!45!black!70] (-1.2,0.2) .. controls (-0.7,0.95) and (-0.3,0.95) .. (0.2,0.45) .. controls (0.5,0.75) and (0.9,0.75) .. (1.2,0.35) -- (1.2,0.1) -- (-1.2,0.1) -- cycle;
+  \fill[green!55!black!60!yellow] (-1.2,0.25) .. controls (-0.5,0.55) and (0.2,0.5) .. (0.6,0.3) .. controls (0.8,0.35) and (1.0,0.4) .. (1.2,0.3) -- (1.2,-1.0) -- (-1.2,-1.0) -- cycle;
+  \fill[black!85] (-0.95,-1.0) .. controls (-0.2,-0.65) and (0.75,-0.6) .. (0.15,-0.25) .. controls (-0.25,0.0) and (-0.1,0.18) .. (0.12,0.3) -- (0.2,0.3) .. controls (0.05,0.18) and (0.05,0.02) .. (0.42,-0.18) .. controls (1.2,-0.62) and (0.45,-0.95) .. (0.2,-1.0) -- cycle;
+  \draw[white,line width=1pt,dash pattern=on 3pt off 3pt] (-0.38,-1.0) .. controls (0.25,-0.75) and (0.95,-0.62) .. (0.28,-0.22) .. controls (-0.1,0.02) and (-0.05,0.18) .. (0.16,0.3);
+  \foreach \gx/\gy in {-0.95,-0.7}{}
+  \foreach \gx/\gy in {-0.9/0.45,0.75/0.48,-0.55/0.62}{\fill[green!30!black] (\gx,\gy) circle (0.09); \fill[GAnaudo] (\gx-0.015,\gy-0.15) rectangle (\gx+0.015,\gy-0.07);}
+  \draw[black!75,line width=0.6pt] (-1.2,-1.0) -- (1.2,-1.0);
+  \end{scope}}
+% ---------- con đò ----------
+\providecommand{\GAveConDo}{}\renewcommand{\GAveConDo}{%
+  \begin{scope}[line join=round,scale=1.05]
+  \fill[PKxanhnuoc!35] (-1.15,-0.55) rectangle (1.15,-0.2);
+  \foreach \gx in {-1.0,-0.5,0,0.5}{\draw[PKxanhnuoc!80!black,thin] (\gx,-0.32) .. controls (\gx+0.1,-0.26) and (\gx+0.2,-0.26) .. (\gx+0.3,-0.32) (\gx+0.2,-0.46) .. controls (\gx+0.3,-0.4) and (\gx+0.4,-0.4) .. (\gx+0.5,-0.46);}
+  \fill[PKnau,draw=PKnau!50!black,thick] (-1.05,0.05) .. controls (-0.75,-0.35) and (0.75,-0.35) .. (1.05,0.05) -- (0.8,0.0) -- (-0.8,0.0) -- cycle;
+  \draw[PKnau!50!black,thin] (-0.9,-0.07) .. controls (-0.4,-0.2) and (0.4,-0.2) .. (0.9,-0.07);
+  \fill[yellow!50!brown!80,draw=PKnau!60!black,thick] (-0.5,0.0) -- (-0.5,0.27) .. controls (-0.33,0.55) and (0.33,0.55) .. (0.5,0.27) -- (0.5,0.0) -- cycle;
+  \foreach \gx in {-0.33,-0.17,0,0.17,0.33}{\draw[PKnau!60!black,thin] (\gx,0.0) -- (\gx,0.4);}
+  \fill[black!70] (0.78,0.35) circle (0.07);
+  \fill[yellow!50!brown,draw=black!60,thin] (0.64,0.4) -- (0.92,0.4) -- (0.78,0.52) -- cycle;
+  \draw[black!70,thick] (0.78,0.28) -- (0.78,0.02);
+  \draw[PKnau!50!black,thick] (0.65,0.42) -- (1.02,-0.38);
+  \end{scope}}
+% ---------- cây đa ----------
+\providecommand{\GAveCayDa}{}\renewcommand{\GAveCayDa}{%
+  \begin{scope}[GAvien]
+  \fill[green!45!black!60] (0,-0.95) ellipse (1.0 and 0.1);
+  \filldraw[left color=GAnaudo!70,right color=GAnaudo!45!black] (-0.35,-0.95) .. controls (-0.15,-0.7) .. (-0.16,-0.2) -- (-0.45,0.25) -- (-0.35,0.3) -- (-0.08,0.0) -- (0.0,0.35) -- (0.1,0.35) -- (0.1,0.0) -- (0.4,0.3) -- (0.48,0.22) -- (0.16,-0.2) .. controls (0.15,-0.7) .. (0.38,-0.95) -- cycle;
+  \draw[GAnaudo!50!black] (-0.05,-0.85) -- (-0.05,-0.3) (0.06,-0.8) -- (0.05,-0.35);
+  \foreach \gx in {-0.62,-0.5,0.55,0.66}{\draw[GAnaudo!70!black,line width=0.7pt] (\gx,0.15) .. controls (\gx+0.03,-0.4) .. (\gx,-0.9);}
+  \foreach \gx/\gy/\gr in {-0.75/0.35/0.38,0.75/0.35/0.38,-0.45/0.7/0.42,0.45/0.7/0.42,0/0.9/0.42,0/0.45/0.45,-0.35/0.25/0.3,0.35/0.25/0.3}{%
+    \GAkhoi{\gx}{\gy}{\gr}{green!50!black}}
+  \foreach \gx/\gy/\ga in {-0.85/0.45/20,-0.55/0.85/-30,0.35/0.85/40,-0.1/1.05/0,0.65/0.45/-20,-0.15/0.55/60,0.2/0.4/-50,-0.45/0.3/30}{%
+    \fill[green!60!yellow!70!black,opacity=0.8,rotate around={\ga:(\gx,\gy)}] (\gx,\gy) ellipse (0.09 and 0.04);}
+  \end{scope}}
+% ---------- hạt điều ----------
+\providecommand{\GAveHatDieu}{}\renewcommand{\GAveHatDieu}{%
+  \begin{scope}[GAvien]
+  \draw[GAnaudo!80!black,line width=1.6pt] (-1.0,1.05) .. controls (-0.5,0.85) .. (-0.3,0.55);
+  \filldraw[fill=green!55!black,rotate around={30:(-0.75,0.75)}] (-0.75,0.75) ellipse (0.35 and 0.15);
+  \filldraw[fill=green!50!black,rotate around={-25:(-0.1,0.9)}] (-0.1,0.9) ellipse (0.35 and 0.14);
+  \shade[top color=red!85!black,bottom color=yellow!85!orange] (-0.42,0.55) .. controls (-0.1,0.6) and (0.1,0.35) .. (0.0,-0.05) .. controls (-0.08,-0.25) and (-0.5,-0.3) .. (-0.6,-0.05) .. controls (-0.7,0.3) and (-0.6,0.5) .. (-0.42,0.55);
+  \draw (-0.42,0.55) .. controls (-0.1,0.6) and (0.1,0.35) .. (0.0,-0.05) .. controls (-0.08,-0.25) and (-0.5,-0.3) .. (-0.6,-0.05) .. controls (-0.7,0.3) and (-0.6,0.5) .. (-0.42,0.55);
+  \fill[white,opacity=0.45] (-0.45,0.3) ellipse (0.05 and 0.12);
+  \draw[black!70,line width=7pt] (-0.5,-0.22) arc (200:340:0.22);
+  \draw[green!45!gray,line width=5.5pt] (-0.5,-0.22) arc (200:340:0.22);
+  \foreach \gx/\gy/\gr in {0.35/-0.55/0,0.75/-0.35/40,0.55/-0.85/-30,0.95/-0.75/15}{%
+    \begin{scope}[shift={(\gx,\gy)},rotate=\gr]
+    \draw[black!70,line width=7pt] (-0.18,0.05) arc (190:350:0.19);
+    \draw[yellow!25!white!90!brown,line width=5.5pt] (-0.18,0.05) arc (190:350:0.19);
+    \end{scope}}
+  \end{scope}}
+% ---------- con ngỗng ----------
+\providecommand{\GAveNgong}{}\renewcommand{\GAveNgong}{%
+  \begin{scope}[GAvien]
+  \filldraw[fill=orange!85] (0.0,-0.55) -- (-0.05,-0.85) -- (-0.25,-0.95) -- (0.1,-0.95) -- (0.05,-0.6) (0.3,-0.55) -- (0.32,-0.85) -- (0.15,-0.95) -- (0.5,-0.95) -- (0.38,-0.6);
+  \draw[orange!85!black,line width=1.4pt] (0.02,-0.55) -- (0.0,-0.85) (0.33,-0.55) -- (0.34,-0.85);
+  \GAbongdo{0.2}{-0.96}{0.7}
+  \shade[top color=white,bottom color=gray!35] (-0.35,-0.05) .. controls (-0.4,-0.6) and (0.6,-0.75) .. (0.95,-0.15) .. controls (1.05,0.0) and (1.05,0.2) .. (0.95,0.18) .. controls (0.6,0.15) and (0.0,0.2) .. (-0.35,-0.05);
+  \draw (-0.35,-0.05) .. controls (-0.4,-0.6) and (0.6,-0.75) .. (0.95,-0.15) .. controls (1.05,0.0) and (1.05,0.2) .. (0.95,0.18) .. controls (0.6,0.15) and (0.0,0.2) .. (-0.35,-0.05);
+  \filldraw[fill=gray!8] (0.0,0.0) .. controls (0.2,0.55) and (0.7,0.7) .. (1.05,0.65) .. controls (0.85,0.45) and (0.75,0.15) .. (0.6,0.05) .. controls (0.4,-0.1) .. (0.0,0.0);
+  \draw[gray!50] (0.35,0.3) -- (0.55,0.15) (0.55,0.45) -- (0.7,0.25) (0.75,0.55) -- (0.85,0.38);
+  \draw[black!75,line width=8pt] (-0.22,-0.05) .. controls (-0.45,0.35) and (-0.25,0.6) .. (-0.45,0.85);
+  \draw[white,line width=6.6pt] (-0.22,-0.05) .. controls (-0.45,0.35) and (-0.25,0.6) .. (-0.45,0.85);
+  \filldraw[fill=white] (-0.45,0.88) ellipse (0.18 and 0.15);
+  \filldraw[fill=orange!90] (-0.58,0.92) -- (-0.92,0.8) -- (-0.6,0.76) -- cycle;
+  \filldraw[fill=orange!80!red] (-0.58,0.95) circle (0.05);
+  \fill[black] (-0.47,0.92) circle (0.035);
+  \end{scope}}
+% ---------- con vượn ----------
+\providecommand{\GAveVuon}{}\renewcommand{\GAveVuon}{%
+  \begin{scope}[GAvien]
+  \filldraw[fill=GAnaudo] (-1.15,0.78) -- (1.15,0.85) -- (1.15,0.97) -- (-1.15,0.9) -- cycle;
+  \foreach \gx/\gr in {-0.9/30,0.85/-30,0.55/20}{\filldraw[fill=green!50!black,rotate around={\gr:(\gx,0.98)}] (\gx,0.98) ellipse (0.18 and 0.07);}
+  \draw[black!75,line width=6pt] (-0.2,0.25) .. controls (-0.45,0.45) .. (-0.42,0.86) (0.2,0.25) .. controls (0.45,0.45) .. (0.42,0.86);
+  \draw[brown!35!black,line width=4.6pt] (-0.2,0.25) .. controls (-0.45,0.45) .. (-0.42,0.86) (0.2,0.25) .. controls (0.45,0.45) .. (0.42,0.86);
+  \filldraw[fill=brown!35!black] (-0.42,0.9) circle (0.07) (0.42,0.9) circle (0.07);
+  \draw[black!75,line width=5pt] (-0.12,-0.45) .. controls (-0.45,-0.55) .. (-0.3,-0.85) (0.12,-0.45) .. controls (0.45,-0.55) .. (0.3,-0.85);
+  \draw[brown!35!black,line width=3.6pt] (-0.12,-0.45) .. controls (-0.45,-0.55) .. (-0.3,-0.85) (0.12,-0.45) .. controls (0.45,-0.55) .. (0.3,-0.85);
+  \begin{scope}\clip (0,-0.15) ellipse (0.28 and 0.38); \fill[white] (0,-0.15) ellipse (0.28 and 0.38);
+    \shade[inner color=brown!55!black,outer color=brown!25!black] (-0.08,-0.05) ellipse (0.34 and 0.44);
+    \foreach \gy in {-0.4,-0.25,...,0.15}{\draw[brown!60!black,thin] (-0.12,\gy) -- (-0.05,\gy-0.08) (0.1,\gy) -- (0.04,\gy-0.08);}\end{scope}
+  \draw (0,-0.15) ellipse (0.28 and 0.38);
+  \fill[brown!50!black,opacity=0.8] (0,-0.2) ellipse (0.15 and 0.22);
+  \filldraw[fill=brown!35!black] (0,0.33) circle (0.24);
+  \filldraw[fill=brown!20!GAda] (0,0.3) ellipse (0.16 and 0.14);
+  \fill[black] (-0.06,0.35) circle (0.025) (0.06,0.35) circle (0.025);
+  \draw (-0.05,0.23) .. controls (0,0.2) .. (0.05,0.23);
+  \end{scope}}
+% ---------- con vẹt ----------
+\providecommand{\GAveVet}{}\renewcommand{\GAveVet}{%
+  \begin{scope}[GAvien]
+  \filldraw[fill=red!80!black] (0.05,-0.35) -- (0.75,-1.0) -- (0.85,-0.9) -- (0.25,-0.3) -- cycle;
+  \filldraw[fill=blue!70] (0.6,-0.85) -- (0.75,-1.0) -- (0.85,-0.9) -- (0.72,-0.75) -- cycle;
+  \filldraw[fill=GAnaudo] (-1.1,-0.45) -- (1.1,-0.4) -- (1.1,-0.52) -- (-1.1,-0.57) -- cycle;
+  \draw[gray!60!black,line width=1.4pt] (-0.15,-0.32) -- (-0.15,-0.47) (0.02,-0.32) -- (0.02,-0.47);
+  \filldraw[top color=red!85!PKdo,bottom color=red!65!black] (-0.35,0.55) .. controls (0.05,0.55) and (0.3,0.1) .. (0.15,-0.3) .. controls (0.0,-0.45) and (-0.35,-0.35) .. (-0.4,-0.05) .. controls (-0.45,0.2) and (-0.6,0.5) .. (-0.35,0.55);
+  \filldraw[fill=yellow!90!orange] (-0.15,0.2) .. controls (0.3,0.25) and (0.55,0.0) .. (0.6,-0.2) .. controls (0.3,-0.15) and (0.0,-0.05) .. (-0.15,0.2);
+  \filldraw[top color=blue!65,bottom color=blue!55!black] (0.05,0.0) .. controls (0.4,0.0) and (0.75,-0.1) .. (0.9,-0.35) .. controls (0.55,-0.3) and (0.25,-0.25) .. (0.05,0.0);
+  \filldraw[fill=green!55!black] (0.25,0.08) .. controls (0.45,0.1) .. (0.65,-0.05) .. controls (0.45,-0.08) .. (0.25,0.08);
+  \filldraw[fill=white] (-0.42,0.38) ellipse (0.15 and 0.12);
+  \fill[black] (-0.42,0.4) circle (0.04);
+  \filldraw[fill=gray!20] (-0.55,0.45) .. controls (-0.78,0.48) and (-0.82,0.25) .. (-0.68,0.15) .. controls (-0.68,0.28) .. (-0.55,0.3) -- cycle;
+  \filldraw[fill=black!80] (-0.58,0.3) .. controls (-0.66,0.28) .. (-0.62,0.2) -- (-0.5,0.27) -- cycle;
+  \end{scope}}
+% ---------- bò sữa ----------
+\providecommand{\GAveBoSua}{}\renewcommand{\GAveBoSua}{%
+  \begin{scope}[GAvien]
+  \draw[line width=1pt] (0.9,0.35) .. controls (1.1,0.2) .. (1.08,-0.3); \filldraw[fill=black] (1.08,-0.33) ellipse (0.05 and 0.09);
+  \foreach \gx in {0.75,-0.25}{\filldraw[fill=gray!15] (\gx-0.08,-0.15) rectangle (\gx+0.08,-0.85); \filldraw[fill=black!70] (\gx-0.09,-0.85) rectangle (\gx+0.09,-0.97);}
+  \def\GAthanbo{(-0.55,0.45) -- (0.85,0.45) .. controls (0.98,0.45) and (1.0,0.3) .. (0.98,0.05) .. controls (0.97,-0.2) and (0.85,-0.3) .. (0.7,-0.3) -- (-0.45,-0.3) .. controls (-0.6,-0.3) and (-0.65,-0.15) .. (-0.65,0.1) -- cycle}
+  \GAbongdo{0.15}{-0.98}{1.0}
+  \shade[top color=white,bottom color=gray!30] \GAthanbo;
+  \begin{scope}\clip \GAthanbo;
+    \fill[black!85] (-0.2,0.35) ellipse (0.3 and 0.2) (0.55,0.1) ellipse (0.25 and 0.3) (0.15,-0.25) ellipse (0.2 and 0.12);\end{scope}
+  \draw \GAthanbo;
+  \filldraw[fill=PKhong!70] (0.45,-0.32) ellipse (0.16 and 0.1);
+  \foreach \gx in {0.55,-0.45}{\filldraw[fill=white] (\gx-0.08,-0.2) rectangle (\gx+0.08,-0.88); \filldraw[fill=black!70] (\gx-0.09,-0.88) rectangle (\gx+0.09,-0.99);}
+  \filldraw[fill=yellow!70!orange] (-0.72,0.75) -- (-0.62,0.95) -- (-0.58,0.75) (-0.98,0.75) -- (-1.08,0.95) -- (-1.03,0.73);
+  \filldraw[fill=white,rotate around={-20:(-1.1,0.68)}] (-1.1,0.68) ellipse (0.15 and 0.07);
+  \filldraw[fill=white,rotate around={20:(-0.5,0.7)}] (-0.5,0.7) ellipse (0.15 and 0.07);
+  \filldraw[fill=white] (-0.8,0.45) ellipse (0.3 and 0.33);
+  \begin{scope}\clip (-0.8,0.45) ellipse (0.3 and 0.33); \fill[black!85] (-0.6,0.7) circle (0.2);\end{scope}
+  \draw (-0.8,0.45) ellipse (0.3 and 0.33);
+  \filldraw[fill=PKhong!60] (-0.8,0.22) ellipse (0.25 and 0.15);
+  \fill[black!70] (-0.88,0.22) ellipse (0.03 and 0.045) (-0.72,0.22) ellipse (0.03 and 0.045);
+  \fill[black] (-0.9,0.52) circle (0.04); \fill[white] (-0.7,0.52) circle (0.05); \fill[black] (-0.7,0.52) circle (0.035);
+  \end{scope}}
+% ---------- con quạ ----------
+\providecommand{\GAveQua}{}\renewcommand{\GAveQua}{%
+  \begin{scope}[GAvien]
+  \draw[yellow!70!orange!90!black,line width=1.4pt] (-0.05,-0.35) -- (-0.1,-0.75) -- (-0.3,-0.8) (-0.1,-0.75) -- (0.05,-0.82) (0.15,-0.35) -- (0.15,-0.75) -- (-0.05,-0.82) (0.15,-0.75) -- (0.3,-0.82);
+  \filldraw[fill=black!85] (0.45,-0.05) -- (1.15,-0.45) -- (1.12,-0.3) -- (1.2,-0.2) -- (0.55,0.15) -- cycle;
+  \GAbongdo{0.05}{-0.85}{0.55}
+  \shade[top color=black!70!blue!80,bottom color=black,rotate around={-15:(0.1,0.0)}] (0.1,0.0) ellipse (0.55 and 0.35);
+  \draw[rotate around={-15:(0.1,0.0)}] (0.1,0.0) ellipse (0.55 and 0.35);
+  \filldraw[fill=black!75] (-0.05,0.15) .. controls (0.35,0.25) and (0.75,0.05) .. (0.95,-0.2) .. controls (0.55,-0.15) and (0.2,-0.15) .. (-0.05,0.15);
+  \draw[blue!40!gray,thin] (0.25,0.08) -- (0.7,-0.08) (0.3,-0.02) -- (0.75,-0.15);
+
+  \begin{scope}\clip (-0.42,0.32) circle (0.25);\fill[white](-0.42,0.32) circle (0.25);\shade[inner color=black!55!blue!70,outer color=black] (-0.5,0.4) circle (0.32);\end{scope}\draw (-0.42,0.32) circle (0.25);
+  \filldraw[fill=yellow!80!orange] (-0.6,0.4) -- (-1.05,0.25) -- (-0.6,0.22) -- cycle;
+  \draw (-0.62,0.31) -- (-0.98,0.26);
+  \filldraw[fill=white] (-0.45,0.4) circle (0.07); \fill[black] (-0.47,0.4) circle (0.04);
+  \end{scope}}
+% ---------- con trâu ----------
+\providecommand{\GAveTrau}{}\renewcommand{\GAveTrau}{%
+  \begin{scope}[GAvien]
+  \draw[line width=1pt] (0.92,0.3) .. controls (1.1,0.1) .. (1.05,-0.35); \fill[GAtrau!60!black] (1.05,-0.38) ellipse (0.05 and 0.1);
+  \foreach \gx in {0.75,-0.15}{\filldraw[fill=GAtrau!80!black] (\gx-0.1,-0.1) rectangle (\gx+0.1,-0.88); \filldraw[fill=black!80] (\gx-0.11,-0.88) rectangle (\gx+0.11,-0.98);}
+  \GAbongdo{0.15}{-0.98}{1.0}
+  \shade[top color=GAtrau!75!white,bottom color=GAtrau!60!black] (0.2,0.05) ellipse (0.8 and 0.45);
+  \begin{scope}\clip (0.2,0.05) ellipse (0.8 and 0.45);\foreach \gx in {-0.3,-0.1,...,0.9}{\draw[GAtrau!50!black,thin,opacity=0.5] (\gx,0.35) .. controls (\gx+0.05,0.1) .. (\gx,-0.2);}\end{scope} \draw (0.2,0.05) ellipse (0.8 and 0.45);
+  \foreach \gx in {0.55,-0.35}{\filldraw[fill=GAtrau] (\gx-0.1,-0.15) rectangle (\gx+0.1,-0.9); \filldraw[fill=black!80] (\gx-0.11,-0.9) rectangle (\gx+0.11,-1.0);}
+  \filldraw[left color=gray!15,right color=gray!55] (-0.5,0.55) .. controls (-0.3,1.0) and (0.15,1.0) .. (0.3,0.7) -- (0.22,0.66) .. controls (0.08,0.88) and (-0.25,0.85) .. (-0.38,0.5) -- cycle;
+  \shade[top color=GAtrau!85,bottom color=GAtrau!75!black] (-0.75,0.15) .. controls (-0.85,0.5) and (-0.55,0.68) .. (-0.4,0.6) .. controls (-0.25,0.5) and (-0.35,0.1) .. (-0.45,-0.1) .. controls (-0.55,-0.25) and (-0.75,-0.15) .. (-0.75,0.15);
+  \draw (-0.75,0.15) .. controls (-0.85,0.5) and (-0.55,0.68) .. (-0.4,0.6) .. controls (-0.25,0.5) and (-0.35,0.1) .. (-0.45,-0.1) .. controls (-0.55,-0.25) and (-0.75,-0.15) .. (-0.75,0.15);
+  \filldraw[left color=gray!55,right color=gray!15] (-0.62,0.58) .. controls (-0.85,0.95) and (-1.15,0.95) .. (-1.2,0.75) -- (-1.12,0.72) .. controls (-1.05,0.85) and (-0.85,0.85) .. (-0.7,0.5) -- cycle;
+  \filldraw[fill=GAtrau,rotate around={30:(-0.3,0.45)}] (-0.25,0.45) ellipse (0.14 and 0.06);
+  \filldraw[fill=gray!55] (-0.62,-0.08) ellipse (0.17 and 0.12);
+  \fill[black!80] (-0.68,-0.08) circle (0.025) (-0.56,-0.08) circle (0.025);
+  \fill[white] (-0.62,0.32) circle (0.05); \fill[black] (-0.63,0.32) circle (0.03);
+  \end{scope}}
+% ---------- bé ăn ----------
+\providecommand{\GAveAn}{}\renewcommand{\GAveAn}{%
+  \begin{scope}[GAvien]
+  \filldraw[fill=GAda] (-0.88,0.2) circle (0.14) (0.88,0.2) circle (0.14);
+  \filldraw[inner color=GAda!50!white,outer color=GAdam!80!GAda] (0,0.15) ellipse (0.85 and 0.8);
+  \filldraw[fill=GAtoc!70!brown] (-0.85,0.3) .. controls (-0.95,1.1) and (0.6,1.25) .. (0.85,0.4) .. controls (0.6,0.6) and (0.3,0.62) .. (0.15,0.75) .. controls (0.0,0.6) and (-0.5,0.62) .. (-0.85,0.3);
+  \draw[line width=1.2pt] (-0.5,0.3) .. controls (-0.4,0.42) and (-0.25,0.42) .. (-0.18,0.3) (0.18,0.3) .. controls (0.25,0.42) and (0.4,0.42) .. (0.5,0.3);
+  \fill[red!60,opacity=0.7] (-0.58,0.05) ellipse (0.12 and 0.07) (0.58,0.05) ellipse (0.12 and 0.07);
+  \filldraw[fill=red!55!black] (-0.38,0.0) .. controls (-0.38,-0.55) and (0.38,-0.55) .. (0.38,0.0) -- cycle;
+  \fill[white] (-0.3,-0.01) rectangle (0.3,-0.08);
+  \fill[PKhong] (0,-0.3) ellipse (0.18 and 0.08);
+  \fill[gray!55,draw=black!70] (-1.15,-0.75) -- (-0.4,-0.5) -- (-0.38,-0.56) -- (-1.15,-0.85) -- cycle;
+  \filldraw[fill=gray!40] (0.0,-0.5) ellipse (0.42 and 0.16);
+  \foreach \gx/\gc in {-0.2/green!55!black,0.0/green!45!black,0.15/PKdo,0.3/orange}{\filldraw[fill=\gc] (\gx,-0.45) circle (0.1);}
+  \filldraw[fill=GAda,rounded corners=3pt] (-0.95,-0.95) rectangle (-0.55,-0.6);
+  \draw (-0.85,-0.6) -- (-0.85,-0.75) (-0.75,-0.6) -- (-0.75,-0.75) (-0.65,-0.6) -- (-0.65,-0.75);
+  \end{scope}}
+% ---------- ba (bố cõng con trên vai) ----------
+\providecommand{\GAveBa}{}\renewcommand{\GAveBa}{%
+  \begin{scope}[GAvien]
+  % con: áo vàng, tay, đầu
+  \filldraw[fill=yellow!60!white,rounded corners=3pt] (-0.25,0.35) rectangle (0.25,0.7);
+  \draw[GAda!60!black,line width=5pt] (-0.22,0.6) -- (-0.6,0.55) (0.22,0.6) -- (0.6,0.55);
+  \draw[GAda,line width=3.8pt] (-0.22,0.6) -- (-0.6,0.55) (0.22,0.6) -- (0.6,0.55);
+  \filldraw[inner color=GAda!50!white,outer color=GAdam!80!GAda] (0,0.92) circle (0.22);
+  \filldraw[fill=GAtoc] (-0.22,0.95) .. controls (-0.2,1.2) and (0.25,1.22) .. (0.23,0.95) .. controls (0.1,1.05) and (-0.1,1.0) .. (-0.22,0.95);
+  \fill[black] (-0.08,0.92) circle (0.025) (0.08,0.92) circle (0.025);
+  \filldraw[fill=red!60!black] (-0.06,0.82) .. controls (-0.03,0.76) and (0.03,0.76) .. (0.06,0.82) -- cycle;
+  % bố: áo cam, tay giơ lên
+  \filldraw[top color=orange!60,bottom color=orange!80!red!80!black] (-0.55,-0.25) .. controls (-0.6,-0.6) .. (-0.5,-1.0) -- (0.5,-1.0) .. controls (0.6,-0.6) .. (0.55,-0.25) .. controls (0.3,-0.1) and (-0.3,-0.1) .. (-0.55,-0.25);
+  \draw[GAda!60!black,line width=7pt] (-0.52,-0.3) -- (-0.75,0.1) -- (-0.65,0.5) (0.52,-0.3) -- (0.75,0.1) -- (0.65,0.5);
+  \draw[GAda,line width=5.6pt] (-0.52,-0.3) -- (-0.75,0.1) -- (-0.65,0.5) (0.52,-0.3) -- (0.75,0.1) -- (0.65,0.5);
+  \filldraw[fill=GAda] (-0.64,0.55) circle (0.08) (0.64,0.55) circle (0.08);
+  \filldraw[inner color=GAda!50!white,outer color=GAdam!80!GAda] (0,0.06) circle (0.26);
+  \filldraw[fill=GAtoc] (-0.26,0.1) .. controls (-0.28,0.42) and (0.28,0.42) .. (0.27,0.1) .. controls (0.15,0.22) and (-0.1,0.2) .. (-0.26,0.1);
+  \fill[black] (-0.09,0.08) circle (0.03) (0.09,0.08) circle (0.03);
+  \fill[red!60,opacity=0.6] (-0.17,-0.02) circle (0.04) (0.17,-0.02) circle (0.04);
+  \filldraw[fill=red!60!black] (-0.09,-0.04) .. controls (-0.05,-0.14) and (0.05,-0.14) .. (0.09,-0.04) -- cycle;
+  % chân con vắt qua vai bố
+  \draw[black!75,line width=6pt] (-0.18,0.4) .. controls (-0.38,0.3) .. (-0.43,0.05) -- (-0.45,-0.42) (0.18,0.4) .. controls (0.38,0.3) .. (0.43,0.05) -- (0.45,-0.42);
+  \draw[GAnaudo,line width=4.6pt] (-0.18,0.4) .. controls (-0.38,0.3) .. (-0.43,0.05) -- (-0.45,-0.42) (0.18,0.4) .. controls (0.38,0.3) .. (0.43,0.05) -- (0.45,-0.42);
+  \filldraw[fill=red!55!black,rounded corners=1pt] (-0.56,-0.5) rectangle (-0.36,-0.4) (0.36,-0.5) rectangle (0.56,-0.4);
+  \end{scope}}
+% ---------- bà (bà ôm cháu) ----------
+\providecommand{\GAveBaGia}{}\renewcommand{\GAveBaGia}{%
+  \begin{scope}[GAvien]
+  % bà
+  \filldraw[top color=green!40!black!60,bottom color=green!30!black!90] (0.05,0.25) .. controls (0.6,0.35) .. (0.65,0.0) .. controls (0.75,-0.5) .. (0.8,-0.9) -- (-0.2,-0.9) .. controls (-0.15,-0.5) .. (-0.05,0.0) -- cycle;
+  \foreach \gx/\gy in {0.1/-0.1,0.4/-0.2,0.6/-0.5,0.2/-0.45,0.0/-0.75,0.45/-0.75,0.65/-0.8,0.35/0.1}{\fill[green!20!white] (\gx,\gy) circle (0.02);}
+  \filldraw[fill=black!80] (-0.05,-0.97) rectangle (0.15,-0.9) (0.45,-0.97) rectangle (0.65,-0.9);
+  \filldraw[fill=gray!35] (0.3,0.92) circle (0.12);
+  \filldraw[inner color=GAda!50!white,outer color=GAdam!80!GAda] (0.3,0.55) circle (0.25);
+  \filldraw[fill=gray!35] (0.05,0.6) .. controls (0.0,0.95) and (0.6,0.95) .. (0.55,0.6) .. controls (0.45,0.72) and (0.15,0.72) .. (0.05,0.6);
+  \draw[black!80] (0.21,0.53) circle (0.07) (0.39,0.53) circle (0.07) (0.28,0.53) -- (0.32,0.53);
+  \fill[black] (0.21,0.53) circle (0.02) (0.39,0.53) circle (0.02);
+  \draw (0.24,0.42) .. controls (0.3,0.37) .. (0.36,0.42);
+  % cháu
+  \filldraw[fill=red!65!black] (-0.75,-0.3) -- (-0.3,-0.3) -- (-0.22,-0.55) -- (-0.82,-0.55) -- cycle;
+  \draw[red!30!black,thin] (-0.65,-0.3) -- (-0.7,-0.55) (-0.5,-0.3) -- (-0.52,-0.55) (-0.35,-0.3) -- (-0.32,-0.55);
+  \draw[black!75,line width=4.5pt] (-0.62,-0.55) -- (-0.65,-0.88) (-0.4,-0.55) -- (-0.62,-0.7) -- (-0.85,-0.62);
+  \draw[GAda,line width=3.2pt] (-0.62,-0.55) -- (-0.65,-0.88) (-0.4,-0.55) -- (-0.62,-0.7) -- (-0.85,-0.62);
+  \filldraw[fill=PKhong!80!red] (-0.75,-0.96) rectangle (-0.55,-0.88) (-0.95,-0.66) rectangle (-0.85,-0.56);
+  \filldraw[fill=PKhong!45,rounded corners=3pt] (-0.75,-0.32) rectangle (-0.3,0.12);
+  \filldraw[inner color=GAda!50!white,outer color=GAdam!80!GAda] (-0.5,0.32) circle (0.21);
+  \filldraw[fill=red!45!black] (-0.71,0.35) .. controls (-0.7,0.6) and (-0.3,0.62) .. (-0.29,0.36) .. controls (-0.4,0.45) and (-0.6,0.45) .. (-0.71,0.35);
+  \filldraw[fill=red!45!black] (-0.75,0.32) ellipse (0.08 and 0.12) (-0.82,0.15) ellipse (0.06 and 0.1);
+  \draw (-0.6,0.33) .. controls (-0.57,0.36) .. (-0.54,0.33) (-0.46,0.33) .. controls (-0.43,0.36) .. (-0.4,0.33);
+  \fill[red!60,opacity=0.6] (-0.62,0.25) circle (0.035) (-0.38,0.25) circle (0.035);
+  % tay bà ôm cháu
+  \draw[black!75,line width=5.5pt] (0.12,0.12) .. controls (-0.1,-0.05) .. (-0.62,-0.08);
+  \draw[green!35!black!70,line width=4.2pt] (0.12,0.12) .. controls (-0.1,-0.05) .. (-0.45,-0.07);
+  \draw[GAda,line width=4.2pt] (-0.45,-0.07) -- (-0.62,-0.08);
+  \filldraw[fill=GAda] (-0.66,-0.08) circle (0.06);
+  \draw[black!75,line width=4.5pt] (-0.36,0.06) .. controls (-0.15,0.2) .. (0.08,0.3);
+  \draw[PKhong!45,line width=3.2pt] (-0.36,0.06) .. controls (-0.15,0.2) .. (0.0,0.27);
+  \draw[GAda,line width=3.2pt] (0.0,0.27) -- (0.08,0.3);
+  \filldraw[fill=GAda] (0.1,0.31) circle (0.05);
+  \end{scope}}
+
+% ---------- Bảng tên ảnh -> tranh vẽ TikZ (các lệnh gọi ảnh cũ tự vẽ bằng TikZ, không cần file ảnh) ----------
+\makeatletter
+\def\GAdangky#1#2{\expandafter\def\csname GAve@#1\endcsname{#2}}
+\GAdangky{p14_de.png}{\tikz{\GAveDe}}        \GAdangky{p14_conde_dung.png}{\tikz{\GAveDe}}
+\GAdangky{p14_co.png}{\tikz{\GAveCo}}        \GAdangky{p14_da.png}{\tikz{\GAveDa}}
+\GAdangky{p14_beca.png}{\tikz{\GAveBeCa}}    \GAdangky{p14_duahau.png}{\tikz{\GAveDuaHau}}
+\GAdangky{p14_dudu.png}{\tikz{\GAveDuDu}}    \GAdangky{p14_hatdau.png}{\tikz{\GAveHatDau}}
+\GAdangky{p14_quadua.png}{\tikz{\GAveQuaDua}} \GAdangky{p14_hatde.png}{\tikz{\GAveHatDe}}
+\GAdangky{p14_quediem.png}{\tikz{\GAveQueDiem}} \GAdangky{p14_conde2.png}{\tikz{\GAveDeMen}}
+\GAdangky{p14_duong.png}{\tikz{\GAveDuong}}  \GAdangky{p14_do.png}{\tikz{\GAveConDo}}
+\GAdangky{p14_cayda.png}{\tikz{\GAveCayDa}}  \GAdangky{p14_hatdieu.png}{\tikz{\GAveHatDieu}}
+\GAdangky{p14_ngong.png}{\tikz{\GAveNgong}}  \GAdangky{p14_vuon.png}{\tikz{\GAveVuon}}
+\GAdangky{p14_vet.png}{\tikz{\GAveVet}}      \GAdangky{p14_bosua.png}{\tikz{\GAveBoSua}}
+\GAdangky{p14_qua.png}{\tikz{\GAveQua}}      \GAdangky{p14_trau.png}{\tikz{\GAveTrau}}
+\GAdangky{p14_an.png}{\tikz{\GAveAn}}        \GAdangky{p14_ba.png}{\tikz{\GAveBa}}
+\GAdangky{p14_ba2.png}{\tikz{\GAveBaGia}}
+\GAdangky{p14_image20.png}{\GAhangchu{D}{d}{\GAchuD}{5}}
+\GAdangky{p14_image23.png}{\GAhangchu{Đ}{đ}{\GAchuDd}{5}}
+% Vẽ tranh theo cỡ yêu cầu (height / width như \includegraphics)
+\define@key{GAkh}{height}{\def\GA@h{#1}}
+\define@key{GAkh}{width}{\def\GA@w{#1}}
+\define@key{GAkh}{keepaspectratio}[]{\def\GA@k{1}}
+\def\GA@cham{!}
+\def\GA@vetranh#1#2{%
+  \def\GA@h{!}\def\GA@w{!}\def\GA@k{0}\setkeys{GAkh}{#1}%
+  \if1\GA@k\ifx\GA@h\GA@cham\else\def\GA@w{!}\fi\fi
+  \ifx\GA@h\GA@cham\ifx\GA@w\GA@cham\def\GA@h{2cm}\fi\fi
+  \edef\GA@lenh{\noexpand\resizebox{\GA@w}{\GA@h}}\GA@lenh{\csname GAve@#2\endcsname}}
+\makeatother
 
 %=========================================================
 %  HÌNH VẼ PHẦN TOÁN
