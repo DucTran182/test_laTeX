@@ -1,23 +1,17 @@
 \documentclass[../main.tex]{subfiles}
+\renewcommand{\lop}{PRE}
+\graphicspath{{Hinh_PRE1_Tuan14/}{Data_PhieuBaiTap_HK0/Hinh_PRE1_Tuan14/}}
 \begin{document}
-%=========================================================
-% TĐ_GiaoAn_PRE1_HK1_Tuan14
-% Giáo án PRE1 - Tuần 14 - Buổi 1 (bản chỉnh sửa)
-%   Toán: Làm quen với phép trừ, dấu trừ
-%   Tiếng Việt: Làm quen âm d, đ
-% Soạn theo mẫu giáo án (\hktuan, \subsection, hd, vd, luuy)
-% Toàn bộ chữ in màu đen (\GAbs đánh dấu phần bổ sung so với bản gốc, không tô màu).
-% Hình vẽ lại bằng TikZ theo phong cách PBT PRE1 Tuần 14 (màu PK...).
-% Tranh con vật / người (khó vẽ) đặt trong thư mục Hinh_GiaoAn_PRE1_Tuan14/, tiền tố p14_
-\graphicspath{{Hinh_PRE1_Tuan14/}{Data_PhieuBaiTap_HK0/Hinh_PRE1_Tuan14/}{../Data_PhieuBaiTap_HK0/Hinh_PRE1_Tuan14/}}
+
+% Hình dùng chung thư mục của PBT (Data_PhieuBaiTap_HK0/Hinh_PRE1_Tuan14), tên hình có tiền tố p14_
+\graphicspath{{Hinh_PRE1_Tuan14/}{Data_PhieuBaiTap_HK0/Hinh_PRE1_Tuan14/}{Data_GiaoAn_HK0/Hinh_PRE1_Tuan14/}{../Data_PhieuBaiTap_HK0/Hinh_PRE1_Tuan14/}}
+\raggedbottom % không kéo giãn khoảng trống trên trang khi hình lớn bị đẩy sang trang sau
 %=========================================================
 
-\raggedbottom % không kéo giãn khoảng trống trên trang khi hình lớn bị đẩy sang trang sau
 %---------- Lệnh dùng riêng cho giáo án ----------
-% Nội dung bổ sung / chỉnh sửa (màu xanh dương)
-\definecolor{GAbosung}{HTML}{1F4E79}
-% Muốn tô màu xanh lại phần bổ sung: đổi #1 thành {\color{GAbosung}#1}
+% Nội dung bổ sung / chỉnh sửa (in màu đen như phần còn lại)
 \providecommand{\GAbs}{}\renewcommand{\GAbs}[1]{#1}
+\definecolor{GAbosung}{HTML}{1F4E79}
 % Tiêu đề mục nhỏ trong một hoạt động
 \providecommand{\GAmucnho}{}\renewcommand{\GAmucnho}[1]{\par\addvspace{4pt}\noindent{\color{mauchinh}\bfseries #1}\par\nopagebreak\addvspace{2pt}}
 % Lời GV / HS nói (in nghiêng, có dấu ngoặc kép)
@@ -25,20 +19,28 @@
 % Bắt đầu hình ngay dưới đoạn phía trên (không tách trang)
 \providecommand{\GAbatdauhinh}{}\renewcommand{\GAbatdauhinh}{\par\nopagebreak\vspace{4pt}\nopagebreak}
 % Danh sách gọn (đặt ngay sau \begin{itemize}): giảm khoảng cách giữa các dòng
-\providecommand{\GAgon}{}\renewcommand{\GAgon}{\setlength{\itemsep}{1pt}\setlength{\parsep}{0pt}\setlength{\parskip}{0pt}\setlength{\topsep}{2pt}}
-% Chèn hình p14_... : tìm trong các thư mục hình; nếu chưa tải hình lên thì hiện khung báo thiếu (không làm lỗi biên dịch)
+\providecommand{\GAgon}{}\renewcommand{\GAgon}{\setlength{\itemsep}{1pt}\setlength{\parsep}{0pt}\setlength{\parskip}{0pt}}
+% Chèn hình: tự tìm trong các thư mục hình; nếu chưa tải hình lên thì hiện khung "Thiếu hình" (không làm lỗi biên dịch)
+%   \GAhinh[tuỳ chọn]{tên đầy đủ}        ví dụ \GAhinh[height=2cm]{p14_de.png}
+%   \GAhinhx[tuỳ chọn]{tên không tiền tố} tìm p14_tên rồi ga14_tên, ví dụ \GAhinhx[height=2cm]{ba.png}
 \makeatletter
 \def\GA@thu#1#2{\ifx\GA@duong\@empty\IfFileExists{#1#2}{\def\GA@duong{#1#2}}{}\fi}
-\providecommand{\GAhinh}{}\renewcommand{\GAhinh}[2][]{%
-  \def\GA@duong{}%
-  \GA@thu{Hinh_PRE1_Tuan14/}{#2}\GA@thu{Data_PhieuBaiTap_HK0/Hinh_PRE1_Tuan14/}{#2}%
-  \GA@thu{../Data_PhieuBaiTap_HK0/Hinh_PRE1_Tuan14/}{#2}\GA@thu{Data_GiaoAn_HK0/}{#2}\GA@thu{}{#2}%
-  \ifx\GA@duong\@empty
-    \fbox{\parbox{2.2cm}{\centering\scriptsize\color{red}Thiếu hình\\\detokenize{#2}}}%
-  \else\expandafter\GA@chen\expandafter{\GA@duong}{#1}\fi}
+\def\GA@tim#1{%
+  \GA@thu{}{#1}\GA@thu{Hinh_PRE1_Tuan14/}{#1}\GA@thu{Data_PhieuBaiTap_HK0/Hinh_PRE1_Tuan14/}{#1}%
+  \GA@thu{Data_GiaoAn_HK0/Hinh_PRE1_Tuan14/}{#1}\GA@thu{Hinh_GiaoAn_PRE1_Tuan14/}{#1}%
+  \GA@thu{Data_GiaoAn_HK0/Hinh_GiaoAn_PRE1_Tuan14/}{#1}\GA@thu{../Data_PhieuBaiTap_HK0/Hinh_PRE1_Tuan14/}{#1}%
+  \GA@thu{Data_GiaoAn_HK0/}{#1}}
 \def\GA@chen#1#2{\includegraphics[#2]{#1}}
+\def\GA@ketqua#1#2{%
+  \ifx\GA@duong\@empty
+    \edef\GA@ten{#2}\fbox{\parbox{2.2cm}{\centering\scriptsize\color{red}Thiếu hình\\\detokenize\expandafter{\GA@ten}}}%
+  \else\expandafter\GA@chen\expandafter{\GA@duong}{#1}\fi}
+\providecommand{\GAhinh}{}\renewcommand{\GAhinh}[2][]{\def\GA@duong{}\GA@tim{#2}\GA@ketqua{#1}{#2}}
+\providecommand{\GAhinhx}{}\renewcommand{\GAhinhx}[2][]{\def\GA@duong{}\GA@tim{p14_#2}\GA@tim{ga14_#2}\GA@ketqua{#1}{p14_#2}}
+% Đánh lại số bài từ 1 (cho Bài 1, Bài 2 lấy từ PBT)
+\providecommand{\GAdatlaibai}{}\renewcommand{\GAdatlaibai}{\@ifundefined{c@bt}{}{\setcounter{bt}{0}}}
 \makeatother
-% Các lệnh giống PBT PRE1 Tuần 14 (dùng được cả khi giáo án biên dịch riêng)
+% Các lệnh giống PBT PRE1 Tuần 14 (dùng được cả khi không có file PBT trong main)
 \providecommand{\TThinh}{}\renewcommand{\TThinh}[2][8cm]{\par\nopagebreak\vspace{2pt}\nopagebreak{\centering\GAhinh[height=#1,width=\linewidth,keepaspectratio]{#2}\par}\vspace{2pt}}
 \providecommand{\TTbatdauhinh}{}\renewcommand{\TTbatdauhinh}{\par\nopagebreak\vspace{4pt}\nopagebreak}
 
@@ -48,12 +50,13 @@
 \definecolor{PKvangnhat}{RGB}{255,243,190}\definecolor{PKcam}{RGB}{255,150,60}
 \definecolor{PKhong}{RGB}{255,140,180}\definecolor{PKnau}{RGB}{140,85,45}
 \definecolor{PKxanhnuoc}{RGB}{90,170,235}
-\definecolor{GAkem}{RGB}{255,248,225}\definecolor{GAsau}{RGB}{165,208,100}\definecolor{GAoli}{RGB}{70,150,220}
+\definecolor{GAkem}{RGB}{255,248,225}\definecolor{GAoli}{RGB}{70,150,220}
+\definecolor{GAsau}{RGB}{165,208,100}
+\definecolor{GAdochu}{RGB}{238,28,36}\definecolor{GAsoke}{RGB}{25,35,140}
 
 %=========================================================
 %  HÌNH VẼ PHẦN TOÁN
 %=========================================================
-% Quả bóng nhựa có đổ bóng: \GAbi{x}{y}{màu}
 % Quả bóng tròn bóng loáng (ánh sáng từ trên bên trái): \GAqua{x}{y}{bán kính}{màu}
 \providecommand{\GAqua}{}\renewcommand{\GAqua}[4]{%
   \begin{scope}
@@ -62,6 +65,7 @@
   \end{scope}
   \draw[#4!50!black,thin] (#1,#2) circle (#3);
   \fill[white,opacity=0.75,rotate around={35:({#1-0.38*#3},{#2+0.42*#3})}] ({#1-0.38*#3},{#2+0.42*#3}) ellipse ({0.24*#3} and {0.13*#3});}
+% Quả bóng nhựa trong ly: \GAbi{x}{y}{màu}
 \providecommand{\GAbi}{}\renewcommand{\GAbi}[3]{\GAqua{#1}{#2}{0.35}{#3}}
 % Dấu trừ, dấu bằng vẽ đậm (tâm tại gốc): \GAdautru{màu}, \GAdaubang{màu}
 \providecommand{\GAdautru}{}\renewcommand{\GAdautru}[1]{\fill[#1,rounded corners=1.5pt] (-0.32,-0.07) rectangle (0.32,0.07);}
@@ -92,10 +96,10 @@
 %=========================================================
 %  HÌNH VẼ PHẦN TIẾNG VIỆT
 %=========================================================
-% ---- Chữ viết tay (đơn vị: 1 ly; chân chữ ở y = 0) ----
+% ---- Chữ viết tay theo mẫu (đơn vị: 1 ly; chân chữ ở y = 0; rộng 2,5 ly) ----
 \providecommand{\GAcongkin}{}\renewcommand{\GAcongkin}{% nét cong kín
   \draw plot[smooth cycle,tension=0.7] coordinates {(1.98,1.5) (1.62,1.93) (1.12,1.98) (0.66,1.72) (0.44,1.0) (0.62,0.28) (1.1,0.0) (1.6,0.1) (1.94,0.48) (2.02,1.0)};}
-\providecommand{\GAmoc}{}\renewcommand{\GAmoc}[1]{% nét móc ngược phải, #1 = độ cao bắt đầu
+\providecommand{\GAmoc}{}\renewcommand{\GAmoc}[1]{% nét móc ngược phải, #1 = độ cao bắt đầu; dừng ở đường kẻ 2
   \draw (2.0,#1) -- (2.0,0.38) .. controls (2.02,-0.04) and (2.52,-0.1) .. (2.95,1.0);}
 \providecommand{\GAchuA}{}\renewcommand{\GAchuA}{\GAcongkin\GAmoc{2}}
 \providecommand{\GAchuAw}{}\renewcommand{\GAchuAw}{\GAchuA\draw (0.92,2.85) .. controls (1.02,2.42) and (1.42,2.42) .. (1.52,2.85);}
@@ -118,8 +122,7 @@
   \end{tikzpicture}}
 % Quy trình viết chữ trên khung 4 x 4 ô (đường kẻ đánh số 1 - 5), giống hình mẫu:
 % \GAquytrinh{nét thêm (tô đỏ)}{mũi tên thêm}
-% Chữ d: nét cong kín từ dọc 1,4 đến dọc 3, cao 2 ly; nét móc ngược trên đường kẻ dọc 3, từ ngang 5 xuống, dừng ở ngang 2
-\definecolor{GAdochu}{RGB}{238,28,36}\definecolor{GAsoke}{RGB}{25,35,140}
+% Chữ d: nét cong kín cao 2 ly; nét móc ngược trên đường kẻ dọc 3, từ ngang 5 xuống, dừng ở ngang 2
 \providecommand{\GAquytrinh}{}\renewcommand{\GAquytrinh}[2]{%
   \begin{tikzpicture}[scale=0.75]
     \fill[white] (0,0) rectangle (4,4);
@@ -262,8 +265,20 @@
     \begin{scope}[shift={(0,1.95)}]#2\end{scope}
     \node[anchor=base,font=\fontsize{32}{32}\selectfont] at (0,-0.15) {#3};
   \end{scope}}
-% Tranh dạng ảnh có sẵn: \GAanh{tên hình}{chiều cao}
-\providecommand{\GAanh}{}\renewcommand{\GAanh}[2]{\node[inner sep=0pt] at (0,0) {\GAhinh[height=#2]{#1}};}
+  % Thẻ tranh có tên bên dưới (tên theo font của bài): \PKthe{hình}{tên}
+\providecommand{\PKthe}{}\renewcommand{\PKthe}[2]{%
+  \node[inner sep=0pt] (h) at (0,0) {\GAhinh[height=1.6cm,width=2.3cm,keepaspectratio]{#1}};
+  \node[draw,thick,rounded corners=4pt,fill=PKvangnhat,anchor=north,inner sep=2.5pt,minimum width=2.1cm] at (0,-0.95) {#2};}
+% Khung một ô "Điền d hay đ": \PKoditen{hình}{chữ đầu chấm}{phần còn lại}
+\providecommand{\PKoditen}{}\renewcommand{\PKoditen}[2]{%
+  \begin{tikzpicture}
+    \draw[thick,rounded corners=8pt,fill=PKvangnhat!40] (-1.6,-1.6) rectangle (1.6,1.35);
+    \begin{scope}[shift={(0,0.35)},scale=1.1]#1\end{scope}
+    \node[font=\Large] at (0,-1.05) {#2};
+  \end{tikzpicture}}
+
+% Tranh dạng ảnh có sẵn: \GAanh{tên hình (không có tiền tố p14_)}{chiều cao}
+\providecommand{\GAanh}{}\renewcommand{\GAanh}[2]{\node[inner sep=0pt] at (0,0) {\GAhinhx[height=#2]{#1}};}
 % Gạch chân vần trong từ
 \providecommand{\GAgc}{}\renewcommand{\GAgc}[1]{\underline{#1}}
 % Khung hàng tranh - từ (3 ô) có kẻ ngang bên dưới
@@ -324,28 +339,25 @@
 \par\medskip
 %\textbf{Người soạn: }
 \begin{center}
-        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ 14: LÀM QUEN VỚI PHÉP TRỪ, DẤU TRỪ}
+        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ 14: LÀM QUEN VỚI PHÉP TRỪ, DẤU TRỪ}\\[2pt]
 \end{center}
-
 \subsection{MỤC TIÊU}
 \begin{itemize}\GAgon
     \item Học sinh nhận biết được dấu trừ, phép trừ.
     \item Học sinh biết thực hiện phép trừ thông qua đếm số lượng còn lại, đếm bớt, bớt đi.
-    \item \GAbs{Học sinh biết nói trọn câu theo mẫu: \textbf{“Có \dots, bớt đi \dots, còn lại \dots”} và đọc được phép trừ đơn giản trong phạm vi 5 (VD: $3 - 1 = 2$).}
-    \item \GAbs{Học sinh hứng thú, mạnh dạn, biết hợp tác cùng bạn trong nhóm đôi và lắng nghe hiệu lệnh của cô.}
 \end{itemize}
 
 \subsection{TIẾN TRÌNH DẠY HỌC}
-\begin{itemize}\GAgon
-    \item \textbf{Đồ dùng dạy học:} bút, khăn ẩm, phiếu bài tập, giáo án, con dấu, hộp màu, bóng, ly giấy. Hình thỏ, 5 củ cà rốt bằng giấy có gắn nam châm, thẻ dấu trừ “$-$” cỡ lớn, bảng phụ, sticker.
-\end{itemize}
 
+\begin{itemize}\GAgon
+    \item \textbf{Đồ dùng dạy học:} bút, khăn ẩm, phiếu bài tập, giáo án, con dấu, hộp màu, bóng, ly giấy. Hình thỏ 5 củ cà rốt bằng giấy có gắn nam châm, thẻ dấu trừ “$-$” cỡ lớn, bảng phụ, sticker.
+\end{itemize}
 %---------------------------------------------------------
-\subsubsection{HOẠT ĐỘNG 1: KHỞI ĐỘNG \& SỬA BÀI TẬP VỀ NHÀ}
+\subsubsection{KHỞI ĐỘNG \& SỬA BÀI TẬP VỀ NHÀ}
 \begin{hd}
     \begin{itemize}\GAgon
         \item Thời gian: 10 phút
-        \item Giáo viên sửa bài tập về nhà, số lượng tùy tình hình mỗi lớp.
+        \item {Giáo viên sửa bài tập về nhà, số lượng tùy tình hình mỗi lớp.}
     \end{itemize}
 \end{hd}
 \GAmucnho{\GAbs{a. Khởi động (2 -- 3 phút) -- Bài hát “Five Little Monkeys Jumping on the Bed”}}
@@ -353,11 +365,8 @@
     \item \GAbs{Cả lớp đứng dậy, giơ 5 ngón tay làm “5 chú khỉ nhỏ”. Mỗi lần có một chú khỉ ngã khỏi giường, HS cụp bớt 1 ngón tay và đồng thanh đếm số khỉ còn lại: 5 -- 4 -- 3 -- 2 -- 1.}
     \item \GAbs{GV chốt nhẹ: \GAloi{Các con thấy không, số khỉ cứ ít dần đi khi có bạn bị bớt ra. Hôm nay mình sẽ học cách đếm phần còn lại đó nhé!} $\to$ tạo tò mò cho bài mới.}
 \end{itemize}
-\GAmucnho{\GAbs{b. Sửa bài tập về nhà (7 -- 8 phút)}}
-\noindent\GAbs{GV gọi HS lên bảng chữa bài, khen ngợi cụ thể (VD: \GAloi{Con viết số 4 rất thẳng hàng!}) thay vì chỉ nói \GAloi{giỏi lắm}.}
-
 %---------------------------------------------------------
-\subsubsection{HOẠT ĐỘNG 2: TRÒ CHƠI “QUẢ BÓNG SẮC MÀU”}
+\subsubsection{ TRÒ CHƠI “QUẢ BÓNG SẮC MÀU”}
 \begin{hd}
     \begin{itemize}\GAgon
         \item Thời gian: 10 phút
@@ -365,17 +374,16 @@
     \end{itemize}
 \end{hd}
 \begin{itemize}\GAgon
-    \item GV chuẩn bị các quả bóng nhựa có 3 màu sắc khác nhau, một số ly giấy tùy theo tình hình lớp (2 HS 1 ly).
-    \item GV để sẵn 3 quả bóng (màu sắc khác nhau) vào ly và yêu cầu HS bỏ bớt đi 1, 2 hoặc 3 quả bóng của nhóm mình theo yêu cầu của GV. (VD: bỏ bớt đi quả bóng màu xanh)
+
     \item \GAbs{\textbf{Lời dẫn gợi hứng thú:} \GAloi{Mỗi nhóm được cô tặng một chiếc ly thần kỳ có 3 quả bóng. Khi cô hô ‘Phép thuật -- bớt đi!’, các con nghe kỹ cô bảo bớt quả nào thì nhanh tay lấy quả đó ra nhé!}}
-    \item HS hoạt động theo nhóm đôi để hoàn thành nhiệm vụ, sau đó cho biết ban đầu trong ly có mấy quả bóng, nhóm mình đã bỏ bớt đi bao nhiêu quả bóng và còn lại trong ly mấy quả bóng?
     \item \GAbs{HS trả lời theo \textbf{câu mẫu} (GV viết sẵn lên bảng và cho cả lớp đọc 1 lần trước khi chơi): \GAloi{Ban đầu có 3 quả bóng, bỏ bớt 1 quả, còn lại 2 quả.}}
     \item \GAbs{\textbf{Vòng 2 (nâng độ khó):} GV thêm bóng để ly có 4 hoặc 5 quả, yêu cầu bớt 2 quả cùng lúc (VD: \GAloi{bớt đi 2 quả màu vàng}). Bạn A bớt bóng -- bạn B nói câu, sau đó đổi vai.}
     \item Nhóm nào thực hiện nhanh và trả lời đúng câu hỏi được cộng 2 điểm.
 \end{itemize}
 
 %---------------------------------------------------------
-\subsubsection{HOẠT ĐỘNG 3: THỰC HIỆN PHÉP TRỪ BẰNG CÁCH ĐẾM SỐ LƯỢNG CÒN LẠI VÀ GẠCH BỚT}
+\newpage
+\subsubsection{ THỰC HIỆN PHÉP TRỪ BẰNG CÁCH ĐẾM SỐ LƯỢNG CÒN LẠI VÀ GẠCH BỚT}
 \begin{hd}
     \begin{itemize}\GAgon
         \item Thời gian: 10 phút
@@ -415,7 +423,7 @@
     \end{tikzpicture}\par}
 \end{vd}
 \begin{itemize}\GAgon
-    \item \GAbs{\textbf{Câu chuyện “Bạn Thỏ ăn cà rốt” (dùng rối tay):} GV gắn 4 củ cà rốt lên bảng. Thỏ: \GAloi{Ôi, tớ đói quá! Tớ ăn 1 củ nhé!} $\to$ GV gỡ 1 củ xuống. GV hỏi: \GAloi{Lúc đầu có mấy củ? Thỏ ăn mất mấy củ? Còn lại mấy củ?} $\to$ HS trả lời theo câu mẫu. Lặp lại 2 -- 3 lần với số lượng khác nhau.}
+    \item \GAbs{\textbf{Câu chuyện “Bạn Thỏ ăn cà rốt”:} GV gắn 4 củ cà rốt lên bảng. Thỏ: \GAloi{Ôi, tớ đói quá! Tớ ăn 1 củ nhé!} $\to$ GV gỡ 1 củ xuống. GV hỏi: \GAloi{Lúc đầu có mấy củ? Thỏ ăn mất mấy củ? Còn lại mấy củ?} $\to$ HS trả lời theo câu mẫu. Lặp lại 2 -- 3 lần với số lượng khác nhau.}
     \GAbatdauhinh
     {\centering
     \begin{tikzpicture}
@@ -440,18 +448,18 @@
     \item GV giới thiệu phép trừ và dấu “$-$” gọi là dấu trừ, và hướng dẫn HS cách viết dấu trừ.
     \item HS luyện viết dấu trừ vào vở.
 \end{itemize}
+\newpage
 \begin{luuy}
     \GAbs{\textbf{Mẹo giúp HS nhớ dấu trừ “$-$”:}
     \begin{itemize}\GAgon
         \item Dấu trừ giống \textbf{“chú sâu nằm ngủ”} hay \textbf{“que kem nằm ngang”} -- chỉ có \textbf{1 nét ngang}, nằm giữa dòng kẻ.
-        \item \textbf{Vận động:} HS dang thẳng hai tay sang ngang làm “dấu trừ người”. (Nếu lớp đã học dấu cộng: một bạn dang tay ngang, một bạn giơ tay thẳng đứng $\to$ ghép thành dấu cộng; bạn đứng bỏ đi $\to$ chỉ còn dấu trừ.)
         \item \textbf{Viết theo thứ tự:} viết trên không $\to$ viết bằng ngón tay lên lưng bạn bên cạnh $\to$ viết bảng con $\to$ viết vào vở.
         \item \textbf{Câu vè:} \GAloi{Một nét ngang thôi, nằm ngay giữa dòng; bớt đi là trừ, các con nhớ không?}
     \end{itemize}}
 \end{luuy}
 
 %---------------------------------------------------------
-\subsubsection{HOẠT ĐỘNG 4: LUYỆN TẬP}
+\subsubsection{LUYỆN TẬP}
 \begin{hd}
     \begin{itemize}\GAgon
         \item Thời gian: 10 phút
@@ -481,13 +489,6 @@
     \item Nhấn mạnh phép trừ là \textbf{đếm số lượng còn lại, đếm bớt, bớt đi.}
     \item GV lựa chọn các bài tập phù hợp với học sinh.
 \end{itemize}
-\begin{luuy}
-    \GAbs{\textbf{Phân hoá học sinh:}
-    \begin{itemize}\GAgon
-        \item \textbf{HS cần hỗ trợ:} cho dùng que tính / hạt màu thật để bớt đi rồi đếm phần còn lại trước khi gạch trên hình.
-        \item \textbf{HS khá:} tự vẽ hình và ra đề cho bạn cùng bàn (VD: \GAloi{Tớ vẽ 4 bông hoa, cậu gạch bớt để còn 1 bông nhé!}).
-    \end{itemize}}
-\end{luuy}
 
 %---------------------------------------------------------
 \subsubsection{NGHỈ GIẢI LAO}
@@ -500,7 +501,8 @@
 \noindent Link bài hát: \url{https://youtu.be/XqZsoesa55w?si=iYBG52x-gX1Z_Svv}
 
 %---------------------------------------------------------
-\subsubsection{HOẠT ĐỘNG 5: CỦNG CỐ, DẶN BÀI TẬP VỀ NHÀ}
+\newpage
+\subsubsection{ CỦNG CỐ, DẶN BÀI TẬP VỀ NHÀ}
 \begin{hd}
     \begin{itemize}\GAgon
         \item Thời gian: 10 phút
@@ -508,11 +510,9 @@
     \end{itemize}
 \end{hd}
 \begin{itemize}\GAgon
-    \item GV cho HS nhắc lại nội dung bài học và kiểm tra lại kiến thức của HS về bài học.
     \item GV có thể tuỳ vào tình hình HS mỗi lớp để cho các BT phù hợp.
-    \item \GAbs{\textbf{Trò chơi củng cố “Đúng hay Sai?”:} GV dùng cà rốt / hình vẽ nêu tình huống (VD: \GAloi{Có 3 củ, Thỏ ăn 1 củ, còn lại 1 củ -- đúng hay sai?}). HS giơ \textbf{ngón cái lên} nếu đúng, \textbf{ngón cái xuống} nếu sai; bạn nào giải thích được vì sao sai sẽ nhận sticker.}
     \item \GAbs{\textbf{Tổng kết:} GV và HS cùng nhắc lại: \GAloi{Phép trừ là bớt đi, đếm phần còn lại; dấu trừ là một nét ngang.} Tuyên dương nhóm có nhiều điểm nhất.}
-    \item \GAbs{\textbf{Gợi ý BTVN vui:} Về nhà cùng ba mẹ chơi \textbf{“Đi chợ bớt đồ”}: xếp 5 món đồ (trái cây, đồ chơi\dots), ba mẹ lấy bớt đi vài món, bé đếm và nói số món còn lại.}
+
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -521,7 +521,7 @@
 \newpage
 \setcounter{subsection}{0}
 \begin{center}
-        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ 14: LÀM QUEN VỚI ÂM D, Đ}
+        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ 14: LÀM QUEN VỚI ÂM D, Đ}\\[2pt]
 \end{center}
 
 \subsection{MỤC TIÊU}
@@ -530,14 +530,15 @@
     \item Học sinh tập viết chữ d, đ.
     \item \GAbs{Học sinh \textbf{phân biệt được chữ d và chữ đ} (chữ đ có thêm một nét ngang ngắn).}
     \item Học sinh nhận biết được tiếng có âm d, đ; nói được từ ngữ chứa tiếng có âm d, đ.
+
 \end{itemize}
 
 \subsection{TIẾN TRÌNH DẠY HỌC}
 \begin{itemize}\GAgon
-    \item \textbf{Đồ dùng dạy học:} giáo án, bút bảng, PPT trình chiếu, PBT, tranh, bảng con, hình ảnh; “Hộp quà bí mật” (con dê, trái dừa, cái dù, đôi đũa, đèn pin, hòn đá\dots), thẻ chữ d, đ cỡ lớn, dây len / đất nặn, sticker.
+    \item Giáo án, bút bảng, PPT trình chiếu, PBT, tranh, bảng con, hình ảnh.
 \end{itemize}
-%---------------------------------------------------------
-\subsubsection{HOẠT ĐỘNG 1: HỌC SINH ÔN TẬP LẠI ÂM A, Ă, Â}
+
+\subsubsection{ ÔN TẬP LẠI ÂM A, Ă, Â}
 \begin{hd}
     \begin{itemize}\GAgon
         \item Thời gian: 15 phút
@@ -551,16 +552,16 @@
 {\centering
     \GAhangchu{A}{a}{\GAchuA}{4}\par\nopagebreak\vspace{6pt}
     \GAhangtranh{\begin{scope}[scale=0.95]\GAcahe\end{scope}}{c\GAgc{á}}
-                {\GAanh{p14_ba.png}{2.6cm}}{b\GAgc{a}}
-                {\GAanh{p14_ba2.png}{2.6cm}}{b\GAgc{à}}\par\vspace{6pt}
+                {\GAanh{ba.png}{2.6cm}}{b\GAgc{a}}
+                {\GAanh{ba2.png}{2.6cm}}{b\GAgc{à}}\par\vspace{6pt}
     \GAhangchu{Ă}{ă}{\GAchuAw}{4}\par\nopagebreak\vspace{6pt}
-    \GAhangtranh{\GAanh{p14_an.png}{2.3cm}}{\GAgc{ă}n}
+    \GAhangtranh{\GAanh{an.png}{2.3cm}}{\GAgc{ă}n}
                 {\begin{scope}[shift={(0,-0.05)},scale=0.95]\GArang\end{scope}}{r\GAgc{ă}ng}
                 {\begin{scope}[shift={(0,-1.15)},scale=1.15]\GAmang\end{scope}}{m\GAgc{ă}ng}\par\vspace{6pt}
     \GAhangchu{Â}{â}{\GAchuAa}{4}\par\nopagebreak\vspace{6pt}
     \GAhangtranh{\begin{scope}[shift={(-0.4,-0.25)},scale=0.9]\GAsau\end{scope}}{s\GAgc{â}u}
                 {\begin{scope}[shift={(0,-0.15)},scale=0.95]\GAnam\end{scope}}{n\GAgc{ấ}m}
-                {\GAanh{p14_trau.png}{2.5cm}}{tr\GAgc{â}u}\par}
+                {\GAanh{trau.png}{2.5cm}}{tr\GAgc{â}u}\par}
 \begin{itemize}\GAgon
     \item GV cho HS đọc cá nhân.
     \item GV chia nhóm cho HS đọc.
@@ -576,7 +577,7 @@
 \end{luuy}
 
 %---------------------------------------------------------
-\subsubsection{HOẠT ĐỘNG 2: HỌC SINH LÀM QUEN ÂM D, Đ}
+\subsubsection{ LÀM QUEN ÂM D, Đ}
 \begin{hd}
     \begin{itemize}\GAgon
         \item Thời gian: 20 phút
@@ -593,23 +594,34 @@
     \item \GAbs{\textbf{Câu vè:} \GAloi{d d -- con dê kêu be be; đ đ -- đèn sáng cho bé xem.} HS vừa đọc vừa làm động tác (d: hai tay làm sừng dê; đ: hai tay xoè ra như đèn sáng).}
     \item \GAbs{\textbf{Tạo hình chữ (tuỳ thời gian):} Mỗi nhóm dùng dây len / đất nặn tạo chữ d, sau đó thêm một nét ngang để biến thành chữ đ.}
 \end{itemize}
-\GAbatdauhinh
-{\centering
+% Bài 1, Bài 2: y như PBT PRE1 Tuần 14
+\GAdatlaibai
+\begin{bt}
+    Bé hãy đọc và khoanh vào âm \textbf{d} của các từ phía dưới.
     \TThinh[2.6cm]{p14_image20.png}
     \TTbatdauhinh
-    \PKbontranh{d}{p14_de.png}{con dê}{p14_hatde.png}{hạt dẻ}{p14_quediem.png}{que diêm}{p14_conde2.png}{con dế}\hfill
-    \begin{minipage}[b]{0.42\linewidth}\centering\PKghep{d}{ê}{dê}\\[8pt]\PKghep{d}{ế}{dế}\end{minipage}\par
-    \vspace{10pt}
+    {\centering
+        \PKbontranh{d}{p14_de.png}{con dê}{p14_hatde.png}{hạt dẻ}{p14_quediem.png}{que diêm}{p14_conde2.png}{con dế}\hfill
+        \begin{minipage}[b]{0.42\linewidth}\centering\PKghep{d}{ê}{dê}\\[8pt]\PKghep{d}{ế}{dế}\end{minipage}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy đọc và khoanh vào âm \textbf{đ} của các từ phía dưới.
     \TThinh[2.6cm]{p14_image23.png}
     \TTbatdauhinh
-    \PKbontranh{đ}{p14_duong.png}{con đường}{p14_do.png}{con đò}{p14_cayda.png}{cây đa}{p14_hatdieu.png}{hạt điều}\hfill
-    \begin{minipage}[b]{0.42\linewidth}\centering\PKghep{đ}{o}{đo}\\[8pt]\PKghep{đ}{ò}{đò}\end{minipage}\par}
+    {\centering
+        \PKbontranh{đ}{p14_duong.png}{con đường}{p14_do.png}{con đò}{p14_cayda.png}{cây đa}{p14_hatdieu.png}{hạt điều}\hfill
+        \begin{minipage}[b]{0.42\linewidth}\centering\PKghep{đ}{o}{đo}\\[8pt]\PKghep{đ}{ò}{đò}\end{minipage}\par}
+\end{bt}
+
+\newpage
+
 \begin{itemize}\GAgon
     \item Bài tập áp dụng: Bài 1, 2 trong Phiếu bài tập.
 \end{itemize}
 
 %---------------------------------------------------------
-\subsubsection{HOẠT ĐỘNG 3: HỌC SINH NHẬN BIẾT ĐƯỢC TIẾNG CÓ ÂM D, Đ; NÓI ĐƯỢC TỪ NGỮ CHỨA TIẾNG CÓ ÂM D, Đ}
+\subsubsection{NHẬN BIẾT ĐƯỢC TIẾNG CÓ ÂM D, Đ}
 \begin{hd}
     \begin{itemize}\GAgon
         \item Thời gian: 10 phút
@@ -650,10 +662,10 @@
 \GAbatdauhinh
 {\centering
 \begin{tikzpicture}
-    \node[inner sep=0pt] at (0,2.4) {\GAhinh[height=2.2cm]{p14_duahau.png}};
-    \node[inner sep=0pt] at (0,-0.4) {\GAhinh[height=2.0cm]{p14_hatdau.png}};
-    \node[inner sep=0pt] at (11,2.4) {\GAhinh[height=2.3cm]{p14_dudu.png}};
-    \node[inner sep=0pt] at (11,-0.4) {\GAhinh[height=2.1cm]{p14_quadua.png}};
+    \node[inner sep=0pt] at (0,2.4) {\GAhinhx[height=2.2cm]{duahau.png}};
+    \node[inner sep=0pt] at (0,-0.4) {\GAhinhx[height=2.0cm]{hatdau.png}};
+    \node[inner sep=0pt] at (11,2.4) {\GAhinhx[height=2.3cm]{dudu.png}};
+    \node[inner sep=0pt] at (11,-0.4) {\GAhinhx[height=2.1cm]{quadua.png}};
     \foreach \y in {2.4,-0.4}{\fill (1.55,\y) circle (3pt); \fill (9.45,\y) circle (3pt);}
     \foreach \tu/\y in {quả dừa/2.7,đu đủ/1.5,dưa hấu/0.3,hạt đậu/-0.9}{%
         \node[draw,line width=1.2pt,rounded corners=5pt,fill=PKvangnhat,minimum width=3.2cm,minimum height=0.85cm,font=\Large] at (5.5,\y) {\tu};}
@@ -665,19 +677,19 @@
 {\centering
 \begin{tikzpicture}
     % hàng 1: dê, cò
-    \node[inner sep=0pt] at (1.0,0.55) {\GAhinh[height=1.9cm]{p14_conde_dung.png}};
+    \node[inner sep=0pt] at (1.0,0.55) {\GAhinhx[height=1.9cm]{conde_dung.png}};
     \GAdongviet{2.4}{0}{2.6}{dê}
-    \node[inner sep=0pt] at (9.6,0.55) {\GAhinh[height=1.9cm]{p14_co.png}};
+    \node[inner sep=0pt] at (9.6,0.55) {\GAhinhx[height=1.9cm]{co.png}};
     \GAdongviet{11.0}{0}{2.6}{cò}
     \draw[PKdo!65,line width=1.8pt,dash pattern=on 6pt off 4pt] (-0.4,-0.85) -- (15.8,-0.85);
     % hàng 2: đá, ô tô
-    \node[inner sep=0pt] at (1.0,-2.0) {\GAhinh[width=2.4cm]{p14_da.png}};
+    \node[inner sep=0pt] at (1.0,-2.0) {\GAhinhx[width=2.4cm]{da.png}};
     \GAdongviet{2.4}{-2.5}{2.6}{đá}
     \begin{scope}[shift={(9.4,-2.05)},scale=0.72]\GAoto\end{scope}
     \GAdongviet{11.0}{-2.5}{3.6}{ô tô}
     \draw[PKdo!65,line width=1.8pt,dash pattern=on 6pt off 4pt] (-0.4,-3.35) -- (15.8,-3.35);
     % hàng 3: Đô có cá
-    \node[inner sep=0pt] at (2.0,-5.0) {\GAhinh[height=2.6cm]{p14_beca.png}};
+    \node[inner sep=0pt] at (2.0,-5.0) {\GAhinhx[height=2.6cm]{beca.png}};
     \GAdongviet{5.0}{-5.4}{6.6}{Đô có cá}
 \end{tikzpicture}\par}
 \medskip
@@ -692,12 +704,12 @@
     \node[draw,line width=1.5pt,circle,fill=green!15,minimum size=1.6cm] (g) at (1.0,0) {};
     \begin{scope}[shift={(1.0,0)}]\GAdaunga\end{scope}
     % các con vật: tên nút / vị trí / hình / tên / điểm nối (dưới tên, hoặc cạnh tranh)
-    \foreach \t/\p/\h/\ten/\noi in {a1/{(-3.0,3.1)}/p14_ngong.png/con ngỗng/{([yshift=-4pt]a1t.south)},
-                                    a2/{(3.2,3.1)}/p14_vuon.png/con vượn/{([yshift=-4pt]a2t.south)},
-                                    a3/{(-5.8,0.2)}/p14_vet.png/con vẹt/{([xshift=5pt]a3.east)},
-                                    a4/{(5.8,0.2)}/p14_bosua.png/bò sữa/{([xshift=-5pt]a4.west)},
-                                    a5/{(0,-3.2)}/p14_qua.png/con quạ/{([yshift=4pt]a5.north)}}{%
-        \node[inner sep=0pt] (\t) at \p {\GAhinh[height=1.7cm]{\h}};
+    \foreach \t/\p/\h/\ten/\noi in {a1/{(-3.0,3.1)}/ngong.png/con ngỗng/{([yshift=-4pt]a1t.south)},
+                                    a2/{(3.2,3.1)}/vuon.png/con vượn/{([yshift=-4pt]a2t.south)},
+                                    a3/{(-5.8,0.2)}/vet.png/con vẹt/{([xshift=5pt]a3.east)},
+                                    a4/{(5.8,0.2)}/bosua.png/bò sữa/{([xshift=-5pt]a4.west)},
+                                    a5/{(0,-3.2)}/qua.png/con quạ/{([yshift=4pt]a5.north)}}{%
+        \node[inner sep=0pt] (\t) at \p {\GAhinhx[height=1.7cm]{\h}};
         \node[anchor=north,inner sep=2pt] (\t t) at (\t.south) {\ten};
         \fill \noi circle (3pt);}
     % điểm nối trên hai dấu
@@ -705,7 +717,7 @@
 \end{tikzpicture}\par}
 
 %---------------------------------------------------------
-\subsubsection{HOẠT ĐỘNG 4: HỌC SINH TẬP VIẾT CHỮ D, Đ}
+\subsubsection{ TẬP VIẾT CHỮ D, Đ}
 \begin{hd}
     \begin{itemize}\GAgon
         \item Thời gian: 25 phút
@@ -743,7 +755,7 @@
 \end{itemize}
 
 %---------------------------------------------------------
-\subsubsection{HOẠT ĐỘNG 5: CỦNG CỐ VÀ GIAO BÀI TẬP VỀ NHÀ}
+\subsubsection{CỦNG CỐ VÀ GIAO BÀI TẬP VỀ NHÀ}
 \begin{hd}
     \begin{itemize}\GAgon
         \item Thời gian: 10 phút
