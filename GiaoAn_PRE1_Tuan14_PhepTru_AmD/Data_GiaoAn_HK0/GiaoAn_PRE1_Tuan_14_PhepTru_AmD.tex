@@ -19,7 +19,7 @@
 % Bắt đầu hình ngay dưới đoạn phía trên (không tách trang)
 \providecommand{\GAbatdauhinh}{}\renewcommand{\GAbatdauhinh}{\par\nopagebreak\vspace{4pt}\nopagebreak}
 % Danh sách gọn (đặt ngay sau \begin{itemize}): giảm khoảng cách giữa các dòng
-\providecommand{\GAgon}{}\renewcommand{\GAgon}{\setlength{\itemsep}{1pt}\setlength{\parsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\GAgon}{}\renewcommand{\GAgon}{\setlength{\itemsep}{4pt}\setlength{\parsep}{0pt}\setlength{\parskip}{0pt}}
 % Chèn hình: tự tìm trong các thư mục hình; nếu chưa tải hình lên thì hiện khung "Thiếu hình" (không làm lỗi biên dịch)
 %   \GAhinh[tuỳ chọn]{tên đầy đủ}        ví dụ \GAhinh[height=2cm]{p14_de.png}
 %   \GAhinhx[tuỳ chọn]{tên không tiền tố} tìm p14_tên rồi ga14_tên, ví dụ \GAhinhx[height=2cm]{ba.png}
@@ -29,7 +29,9 @@
   \GA@thu{}{#1}\GA@thu{Hinh_PRE1_Tuan14/}{#1}\GA@thu{Data_PhieuBaiTap_HK0/Hinh_PRE1_Tuan14/}{#1}%
   \GA@thu{Data_GiaoAn_HK0/Hinh_PRE1_Tuan14/}{#1}\GA@thu{Hinh_GiaoAn_PRE1_Tuan14/}{#1}%
   \GA@thu{Data_GiaoAn_HK0/Hinh_GiaoAn_PRE1_Tuan14/}{#1}\GA@thu{../Data_PhieuBaiTap_HK0/Hinh_PRE1_Tuan14/}{#1}%
-  \GA@thu{Data_GiaoAn_HK0/}{#1}}
+  \GA@thu{Data_GiaoAn_HK0/}{#1}%
+  \GA@thu{Data_PhieuBaiTap_HK0/Hinh_PRE1_Tuan14 2/}{#1}\GA@thu{Data_PhieuBaiTap_HK0/Hinh_PRE1_Tuan14 3/}{#1}%
+  \GA@thu{Data_PhieuBaiTap_HK0/Hinh_PRE1_Tuan14 4/}{#1}\GA@thu{Data_PhieuBaiTap_HK0/Hinh_PRE1_Tuan14 5/}{#1}}
 \def\GA@chen#1#2{\includegraphics[#2]{#1}}
 \def\GA@ketqua#1#2{%
   \ifx\GA@duong\@empty
@@ -98,7 +100,7 @@
 %=========================================================
 % ---- Chữ viết tay theo mẫu (đơn vị: 1 ly; chân chữ ở y = 0; rộng 2,5 ly) ----
 \providecommand{\GAcongkin}{}\renewcommand{\GAcongkin}{% nét cong kín
-  \draw plot[smooth cycle,tension=0.7] coordinates {(1.98,1.5) (1.62,1.93) (1.12,1.98) (0.66,1.72) (0.44,1.0) (0.62,0.28) (1.1,0.0) (1.6,0.1) (1.94,0.48) (2.02,1.0)};}
+  \draw (1.22,1.0) ellipse (0.78 and 1.0);}
 \providecommand{\GAmoc}{}\renewcommand{\GAmoc}[1]{% nét móc ngược phải, #1 = độ cao bắt đầu; dừng ở đường kẻ 2
   \draw (2.0,#1) -- (2.0,0.38) .. controls (2.02,-0.04) and (2.52,-0.1) .. (2.95,1.0);}
 \providecommand{\GAchuA}{}\renewcommand{\GAchuA}{\GAcongkin\GAmoc{2}}
