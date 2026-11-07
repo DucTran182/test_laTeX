@@ -252,6 +252,529 @@
   \fill[PKdo] (1.6*#2,0) circle (0.09);
   \begin{scope}[shift={(1.6*#1,0.95)},scale=0.55]\PNech\end{scope}}
 
+%---------- Đầu các con vật (vẽ tại gốc tọa độ, rộng khoảng 1,1cm) ----------
+\definecolor{PNmauvoi}{RGB}{135,190,228}\definecolor{PNmauvoidam}{RGB}{70,130,175}
+\definecolor{PNmaukhi}{RGB}{120,74,42}\definecolor{PNmaukem}{RGB}{248,224,180}
+\definecolor{PNmauho}{RGB}{255,176,40}\definecolor{PNmausoc}{RGB}{105,58,25}
+\definecolor{PNmaucao}{RGB}{245,112,72}\definecolor{PNmauhuou}{RGB}{238,190,112}
+\definecolor{PNmaumeo}{RGB}{196,178,214}\definecolor{PNmauthodam}{RGB}{88,98,110}
+\definecolor{PNmaucho}{RGB}{190,125,75}\definecolor{PNmaulon}{RGB}{246,168,168}
+\definecolor{PNmahong}{RGB}{255,150,170}
+% Mắt tròn có đốm sáng: \PNmat{x}{y}{bán kính}
+\providecommand{\PNmat}{}\renewcommand{\PNmat}[3]{%
+  \fill[black!88] (#1,#2) circle (#3);
+  \fill[white] ({#1-0.35*#3},{#2+0.35*#3}) circle ({0.38*#3});
+  \fill[white] ({#1+0.35*#3},{#2-0.3*#3}) circle ({0.16*#3});}
+% Má hồng
+\providecommand{\PNma}{}\renewcommand{\PNma}[2]{\fill[PNmahong,opacity=0.55] (#1,#2) ellipse (0.075 and 0.045);}
+% Đường viền mặt tròn mềm (bốn cung Bézier nối trơn, không có góc): \PNmatoval{nửa rộng}{nửa cao trên}{nửa cao dưới}
+\def\PNmatoval#1#2#3{(0,#2) .. controls ({0.6*#1},#2) and (#1,{0.55*#2}) .. (#1,0) .. controls (#1,{-0.6*#3}) and ({0.6*#1},-#3) .. (0,-#3)
+  .. controls ({-0.6*#1},-#3) and (-#1,{-0.6*#3}) .. (-#1,0) .. controls (-#1,{0.55*#2}) and ({-0.6*#1},#2) .. cycle}
+% Gấu trúc
+\providecommand{\PNgautruc}{}\renewcommand{\PNgautruc}{%
+  \begin{scope}[line join=round]
+    \foreach \s in {-1,1}{\fill[black!82] (\s*0.36,0.35) circle (0.165); \fill[white,opacity=0.18] (\s*0.33,0.39) circle (0.07);}
+    \shade[top color=white,bottom color=gray!25,draw=gray!60,line width=0.6pt] \PNmatoval{0.52}{0.44}{0.39};
+    \foreach \s in {-1,1}{%
+      \fill[black!85,rotate around={\s*(-38):(\s*0.2,0.01)}] (\s*0.2,0.01) ellipse (0.115 and 0.165);
+      \fill[white] (\s*0.19,0.04) circle (0.058); \fill[black] (\s*0.185,0.035) circle (0.035); \fill[white] (\s*0.175,0.05) circle (0.012);}
+    \fill[black!85] (-0.075,-0.13) .. controls (-0.07,-0.08) and (0.07,-0.08) .. (0.075,-0.13) .. controls (0.05,-0.19) and (-0.05,-0.19) .. cycle;
+    \draw[black!80,line width=0.6pt,line cap=round] (0,-0.18)--(0,-0.22) (-0.08,-0.24) .. controls (-0.04,-0.28) .. (0,-0.22) .. controls (0.04,-0.28) .. (0.08,-0.24);
+    \PNma{-0.34}{-0.14}\PNma{0.34}{-0.14}
+  \end{scope}}
+
+% Gấu koala
+\providecommand{\PNkoala}{}\renewcommand{\PNkoala}{%
+  \begin{scope}[line join=round]
+    \foreach \s in {-1,1}{%
+      \shade[top color=gray!45,bottom color=gray!65,draw=gray!50!black,line width=0.6pt] (\s*0.43,0.27) circle (0.25);
+      \fill[pink!55] (\s*0.45,0.25) circle (0.145);
+      \fill[white,opacity=0.5] (\s*0.47,0.3) circle (0.05);}
+    \shade[top color=gray!42,bottom color=gray!68,draw=gray!50!black,line width=0.6pt] \PNmatoval{0.45}{0.38}{0.38};
+    \PNmat{-0.17}{0.07}{0.068}\PNmat{0.17}{0.07}{0.068}
+    \shade[ball color=black!65] (0,-0.1) ellipse (0.115 and 0.15);
+    \fill[white,opacity=0.6] (-0.04,-0.03) ellipse (0.035 and 0.02);
+    \PNma{-0.27}{-0.08}\PNma{0.27}{-0.08}
+    \draw[black!70,line width=0.6pt,line cap=round] (-0.06,-0.29) .. controls (0,-0.32) .. (0.06,-0.29);
+  \end{scope}}
+
+% Hổ
+\providecommand{\PNho}{}\renewcommand{\PNho}{%
+  \begin{scope}[line join=round]
+    \foreach \s in {-1,1}{\fill[PNmausoc,draw=PNmausoc!70!black,line width=0.5pt] (\s*0.34,0.3) circle (0.15); \fill[PNmaukem] (\s*0.34,0.3) circle (0.085);}
+    \def\PNmatho{\PNmatoval{0.52}{0.4}{0.37}}
+    \shade[top color=PNmauho!85!yellow,bottom color=PNmauho!90!red] \PNmatho;
+    \begin{scope}
+      \clip \PNmatho;
+      \foreach \x in {-0.13,0,0.13}{\fill[PNmausoc] (\x-0.04,0.45) .. controls (\x-0.02,0.32) .. (\x,0.21) .. controls (\x+0.02,0.32) .. (\x+0.04,0.45) -- cycle;}
+      \foreach \s in {-1,1}{\foreach \y in {0.08,-0.08}{%
+        \fill[PNmausoc] (\s*0.56,\y+0.04) .. controls (\s*0.42,\y+0.04) .. (\s*0.32,\y) .. controls (\s*0.42,\y-0.01) .. (\s*0.56,\y-0.03) -- cycle;}}
+      \fill[PNmaukem] (-0.13,-0.21) ellipse (0.17 and 0.13); \fill[PNmaukem] (0.13,-0.21) ellipse (0.17 and 0.13);
+      \fill[PNmaukem] (0,-0.33) ellipse (0.2 and 0.1);
+    \end{scope}
+    \draw[PNmausoc!70!black,line width=0.6pt] \PNmatho;
+    \PNmat{-0.17}{0.05}{0.055}\PNmat{0.17}{0.05}{0.055}
+    \fill[PNmausoc] (-0.065,-0.1) .. controls (-0.06,-0.06) and (0.06,-0.06) .. (0.065,-0.1) .. controls (0.04,-0.15) and (-0.04,-0.15) .. cycle;
+    \draw[PNmausoc,line width=0.6pt,line cap=round] (0,-0.145)--(0,-0.18) (-0.08,-0.2) .. controls (-0.04,-0.24) .. (0,-0.18) .. controls (0.04,-0.24) .. (0.08,-0.2);
+    \foreach \s in {-1,1}{\draw[PNmausoc!80,line width=0.35pt] (\s*0.3,-0.17) -- (\s*0.62,-0.13) (\s*0.3,-0.21) -- (\s*0.62,-0.23) (\s*0.31,-0.25) -- (\s*0.58,-0.32);}
+  \end{scope}}
+
+% Voi (nhìn thẳng, vòi cong)
+\providecommand{\PNvoi}{}\renewcommand{\PNvoi}{%
+  \begin{scope}[line join=round]
+    \foreach \s in {-1,1}{%
+      \shade[top color=PNmauvoi,bottom color=PNmauvoi!80!PNmauvoidam,draw=PNmauvoidam,line width=0.6pt] plot[smooth cycle,tension=1]
+        coordinates{(\s*0.22,0.3)(\s*0.45,0.42)(\s*0.62,0.28)(\s*0.66,0.0)(\s*0.55,-0.25)(\s*0.3,-0.2)};
+      \fill[PNmahong!80] plot[smooth cycle,tension=1] coordinates{(\s*0.3,0.24)(\s*0.46,0.32)(\s*0.56,0.2)(\s*0.57,0.0)(\s*0.48,-0.14)(\s*0.33,-0.1)};}
+    \shade[top color=PNmauvoi!85!white,bottom color=PNmauvoi,draw=PNmauvoidam,line width=0.6pt] \PNmatoval{0.34}{0.4}{0.28};
+    \shade[left color=PNmauvoi!85!white,right color=PNmauvoi,draw=PNmauvoidam,line width=0.6pt]
+      (-0.1,-0.12) .. controls (-0.12,-0.42) and (-0.02,-0.6) .. (0.2,-0.57) .. controls (0.27,-0.56) and (0.27,-0.45) .. (0.2,-0.45)
+      .. controls (0.08,-0.46) and (0.08,-0.33) .. (0.1,-0.12) -- cycle;
+    \foreach \y in {-0.22,-0.3,-0.38}{\draw[PNmauvoidam!80,line width=0.4pt] (-0.1,\y) .. controls (-0.0,\y-0.02) .. (0.09,\y);}
+    \PNmat{-0.14}{0.1}{0.05}\PNmat{0.14}{0.1}{0.05}
+    \PNma{-0.22}{-0.05}\PNma{0.22}{-0.05}
+    \draw[PNmauvoidam,line width=0.6pt,line cap=round] (-0.2,-0.13) .. controls (-0.17,-0.18) .. (-0.12,-0.17) (0.2,-0.13) .. controls (0.17,-0.18) .. (0.12,-0.17);
+  \end{scope}}
+
+% Khỉ
+\providecommand{\PNkhi}{}\renewcommand{\PNkhi}{%
+  \begin{scope}[line join=round]
+    \foreach \s in {-1,1}{\shade[ball color=PNmaukhi] (\s*0.45,0.02) circle (0.16); \fill[PNmaukem!90!PNmaukhi] (\s*0.46,0.02) circle (0.095);}
+    \shade[top color=PNmaukhi!85!white,bottom color=PNmaukhi,draw=PNmaukhi!70!black,line width=0.6pt] \PNmatoval{0.43}{0.42}{0.4};
+    \fill[PNmaukem] (-0.13,0.07) circle (0.165); \fill[PNmaukem] (0.13,0.07) circle (0.165);
+    \fill[PNmaukem] (0,-0.17) ellipse (0.29 and 0.19);
+    \PNmat{-0.12}{0.07}{0.052}\PNmat{0.12}{0.07}{0.052}
+    \fill[PNmaukhi!80!black] (-0.035,-0.08) circle (0.018) (0.035,-0.08) circle (0.018);
+    \draw[PNmaukhi!80!black,line width=0.7pt,line cap=round] (-0.12,-0.18) .. controls (-0.05,-0.26) and (0.05,-0.26) .. (0.12,-0.18);
+    \PNma{-0.22}{-0.12}\PNma{0.22}{-0.12}
+  \end{scope}}
+
+% Sư tử
+\providecommand{\PNsutu}{}\renewcommand{\PNsutu}{%
+  \begin{scope}[line join=round]
+    \foreach \a in {0,30,...,330}{\fill[PNmausoc!90!orange,draw=PNmausoc!75!black,line width=0.5pt] (\a+15:0.44) circle (0.15);}
+    \fill[PNmausoc!90!orange] (0,0) circle (0.45);
+    \foreach \s in {-1,1}{\fill[PNmauho!95!orange,draw=PNmausoc!70!black,line width=0.5pt] (\s*0.25,0.27) circle (0.095); \fill[PNmaukem] (\s*0.25,0.27) circle (0.05);}
+    \shade[top color=PNmauho!80!yellow,bottom color=PNmauho!95!red,draw=PNmausoc!70!black,line width=0.5pt] \PNmatoval{0.34}{0.3}{0.31};
+    \fill[PNmaukem] (-0.09,-0.16) ellipse (0.12 and 0.09); \fill[PNmaukem] (0.09,-0.16) ellipse (0.12 and 0.09);
+    \PNmat{-0.12}{0.05}{0.045}\PNmat{0.12}{0.05}{0.045}
+    \fill[PNmausoc] (-0.05,-0.08) .. controls (-0.04,-0.05) and (0.04,-0.05) .. (0.05,-0.08) .. controls (0.03,-0.12) and (-0.03,-0.12) .. cycle;
+    \draw[PNmausoc,line width=0.6pt,line cap=round] (0,-0.115)--(0,-0.14) (-0.06,-0.16) .. controls (-0.03,-0.19) .. (0,-0.14) .. controls (0.03,-0.19) .. (0.06,-0.16);
+    \foreach \s in {-1,1}{\draw[white!85!PNmauho,line width=0.35pt] (\s*0.18,-0.14) -- (\s*0.4,-0.11) (\s*0.18,-0.18) -- (\s*0.4,-0.2);}
+  \end{scope}}
+
+% Cáo
+\providecommand{\PNcao}{}\renewcommand{\PNcao}{%
+  \begin{scope}[line join=round]
+    \foreach \s in {-1,1}{%
+      \fill[PNmaucao,draw=PNmaucao!60!black,line width=0.6pt] (\s*0.12,0.25) .. controls (\s*0.25,0.45) and (\s*0.36,0.6) .. (\s*0.42,0.62) .. controls (\s*0.47,0.45) and (\s*0.47,0.25) .. (\s*0.42,0.1) -- cycle;
+      \fill[black!70] (\s*0.33,0.53) .. controls (\s*0.38,0.6) .. (\s*0.42,0.62) .. controls (\s*0.45,0.55) .. (\s*0.45,0.47) .. controls (\s*0.4,0.5) .. cycle;
+      \fill[PNmahong!70] (\s*0.22,0.26) .. controls (\s*0.3,0.38) .. (\s*0.39,0.47) .. controls (\s*0.41,0.35) .. (\s*0.38,0.2) -- cycle;}
+    \def\PNmatcao{plot[smooth cycle,tension=1] coordinates{(0,0.33)(0.32,0.27)(0.5,0.05)(0.3,-0.16)(0,-0.36)(-0.3,-0.16)(-0.5,0.05)(-0.32,0.27)}}
+    \shade[top color=PNmaucao!85!orange,bottom color=PNmaucao] \PNmatcao;
+    \begin{scope}
+      \clip \PNmatcao;
+      \foreach \s in {-1,1}{\fill[white!95!PNmaukem] (\s*0.55,0.08) .. controls (\s*0.3,-0.02) and (\s*0.12,-0.1) .. (0,-0.24) -- (0,-0.45) -- (\s*0.55,-0.45) -- cycle;}
+    \end{scope}
+    \draw[PNmaucao!60!black,line width=0.6pt] \PNmatcao;
+    \PNmat{-0.17}{0.07}{0.06}\PNmat{0.17}{0.07}{0.06}
+    \fill[black!85] (-0.055,-0.27) .. controls (-0.05,-0.23) and (0.05,-0.23) .. (0.055,-0.27) .. controls (0.03,-0.32) and (-0.03,-0.32) .. cycle;
+    \PNma{-0.26}{-0.05}\PNma{0.26}{-0.05}
+  \end{scope}}
+
+% Hươu cao cổ
+\providecommand{\PNhuou}{}\renewcommand{\PNhuou}{%
+  \begin{scope}[line join=round]
+    \foreach \s in {-1,1}{%
+      \draw[PNmauhuou!80!black,line width=2.2pt,line cap=round] (\s*0.1,0.3) -- (\s*0.13,0.55);
+      \shade[ball color=PNmausoc!80] (\s*0.13,0.57) circle (0.055);
+      \fill[PNmauhuou,draw=PNmauhuou!55!black,line width=0.5pt,rotate around={\s*(-25):(\s*0.4,0.25)}] (\s*0.4,0.25) ellipse (0.15 and 0.07);
+      \fill[PNmahong!70,rotate around={\s*(-25):(\s*0.41,0.25)}] (\s*0.41,0.25) ellipse (0.09 and 0.035);}
+    \def\PNmathuou{\PNmatoval{0.36}{0.38}{0.38}}
+    \shade[top color=PNmauhuou!85!yellow,bottom color=PNmauhuou] \PNmathuou;
+    \begin{scope}
+      \clip \PNmathuou;
+      \fill[PNmaukhi!75!PNmauhuou] (-0.05,0.33) ellipse (0.07 and 0.05) (0.3,0.12) ellipse (0.08 and 0.11) (-0.33,0.18) ellipse (0.07 and 0.09) (0.12,0.3) circle (0.035);
+      \fill[PNmaukem!85!white] (0,-0.22) ellipse (0.3 and 0.18);
+    \end{scope}
+    \draw[PNmauhuou!55!black,line width=0.6pt] \PNmathuou;
+    \PNmat{-0.14}{0.08}{0.07}\PNmat{0.14}{0.08}{0.07}
+    \fill[PNmauhuou!55!black] (-0.08,-0.17) ellipse (0.025 and 0.018) (0.08,-0.17) ellipse (0.025 and 0.018);
+    \draw[PNmauhuou!45!black,line width=0.6pt,line cap=round] (-0.1,-0.27) .. controls (0,-0.32) .. (0.1,-0.27);
+    \PNma{-0.25}{-0.06}\PNma{0.25}{-0.06}
+  \end{scope}}
+
+% Mèo
+\providecommand{\PNmeo}{}\renewcommand{\PNmeo}{%
+  \begin{scope}[line join=round]
+    \foreach \s in {-1,1}{%
+      \fill[PNmaumeo,draw=PNmaumeo!50!black,line width=0.6pt] (\s*0.12,0.25) .. controls (\s*0.2,0.38) and (\s*0.3,0.5) .. (\s*0.36,0.5) .. controls (\s*0.42,0.48) and (\s*0.44,0.3) .. (\s*0.42,0.12) -- cycle;
+      \fill[PNmahong!70] (\s*0.2,0.26) .. controls (\s*0.27,0.36) .. (\s*0.35,0.42) .. controls (\s*0.38,0.32) .. (\s*0.37,0.2) -- cycle;}
+    \shade[top color=PNmaumeo!80!white,bottom color=PNmaumeo,draw=PNmaumeo!50!black,line width=0.6pt] \PNmatoval{0.47}{0.33}{0.33};
+    \fill[white!85!PNmaumeo] (0,-0.17) ellipse (0.2 and 0.12);
+    \PNmat{-0.16}{0.04}{0.055}\PNmat{0.16}{0.04}{0.055}
+    \fill[PNmahong!90!red] (-0.04,-0.1) -- (0.04,-0.1) -- (0,-0.145) -- cycle;
+    \draw[PNmaumeo!40!black,line width=0.5pt,line cap=round] (0,-0.145)--(0,-0.17) (-0.06,-0.19) .. controls (-0.03,-0.22) .. (0,-0.17) .. controls (0.03,-0.22) .. (0.06,-0.19);
+    \foreach \s in {-1,1}{\draw[PNmaumeo!40!black,line width=0.3pt] (\s*0.2,-0.13) -- (\s*0.55,-0.08) (\s*0.2,-0.16) -- (\s*0.56,-0.17) (\s*0.2,-0.19) -- (\s*0.52,-0.26);}
+    \PNma{-0.28}{-0.1}\PNma{0.28}{-0.1}
+  \end{scope}}
+
+% Thỏ (đầu, tai dài)
+\providecommand{\PNthodau}{}\renewcommand{\PNthodau}{%
+  \begin{scope}[line join=round]
+    \foreach \s/\g in {-1/12,1/-18}{%
+      \begin{scope}[rotate around={\g:(\s*0.14,0.22)}]
+        \shade[top color=PNmauthodam!80!white,bottom color=PNmauthodam,draw=PNmauthodam!60!black,line width=0.6pt] (\s*0.14,0.22) .. controls (\s*0.02,0.5) and (\s*0.06,0.78) .. (\s*0.15,0.8) .. controls (\s*0.25,0.78) and (\s*0.28,0.5) .. (\s*0.24,0.2) -- cycle;
+        \fill[PNmahong!80] (\s*0.16,0.28) .. controls (\s*0.09,0.5) and (\s*0.11,0.7) .. (\s*0.155,0.72) .. controls (\s*0.21,0.7) and (\s*0.22,0.5) .. (\s*0.2,0.28) -- cycle;
+      \end{scope}}
+    \shade[top color=PNmauthodam!80!white,bottom color=PNmauthodam,draw=PNmauthodam!60!black,line width=0.6pt] \PNmatoval{0.4}{0.3}{0.33};
+    \fill[white!80!PNmauthodam] (-0.08,-0.15) ellipse (0.11 and 0.09); \fill[white!80!PNmauthodam] (0.08,-0.15) ellipse (0.11 and 0.09);
+    \PNmat{-0.15}{0.04}{0.055}\PNmat{0.15}{0.04}{0.055}
+    \fill[PNmahong!90!red] (0,-0.08) ellipse (0.045 and 0.03);
+    \fill[white,draw=PNmauthodam!50!black,line width=0.4pt] (-0.045,-0.22) rectangle (0.045,-0.3);
+    \draw[PNmauthodam!50!black,line width=0.4pt] (0,-0.22)--(0,-0.3);
+    \PNma{-0.24}{-0.1}\PNma{0.24}{-0.1}
+  \end{scope}}
+
+% Chó (tai cụp)
+\providecommand{\PNcho}{}\renewcommand{\PNcho}{%
+  \begin{scope}[line join=round]
+    \shade[top color=PNmaucho!95!white,bottom color=PNmaucho!90!black,draw=PNmaucho!50!black,line width=0.6pt] \PNmatoval{0.4}{0.36}{0.34};
+    \fill[PNmaukhi!80!black,opacity=0.8] (-0.06,0.35) .. controls (-0.3,0.3) and (-0.32,0.05) .. (-0.2,-0.05) .. controls (-0.1,0.05) and (-0.05,0.2) .. cycle;
+    \foreach \s in {-1,1}{%
+      \shade[top color=PNmaukhi!90!white,bottom color=PNmaukhi!85!black,draw=PNmaukhi!60!black,line width=0.6pt] (\s*0.22,0.3) .. controls (\s*0.45,0.38) and (\s*0.58,0.25) .. (\s*0.55,0.0) .. controls (\s*0.52,-0.12) and (\s*0.42,-0.1) .. (\s*0.38,0.05) .. controls (\s*0.36,0.15) .. (\s*0.3,0.18) -- cycle;}
+    \fill[PNmaukem] (0,-0.17) ellipse (0.22 and 0.15);
+    \PNmat{-0.15}{0.07}{0.055}\PNmat{0.15}{0.07}{0.055}
+    \shade[ball color=black!70] (0,-0.09) ellipse (0.07 and 0.05);
+    \draw[black!70,line width=0.6pt,line cap=round] (0,-0.13)--(0,-0.17) (-0.07,-0.2) .. controls (-0.035,-0.24) .. (0,-0.17) .. controls (0.035,-0.24) .. (0.07,-0.2);
+    \PNma{-0.24}{-0.1}\PNma{0.24}{-0.1}
+  \end{scope}}
+
+% Heo
+\providecommand{\PNlon}{}\renewcommand{\PNlon}{%
+  \begin{scope}[line join=round]
+    \foreach \s in {-1,1}{%
+      \fill[PNmaulon!90!red,draw=PNmaulon!50!black,line width=0.6pt] (\s*0.15,0.28) .. controls (\s*0.25,0.42) and (\s*0.38,0.45) .. (\s*0.42,0.42) .. controls (\s*0.44,0.32) and (\s*0.42,0.22) .. (\s*0.36,0.15) -- cycle;}
+    \shade[top color=PNmaulon!70!white,bottom color=PNmaulon,draw=PNmaulon!50!black,line width=0.6pt] \PNmatoval{0.45}{0.33}{0.34};
+    \PNmat{-0.17}{0.07}{0.05}\PNmat{0.17}{0.07}{0.05}
+    \shade[top color=PNmaulon!60!white,bottom color=PNmaulon!90!red,draw=PNmaulon!50!black,line width=0.6pt] (0,-0.12) ellipse (0.15 and 0.1);
+    \fill[PNmaulon!45!black] (-0.05,-0.12) ellipse (0.025 and 0.04) (0.05,-0.12) ellipse (0.025 and 0.04);
+    \draw[PNmaulon!45!black,line width=0.6pt,line cap=round] (-0.07,-0.26) .. controls (0,-0.3) .. (0.07,-0.26);
+    \fill[PNmahong!90!red,opacity=0.5] (-0.29,-0.1) circle (0.06) (0.29,-0.1) circle (0.06);
+  \end{scope}}
+
+%---------- Con vật cả thân, đồ vật (vẽ tại gốc tọa độ) ----------
+\definecolor{PNmaukl}{RGB}{62,172,84}\definecolor{PNmauklnhat}{RGB}{160,218,90}
+\definecolor{PNmausocdo}{RGB}{226,78,42}\definecolor{PNmaudoi}{RGB}{165,145,205}
+\definecolor{PNmauran}{RGB}{170,80,190}\definecolor{PNmauoc}{RGB}{140,85,200}
+\definecolor{PNmaucarot}{RGB}{250,130,20}\definecolor{PNmaula}{RGB}{70,165,40}
+\definecolor{PNmaucoba}{RGB}{70,180,80}\definecolor{PNmauda}{RGB}{255,214,182}
+\definecolor{PNmautoc}{RGB}{110,62,30}\definecolor{PNmauta}{RGB}{185,170,240}
+\definecolor{PNmaubo}{RGB}{60,110,35}\definecolor{PNmaurotbo}{RGB}{225,230,120}
+
+% Ốc sên (quay sang trái), rộng khoảng 1,3cm
+\providecommand{\PNoc}{}\renewcommand{\PNoc}{%
+  \begin{scope}[line join=round]
+    \draw[PNmaukem!60!orange,line width=1.5pt,line cap=round] (-0.44,0.06) .. controls (-0.5,0.24) .. (-0.6,0.4) (-0.3,0.06) .. controls (-0.3,0.25) .. (-0.31,0.42);
+    \shade[top color=PNmaukem!70!white,bottom color=PNmaukem!85!orange,draw=PNmaukem!45!brown,line width=0.6pt]
+      (0.66,-0.42) .. controls (0.3,-0.47) and (-0.4,-0.47) .. (-0.56,-0.38) .. controls (-0.7,-0.3) and (-0.64,0.12) .. (-0.4,0.12)
+      .. controls (-0.22,0.12) and (-0.2,-0.1) .. (-0.12,-0.25) -- (0.45,-0.3) .. controls (0.56,-0.32) .. cycle;
+    \foreach \x/\y in {-0.6/0.46,-0.31/0.48}{\fill[white,draw=PNmaukem!45!brown,line width=0.5pt] (\x,\y) circle (0.1); \fill[black!85] (\x-0.02,\y+0.01) circle (0.055); \fill[white] (\x-0.04,\y+0.03) circle (0.018);}
+    \draw[PNmaukem!35!brown,line width=0.6pt,line cap=round] (-0.56,-0.1) .. controls (-0.5,-0.16) .. (-0.42,-0.12);
+    \PNma{-0.36}{-0.08}
+    \shade[ball color=PNmauoc!85] (0.18,0.03) circle (0.4);
+    \draw[PNmauoc!50!black,line width=0.6pt] (0.18,0.03) circle (0.4);
+    \draw[PNmauoc!45!black,line width=0.9pt,line cap=round] plot[domain=60:1020,samples=90,smooth] ({0.18+0.00037*\x*cos(\x)},{0.03+0.00037*\x*sin(\x)});
+    \fill[white,opacity=0.35] (0.02,0.25) ellipse (0.1 and 0.05) (0.34,0.3) circle (0.03) (0.42,0.16) circle (0.02);
+  \end{scope}}
+
+% Rắn cuộn tròn, ngẩng đầu
+\providecommand{\PNran}{}\renewcommand{\PNran}{%
+  \begin{scope}[line join=round,line cap=round]
+    \def\PNthanran{plot[smooth,tension=0.75] coordinates{(0.02,0.0)(-0.24,-0.12)(-0.08,-0.28)(0.2,-0.33)(0.16,-0.5)(-0.15,-0.56)(0.14,-0.64)(0.44,-0.6)(0.5,-0.48)}}
+    \draw[PNmauran!55!black,line width=9.5pt] \PNthanran;
+    \draw[PNmauran,line width=8pt] \PNthanran;
+    \draw[PNmahong!85,line width=4.5pt,dash pattern=on 2.2pt off 2.4pt] \PNthanran;
+    \draw[white,opacity=0.3,line width=1.5pt] plot[smooth,tension=0.75] coordinates{(-0.2,-0.08)(-0.06,-0.24)(0.18,-0.29)};
+    \fill[PKdo] (0.3,0.12) -- (0.48,0.12) -- (0.56,0.18) -- (0.5,0.12) -- (0.56,0.06) -- (0.48,0.1) -- (0.3,0.09) -- cycle;
+    \shade[ball color=PNmauran!80!white,draw=PNmauran!55!black,line width=0.6pt] (0.05,0.2) ellipse (0.3 and 0.21);
+    \foreach \x in {-0.09,0.15}{\fill[white,draw=PNmauran!55!black,line width=0.5pt] (\x,0.37) circle (0.095); \fill[black!85] (\x+0.02,0.38) circle (0.05); \fill[white] (\x+0.0,0.4) circle (0.017);}
+    \draw[PNmauran!40!black,line width=0.6pt] (0.0,0.12) .. controls (0.12,0.06) and (0.24,0.08) .. (0.3,0.12);
+    \PNma{-0.14}{0.15}
+    \fill[PNmauran!40!black] (0.2,0.24) circle (0.012) (0.25,0.23) circle (0.012);
+  \end{scope}}
+
+% Khủng long con ngồi
+\providecommand{\PNkhunglong}{}\renewcommand{\PNkhunglong}{%
+  \begin{scope}[line join=round]
+    \foreach \x/\y/\a in {0.02/0.52/80,0.2/0.48/45,0.32/0.34/20,0.37/0.16/5,0.38/-0.02/-5,0.48/-0.16/30,0.62/-0.05/40}{%
+      \fill[PNmauklnhat,draw=PNmaukl!60!black,line width=0.5pt] ($(\x,\y)+(\a+90:0.07)$) -- ($(\x,\y)+(\a:0.14)$) -- ($(\x,\y)+(\a-90:0.07)$) -- cycle;}
+    \shade[top color=PNmaukl!90!white,bottom color=PNmaukl,draw=PNmaukl!55!black,line width=0.6pt]
+      (0.2,-0.38) .. controls (0.6,-0.38) and (0.72,-0.12) .. (0.66,0.05) .. controls (0.58,-0.14) and (0.42,-0.2) .. (0.22,-0.14) -- cycle;
+    \shade[top color=PNmaukl!90!white,bottom color=PNmaukl,draw=PNmaukl!55!black,line width=0.6pt] (0.02,-0.17) ellipse (0.35 and 0.32);
+    \fill[PNmaukem!80!yellow] (-0.04,-0.2) ellipse (0.21 and 0.23);
+    \foreach \y in {-0.08,-0.18,-0.28}{\draw[PNmaukem!50!orange,line width=0.4pt] (-0.2,\y) .. controls (-0.04,\y-0.03) .. (0.13,\y);}
+    \foreach \s in {-1,1}{\shade[top color=PNmaukl!90!white,bottom color=PNmaukl,draw=PNmaukl!55!black,line width=0.6pt] (\s*0.17-0.02,-0.48) ellipse (0.15 and 0.08);
+      \foreach \t in {-0.07,0,0.07}{\fill[PNmauklnhat!70!white] (\s*0.17-0.02+\t,-0.53) circle (0.025);}}
+    \foreach \s in {-1,1}{\shade[top color=PNmaukl!90!white,bottom color=PNmaukl,draw=PNmaukl!55!black,line width=0.6pt,rotate around={\s*30:(\s*0.24-0.03,-0.07)}] (\s*0.24-0.03,-0.07) ellipse (0.11 and 0.06);}
+    \shade[top color=PNmaukl!80!white,bottom color=PNmaukl,draw=PNmaukl!55!black,line width=0.6pt] plot[smooth cycle,tension=1]
+      coordinates{(-0.05,0.55)(0.25,0.45)(0.3,0.2)(0.1,0.05)(-0.2,0.06)(-0.38,0.2)(-0.33,0.45)};
+    \fill[PKdo!70!black] (-0.24,0.2) .. controls (-0.12,0.08) and (0.06,0.08) .. (0.16,0.17) .. controls (0.05,0.19) and (-0.12,0.2) .. cycle;
+    \fill[white] (-0.17,0.19) -- (-0.15,0.16) -- (-0.13,0.19) -- cycle (-0.06,0.18) -- (-0.04,0.14) -- (-0.02,0.18) -- cycle (0.05,0.18) -- (0.07,0.15) -- (0.09,0.18) -- cycle;
+    \foreach \x in {-0.17,0.08}{\fill[white,draw=PNmaukl!55!black,line width=0.5pt] (\x,0.4) circle (0.085); \fill[black!85] (\x+0.01,0.4) circle (0.048); \fill[white] (\x-0.01,0.42) circle (0.016);}
+    \PNma{-0.28}{0.27}\PNma{0.2}{0.27}
+  \end{scope}}
+
+% Sóc đỏ (quay sang trái)
+\providecommand{\PNsoc}{}\renewcommand{\PNsoc}{%
+  \begin{scope}[line join=round]
+    \shade[left color=PNmausocdo!85!orange,right color=PNmausocdo,draw=PNmausocdo!55!black,line width=0.6pt] plot[smooth cycle,tension=0.9]
+      coordinates{(0.12,-0.32)(0.55,-0.22)(0.7,0.12)(0.55,0.48)(0.3,0.58)(0.12,0.45)(0.18,0.3)(0.33,0.33)(0.42,0.18)(0.3,-0.05)(0.08,-0.12)};
+    \draw[PNmausocdo!65!black,line width=0.5pt] plot[smooth,tension=0.9] coordinates{(0.22,0.38)(0.36,0.45)(0.52,0.36)(0.56,0.12)(0.45,-0.1)};
+    \shade[left color=PNmausocdo!90!orange,right color=PNmausocdo,draw=PNmausocdo!55!black,line width=0.6pt,rotate around={20:(-0.02,-0.17)}] (-0.02,-0.17) ellipse (0.28 and 0.2);
+    \fill[white!92!PNmaukem] (-0.2,-0.08) .. controls (-0.3,-0.2) and (-0.2,-0.33) .. (-0.08,-0.32) .. controls (-0.08,-0.2) .. (-0.1,-0.06) -- cycle;
+    \fill[PNmausocdo!80!black,draw=PNmausocdo!55!black,line width=0.5pt] (0.08,-0.36) ellipse (0.13 and 0.05);
+    \fill[PNmausocdo!80!black,draw=PNmausocdo!55!black,line width=0.5pt] (-0.22,-0.37) ellipse (0.08 and 0.04);
+    \fill[PNmausocdo,draw=PNmausocdo!55!black,line width=0.5pt] (-0.18,0.32) -- (-0.14,0.5) -- (-0.07,0.3) -- cycle;
+    \shade[left color=PNmausocdo!80!orange,right color=PNmausocdo,draw=PNmausocdo!55!black,line width=0.6pt] plot[smooth cycle,tension=1]
+      coordinates{(-0.2,0.35)(-0.02,0.28)(0.0,0.08)(-0.15,-0.02)(-0.36,0.02)(-0.47,0.12)(-0.38,0.28)};
+    \fill[white!92!PNmaukem] (-0.44,0.1) .. controls (-0.38,0.02) and (-0.25,-0.01) .. (-0.15,0.0) .. controls (-0.2,0.08) and (-0.35,0.12) .. cycle;
+    \PNmat{-0.27}{0.18}{0.045}
+    \fill[black!85] (-0.46,0.13) circle (0.03);
+    \fill[PNmausocdo!70!black] (-0.32,-0.02) ellipse (0.05 and 0.03);
+  \end{scope}}
+
+% Dơi con mũm mĩm
+\providecommand{\PNdoi}{}\renewcommand{\PNdoi}{%
+  \begin{scope}[line join=round]
+    \foreach \s in {-1,1}{%
+      \shade[top color=PNmaudoi!95!black,bottom color=PNmaudoi!75!black,draw=PNmaudoi!45!black,line width=0.6pt] (\s*0.22,0.12) -- (\s*0.62,0.3) .. controls (\s*0.6,0.12) .. (\s*0.66,-0.04)
+        .. controls (\s*0.56,-0.02) .. (\s*0.52,-0.14) .. controls (\s*0.43,-0.08) .. (\s*0.38,-0.21) .. controls (\s*0.3,-0.14) .. (\s*0.22,-0.18) -- cycle;
+      \draw[PNmaudoi!45!black,line width=0.4pt] (\s*0.62,0.3) -- (\s*0.52,-0.14) (\s*0.62,0.3) -- (\s*0.38,-0.21);
+      \fill[PNmaudoi,draw=PNmaudoi!45!black,line width=0.6pt] (\s*0.07,0.28) -- (\s*0.2,0.6) -- (\s*0.26,0.22) -- cycle;
+      \fill[PNmahong!75] (\s*0.12,0.3) -- (\s*0.19,0.5) -- (\s*0.22,0.27) -- cycle;}
+    \shade[top color=PNmaudoi!80!white,bottom color=PNmaudoi,draw=PNmaudoi!45!black,line width=0.6pt] plot[smooth cycle,tension=1]
+      coordinates{(0,0.38)(0.24,0.25)(0.3,-0.08)(0.2,-0.34)(0,-0.4)(-0.2,-0.34)(-0.3,-0.08)(-0.24,0.25)};
+    \fill[PNmaukem!85!white] (0,-0.17) ellipse (0.18 and 0.19);
+    \PNmat{-0.1}{0.15}{0.05}\PNmat{0.1}{0.15}{0.05}
+    \fill[PNmaudoi!40!black] (-0.025,0.06) circle (0.012) (0.025,0.06) circle (0.012);
+    \draw[PNmaudoi!40!black,line width=0.6pt,line cap=round] (-0.07,0.02) .. controls (0,-0.03) .. (0.07,0.02);
+    \fill[white] (-0.045,0.005) -- (-0.03,-0.04) -- (-0.015,-0.005) -- cycle (0.045,0.005) -- (0.03,-0.04) -- (0.015,-0.005) -- cycle;
+    \PNma{-0.18}{0.06}\PNma{0.18}{0.06}
+    \foreach \s in {-1,1}{\fill[PNmaudoi!70!black] (\s*0.1,-0.4) ellipse (0.06 and 0.03);}
+  \end{scope}}
+
+% Củ cà rốt (cao khoảng 1,6cm)
+\providecommand{\PNcarot}{}\renewcommand{\PNcarot}{%
+  \begin{scope}[line join=round]
+    \foreach \g/\c in {28/PNmaula!85!black,-25/PNmaula!85!black,10/PNmaula,-6/PNmaula!90!yellow}{%
+      \begin{scope}[rotate around={\g:(0,0.42)}]
+        \shade[left color=\c!80!yellow,right color=\c,draw=PNmaula!55!black,line width=0.5pt] (0,0.42) .. controls (-0.13,0.6) and (-0.11,0.86) .. (-0.02,0.95) .. controls (0.08,0.86) and (0.1,0.6) .. (0.02,0.42) -- cycle;
+        \draw[PNmaula!50!black,line width=0.35pt] (0,0.45) -- (-0.02,0.85);
+      \end{scope}}
+    \shade[left color=PNmaucarot!75!yellow,right color=PNmaucarot!85!red,draw=PNmaucarot!60!red,line width=0.6pt]
+      (-0.23,0.43) .. controls (-0.27,0.05) and (-0.07,-0.58) .. (0,-0.64) .. controls (0.07,-0.58) and (0.27,0.05) .. (0.23,0.43) .. controls (0.1,0.5) and (-0.1,0.5) .. cycle;
+    \foreach \y/\x/\w in {0.25/-0.14/0.1,0.1/0.06/0.11,-0.05/-0.1/0.09,-0.2/0.04/0.08,-0.35/-0.05/0.06}{\draw[PNmaucarot!55!red,line width=0.5pt,line cap=round] (\x,\y) .. controls (\x+0.5*\w,\y-0.02) .. (\x+\w,\y);}
+    \fill[white,opacity=0.4] (-0.15,0.3) .. controls (-0.17,0.05) and (-0.1,-0.25) .. (-0.06,-0.35) .. controls (-0.1,-0.1) and (-0.12,0.1) .. (-0.1,0.32) -- cycle;
+  \end{scope}}
+
+% Cỏ bốn lá (rộng khoảng 1,2cm)
+\providecommand{\PNcovaybon}{}\renewcommand{\PNcovaybon}{%
+  \begin{scope}[line join=round]
+    \draw[PNmaucoba!50!black,line width=1.6pt,line cap=round] (0,0) .. controls (0.02,-0.3) and (-0.05,-0.5) .. (-0.2,-0.62);
+    \draw[PNmaucoba!80!white,line width=0.6pt,line cap=round] (0,-0.02) .. controls (0.02,-0.3) and (-0.05,-0.5) .. (-0.19,-0.6);
+    \foreach \g in {45,135,225,315}{%
+      \begin{scope}[rotate=\g-90]
+        \shade[inner color=PNmaucoba!75!yellow,outer color=PNmaucoba!80!black,draw=PNmaucoba!40!black,line width=0.5pt]
+          (0,0) .. controls (-0.05,0.14) and (-0.27,0.18) .. (-0.24,0.38) .. controls (-0.21,0.53) and (-0.02,0.53) .. (0,0.4)
+          .. controls (0.02,0.53) and (0.21,0.53) .. (0.24,0.38) .. controls (0.27,0.18) and (0.05,0.14) .. (0,0) -- cycle;
+        \fill[PNmaucoba!55!black,opacity=0.35] (0,0.02) .. controls (-0.03,0.15) and (-0.17,0.2) .. (-0.15,0.34) .. controls (-0.13,0.43) and (-0.03,0.43) .. (0,0.36) -- cycle;
+        \draw[PNmaucoba!40!black,line width=0.4pt] (0,0) -- (0,0.38);
+      \end{scope}}
+  \end{scope}}
+
+% Thỏ trắng ló đầu (đầu và tai; chân trước vẽ riêng bằng \PNchanthotrang)
+\providecommand{\PNthotrang}{}\renewcommand{\PNthotrang}{%
+  \begin{scope}[line join=round]
+    \foreach \x/\g in {-0.22/14,0.18/-10}{%
+      \begin{scope}[rotate around={\g:(\x,0.4)}]
+        \fill[white,draw=black!80,line width=0.9pt] (\x-0.13,0.38) .. controls (\x-0.2,0.8) and (\x-0.12,1.15) .. (\x,1.17) .. controls (\x+0.12,1.15) and (\x+0.2,0.8) .. (\x+0.13,0.38) -- cycle;
+        \shade[top color=PNmahong!95!red,bottom color=magenta!70!red] (\x-0.06,0.48) .. controls (\x-0.11,0.8) and (\x-0.06,1.04) .. (\x,1.05) .. controls (\x+0.06,1.04) and (\x+0.11,0.8) .. (\x+0.06,0.48) -- cycle;
+      \end{scope}}
+    \fill[white,draw=black!80,line width=0.9pt] (0,0.05) ellipse (0.52 and 0.45);
+    \fill[magenta!75!red,opacity=0.85] (-0.3,-0.08) ellipse (0.12 and 0.08) (0.3,-0.08) ellipse (0.12 and 0.08);
+    \foreach \x in {-0.16,0.16}{\fill[PNmautoc!90!black] (\x,0.08) circle (0.05);}
+    \draw[PNmautoc,line width=0.9pt,line cap=round] (-0.12,-0.12) .. controls (-0.08,-0.18) and (-0.02,-0.16) .. (0,-0.11) .. controls (0.02,-0.16) and (0.08,-0.18) .. (0.12,-0.12);
+  \end{scope}}
+\providecommand{\PNchanthotrang}{}\renewcommand{\PNchanthotrang}{%
+  \fill[white,draw=black!80,line width=0.9pt] (0,0) ellipse (0.17 and 0.12);
+  \draw[black!80,line width=0.6pt,line cap=round] (0.08,0.045) -- (0.16,0.04) (0.08,-0.035) -- (0.16,-0.04);}
+
+% Chú yêu tinh mũ xanh ló ra, tay chỉ sang phải (cao khoảng 2,6cm)
+\providecommand{\PNyeutinh}{}\renewcommand{\PNyeutinh}{%
+  \begin{scope}[line join=round]
+    % thân áo
+    \shade[top color=green!55!black,bottom color=green!40!black,draw=green!25!black,line width=0.6pt] (-0.45,-0.55) .. controls (-0.5,-1.0) .. (-0.42,-1.45) -- (0.42,-1.45) -- (0.38,-0.55) -- cycle;
+    \draw[green!20!black,line width=0.5pt] (0,-0.6) -- (0,-1.45);
+    % cánh tay chỉ
+    \shade[top color=green!55!black,bottom color=green!40!black,draw=green!25!black,line width=0.6pt] (0.1,-0.7) .. controls (0.35,-0.65) and (0.6,-0.6) .. (0.75,-0.55) -- (0.8,-0.8) .. controls (0.6,-0.85) and (0.35,-0.95) .. (0.15,-0.95) -- cycle;
+    \fill[PKvang!90!orange,draw=orange!50!black,line width=0.5pt] (0.72,-0.53) rectangle (0.86,-0.83);
+    \fill[PNmauda,draw=PNmautoc!80,line width=0.6pt] (0.86,-0.57) .. controls (0.98,-0.55) .. (1.02,-0.6) -- (1.3,-0.62) .. controls (1.36,-0.64) and (1.36,-0.7) .. (1.3,-0.71)
+      -- (1.06,-0.71) .. controls (1.08,-0.8) and (1.0,-0.86) .. (0.86,-0.82) -- cycle;
+    \draw[PNmautoc!80,line width=0.4pt] (1.02,-0.76) -- (0.94,-0.76) (1.0,-0.81) -- (0.93,-0.8);
+    % râu
+    \fill[PKcam!90!red,draw=PKcam!50!black,line width=0.5pt] plot[smooth cycle,tension=0.6] coordinates{(-0.42,-0.05)(-0.5,-0.3)(-0.38,-0.55)(-0.2,-0.7)(0,-0.75)(0.2,-0.7)(0.38,-0.55)(0.5,-0.3)(0.42,-0.05)(0,-0.25)};
+    \foreach \x/\y in {-0.35/-0.35,-0.2/-0.55,0/-0.62,0.2/-0.55,0.35/-0.35,-0.1/-0.42,0.12/-0.42}{\draw[PKcam!50!black,line width=0.4pt] (\x,\y) arc (180:450:0.05);}
+    % mặt
+    \shade[top color=PNmauda!90!white,bottom color=PNmauda!90!orange,draw=PNmautoc!80,line width=0.6pt] (0,0.05) ellipse (0.36 and 0.34);
+    \fill[PNmauda!80!orange,draw=PNmautoc!80,line width=0.5pt] (-0.37,0.05) ellipse (0.07 and 0.11) (0.37,0.05) ellipse (0.07 and 0.11);
+    \fill[PKcam!90!red] (0,-0.12) .. controls (-0.25,-0.05) and (-0.3,-0.2) .. (-0.18,-0.22) .. controls (-0.08,-0.24) .. (0,-0.16) .. controls (0.08,-0.24) .. (0.18,-0.22) .. controls (0.3,-0.2) and (0.25,-0.05) .. (0,-0.12);
+    \fill[white,draw=PKdo!60!black,line width=0.5pt] (-0.1,-0.22) .. controls (-0.05,-0.36) and (0.12,-0.36) .. (0.14,-0.22) -- cycle;
+    \shade[ball color=PNmauda!70!red] (0.02,-0.02) circle (0.08);
+    \PNmat{-0.12}{0.1}{0.045}\PNmat{0.15}{0.1}{0.045}
+    \draw[PKcam!50!black,line width=0.9pt,line cap=round] (-0.2,0.2) .. controls (-0.13,0.24) .. (-0.06,0.2) (0.08,0.2) .. controls (0.15,0.24) .. (0.22,0.2);
+    \PNma{-0.22}{-0.02}\PNma{0.24}{-0.02}
+    % mũ
+    \shade[top color=green!60!black,bottom color=green!40!black,draw=green!20!black,line width=0.6pt,rotate around={-12:(0,0.3)}] (0,0.3) ellipse (0.62 and 0.12);
+    \shade[left color=green!55!black,right color=green!35!black,draw=green!20!black,line width=0.6pt,rotate around={-12:(0,0.3)}] (-0.33,0.33) -- (-0.28,0.95) .. controls (0,1.0) .. (0.28,0.95) -- (0.33,0.33) .. controls (0,0.28) .. cycle;
+    \fill[PKnau!80!black,rotate around={-12:(0,0.3)}] (-0.32,0.38) -- (-0.31,0.55) .. controls (0,0.5) .. (0.31,0.55) -- (0.32,0.38) .. controls (0,0.33) .. cycle;
+    \draw[PKvang!95!orange,line width=1.6pt,rotate around={-12:(0,0.3)}] (-0.08,0.38) rectangle (0.1,0.53);
+    \begin{scope}[shift={(-0.32,0.5)},scale=0.32,rotate=10]\PNcovaybon\end{scope}
+  \end{scope}}
+
+% Lọ thủy tinh có nhãn ghi phép tính: \PNlo{phép tính}
+\providecommand{\PNlo}{}\renewcommand{\PNlo}[1]{%
+  \begin{scope}[line join=round]
+    \path[top color=PKxanhnuoc!6,bottom color=PKxanhnuoc!22] (-0.85,0.95) .. controls (-1.45,0.55) and (-1.45,-0.95) .. (0,-1.05) .. controls (1.45,-0.95) and (1.45,0.55) .. (0.85,0.95) -- cycle;
+    \draw[white,line width=2.5pt,line cap=round,opacity=0.9] (-1.0,0.35) .. controls (-1.12,0.0) and (-1.05,-0.4) .. (-0.85,-0.6);
+    \draw[black!80,line width=1.6pt] (-0.85,0.95) .. controls (-1.45,0.55) and (-1.45,-0.95) .. (0,-1.05) .. controls (1.45,-0.95) and (1.45,0.55) .. (0.85,0.95);
+    \node[draw=black!80,line width=1.6pt,fill=white,rounded corners=0.28cm,minimum width=2.9cm,minimum height=0.8cm,font=\sffamily\LARGE,inner sep=1pt] at (0,1.05) {#1};
+  \end{scope}}
+
+%---------- Hình cho bài "Nối và đọc" (Tiếng Việt) ----------
+% Bụi cỏ
+\providecommand{\PNbuico}{}\renewcommand{\PNbuico}{%
+  \begin{scope}[line join=round]
+    \foreach \b/\tx/\ty/\c in {-0.55/-0.85/0.5/PNmaula!75!black,-0.3/-0.55/0.85/PNmaula,0.0/-0.2/0.75/PNmaula!80!black,-0.1/0.12/1.0/PNmaula!90!yellow,
+                               0.2/0.4/0.8/PNmaula!85!black,0.35/0.75/0.55/PNmaula,0.5/0.95/0.25/PNmaula!80!black,-0.45/-0.05/0.6/PNmaula!70!yellow,0.15/-0.4/0.5/PNmaula!95!yellow}{%
+      \shade[bottom color=\c!80!black,top color=\c!75!yellow] (\b-0.07,-0.3) .. controls (\b,0.1) and (\tx*0.5+\b*0.5,\ty*0.7) .. (\tx,\ty) .. controls (\tx*0.4+\b*0.6+0.02,\ty*0.6) and (\b+0.06,0.0) .. (\b+0.08,-0.3) -- cycle;}
+  \end{scope}}
+
+% Bé đang ăn
+\providecommand{\PNbean}{}\renewcommand{\PNbean}{%
+  \begin{scope}[line join=round]
+    \fill[PNmauda!90!orange,draw=PNmautoc!80,line width=0.6pt] (-0.5,0.0) ellipse (0.09 and 0.13) (0.5,0.0) ellipse (0.09 and 0.13);
+    \shade[top color=PNmauda!85!white,bottom color=PNmauda!90!orange,draw=PNmautoc!80,line width=0.6pt] (0,0.0) circle (0.5);
+    \shade[top color=PNmautoc!85!white,bottom color=PNmautoc,draw=PNmautoc!70!black,line width=0.6pt]
+      (-0.5,0.05) .. controls (-0.55,0.45) and (-0.25,0.6) .. (0.05,0.58) .. controls (0.2,0.68) and (0.35,0.72) .. (0.45,0.62) .. controls (0.38,0.58) .. (0.38,0.52)
+      .. controls (0.55,0.45) and (0.55,0.2) .. (0.5,0.08) .. controls (0.4,0.3) and (0.1,0.32) .. (-0.05,0.28) .. controls (-0.2,0.35) and (-0.4,0.3) .. cycle;
+    \draw[PNmautoc!80!black,line width=1pt,line cap=round] (-0.3,0.07) .. controls (-0.24,0.13) and (-0.14,0.13) .. (-0.08,0.07) (0.08,0.07) .. controls (0.14,0.13) and (0.24,0.13) .. (0.3,0.07);
+    \fill[PKdo!65!black] (-0.26,-0.08) .. controls (-0.2,-0.42) and (0.2,-0.42) .. (0.26,-0.08) .. controls (0.1,-0.04) and (-0.1,-0.04) .. cycle;
+    \fill[PNmahong!90!red] (-0.13,-0.27) .. controls (-0.05,-0.34) and (0.08,-0.34) .. (0.14,-0.26) .. controls (0.05,-0.22) and (-0.05,-0.22) .. cycle;
+    \fill[white] (-0.2,-0.08) rectangle (0.2,-0.12);
+    \PNma{-0.33}{-0.06}\PNma{0.33}{-0.06}
+    % thìa và thức ăn
+    \draw[gray!55!black,line width=2.4pt,line cap=round] (-0.95,-0.48) -- (-0.25,-0.3);
+    \draw[gray!20,line width=1pt,line cap=round] (-0.93,-0.47) -- (-0.3,-0.31);
+    \shade[top color=gray!15,bottom color=gray!55,draw=gray!45!black,line width=0.5pt,rotate around={14:(0.0,-0.28)}] (0.0,-0.28) ellipse (0.28 and 0.09);
+    \foreach \x/\y in {-0.12/-0.2,0.0/-0.17,0.12/-0.21}{\shade[ball color=PNmaula] (\x,\y) circle (0.06);}
+    \shade[ball color=PKdo] (0.06,-0.24) circle (0.05); \shade[ball color=PKcam] (-0.06,-0.25) circle (0.04);
+    \shade[top color=PNmauda!85!white,bottom color=PNmauda!90!orange,draw=PNmautoc!80,line width=0.6pt] plot[smooth cycle,tension=1] coordinates{(-0.78,-0.32)(-0.6,-0.36)(-0.55,-0.52)(-0.65,-0.62)(-0.82,-0.58)(-0.86,-0.45)};
+    \draw[PNmautoc!80,line width=0.4pt] (-0.62,-0.42) -- (-0.72,-0.4) (-0.62,-0.5) -- (-0.72,-0.49);
+  \end{scope}}
+
+% Hai quả tạ tay đặt chéo nhau
+\providecommand{\PNmotta}{}\renewcommand{\PNmotta}{%
+  \shade[top color=PNmauta!60!white,bottom color=PNmauta!80!black,draw=PNmauta!45!black,line width=0.5pt] (-0.36,-0.05) rectangle (0.36,0.05);
+  \foreach \s in {-1,1}{%
+    \shade[left color=PNmauta!55!white,right color=PNmauta!85!black,draw=PNmauta!45!black,line width=0.6pt,rounded corners=2pt] (\s*0.28-0.1,-0.22) rectangle (\s*0.28+0.1,0.22);
+    \shade[top color=PNmauta!40!white,bottom color=PNmauta!80!black,draw=PNmauta!45!black,line width=0.6pt,rounded corners=2pt] (\s*0.46-0.09,-0.18) rectangle (\s*0.46+0.09,0.18);
+    \fill[white,opacity=0.5] (\s*0.28-0.06,0.05) rectangle (\s*0.28-0.02,0.18);}}
+\providecommand{\PNta}{}\renewcommand{\PNta}{%
+  \begin{scope}[line join=round]
+    \begin{scope}[rotate=-32,shift={(0,0.05)}]\PNmotta\end{scope}
+    \begin{scope}[rotate=32,shift={(0,-0.05)}]\PNmotta\end{scope}
+  \end{scope}}
+
+% Hai nửa quả bơ và lá
+\providecommand{\PNnuabo}{}\renewcommand{\PNnuabo}{%
+  \fill[PNmaubo!80!black,draw=PNmaubo!50!black,line width=0.6pt] plot[smooth cycle,tension=1] coordinates{(0,0.5)(0.2,0.38)(0.36,0.0)(0.3,-0.38)(0,-0.5)(-0.3,-0.38)(-0.36,0.0)(-0.2,0.38)};
+  \shade[inner color=PNmaurotbo!80!yellow,outer color=PNmaurotbo!70!green] plot[smooth cycle,tension=1] coordinates{(0,0.44)(0.16,0.33)(0.3,0.0)(0.25,-0.33)(0,-0.44)(-0.25,-0.33)(-0.3,0.0)(-0.16,0.33)};
+  \shade[ball color=PKnau!85!orange] (0,-0.1) circle (0.18);}
+\providecommand{\PNbo}{}\renewcommand{\PNbo}{%
+  \begin{scope}[line join=round]
+    \foreach \g/\x in {35/0.45,150/-0.5,80/0.05}{\fill[PNmaula!80!black,draw=PNmaula!45!black,line width=0.5pt,rotate around={\g:(0,0)}] (0,0) .. controls (0.2,0.12) and (0.5,0.1) .. (0.75,0) .. controls (0.5,-0.1) and (0.2,-0.12) .. cycle;
+      \draw[PNmaula!40!black,line width=0.35pt,rotate around={\g:(0,0)}] (0.05,0) -- (0.7,0);}
+    \begin{scope}[shift={(0.22,0.18)},rotate=-28,scale=0.95]\PNnuabo\end{scope}
+    \begin{scope}[shift={(-0.18,-0.12)},rotate=22]\PNnuabo\end{scope}
+  \end{scope}}
+
+%---------- Bố cục các bài vẽ lại từ phiếu gốc ----------
+% Khung vẽ tay màu nâu (hai nét lệch nhau): \PNkhungnau{x1}{y1}{x2}{y2}
+\providecommand{\PNkhungnau}{}\renewcommand{\PNkhungnau}[4]{%
+  \draw[PKnau!75!black,line width=1.4pt,line join=round] (#1,#2) -- (#3+0.03,#2-0.04) -- (#3-0.01,#4) -- (#1-0.02,#4+0.03) -- cycle;
+  \draw[PKnau!60!black,line width=0.6pt,line join=round] (#1+0.04,#2-0.05) -- (#3-0.02,#2) -- (#3+0.04,#4+0.04) -- (#1+0.02,#4-0.02) -- cycle;}
+% Thẻ phép trừ có con vật bị gạch (Bài 1): \PNthetru{tên hình}{số con}{số con bị gạch (tính từ đầu)}{phép tính}
+\providecommand{\PNthetru}{}\renewcommand{\PNthetru}[4]{%
+  \begin{tikzpicture}
+    \PNkhungnau{-3.9}{-2.2}{3.9}{2.2}
+    \ifcase#2\or\def\PNvitri{0/0.6}\or\def\PNvitri{-1.35/0.6,1.35/0.6}\or\def\PNvitri{-2.2/1.05,0/0.45,2.2/1.05}%
+      \or\def\PNvitri{-2.4/1.1,-0.8/0.4,0.8/1.1,2.4/0.4}\or\def\PNvitri{-2.3/1.2,0/1.2,2.3/1.2,-1.15/0.32,1.15/0.32}\fi
+    \ifnum#2=2 \def\PNtile{1.75}\else\def\PNtile{1.38}\fi
+    \foreach \x/\y [count=\k] in \PNvitri {%
+      \begin{scope}[shift={(\x,\y)},scale=\PNtile]\csname #1\endcsname\end{scope}
+      \ifnum\k>#3\else\draw[black,line width=1.6pt,line cap=round] (\x-0.7,\y+0.62) -- (\x+0.7,\y-0.56);\fi}
+    \node[font=\sffamily\LARGE,anchor=east] at (0.35,-1.5) {#4};
+    \draw[PKdo,line width=1.4pt] (0.95,-1.76) -- (2.75,-1.76);
+  \end{tikzpicture}}
+% Lọ có 5 con vật (Bài 2): \PNlothu{phép tính}{tên hình}{tỉ lệ}
+\providecommand{\PNlothu}{}\renewcommand{\PNlothu}[3]{%
+  \begin{tikzpicture}
+    \begin{scope}[scale=1.62]\PNlo{#1}\end{scope}
+    \foreach \x/\y in {-1.06/0.5,0.0/0.66,1.06/0.48,-0.57/-0.68,0.6/-0.66}{\begin{scope}[shift={(\x,\y)},scale=#3]\csname #2\endcsname\end{scope}}
+  \end{tikzpicture}}
+% Một hàng trong bài nối (Bài 3): \PNhangnoi{tên hình}{số con}{số con bị gạch (tính từ cuối)}{tỉ lệ}{khoảng cách}{phép tính}
+\providecommand{\PNhangnoi}{}\renewcommand{\PNhangnoi}[6]{%
+  \draw[gray!65,line width=0.8pt,rounded corners=2pt] (0,-0.92) rectangle (8.0,0.92);
+  \foreach \k in {1,...,#2}{%
+    \pgfmathsetmacro{\xx}{4.0+(\k-(#2+1)/2)*#5}
+    \begin{scope}[shift={(\xx,0.02)},scale=#4]\csname #1\endcsname\end{scope}
+    \pgfmathtruncatemacro{\PNboqua}{#2-#3}
+    \ifnum\k>\PNboqua\draw[black,line width=1.8pt,line cap=round] (\xx-0.5,0.7) -- (\xx+0.55,-0.68);\fi}
+  \fill (8.45,0) circle (2.6pt);
+  \fill (12.3,0) circle (2.6pt);
+  \node[font=\sffamily\bfseries\LARGE,anchor=west] at (12.6,0) {#6};}
+% Một hàng cà rốt (Bài 4): \PNhangcarot{số củ}{các củ bị gạch}{dòng dưới}{số trong vòng tròn}
+\providecommand{\PNhangcarot}{}\renewcommand{\PNhangcarot}[4]{%
+  \draw[black!85,line width=2.2pt,rounded corners=0.45cm] (2.4,-1.35) rectangle (10.4,1.35);
+  \foreach \k in {1,...,#1}{\pgfmathsetmacro{\xx}{6.4+(\k-#1/2-0.5)*1.3}\begin{scope}[shift={(\xx,0.3)},scale=0.88]\PNcarot\end{scope}}
+  \foreach \k in {#2}{\ifnum\k>0 \pgfmathsetmacro{\xx}{6.4+(\k-#1/2-0.5)*1.3}\draw[black,line width=1.8pt,line cap=round] (\xx-0.22,1.1) -- (\xx+0.3,-0.45);\fi}
+  #3
+  \node[font=\sffamily\bfseries\Huge] at (11.05,0) {=};
+  \draw[black!85,line width=2pt] (12.35,0) circle (0.62);
+  \node[font=\sffamily\bfseries\Huge] at (12.35,0) {#4};}
+% Dòng "___ - ___" dưới hàng cà rốt
+\providecommand{\PNtrongcarot}{}\renewcommand{\PNtrongcarot}{%
+  \draw[black!85,line width=1.6pt] (4.85,-1.05) -- (6.05,-1.05) (6.75,-1.05) -- (7.95,-1.05);
+  \node[font=\sffamily\bfseries\Huge] at (6.4,-0.85) {-};}
+% Một hàng cỏ bốn lá (Bài 5): \PNhangcoba{số lá}{các lá bị gạch}{dòng dưới}
+\providecommand{\PNhangcoba}{}\renewcommand{\PNhangcoba}[3]{%
+  \draw[black!90,line width=2.2pt] (2.4,-1.65) rectangle (16.9,1.65);
+  \foreach \k in {1,...,#1}{\pgfmathsetmacro{\xx}{9.65+(\k-#1/2-0.5)*2.2}\begin{scope}[shift={(\xx,0.62)},scale=1.35]\PNcovaybon\end{scope}}
+  \foreach \k in {#2}{\ifnum\k>0 \pgfmathsetmacro{\xx}{9.65+(\k-#1/2-0.5)*2.2}\draw[black,line width=2.2pt,line cap=round] (\xx-0.75,1.45) -- (\xx+0.95,-0.28);\fi}
+  #3}
+% Dòng "___ - ___ = ___" dưới hàng cỏ bốn lá
+\providecommand{\PNtrongcoba}{}\renewcommand{\PNtrongcoba}{%
+  \draw[black,line width=2.2pt,line cap=round] (6.6,-1.3) -- (7.9,-1.3) (8.95,-1.3) -- (10.25,-1.3) (11.3,-1.3) -- (12.6,-1.3);
+  \fill (8.25,-0.98) rectangle (8.6,-0.85);
+  \fill (10.6,-0.8) rectangle (10.95,-0.74) (10.6,-0.96) rectangle (10.95,-0.9);}
+% Viên chữ bo tròn (Tiếng Việt Bài 5): \PNvienchu[màu]{vị trí}{nội dung}
+\providecommand{\PNvienchu}{}\renewcommand{\PNvienchu}[3][white]{%
+  \node[draw=black!85,line width=1.2pt,fill=#1,rounded corners=0.48cm,minimum width=1.1cm,minimum height=1.5cm,inner sep=0pt,font=\Huge] at (#2) {#3};}
+% Chỗ trống trong viên chữ: \PNchotrong{vị trí}
+\providecommand{\PNchotrong}{}\renewcommand{\PNchotrong}[1]{%
+  \draw[black,line width=1.6pt] ($(#1)+(-0.28,-0.28)$) -- ($(#1)+(0.28,-0.28)$);}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                  PHIẾU TOÁN
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -266,38 +789,63 @@
 
 \begin{bt}
     Bé hãy điền kết quả phép tính trừ sau:
-    \PNdong{2.1cm}{13.3cm}{p15_image1.png}
-    \PNdong[8pt]{2.1cm}{13.3cm}{p15_image2.png}
+    \TTbatdauhinh
+    {\centering
+        \PNthetru{PNgautruc}{5}{2}{5 $-$ 2 =}\hspace{4mm}\PNthetru{PNkoala}{2}{1}{2 $-$ 1 =}\\*[3mm]
+        \PNthetru{PNho}{4}{2}{4 $-$ 2 =}\hspace{4mm}\PNthetru{PNvoi}{3}{2}{3 $-$ 2 =}\\*[3mm]
+        \PNthetru{PNkhi}{5}{1}{5 $-$ 1 =}\hspace{4mm}\PNthetru{PNsutu}{4}{1}{4 $-$ 1 =}\\*[3mm]
+        \PNthetru{PNcao}{4}{3}{4 $-$ 3 =}\hspace{4mm}\PNthetru{PNhuou}{3}{1}{3 $-$ 1 =}\par}
 \end{bt}
 
 \begin{bt}
     Bé hãy gạch bớt để thể hiện phép trừ và điền kết quả phép trừ nhé!
-    \PNdong{2.25cm}{13cm}{p15_image3.png}
+    \TTbatdauhinh
+    {\centering
+        \PNlothu{5$-$0=}{PNmeo}{0.98}\hfill\PNlothu{5$-$1=}{PNsutu}{0.86}\hfill\PNlothu{5$-$2=}{PNkhi}{0.92}\\*[3mm]
+        \PNlothu{5$-$3=}{PNthodau}{0.8}\hfill\PNlothu{5$-$4=}{PNcho}{0.94}\hfill\PNlothu{5$-$5=}{PNlon}{0.97}\par}
 \end{bt}
 
 \begin{bt}
     Bé hãy nối hình thể hiện phép trừ tương ứng.
-    % hai hình cùng tỉ lệ 0,014 cm/điểm ảnh, cùng lề trái để các chấm nối thẳng hàng
-    \PNdong{3.16cm}{11.06cm}{p15_image4.png}
-    \PNdong[2pt]{3.16cm}{11.17cm}{p15_image5.png}
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}[scale=1.12]
+        \begin{scope}[shift={(0,0)}]\PNhangnoi{PNoc}{3}{2}{1.05}{2.2}{4-3}\end{scope}
+        \begin{scope}[shift={(0,-2.3)}]\PNhangnoi{PNran}{4}{3}{1.15}{1.8}{4-0}\end{scope}
+        \begin{scope}[shift={(0,-4.6)}]\PNhangnoi{PNkhunglong}{4}{0}{1.15}{1.85}{3-1}\end{scope}
+        \begin{scope}[shift={(0,-6.9)}]\PNhangnoi{PNsoc}{2}{1}{1.35}{2.8}{3-2}\end{scope}
+        \begin{scope}[shift={(0,-9.2)}]\PNhangnoi{PNdoi}{3}{1}{1.25}{2.4}{2-1}\end{scope}
+    \end{tikzpicture}\par}
 \end{bt}
 
 \begin{bt}
     Bé hãy viết phép trừ thể hiện qua hình ảnh bên dưới theo mẫu:
-    % ba hình cùng tỉ lệ 0,0125 cm/điểm ảnh, các khung cà rốt cùng lề trái
-    \PNdong{1.14cm}{14.31cm}{p15_image6.png}
-    \PNdong[2pt]{3.33cm}{12.14cm}{p15_image7.png}
-    \PNdong[8pt]{3.33cm}{13.01cm}{p15_image8.png}
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}[scale=1.25]
+        \begin{scope}[shift={(0,0)}]\PNhangcarot{4}{3,4}{\node[font=\sffamily\bfseries\Huge] at (6.4,-0.95) {4 - 2};}{2}\end{scope}
+        \begin{scope}[shift={(1.75,0.25)},scale=1.45]\PNthotrang\end{scope}
+        \begin{scope}[shift={(2.55,0.0)},rotate=-25,scale=1.5]\PNchanthotrang\end{scope}
+        \begin{scope}[shift={(2.5,-0.85)},rotate=-8,scale=1.5]\PNchanthotrang\end{scope}
+        \begin{scope}[shift={(0,-3.05)}]\PNhangcarot{5}{3,4,5}{\PNtrongcarot}{}\end{scope}
+        \begin{scope}[shift={(0,-6.1)}]\PNhangcarot{3}{1}{\PNtrongcarot}{}\end{scope}
+        \begin{scope}[shift={(0,-9.15)}]\PNhangcarot{4}{1,2,3,4}{\PNtrongcarot}{}\end{scope}
+        \begin{scope}[shift={(0,-12.2)}]\PNhangcarot{5}{2,3,4,5}{\PNtrongcarot}{}\end{scope}
+    \end{tikzpicture}\par}
 \end{bt}
 
 \begin{bt}
     Bé hãy viết phép trừ thể hiện qua hình ảnh bên dưới theo mẫu:
-    % năm hình cùng tỉ lệ 0,0118 cm/điểm ảnh, các khung cỏ bốn lá cùng lề trái
-    \PNdong{0.35cm}{16.78cm}{p15_image9.png}
-    \PNdong[5pt]{3.22cm}{13.92cm}{p15_image10.png}
-    \PNdong[5pt]{3.22cm}{13.92cm}{p15_image11.png}
-    \PNdong[5pt]{3.22cm}{13.92cm}{p15_image12.png}
-    \PNdong[5pt]{3.22cm}{13.92cm}{p15_image13.png}
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}
+        \begin{scope}[shift={(0,0)}]\PNhangcoba{4}{4}{\node[font=\sffamily\bfseries\Huge] at (9.65,-1.1) {4 - 1 = 3};}\end{scope}
+        \begin{scope}[shift={(0.95,0.05)},scale=1.42]\PNyeutinh\end{scope}
+        \begin{scope}[shift={(0,-3.6)}]\PNhangcoba{4}{3,4}{\PNtrongcoba}\end{scope}
+        \begin{scope}[shift={(0,-7.2)}]\PNhangcoba{5}{3,4,5}{\PNtrongcoba}\end{scope}
+        \begin{scope}[shift={(0,-10.8)}]\PNhangcoba{5}{2,3,4,5}{\PNtrongcoba}\end{scope}
+        \begin{scope}[shift={(0,-14.4)}]\PNhangcoba{5}{4,5}{\PNtrongcoba}\end{scope}
+    \end{tikzpicture}\par}
 \end{bt}
 
 \begin{bt}
@@ -525,7 +1073,36 @@
 
 \begin{bt}
     Bé hãy nối và đọc các từ sau!
-    \TThinh[10cm]{p15_image22.png}
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}
+        % c ỏ (cỏ)
+        \begin{scope}[shift={(0,0)}]
+            \begin{scope}[shift={(0,0.0)},scale=1.4]\PNbuico\end{scope}
+            \PNvienchu[PNmaula!25]{2.7,0}{c}\PNvienchu[PNmaula!25]{4.05,0}{}
+            \PNchotrong{4.05,0}\begin{scope}[shift={(4.05,0.32)},scale=1.4]\PNdau{hoi}\end{scope}
+            \PNvienchu[PKvang!60]{10.2,0}{ơ}
+        \end{scope}
+        % ă n (ăn)
+        \begin{scope}[shift={(0,-2.7)}]
+            \begin{scope}[shift={(0.25,0.1)},scale=1.45]\PNbean\end{scope}
+            \PNvienchu[PNmahong!45]{2.7,0}{}\PNchotrong{2.7,0}\PNvienchu[PNmahong!45]{4.05,0}{n}
+            \PNvienchu[PKtim!30]{10.2,0}{ă}
+        \end{scope}
+        % t ạ (tạ)
+        \begin{scope}[shift={(0,-5.4)}]
+            \begin{scope}[shift={(0,0)},scale=1.65]\PNta\end{scope}
+            \PNvienchu[PKvang!35]{2.7,0}{t}\PNvienchu[PKvang!35]{4.05,0}{}
+            \PNchotrong{4.05,0}\fill (4.05,-0.48) circle (0.07);
+            \PNvienchu[PKdo!55]{10.2,0}{o}
+        \end{scope}
+        % b ơ (bơ)
+        \begin{scope}[shift={(0,-8.1)}]
+            \begin{scope}[shift={(0,0)},scale=1.45]\PNbo\end{scope}
+            \PNvienchu[PKxanhnuoc!25]{2.7,0}{b}\PNvienchu[PKxanhnuoc!25]{4.05,0}{}\PNchotrong{4.05,0}
+            \PNvienchu[PKdo!55]{10.2,0}{a}
+        \end{scope}
+    \end{tikzpicture}\par}
 \end{bt}
 
 \begin{bt}
