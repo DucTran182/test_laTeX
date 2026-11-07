@@ -808,28 +808,28 @@
   \node[font=\sffamily\bfseries\LARGE,anchor=west] at (12.6,0) {#6};}
 % Một hàng cà rốt (Bài 4): \PNhangcarot{số củ}{các củ bị gạch}{dòng dưới}{số trong vòng tròn}
 \providecommand{\PNhangcarot}{}\renewcommand{\PNhangcarot}[4]{%
-  \draw[black!85,line width=2.2pt,rounded corners=0.45cm] (2.4,-1.35) rectangle (10.4,1.35);
-  \foreach \k in {1,...,#1}{\pgfmathsetmacro{\xx}{6.4+(\k-#1/2-0.5)*1.3}\begin{scope}[shift={(\xx,0.3)},scale=0.88]\PNcarot\end{scope}}
-  \foreach \k in {#2}{\ifnum\k>0 \pgfmathsetmacro{\xx}{6.4+(\k-#1/2-0.5)*1.3}\draw[black,line width=1.8pt,line cap=round] (\xx-0.22,1.1) -- (\xx+0.3,-0.45);\fi}
+  \draw[black!85,line width=1.8pt,rounded corners=0.35cm] (2.4,-1.0) rectangle (10.4,1.0);
+  \foreach \k in {1,...,#1}{\pgfmathsetmacro{\xx}{6.4+(\k-#1/2-0.5)*1.1}\begin{scope}[shift={(\xx,0.36)},scale=0.62]\PNcarot\end{scope}}
+  \foreach \k in {#2}{\ifnum\k>0 \pgfmathsetmacro{\xx}{6.4+(\k-#1/2-0.5)*1.1}\draw[black,line width=1.5pt,line cap=round] (\xx-0.15,0.85) -- (\xx+0.21,-0.2);\fi}
   #3
-  \node[font=\sffamily\bfseries\Huge] at (11.05,0) {=};
-  \draw[black!85,line width=2pt] (12.35,0) circle (0.62);
-  \node[font=\sffamily\bfseries\Huge] at (12.35,0) {#4};}
+  \node[font=\sffamily\bfseries\LARGE] at (11.0,0) {=};
+  \draw[black!85,line width=1.6pt] (12.1,0) circle (0.5);
+  \node[font=\sffamily\bfseries\LARGE] at (12.1,0) {#4};}
 % Dòng "___ - ___" dưới hàng cà rốt
 \providecommand{\PNtrongcarot}{}\renewcommand{\PNtrongcarot}{%
-  \draw[black!85,line width=1.6pt] (4.85,-1.05) -- (6.05,-1.05) (6.75,-1.05) -- (7.95,-1.05);
-  \node[font=\sffamily\bfseries\Huge] at (6.4,-0.85) {-};}
+  \draw[black!85,line width=1.4pt] (5.0,-0.75) -- (6.0,-0.75) (6.8,-0.75) -- (7.8,-0.75);
+  \node[font=\sffamily\bfseries\LARGE] at (6.4,-0.62) {-};}
 % Một hàng cỏ bốn lá (Bài 5): \PNhangcoba{số lá}{các lá bị gạch}{dòng dưới}
 \providecommand{\PNhangcoba}{}\renewcommand{\PNhangcoba}[3]{%
-  \draw[black!90,line width=2.2pt] (2.4,-1.65) rectangle (16.9,1.65);
-  \foreach \k in {1,...,#1}{\pgfmathsetmacro{\xx}{9.65+(\k-#1/2-0.5)*2.2}\begin{scope}[shift={(\xx,0.62)},scale=1.35]\PNcovaybon\end{scope}}
-  \foreach \k in {#2}{\ifnum\k>0 \pgfmathsetmacro{\xx}{9.65+(\k-#1/2-0.5)*2.2}\draw[black,line width=2.2pt,line cap=round] (\xx-0.75,1.45) -- (\xx+0.95,-0.28);\fi}
+  \draw[black!90,line width=1.9pt] (2.4,-1.15) rectangle (16.9,1.15);
+  \foreach \k in {1,...,#1}{\pgfmathsetmacro{\xx}{9.65+(\k-#1/2-0.5)*2.0}\begin{scope}[shift={(\xx,0.48)}]\PNcovaybon\end{scope}}
+  \foreach \k in {#2}{\ifnum\k>0 \pgfmathsetmacro{\xx}{9.65+(\k-#1/2-0.5)*2.0}\draw[black,line width=1.9pt,line cap=round] (\xx-0.55,1.05) -- (\xx+0.7,-0.15);\fi}
   #3}
 % Dòng "___ - ___ = ___" dưới hàng cỏ bốn lá
 \providecommand{\PNtrongcoba}{}\renewcommand{\PNtrongcoba}{%
-  \draw[black,line width=2.2pt,line cap=round] (6.6,-1.3) -- (7.9,-1.3) (8.95,-1.3) -- (10.25,-1.3) (11.3,-1.3) -- (12.6,-1.3);
-  \fill (8.25,-0.98) rectangle (8.6,-0.85);
-  \fill (10.6,-0.8) rectangle (10.95,-0.74) (10.6,-0.96) rectangle (10.95,-0.9);}
+  \draw[black,line width=1.9pt,line cap=round] (6.7,-0.9) -- (7.9,-0.9) (8.95,-0.9) -- (10.15,-0.9) (11.2,-0.9) -- (12.4,-0.9);
+  \fill (8.25,-0.62) rectangle (8.6,-0.51);
+  \fill (10.5,-0.47) rectangle (10.85,-0.42) (10.5,-0.61) rectangle (10.85,-0.56);}
 % Viên chữ bo tròn (Tiếng Việt Bài 5): \PNvienchu[màu]{vị trí}{nội dung}
 \providecommand{\PNvienchu}{}\renewcommand{\PNvienchu}[3][white]{%
   \node[draw=black!85,line width=1.2pt,fill=#1,rounded corners=0.48cm,minimum width=1.1cm,minimum height=1.5cm,inner sep=0pt,font=\Huge] at (#2) {#3};}
@@ -884,15 +884,15 @@
     Bé hãy viết phép trừ thể hiện qua hình ảnh bên dưới theo mẫu:
     \TTbatdauhinh
     {\centering
-    \begin{tikzpicture}[scale=1.25]
-        \begin{scope}[shift={(0,0)}]\PNhangcarot{4}{3,4}{\node[font=\sffamily\bfseries\Huge] at (6.4,-0.95) {4 - 2};}{2}\end{scope}
-        \begin{scope}[shift={(1.75,0.25)},scale=1.45]\PNthotrang\end{scope}
-        \begin{scope}[shift={(2.55,0.0)},rotate=-25,scale=1.5]\PNchanthotrang\end{scope}
-        \begin{scope}[shift={(2.5,-0.85)},rotate=-8,scale=1.5]\PNchanthotrang\end{scope}
-        \begin{scope}[shift={(0,-3.05)}]\PNhangcarot{5}{3,4,5}{\PNtrongcarot}{}\end{scope}
-        \begin{scope}[shift={(0,-6.1)}]\PNhangcarot{3}{1}{\PNtrongcarot}{}\end{scope}
-        \begin{scope}[shift={(0,-9.15)}]\PNhangcarot{4}{1,2,3,4}{\PNtrongcarot}{}\end{scope}
-        \begin{scope}[shift={(0,-12.2)}]\PNhangcarot{5}{2,3,4,5}{\PNtrongcarot}{}\end{scope}
+    \begin{tikzpicture}
+        \begin{scope}[shift={(0,0)}]\PNhangcarot{4}{3,4}{\node[font=\sffamily\bfseries\LARGE] at (6.4,-0.66) {4 - 2};}{2}\end{scope}
+        \begin{scope}[shift={(1.78,-0.05)},scale=0.95]\PNthotrang\end{scope}
+        \begin{scope}[shift={(2.5,-0.05)},rotate=-25,scale=1.1]\PNchanthotrang\end{scope}
+        \begin{scope}[shift={(2.48,-0.62)},rotate=-8,scale=1.1]\PNchanthotrang\end{scope}
+        \begin{scope}[shift={(0,-2.1)}]\PNhangcarot{5}{3,4,5}{\PNtrongcarot}{}\end{scope}
+        \begin{scope}[shift={(0,-4.2)}]\PNhangcarot{3}{1}{\PNtrongcarot}{}\end{scope}
+        \begin{scope}[shift={(0,-6.3)}]\PNhangcarot{4}{1,2,3,4}{\PNtrongcarot}{}\end{scope}
+        \begin{scope}[shift={(0,-8.4)}]\PNhangcarot{5}{2,3,4,5}{\PNtrongcarot}{}\end{scope}
     \end{tikzpicture}\par}
 \end{bt}
 
@@ -901,12 +901,12 @@
     \TTbatdauhinh
     {\centering
     \begin{tikzpicture}
-        \begin{scope}[shift={(0,0)}]\PNhangcoba{4}{4}{\node[font=\sffamily\bfseries\Huge] at (9.65,-1.1) {4 - 1 = 3};}\end{scope}
-        \begin{scope}[shift={(0.95,0.05)},scale=1.42]\PNyeutinh\end{scope}
-        \begin{scope}[shift={(0,-3.6)}]\PNhangcoba{4}{3,4}{\PNtrongcoba}\end{scope}
-        \begin{scope}[shift={(0,-7.2)}]\PNhangcoba{5}{3,4,5}{\PNtrongcoba}\end{scope}
-        \begin{scope}[shift={(0,-10.8)}]\PNhangcoba{5}{2,3,4,5}{\PNtrongcoba}\end{scope}
-        \begin{scope}[shift={(0,-14.4)}]\PNhangcoba{5}{4,5}{\PNtrongcoba}\end{scope}
+        \begin{scope}[shift={(0,0)}]\PNhangcoba{4}{4}{\node[font=\sffamily\bfseries\huge] at (9.65,-0.72) {4 - 1 = 3};}\end{scope}
+        \begin{scope}[shift={(1.05,0.05)},scale=1.0]\PNyeutinh\end{scope}
+        \begin{scope}[shift={(0,-2.4)}]\PNhangcoba{4}{3,4}{\PNtrongcoba}\end{scope}
+        \begin{scope}[shift={(0,-4.8)}]\PNhangcoba{5}{3,4,5}{\PNtrongcoba}\end{scope}
+        \begin{scope}[shift={(0,-7.2)}]\PNhangcoba{5}{2,3,4,5}{\PNtrongcoba}\end{scope}
+        \begin{scope}[shift={(0,-9.6)}]\PNhangcoba{5}{4,5}{\PNtrongcoba}\end{scope}
     \end{tikzpicture}\par}
 \end{bt}
 
