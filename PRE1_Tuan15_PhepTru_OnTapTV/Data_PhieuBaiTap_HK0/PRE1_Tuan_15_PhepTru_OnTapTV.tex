@@ -719,7 +719,7 @@
   \begin{tikzpicture}
     \PNkhungnau{-3.9}{-2.2}{3.9}{2.2}
     \ifcase#2\or\def\PNvitri{0/0.6}\or\def\PNvitri{-1.35/0.6,1.35/0.6}\or\def\PNvitri{-2.2/1.05,0/0.45,2.2/1.05}%
-      \or\def\PNvitri{-2.4/1.1,-0.8/0.4,0.8/1.1,2.4/0.4}\or\def\PNvitri{-2.3/1.2,0/1.2,2.3/1.2,-1.15/0.32,1.15/0.32}\fi
+      \or\def\PNvitri{-2.46/1.1,-0.82/0.4,0.82/1.1,2.46/0.4}\or\def\PNvitri{-2.3/1.32,0/1.32,2.3/1.32,-1.15/-0.08,1.15/-0.08}\fi
     \ifnum#2=2 \def\PNtile{1.75}\else\def\PNtile{1.38}\fi
     \foreach \x/\y [count=\k] in \PNvitri {%
       \begin{scope}[shift={(\x,\y)},scale=\PNtile]\csname #1\endcsname\end{scope}
