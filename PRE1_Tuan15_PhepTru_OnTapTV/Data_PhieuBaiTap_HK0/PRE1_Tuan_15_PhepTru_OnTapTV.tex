@@ -1216,23 +1216,6 @@
     \end{tikzpicture}\par}
 \end{bt}
 
-\begin{bt}
-    Bé hãy viết các tiếng sau vào vở ô li (tô theo chữ mờ rồi viết tiếp).
-    \TTbatdauhinh
-    {\centering
-    \begin{tikzpicture}
-        \def\oli{0.42}
-        \fill[white] (0,0) rectangle (40*\oli,-18*\oli);
-        \draw[PKtim!30,thin] (0,-18*\oli) grid[step=\oli] (40*\oli,0);
-        \foreach \tu [count=\k] in {nơ,đò,mì,trà}{
-            \pgfmathsetmacro{\yy}{-(4*\k+1)*\oli}
-            \draw[PKtim!75,thick] (0,\yy) -- (40*\oli,\yy);
-            \node[anchor=base west,inner sep=0pt,font=\Huge,scale=2.1] at (0.5,\yy) {\tu};
-            \node[anchor=base west,inner sep=0pt,font=\Huge,scale=2.1,text=gray!40] at (12*\oli,\yy) {\tu};}
-        \draw[PKtim!75,thick] (0,0) rectangle (40*\oli,-18*\oli);
-    \end{tikzpicture}\par}
-\end{bt}
-
 \begin{center}
        \faGg\faGg\quad Hết \quad\faGg\faGg
 \end{center}
