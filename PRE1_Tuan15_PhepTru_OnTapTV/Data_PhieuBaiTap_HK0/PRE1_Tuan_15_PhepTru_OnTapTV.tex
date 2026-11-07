@@ -156,6 +156,8 @@
     \draw[orange!70!black,thin] (0,0) circle (0.36);
     \node[font=\sffamily\bfseries\Large] at (0,0) {#2};
   \end{scope}}
+% Tranh trong bài ghép âm với vần
+\providecommand{\PNanhghep}{}\renewcommand{\PNanhghep}[1]{\node[inner sep=0pt] at (0,0) {\includegraphics[height=1.6cm,width=2.3cm,keepaspectratio]{#1}};}
 % Hình nhỏ trong thẻ (tranh cắt từ phiếu gốc)
 \providecommand{\PNtranh}{}\renewcommand{\PNtranh}[3][1.55cm]{\node[inner sep=0pt] at (#2) {\includegraphics[height=#1,width=2.7cm,keepaspectratio]{#3}};}
 % Dấu thanh vẽ bằng nét (không phụ thuộc phông chữ): \PNdau{huyen|sac|hoi|nga|nang}
@@ -642,6 +644,19 @@
     \begin{scope}[shift={(-0.32,0.5)},scale=0.32,rotate=10]\PNcovaybon\end{scope}
   \end{scope}}
 
+% Mũ lưỡi trai màu đỏ (rộng khoảng 1,6cm)
+\providecommand{\PNmu}{}\renewcommand{\PNmu}{%
+  \begin{scope}[line join=round,shift={(-0.15,0)}]
+    \shade[top color=PKdo!70!white,bottom color=PKdo!85!black,draw=PKdo!40!black,line width=0.6pt]
+      (-0.65,-0.3) .. controls (-0.68,0.25) and (-0.35,0.5) .. (0,0.5) .. controls (0.38,0.5) and (0.62,0.2) .. (0.6,-0.3) .. controls (0.2,-0.38) and (-0.3,-0.38) .. cycle;
+    \draw[PKdo!45!black,line width=0.4pt] (0,0.5) .. controls (-0.15,0.2) .. (-0.2,-0.35) (0,0.5) .. controls (0.18,0.2) .. (0.24,-0.34);
+    \fill[white,opacity=0.3] (-0.38,0.12) ellipse (0.11 and 0.2);
+    \draw[white,line width=1.6pt] (-0.63,-0.22) .. controls (-0.2,-0.3) and (0.2,-0.3) .. (0.6,-0.22);
+    \shade[ball color=PKdo] (0,0.52) ellipse (0.08 and 0.045);
+    \shade[top color=PKdo!80!black,bottom color=PKdo!55!black,draw=PKdo!40!black,line width=0.6pt]
+      (0.2,-0.26) .. controls (0.6,-0.22) and (0.95,-0.3) .. (1.02,-0.38) .. controls (0.92,-0.5) and (0.4,-0.47) .. (0.05,-0.38) -- cycle;
+  \end{scope}}
+
 % Lọ thủy tinh có nhãn ghi phép tính: \PNlo{phép tính}
 \providecommand{\PNlo}{}\renewcommand{\PNlo}[1]{%
   \begin{scope}[line join=round]
@@ -1126,12 +1141,14 @@
     \TTbatdauhinh
     {\centering
     \begin{tikzpicture}
-        \foreach \hinh/\tu [count=\k] in {p15_ga.png/ga,p15_tu.png/tu,p15_re.png/re,p15_ta.png/ta,
-                                          p15_nui.png/nui,p15_co.png/co,p15_mi.png/mi,p15_hocon.png/hô}{
+        \foreach \hinh/\tu [count=\k] in {{\PNtranh[1.75cm]{0,0.8}{p15_tu.png}}/tu,{\begin{scope}[shift={(0,0.8)},scale=1.25]\PNmu\end{scope}}/mu,
+                                          {\PNtranh[1.75cm]{0,0.8}{p15_ta.png}}/ta,{\PNtranh[1.75cm]{0,0.8}{p15_nui.png}}/nui,
+                                          {\PNtranh[1.75cm]{0,0.8}{p15_mi.png}}/mi,{\PNtranh[1.2cm]{0,0.8}{p15_da.png}}/đa,
+                                          {\PNtranh[1.75cm]{0,0.8}{p15_rua.png}}/rua,{\PNtranh[1.75cm]{0,0.8}{p15_dau.png}}/đâu}{
             \pgfmathtruncatemacro{\cot}{mod(\k-1,4)}\pgfmathtruncatemacro{\hang}{div(\k-1,4)}
             \begin{scope}[shift={(4.3*\cot,-4.2*\hang)}]
                 \draw[thick,rounded corners=8pt,fill=PKvangnhat!35] (-2.0,-2.05) rectangle (2.0,1.85);
-                \PNtranh[1.75cm]{0,0.8}{\hinh}
+                \hinh
                 \node[font=\LARGE] at (0,-0.55) {\tu};
                 \foreach \dt [count=\j] in {huyen,sac,hoi,nga,nang}{
                     \begin{scope}[shift={(0.72*\j-2.16,-1.5)}]
@@ -1147,12 +1164,12 @@
     \TTbatdauhinh
     {\centering
     \begin{tikzpicture}[font=\LARGE]
-        \foreach \hinh/\am/\van/\mau [count=\k] in {p15_bo.png/b/ơ/bơ,p15_de.png/d/ê/,p15_tho.png/th/ỏ/,
-                                                   p15_ga.png/g/à/,p15_thuyen.png/đ/ò/,p15_no.png/n/ơ/}{
+        \foreach \hinh/\am/\van/\mau [count=\k] in {{\PNanhghep{p15_no.png}}/n/ơ/nơ,{\PNanhghep{p15_thuyen.png}}/đ/ò/,{\PNanhghep{p15_mi.png}}/m/ì/,
+                                                   {\PNanhghep{p15_tu.png}}/t/ủ/,{\PNanhghep{p15_rua.png}}/r/ùa/,{\begin{scope}[scale=1.15]\PNmu\end{scope}}/m/ũ/}{
             \pgfmathtruncatemacro{\cot}{mod(\k-1,2)}\pgfmathtruncatemacro{\hang}{div(\k-1,2)}
             \begin{scope}[shift={(8.75*\cot,-2.5*\hang)}]
                 \draw[thick,rounded corners=8pt,fill=PKvangnhat!35] (-1.3,-1.05) rectangle (7.1,1.05);
-                \node[inner sep=0pt] at (0,0) {\includegraphics[height=1.6cm,width=2.3cm,keepaspectratio]{\hinh}};
+                \hinh
                 \node[draw=PKdo!80!black,thick,fill=PKhong!25,rounded corners=4pt,minimum width=1.0cm,minimum height=1.0cm,text=PKdo] at (1.85,0) {\am};
                 \node at (2.65,0) {$+$};
                 \node[draw=PKxanhdam,thick,fill=PKxanhnuoc!20,rounded corners=4pt,minimum width=1.0cm,minimum height=1.0cm] at (3.45,0) {\van};
@@ -1178,21 +1195,21 @@
 \end{bt}
 
 \begin{bt}
-    Bé hãy tô màu quả bóng: chữ \textbf{m} tô màu \textbf{đỏ}, chữ \textbf{n} tô màu \textbf{xanh}, chữ \textbf{l} tô màu \textbf{vàng}.
+    Bé hãy tô màu quả bóng: chữ \textbf{m} tô màu \textbf{đỏ}, chữ \textbf{n} tô màu \textbf{xanh}, chữ \textbf{v} tô màu \textbf{vàng}.
     \TTbatdauhinh
     {\centering
     \begin{tikzpicture}
         % chú thích màu
-        \foreach \chu/\mau/\x in {m/PKdo/-4.2,n/PKxanhnuoc/0,l/PKvang/4.2}{
+        \foreach \chu/\mau/\x in {m/PKdo/-4.2,n/PKxanhnuoc/0,v/PKvang/4.2}{
             \begin{scope}[shift={(\x,3.6)},scale=0.6]\PNbongto{}{\mau}\end{scope}
             \node[font=\bfseries\LARGE,anchor=west] at (\x+0.55,3.6) {= \chu};}
         % chùm bóng
         \coordinate (nut) at (0,-3.6);
-        \foreach \chu/\x/\y in {m/-6.0/0.6,n/-4.5/1.6,l/-3.0/0.4,n/-1.5/1.7,m/0/0.5,l/1.5/1.75,m/3.0/0.45,n/4.5/1.6,l/6.0/0.6,
-                                n/-5.1/-1.25,l/-2.55/-1.2,m/0/-1.35,n/2.55/-1.2,m/5.1/-1.25}{
+        \foreach \chu/\x/\y in {m/-6.0/0.6,n/-4.5/1.6,v/-3.0/0.4,n/-1.5/1.7,m/0/0.5,v/1.5/1.75,m/3.0/0.45,n/4.5/1.6,v/6.0/0.6,
+                                n/-5.1/-1.25,v/-2.55/-1.2,m/0/-1.35,n/2.55/-1.2,m/5.1/-1.25}{
             \draw[gray!70!black,thin] (\x,\y-0.75) .. controls (\x*0.5,\y-1.6) and (0.1,-2.4) .. (nut);}
-        \foreach \chu/\x/\y in {m/-6.0/0.6,n/-4.5/1.6,l/-3.0/0.4,n/-1.5/1.7,m/0/0.5,l/1.5/1.75,m/3.0/0.45,n/4.5/1.6,l/6.0/0.6,
-                                n/-5.1/-1.25,l/-2.55/-1.2,m/0/-1.35,n/2.55/-1.2,m/5.1/-1.25}{
+        \foreach \chu/\x/\y in {m/-6.0/0.6,n/-4.5/1.6,v/-3.0/0.4,n/-1.5/1.7,m/0/0.5,v/1.5/1.75,m/3.0/0.45,n/4.5/1.6,v/6.0/0.6,
+                                n/-5.1/-1.25,v/-2.55/-1.2,m/0/-1.35,n/2.55/-1.2,m/5.1/-1.25}{
             \begin{scope}[shift={(\x,\y)}]\PNbongto{\chu}{white}\end{scope}}
         \fill[PKdo] (nut) -- ++(-0.35,0.2) -- ++(0,-0.4) -- cycle (nut) -- ++(0.35,0.2) -- ++(0,-0.4) -- cycle;
         \fill[PKdo!70!black] (nut) circle (0.09);
@@ -1207,7 +1224,7 @@
         \def\oli{0.42}
         \fill[white] (0,0) rectangle (40*\oli,-18*\oli);
         \draw[PKtim!30,thin] (0,-18*\oli) grid[step=\oli] (40*\oli,0);
-        \foreach \tu [count=\k] in {bơ,cỏ,đò,nơ}{
+        \foreach \tu [count=\k] in {nơ,đò,mì,trà}{
             \pgfmathsetmacro{\yy}{-(4*\k+1)*\oli}
             \draw[PKtim!75,thick] (0,\yy) -- (40*\oli,\yy);
             \node[anchor=base west,inner sep=0pt,font=\Huge,scale=2.1] at (0.5,\yy) {\tu};
