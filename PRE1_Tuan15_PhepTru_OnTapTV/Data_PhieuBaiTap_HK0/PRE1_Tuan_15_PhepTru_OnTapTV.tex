@@ -1,0 +1,645 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+%=========================================================
+% TĐ_PBT_PRE1_HK1_Tuan15
+% Phiếu bài tập PRE1 - Tuần 15
+%   Toán: Phép trừ trong phạm vi 5
+%   Tiếng Việt: Ôn tập Tiếng Việt
+% Soạn theo mẫu (\hktuan, bt, listEX)
+% Hình đặt trong thư mục Hinh_PRE1_Tuan15/ (cùng cấp với file này), tên hình có tiền tố p15_
+% Đường dẫn tính từ thư mục của main.tex khi biên dịch main.tex
+\graphicspath{{Hinh_PRE1_Tuan15/}{Data_PhieuBaiTap_HK0/Hinh_PRE1_Tuan15/}}
+%=========================================================
+
+%---------- Lệnh dùng chung cho phiếu ----------
+% Chèn hình căn giữa, dính liền với đề bài phía trên (không bị tách trang)
+% Tham số tùy chọn = chiều cao tối đa của hình (mặc định 8cm); hình không rộng quá khổ giấy
+\providecommand{\TThinh}{}\renewcommand{\TThinh}[2][8cm]{\par\nopagebreak\vspace{2pt}\nopagebreak{\centering\includegraphics[height=#1,width=\linewidth,keepaspectratio]{#2}\par}\vspace{2pt}}
+% Chỗ chấm điền
+\providecommand{\TTcham}[1][3cm]{\makebox[#1]{\dotfill}}
+% Dòng thông tin học sinh
+\providecommand{\TTthongtin}{%
+  \noindent\begin{tabular}{|p{7.6cm}|p{4cm}|p{4cm}|}
+    \hline
+    \textbf{Họ và Tên HS:}\dotfill & \textbf{Lớp:}\dotfill & \textbf{Ngày:}\dotfill \\
+    \hline
+  \end{tabular}\par\medskip}
+% Đánh lại số bài từ 1 cho phiếu Tiếng Việt (chỉ khi môi trường bt có bộ đếm tên bt)
+\makeatletter
+\providecommand{\TTdatlaibai}{\@ifundefined{c@bt}{}{\setcounter{bt}{0}}}
+\makeatother
+% Bắt đầu phần hình vẽ TikZ ngay dưới đề bài
+\providecommand{\TTbatdauhinh}{}\renewcommand{\TTbatdauhinh}{\par\nopagebreak\vspace{4pt}\nopagebreak}
+% Một hình của phiếu Word, dính liền với dòng phía trên (không bị tách trang):
+% \PNdong[khoảng cách phía trên]{lề trái}{độ rộng}{hình}
+% Các hình trong cùng một bài dùng chung một tỉ lệ (cm/điểm ảnh) và lề trái tính sẵn để các khung thẳng hàng
+\providecommand{\PNdong}{}\renewcommand{\PNdong}[4][4pt]{%
+  \par\nopagebreak\vspace{#1}\nopagebreak{\noindent\hspace*{#2}\includegraphics[width=#3]{#4}\par}}
+% Trang không giãn khoảng trắng giữa các bài (khoảng trống dư dồn xuống cuối trang);
+% đề bài hai dòng không bị tách sang hai trang
+\raggedbottom\clubpenalty=10000 \widowpenalty=10000
+
+%---------- Màu dùng cho hình vẽ ----------
+\definecolor{PKdo}{RGB}{230,60,60}\definecolor{PKxanhla}{RGB}{90,180,80}
+\definecolor{PKxanhdam}{RGB}{20,90,190}\definecolor{PKvang}{RGB}{255,205,60}
+\definecolor{PKvangnhat}{RGB}{255,243,190}\definecolor{PKcam}{RGB}{255,150,60}
+\definecolor{PKhong}{RGB}{255,140,180}\definecolor{PKnau}{RGB}{140,85,45}
+\definecolor{PKxanhnuoc}{RGB}{90,170,235}\definecolor{PKtim}{RGB}{150,90,200}
+\definecolor{PNla}{RGB}{120,195,75}
+
+%---------- Hình vẽ nhỏ (vẽ tại gốc tọa độ) ----------
+% Tranh màu cắt từ phiếu gốc, dùng trong các hàng đếm: \PNanh{hình}
+\providecommand{\PNanh}{}\renewcommand{\PNanh}[1]{\node[inner sep=0pt] at (0,0) {\includegraphics[height=1.05cm,width=1.1cm,keepaspectratio]{#1}};}
+% Gạch chéo một hình
+\providecommand{\PNgach}{}\renewcommand{\PNgach}{\draw[line width=1.3pt,line cap=round] (-0.48,-0.46)--(0.48,0.5);}
+% Ô vuông để bé điền
+\providecommand{\PNo}{}\renewcommand{\PNo}[2][]{\node[draw,thick,rounded corners=3pt,minimum size=0.9cm,fill=white,#1] at (#2) {};}
+% Một hàng Đúng/Sai: \PNdungsai{hình}{số hình}{số hình bị gạch}{phép tính có kết quả}
+\providecommand{\PNdungsai}{}\renewcommand{\PNdungsai}[4]{%
+  \begin{tikzpicture}[font=\sffamily\Large]
+    \foreach \k in {1,...,#2}{\begin{scope}[shift={(1.22*\k,0)}]\PNanh{#1}\pgfmathtruncatemacro{\bigach}{#2-#3}\ifnum\k>\bigach\PNgach\fi\end{scope}}
+    \node[anchor=west] at (7.0,0) {#4};
+    \PNo{11.0,0}
+    \path (0.6,-0.6) (11.5,0.6); % khung cố định để các hàng thẳng cột
+  \end{tikzpicture}}
+% Đám mây trang trí
+\providecommand{\PNmay}{}\renewcommand{\PNmay}{%
+  \fill[white,draw=PKxanhnuoc!60,thick] (-0.7,0) arc (180:90:0.32) arc (160:20:0.42) arc (110:0:0.3) -- cycle;}
+% Khinh khí cầu (để trống cho bé tô, hoặc tô sẵn khi làm chú thích): \PNkkc{màu}{chữ}
+\providecommand{\PNkkc}{}\renewcommand{\PNkkc}[2]{%
+  \begin{scope}[line join=round]
+    \def\PNvo{(-0.3,-0.78) .. controls (-0.55,-0.45) and (-0.95,-0.05) .. (-0.95,0.4) arc (180:0:0.95) .. controls (0.95,-0.05) and (0.55,-0.45) .. (0.3,-0.78) -- cycle}
+    \fill[#1] \PNvo;
+    \begin{scope}
+      \clip \PNvo;
+      \foreach \s in {0.42,0.8}{%
+        \draw[black!55,thin] (0,1.35) .. controls (-\s*1.25,1.1) and (-\s*1.3,-0.2) .. (-\s*0.3,-0.78);
+        \draw[black!55,thin] (0,1.35) .. controls (\s*1.25,1.1) and (\s*1.3,-0.2) .. (\s*0.3,-0.78);}
+      \draw[black!55,thin] (0,1.35) -- (0,-0.78);
+      \draw[black!55,thin] (-1,-0.32) .. controls (-0.3,-0.44) and (0.3,-0.44) .. (1,-0.32);
+      \fill[white,opacity=0.45] (-0.55,0.75) ellipse (0.12 and 0.28);
+    \end{scope}
+    \draw[black!80,thick] \PNvo;
+    \draw[black!70] (-0.3,-0.78)--(-0.22,-1.05) (0.3,-0.78)--(0.22,-1.05) (-0.1,-0.8)--(-0.08,-1.05) (0.1,-0.8)--(0.08,-1.05);
+    \draw[black!80,thick,fill=#1,rounded corners=1pt] (-0.24,-1.05) rectangle (0.24,-1.38);
+    \draw[black!45,thin] (-0.24,-1.16)--(0.24,-1.16) (-0.24,-1.27)--(0.24,-1.27) (-0.08,-1.05)--(-0.08,-1.38) (0.08,-1.05)--(0.08,-1.38);
+    \if\relax\detokenize{#2}\relax\else\node[fill=white,draw=black!50,rounded corners=3pt,font=\sffamily\bfseries\large,inner sep=2.5pt] at (0,0.42) {#2};\fi
+  \end{scope}}
+% Ngôi nhà phép trừ: \PNnha{số trên mái}{màu mái}{phép tính 1}{phép tính 2}{phép tính 3}{phép tính 4}
+\providecommand{\PNnha}{}\renewcommand{\PNnha}[6]{%
+  \begin{scope}[line join=round]
+    % ống khói và khói
+    \fill[PKnau!80,draw=PKnau!50!black,thick] (3.25,4.6) rectangle (3.75,5.75);
+    \fill[PKnau!50!black] (3.18,5.75) rectangle (3.82,5.9);
+    \foreach \x/\y/\r in {3.6/6.15/0.13,3.85/6.45/0.17,4.2/6.75/0.21}{\fill[gray!25,draw=gray!50,thin] (\x,\y) circle (\r);}
+    % tường
+    \shade[top color=PKvangnhat,bottom color=PKvangnhat!60!PKcam!40,draw=PKnau!70!black,thick] (0,0) rectangle (4.4,4.25);
+    % mái
+    \shade[top color=#2!55,bottom color=#2,draw=#2!50!black,thick] (-0.45,4.15) -- (2.2,6.05) -- (4.85,4.15) -- cycle;
+    \foreach \t in {0.25,0.5,0.75}{\draw[#2!50!black,thin,opacity=0.5] ($(-0.45,4.15)!\t!(2.2,6.05)$) -- ($(4.85,4.15)!\t!(2.2,6.05)$);}
+    \node[circle,draw=#2!50!black,thick,fill=white,minimum size=1.05cm,font=\sffamily\bfseries\LARGE] at (2.2,4.85) {#1};
+    % các phép tính
+    \foreach \pt [count=\i] in {#3,#4,#5,#6}{%
+      \pgfmathsetmacro{\yy}{3.6-0.95*(\i-1)}
+      \node[font=\sffamily\Large,anchor=east] at (2.95,\yy) {\pt\ =};
+      \PNo{3.6,\yy}}
+  \end{scope}}
+% Chú chim đậu (quay sang phải): \PNchim{màu}
+\providecommand{\PNchim}{}\renewcommand{\PNchim}[1]{%
+  \begin{scope}[line join=round]
+    \fill[#1!70!black] (-0.32,0.02) -- (-0.72,-0.2) -- (-0.6,-0.02) -- (-0.74,0.1) -- cycle;
+    \draw[orange!75!black,thick,line cap=round] (-0.02,-0.26) -- (-0.05,-0.42) (0.13,-0.26) -- (0.13,-0.42);
+    \shade[ball color=#1] (0,0) ellipse (0.42 and 0.3);
+    \fill[#1!25!white] (0.12,-0.12) ellipse (0.24 and 0.14);
+    \shade[ball color=#1] (0.33,0.27) circle (0.21);
+    \fill[#1!65!black] (-0.28,0.08) .. controls (0,0.26) and (0.22,0.1) .. (0.14,-0.04) .. controls (0,-0.16) and (-0.2,-0.06) .. (-0.28,0.08);
+    \fill[orange,draw=orange!60!black,thin] (0.51,0.31) -- (0.69,0.24) -- (0.51,0.19) -- cycle;
+    \fill[white] (0.4,0.32) circle (0.06); \fill[black] (0.415,0.32) circle (0.035);
+  \end{scope}}
+% Chú chim đang bay (quay sang phải): \PNchimbay{màu}
+\providecommand{\PNchimbay}{}\renewcommand{\PNchimbay}[1]{%
+  \begin{scope}[line join=round]
+    \fill[#1!45!black] (-0.05,0.12) .. controls (-0.45,0.45) and (-0.5,0.7) .. (-0.45,0.85) .. controls (-0.2,0.6) .. (0.12,0.14) -- cycle;
+    \fill[#1!70!black] (-0.33,-0.02) -- (-0.7,0.06) -- (-0.6,-0.08) -- (-0.68,-0.2) -- cycle;
+    \shade[ball color=#1,rotate=10] (0,0) ellipse (0.4 and 0.22);
+    \shade[ball color=#1] (0.38,0.14) circle (0.17);
+    \fill[#1!65!black] (0.0,0.1) .. controls (0.05,0.55) and (0.3,0.85) .. (0.55,0.95) .. controls (0.35,0.6) and (0.3,0.3) .. (0.2,0.08) -- cycle;
+    \fill[orange,draw=orange!60!black,thin] (0.53,0.18) -- (0.68,0.12) -- (0.53,0.08) -- cycle;
+    \fill[white] (0.43,0.18) circle (0.05); \fill[black] (0.445,0.18) circle (0.03);
+  \end{scope}}
+% Chú ong (quay sang phải)
+\providecommand{\PNong}{}\renewcommand{\PNong}{%
+  \begin{scope}[line join=round]
+    \fill[PKxanhnuoc!25,draw=PKxanhnuoc!80!black,thin,rotate around={25:(-0.12,0.38)}] (-0.12,0.38) ellipse (0.17 and 0.3);
+    \fill[black] (-0.43,0.0) -- (-0.62,0.04) -- (-0.43,0.1) -- cycle;
+    \shade[ball color=PKvang] (0,0.03) ellipse (0.45 and 0.32);
+    \begin{scope}
+      \clip (0,0.03) ellipse (0.45 and 0.32);
+      \foreach \x in {-0.3,-0.06,0.18}{\fill[black!80] (\x,-0.4) rectangle (\x+0.12,0.45);}
+    \end{scope}
+    \draw[black!70,thin] (0,0.03) ellipse (0.45 and 0.32);
+    \fill[white,opacity=0.85,draw=PKxanhnuoc!80!black,thin,rotate around={-15:(0.12,0.4)}] (0.12,0.4) ellipse (0.16 and 0.28);
+    \shade[ball color=black!75] (0.5,0.08) circle (0.21);
+    \fill[white] (0.57,0.14) circle (0.065); \fill[black] (0.59,0.14) circle (0.035);
+    \draw[white,thin] (0.52,-0.02) arc (200:320:0.08);
+    \draw[black,thick] (0.48,0.27) .. controls (0.48,0.45) and (0.55,0.5) .. (0.62,0.52) (0.56,0.25) .. controls (0.62,0.4) and (0.7,0.44) .. (0.78,0.44);
+    \fill[black] (0.62,0.52) circle (0.035) (0.78,0.44) circle (0.035);
+  \end{scope}}
+% Bông hoa ghi số: \PNhoa{màu cánh}{số}
+\providecommand{\PNhoa}{}\renewcommand{\PNhoa}[2]{%
+  \begin{scope}[line join=round]
+    \draw[green!45!black,line width=2.5pt] (0,-0.4) .. controls (0.12,-0.9) .. (0,-1.45);
+    \fill[green!55!black] (0.04,-1.0) .. controls (0.35,-0.75) and (0.6,-0.9) .. (0.65,-1.05) .. controls (0.4,-1.2) and (0.2,-1.15) .. (0.04,-1.0);
+    \fill[green!45!black] (0.0,-1.2) .. controls (-0.3,-0.98) and (-0.55,-1.1) .. (-0.6,-1.25) .. controls (-0.35,-1.38) and (-0.15,-1.35) .. (0.0,-1.2);
+    \foreach \g in {0,60,...,300}{\begin{scope}[rotate=\g]\shade[ball color=#1] (0,0.45) ellipse (0.26 and 0.37);\draw[#1!55!black,thin] (0,0.45) ellipse (0.26 and 0.37);\end{scope}}
+    \shade[ball color=yellow!85!orange] (0,0) circle (0.36);
+    \draw[orange!70!black,thin] (0,0) circle (0.36);
+    \node[font=\sffamily\bfseries\Large] at (0,0) {#2};
+  \end{scope}}
+% Hình nhỏ trong thẻ (tranh cắt từ phiếu gốc)
+\providecommand{\PNtranh}{}\renewcommand{\PNtranh}[3][1.55cm]{\node[inner sep=0pt] at (#2) {\includegraphics[height=#1,width=2.7cm,keepaspectratio]{#3}};}
+% Dấu thanh vẽ bằng nét (không phụ thuộc phông chữ): \PNdau{huyen|sac|hoi|nga|nang}
+\providecommand{\PNdauhuyen}{}\renewcommand{\PNdauhuyen}{\draw (-0.08,0.1) -- (0.08,-0.1);}
+\providecommand{\PNdausac}{}\renewcommand{\PNdausac}{\draw (-0.08,-0.1) -- (0.08,0.1);}
+\providecommand{\PNdauhoi}{}\renewcommand{\PNdauhoi}{\draw (-0.07,0.06) .. controls (-0.05,0.15) and (0.09,0.15) .. (0.07,0.05) .. controls (0.06,0.0) and (0,0.0) .. (0,-0.09);}
+\providecommand{\PNdaunga}{}\renewcommand{\PNdaunga}{\draw (-0.11,-0.03) .. controls (-0.06,0.08) and (-0.03,0.07) .. (0,0) .. controls (0.03,-0.07) and (0.06,-0.08) .. (0.11,0.03);}
+\providecommand{\PNdaunang}{}\renewcommand{\PNdaunang}{\fill (0,0) circle (0.055);}
+\providecommand{\PNdau}{}\renewcommand{\PNdau}[1]{\begin{scope}[line width=1.4pt,line cap=round,line join=round]\csname PNdau#1\endcsname\end{scope}}
+% Quả bóng bay để trống cho bé tô, có chữ: \PNbongto{chữ}{màu tô sẵn}
+\providecommand{\PNbongto}{}\renewcommand{\PNbongto}[2]{%
+  \fill[#2,draw=black!75,thick] (0,0) ellipse (0.55 and 0.68);
+  \fill[white,opacity=0.6] (-0.25,0.28) ellipse (0.07 and 0.16);
+  \fill[#2,draw=black!75,thick,line join=round] (-0.09,-0.75) -- (0.09,-0.75) -- (0,-0.66) -- cycle;
+  \node[font=\bfseries\LARGE] at (0,0) {#1};}
+% Ngôi sao để trống cho bé tô, có chữ: \PNsaoto{chữ}
+\providecommand{\PNsaoto}{}\renewcommand{\PNsaoto}[1]{%
+  \node[star,star points=5,star point ratio=2.1,draw=black!80,very thick,fill=white,minimum size=2.55cm,inner sep=0pt,rounded corners=5pt] at (0,0) {};
+  \node[font=\LARGE] at (0,-0.08) {#1};}
+
+% Đầu máy xe lửa (quay sang trái, dài khoảng 3cm, đáy bánh xe ở y = 0)
+\providecommand{\PNdaumay}{}\renewcommand{\PNdaumay}{%
+  \begin{scope}[line join=round]
+    \foreach \x/\y/\r in {0.75/2.4/0.16,1.05/2.7/0.2,1.45/2.95/0.24}{\fill[gray!20,draw=gray!45,thin] (\x,\y) circle (\r);}
+    \fill[black!70] (0.38,1.35) rectangle (0.68,1.98); \fill[black!80,rounded corners=1pt] (0.28,1.98) rectangle (0.78,2.15);
+    \shade[top color=PKdo!65,bottom color=PKdo!85!black,draw=PKdo!50!black,thick,rounded corners=3pt] (0.05,0.5) rectangle (1.85,1.42);
+    \draw[PKvang,line width=2pt] (0.6,0.52)--(0.6,1.4) (1.25,0.52)--(1.25,1.4);
+    \shade[ball color=yellow] (0.07,1.15) circle (0.13);
+    \fill[black!65] (0.05,0.5) -- (-0.32,0.12) -- (0.05,0.12) -- cycle;
+    \shade[top color=PKxanhdam!65,bottom color=PKxanhdam,draw=PKxanhdam!50!black,thick] (1.85,0.4) rectangle (2.85,2.05);
+    \fill[white,draw=PKxanhdam!50!black,thick,rounded corners=2pt] (2.05,1.3) rectangle (2.62,1.82);
+    \fill[PKdo!80!black,rounded corners=2pt] (1.72,2.03) rectangle (2.98,2.24);
+    \fill[black!75] (-0.05,0.3) rectangle (2.9,0.52);
+    \foreach \x/\r in {0.45/0.27,1.2/0.27,2.3/0.38}{\fill[black!80] (\x,\r+0.02) circle (\r); \fill[gray!55] (\x,\r+0.02) circle (0.55*\r); \fill[black!80] (\x,\r+0.02) circle (0.05);}
+    \draw[gray!25,line width=1.5pt,line cap=round] (0.45,0.29) -- (2.3,0.4);
+  \end{scope}}
+% Toa tàu chở số (dài 2cm, đáy bánh xe ở y = 0): \PNtoa{màu}{số}
+\providecommand{\PNtoa}{}\renewcommand{\PNtoa}[2]{%
+  \begin{scope}[line join=round]
+    \draw[black!70,line width=2pt] (-0.62,0.5) -- (0,0.5);
+    \shade[top color=#1!55,bottom color=#1,draw=#1!50!black,thick,rounded corners=3pt] (0,0.4) rectangle (2.0,1.75);
+    \fill[#1!50!black,rounded corners=1pt] (-0.06,1.73) rectangle (2.06,1.88);
+    \fill[black!75] (0.05,0.3) rectangle (1.95,0.45);
+    \foreach \x in {0.45,1.55}{\fill[black!80] (\x,0.29) circle (0.27); \fill[gray!55] (\x,0.29) circle (0.15); \fill[black!80] (\x,0.29) circle (0.05);}
+    \node[circle,fill=white,draw=#1!50!black,thick,minimum size=0.95cm,font=\sffamily\bfseries\LARGE] at (1.0,1.08) {#2};
+  \end{scope}}
+
+% Chú ếch con ngồi (tâm tại gốc tọa độ, cao khoảng 1,4cm, rộng khoảng 1,6cm)
+\providecommand{\PNech}{}\renewcommand{\PNech}{%
+  \begin{scope}[line join=round]
+  % --- chân sau gập hai bên ---
+  \foreach \s in {-1,1}{%
+    \begin{scope}[xscale=\s]
+      \fill[PNla!85!black,draw=green!35!black,thick] (0.28,-0.55) .. controls (0.95,-0.6) and (0.95,0.05) .. (0.55,0.02) .. controls (0.35,0.0) and (0.25,-0.3) .. cycle;
+      % bàn chân sau có 3 ngón
+      \fill[PNla!85!black,draw=green!35!black,thick] (0.45,-0.55) .. controls (0.7,-0.62) .. (0.92,-0.58)
+        .. controls (0.98,-0.62) and (0.96,-0.68) .. (0.9,-0.67) .. controls (0.75,-0.66) .. (0.62,-0.66)
+        .. controls (0.55,-0.7) .. (0.45,-0.68) -- cycle;
+    \end{scope}}
+  % --- thân ---
+  \fill[PNla,draw=green!35!black,thick] (0,-0.62) .. controls (-0.55,-0.62) and (-0.6,-0.1) .. (-0.5,0.15)
+     -- (0.5,0.15) .. controls (0.6,-0.1) and (0.55,-0.62) .. (0,-0.62);
+  % bụng
+  \fill[yellow!35!green!25] (0,-0.28) ellipse (0.28 and 0.3);
+  % --- chân trước ---
+  \foreach \s in {-1,1}{%
+    \begin{scope}[xscale=\s]
+      \fill[PNla,draw=green!35!black,thick] (0.24,0.0) .. controls (0.32,-0.3) .. (0.28,-0.58) -- (0.16,-0.58) .. controls (0.18,-0.3) .. (0.14,-0.05) -- cycle;
+      \fill[PNla,draw=green!35!black,thick] (0.22,-0.6) ellipse (0.12 and 0.05);
+    \end{scope}}
+  % --- đầu ---
+  \fill[PNla,draw=green!35!black,thick] (0,0.33) ellipse (0.66 and 0.36);
+  % mắt lồi
+  \foreach \x in {-0.33,0.33}{%
+    \fill[PNla,draw=green!35!black,thick] (\x,0.68) circle (0.21);
+    \fill[white] (\x,0.69) circle (0.14);
+    \fill[black] (\x+0.02,0.68) circle (0.075);
+    \fill[white] (\x+0.05,0.71) circle (0.025);}
+  % đốm trên đầu
+  \fill[green!45!black,opacity=0.5] (-0.08,0.52) circle (0.045) (0.1,0.55) circle (0.035) (0.0,0.6) circle (0.03);
+  % má hồng
+  \fill[pink!85] (-0.45,0.27) ellipse (0.1 and 0.06) (0.45,0.27) ellipse (0.1 and 0.06);
+  % miệng cười rộng
+  \draw[green!25!black,thick,line cap=round] (-0.42,0.33) .. controls (-0.2,0.08) and (0.2,0.08) .. (0.42,0.33);
+  % lỗ mũi
+  \fill[green!25!black] (-0.06,0.45) circle (0.018) (0.06,0.45) circle (0.018);
+  \end{scope}}
+% Tia số từ 0 đến 5, ếch nhảy lùi từ số #1 đến số #2: \PNtiaso{số bắt đầu}{số đến}
+\providecommand{\PNtiaso}{}\renewcommand{\PNtiaso}[2]{%
+  \draw[-latex,very thick,black!75] (-0.3,0) -- (8.6,0);
+  \foreach \n in {0,...,5}{\draw[very thick,black!75] (1.6*\n,-0.12) -- (1.6*\n,0.12); \node[font=\sffamily\bfseries\Large,below] at (1.6*\n,-0.14) {\n};}
+  \pgfmathtruncatemacro{\PNtu}{#2+1}
+  \foreach \n in {#1,...,\PNtu}{\draw[-latex,thick,PKdo,dashed] (1.6*\n,0.15) to[out=120,in=60] (1.6*\n-1.6,0.15);}
+  \fill[PKdo] (1.6*#2,0) circle (0.09);
+  \begin{scope}[shift={(1.6*#1,0.95)},scale=0.55]\PNech\end{scope}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                  PHIẾU TOÁN
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setcounter{section}{3} % không chỉnh sửa
+\hktuan{1}{15}
+\par\medskip % xuống dòng: tiêu đề không nằm chung dòng với khung HK1 - Tuần 15
+{\centering
+        {\color{mauchinh!120}\bfseries\Large PHIẾU BÀI TẬP TOÁN PRE1 -- TUẦN 15}\\[3pt]
+        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ 15: PHÉP TRỪ TRONG PHẠM VI 5}\par}
+\vspace{6pt}
+\TTthongtin
+
+\begin{bt}
+    Bé hãy điền kết quả phép tính trừ sau:
+    \PNdong{2.1cm}{13.3cm}{p15_image1.png}
+    \PNdong[8pt]{2.1cm}{13.3cm}{p15_image2.png}
+\end{bt}
+
+\begin{bt}
+    Bé hãy gạch bớt để thể hiện phép trừ và điền kết quả phép trừ nhé!
+    \PNdong{2.25cm}{13cm}{p15_image3.png}
+\end{bt}
+
+\begin{bt}
+    Bé hãy nối hình thể hiện phép trừ tương ứng.
+    % hai hình cùng tỉ lệ 0,014 cm/điểm ảnh, cùng lề trái để các chấm nối thẳng hàng
+    \PNdong{3.16cm}{11.06cm}{p15_image4.png}
+    \PNdong[2pt]{3.16cm}{11.17cm}{p15_image5.png}
+\end{bt}
+
+\begin{bt}
+    Bé hãy viết phép trừ thể hiện qua hình ảnh bên dưới theo mẫu:
+    % ba hình cùng tỉ lệ 0,0125 cm/điểm ảnh, các khung cà rốt cùng lề trái
+    \PNdong{1.14cm}{14.31cm}{p15_image6.png}
+    \PNdong[2pt]{3.33cm}{12.14cm}{p15_image7.png}
+    \PNdong[8pt]{3.33cm}{13.01cm}{p15_image8.png}
+\end{bt}
+
+\begin{bt}
+    Bé hãy viết phép trừ thể hiện qua hình ảnh bên dưới theo mẫu:
+    % năm hình cùng tỉ lệ 0,0118 cm/điểm ảnh, các khung cỏ bốn lá cùng lề trái
+    \PNdong{0.35cm}{16.78cm}{p15_image9.png}
+    \PNdong[5pt]{3.22cm}{13.92cm}{p15_image10.png}
+    \PNdong[5pt]{3.22cm}{13.92cm}{p15_image11.png}
+    \PNdong[5pt]{3.22cm}{13.92cm}{p15_image12.png}
+    \PNdong[5pt]{3.22cm}{13.92cm}{p15_image13.png}
+\end{bt}
+
+\begin{bt}
+    Bé hãy viết phép trừ thể hiện qua hình ảnh bên dưới theo mẫu:
+    % hai hình cùng tỉ lệ 0,0118 cm/điểm ảnh, dấu trừ, dấu bằng và ô trống thẳng hàng
+    \PNdong{3.72cm}{10.05cm}{p15_image14.png}
+    \PNdong[3pt]{3.96cm}{9.91cm}{p15_image15.png}
+\end{bt}
+
+\begin{bt}
+    Bé tô màu hình sau:
+    \TThinh[11.8cm]{p15_image16.png}
+\end{bt}
+
+\begin{bt}
+    Bé hãy tìm 7 điểm khác biệt trong hai hình bên dưới:
+    \PNdong{0cm}{\linewidth}{p15_image17.png}
+\end{bt}
+
+%---------- Bài bổ sung (Toán) ----------
+\begin{bt}
+    Bé hãy tính rồi tô màu khinh khí cầu theo kết quả: kết quả là \textbf{1} tô màu \textbf{đỏ}, kết quả là \textbf{2} tô màu \textbf{vàng}, kết quả là \textbf{3} tô màu \textbf{xanh lá}, kết quả là \textbf{4} tô màu \textbf{xanh dương}.
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}
+        % bầu trời
+        \shade[top color=PKxanhnuoc!30,bottom color=white,rounded corners=14pt,draw=PKxanhnuoc!70,thick] (-1.3,-5.0) rectangle (15.3,2.55);
+        \foreach \x/\y/\s in {1.9/1.75/1,9.8/1.95/0.9,13.6/-1.7/0.8,5.8/-1.65/0.85,0.2/-4.3/0.75,10.2/-4.4/0.8}{\begin{scope}[shift={(\x,\y)},scale=\s]\PNmay\end{scope}}
+        % chú thích màu
+        \foreach \so/\mau/\x in {1/PKdo/3.2,2/PKvang/5.4,3/PKxanhla/7.6,4/PKxanhdam!70/9.8}{
+            \begin{scope}[shift={(\x,1.6)},scale=0.42]\PNkkc{\mau}{}\end{scope}
+            \node[font=\sffamily\bfseries\Large] at (\x+0.65,1.55) {\so};}
+        % các khinh khí cầu
+        \foreach \pt/\x/\y in {2 $-$ 1/0.3/-0.6,5 $-$ 3/2.6/-0.35,4 $-$ 1/4.9/-0.7,5 $-$ 1/7.1/-0.4,3 $-$ 2/9.4/-0.65,4 $-$ 2/11.7/-0.35,5 $-$ 2/14.0/-0.6,
+                              4 $-$ 0/1.5/-3.25,3 $-$ 1/4.0/-3.0,5 $-$ 4/6.6/-3.3,4 $-$ 3/9.1/-3.0,3 $-$ 0/11.6/-3.25,2 $-$ 0/14.0/-3.1}{
+            \begin{scope}[shift={(\x,\y)},scale=0.95]\PNkkc{white}{\pt}\end{scope}}
+    \end{tikzpicture}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy điền số thích hợp vào ô trống trong mỗi ngôi nhà.
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}
+        \begin{scope}[shift={(0,0)}]\PNnha{5}{PKdo}{5 $-$ 1}{5 $-$ 2}{5 $-$ 3}{5 $-$ 4}\end{scope}
+        \begin{scope}[shift={(5.9,0)}]\PNnha{4}{PKxanhdam}{4 $-$ 1}{4 $-$ 2}{4 $-$ 3}{4 $-$ 4}\end{scope}
+        \begin{scope}[shift={(11.8,0)}]\PNnha{3}{PKxanhla}{3 $-$ 0}{3 $-$ 1}{3 $-$ 2}{3 $-$ 3}\end{scope}
+        % bãi cỏ
+        \fill[green!45!black!70,rounded corners=4pt] (-0.6,-0.05) rectangle (16.8,-0.35);
+        \foreach \x in {-0.5,-0.1,...,16.6}{\fill[green!50!black] (\x,-0.05) -- (\x+0.08,0.17) -- (\x+0.16,-0.05) -- cycle;}
+    \end{tikzpicture}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy quan sát tranh rồi viết phép trừ thích hợp.
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}[font=\sffamily\Large]
+        % a) 5 chú chim, 3 chú bay đi
+        \node[font=\bfseries] at (-0.85,2.7) {a)};
+        \shade[top color=PKxanhnuoc!28,bottom color=white,rounded corners=10pt,draw=PKxanhnuoc!70,thick] (-0.5,-0.8) rectangle (7.0,3.0);
+        \draw[PKnau!80!black,line width=5pt,line cap=round] (-0.5,0.0) .. controls (1.2,-0.2) and (2.4,0.15) .. (4.0,-0.05);
+        \draw[PKnau!80!black,line width=2.5pt,line cap=round] (2.6,0.03) .. controls (3.0,0.35) .. (3.4,0.5);
+        \foreach \x/\g in {0.6/20,1.6/-25,3.0/35,3.6/-10}{\fill[green!55!black,rotate around={\g:(\x,-0.02)}] (\x,-0.02) .. controls (\x+0.15,0.25) and (\x+0.4,0.25) .. (\x+0.5,0.0) .. controls (\x+0.4,-0.15) and (\x+0.15,-0.15) .. (\x,-0.02);}
+        \begin{scope}[shift={(0.85,0.42)}]\PNchim{PKcam}\end{scope}
+        \begin{scope}[shift={(2.15,0.48)}]\PNchim{PKxanhnuoc}\end{scope}
+        \begin{scope}[shift={(4.8,0.9)},rotate=8]\PNchimbay{PKdo}\end{scope}
+        \begin{scope}[shift={(5.6,2.1)},rotate=12]\PNchimbay{PKvang!90!orange}\end{scope}
+        \begin{scope}[shift={(4.0,2.25)},rotate=5]\PNchimbay{PKxanhla}\end{scope}
+        \draw[->,gray,thick,dashed] (2.9,1.0) to[bend left=25] (3.7,1.75);
+        \foreach \x in {0.6,2.9,5.2}{\PNo{\x,-1.75}}
+        \node at (1.75,-1.75) {$-$}; \node at (4.05,-1.75) {$=$};
+        % b) cây táo có 4 quả, 1 quả rơi xuống
+        \begin{scope}[shift={(9.0,0)}]
+            \node[font=\bfseries] at (-0.85,2.7) {b)};
+            \shade[top color=PKxanhnuoc!28,bottom color=white,rounded corners=10pt,draw=PKxanhnuoc!70,thick] (-0.5,-0.8) rectangle (7.0,3.0);
+            \fill[green!40!black!60,rounded corners=8pt] (-0.5,-0.8) rectangle (7.0,-0.3);
+            \shade[left color=PKnau!70!black,right color=PKnau!90,draw=PKnau!50!black] (2.55,-0.45) -- (2.75,1.0) -- (3.25,1.0) -- (3.45,-0.45) -- cycle;
+            \foreach \x/\y/\r in {1.9/1.35/0.75,3.0/1.85/0.95,4.1/1.35/0.75,2.4/0.95/0.6,3.6/0.95/0.6}{\shade[ball color=PKxanhla!85!black] (\x,\y) circle (\r);}
+            \foreach \x/\y in {1.8/1.35,2.9/2.15,3.95/1.5,3.2/1.05}{\node[inner sep=0pt] at (\x,\y) {\includegraphics[height=0.55cm]{p15_tao.png}};}
+            \node[inner sep=0pt] at (5.45,0.0) {\includegraphics[height=0.55cm]{p15_tao.png}};
+            \draw[gray,thick] (5.15,0.55)--(5.15,0.85) (5.45,0.6)--(5.45,0.95) (5.75,0.55)--(5.75,0.85);
+            \draw[->,gray,thick,dashed] (4.5,1.2) to[bend left=30] (5.3,0.35);
+            \foreach \x in {0.6,2.9,5.2}{\PNo{\x,-1.75}}
+            \node at (1.75,-1.75) {$-$}; \node at (4.05,-1.75) {$=$};
+        \end{scope}
+    \end{tikzpicture}\par}
+\end{bt}
+
+\begin{bt}
+    Bé giúp các chú ong tìm đúng bông hoa: nối mỗi chú ong với bông hoa ghi kết quả đúng.
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}
+        \foreach \pt/\x in {5 $-$ 1/0,3 $-$ 3/3.6,4 $-$ 2/7.2,5 $-$ 4/10.8,4 $-$ 1/14.4}{
+            \begin{scope}[shift={(\x-0.3,3.45)},scale=1.45]\PNong\end{scope}
+            \node[draw=PKcam!80!black,thick,fill=PKvangnhat,rounded corners=4pt,font=\sffamily\bfseries\Large,inner sep=3pt] at (\x,2.35) {\pt};
+            \fill (\x,1.8) circle (2.5pt);}
+        \foreach \so/\mau/\x in {2/PKhong/0,4/PKtim/3.6,0/PKdo/7.2,3/PKxanhnuoc/10.8,1/PKcam/14.4}{
+            \fill (\x,0.25) circle (2.5pt);
+            \begin{scope}[shift={(\x,-0.75)}]\PNhoa{\mau}{\so}\end{scope}}
+    \end{tikzpicture}\par}
+\end{bt}
+
+\begin{bt}
+    Đúng ghi \textbf{Đ}, sai ghi \textbf{S} vào ô trống.
+    \TTbatdauhinh
+    {\centering
+        \PNdungsai{p15_gautruc.png}{5}{2}{5 $-$ 2 = 3}\\*[10pt]
+        \PNdungsai{p15_koala.png}{4}{1}{4 $-$ 1 = 2}\\*[10pt]
+        \PNdungsai{p15_khi.png}{3}{3}{3 $-$ 3 = 0}\\*[10pt]
+        \PNdungsai{p15_ho.png}{5}{4}{5 $-$ 4 = 2}\\*[10pt]
+        \PNdungsai{p15_huoucaoco.png}{4}{2}{4 $-$ 2 = 2}\par}
+\end{bt}
+
+\begin{bt}
+    Mỗi toa tàu chở một số. Bé hãy tính rồi nối mỗi phép trừ với toa tàu chở kết quả đúng.
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}
+        % đường ray
+        \foreach \x in {-0.5,0,...,16.0}{\fill[PKnau!80] (\x,-0.16) rectangle (\x+0.22,-0.04);}
+        \draw[gray!60!black,line width=2pt] (-0.7,-0.02) -- (16.5,-0.02);
+        \PNdaumay
+        \foreach \so/\mau [count=\k] in {0/PKvang,1/PKxanhla,2/PKcam,3/PKhong,4/PKxanhnuoc}{
+            \begin{scope}[shift={(0.6+2.6*\k,0)}]\PNtoa{\mau}{\so}\end{scope}
+            \fill (2.6*\k+1.6,2.15) circle (2.5pt);}
+        % các phép trừ (không đặt ngay trên toa chở kết quả của nó)
+        \foreach \pt [count=\k] in {3 $-$ 2,4 $-$ 1,5 $-$ 1,5 $-$ 5,4 $-$ 2}{
+            \fill (2.6*\k+1.6,3.15) circle (2.5pt);
+            \node[ellipse,draw=PKxanhdam!70,thick,fill=PKxanhnuoc!15,font=\sffamily\bfseries\Large,inner sep=1.5pt,minimum width=2.1cm] at (2.6*\k+1.6,3.85) {\pt};}
+    \end{tikzpicture}\par}
+\end{bt}
+
+\begin{bt}
+    Chú ếch nhảy lùi trên tia số. Bé hãy đếm số bước nhảy rồi viết phép trừ thích hợp theo mẫu.
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}[font=\sffamily\Large]
+        \foreach \a/\b/\kq [count=\k] in {5/2/3,4/3/,3/1/}{
+            \begin{scope}[shift={(0,-2.45*\k)}]
+                \pgfmathtruncatemacro{\den}{\a-\b}
+                \PNtiaso{\a}{\den}
+                \ifx\kq\empty
+                    \foreach \x in {10.0,11.8,13.6}{\PNo{\x,0.35}}
+                \else
+                    \foreach \x/\so in {10.0/\a,11.8/\b,13.6/\kq}{\node[draw,thick,rounded corners=3pt,minimum size=0.9cm,text=PKdo,font=\sffamily\bfseries\Large] at (\x,0.35) {\so};}
+                \fi
+                \node at (10.9,0.35) {$-$}; \node at (12.7,0.35) {$=$};
+            \end{scope}}
+    \end{tikzpicture}\par}
+\end{bt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                  PHIẾU TIẾNG VIỆT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\TTdatlaibai
+{\centering
+        {\color{mauchinh!120}\bfseries\Large PHIẾU BÀI TẬP TIẾNG VIỆT PRE1 -- TUẦN 15}\\[3pt]
+        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ 15: ÔN TẬP TIẾNG VIỆT}\par}
+\vspace{6pt}
+\TTthongtin
+
+\begin{bt}
+    Bé hãy đọc và đánh dấu \textbf{X} vào từ đúng.
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}[font=\LARGE]
+        \foreach \hinh/\a/\b/\mau [count=\k] in {p15_thuyen.png/đò/lò/x,p15_no.png/mơ/nơ/,p15_na_banna.png/ná/cá/,p15_catim.png/cà/trà/}{
+            \pgfmathtruncatemacro{\cot}{mod(\k-1,2)}\pgfmathtruncatemacro{\hang}{div(\k-1,2)}
+            \begin{scope}[shift={(8.7*\cot,-3.3*\hang)}]
+                \draw[thick,rounded corners=8pt,fill=PKvangnhat!35] (-0.9,-1.35) rectangle (7.4,1.45);
+                \node[inner sep=0pt] at (1.3,0) {\includegraphics[height=1.9cm,width=2.6cm,keepaspectratio]{\hinh}};
+                \node at (4.1,0.8) {\a}; \node at (6.1,0.8) {\b};
+                \PNo[minimum size=1.05cm]{4.1,-0.45} \PNo[minimum size=1.05cm]{6.1,-0.45}
+                \ifx\mau\empty\else\node[font=\Huge\bfseries,PKdo] at (4.1,-0.45) {X};\fi
+            \end{scope}}
+    \end{tikzpicture}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy đọc tên và điền âm còn thiếu của các từ phía dưới.
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}[font=\LARGE]
+        \foreach \hinh/\van [count=\k] in {p15_re.png/ễ,p15_de.png/ê,p15_tu.png/ủ,p15_mi.png/ì}{
+            \begin{scope}[shift={(4.35*\k-4.35,0)}]
+                \draw[thick,rounded corners=8pt,fill=PKvangnhat!35] (-1.95,-1.75) rectangle (1.95,1.75);
+                \node[inner sep=0pt] at (0,0.42) {\includegraphics[height=2.2cm,width=3.2cm,keepaspectratio]{\hinh}};
+                \node at (0,-1.25) {\makebox[1.3cm]{\dotfill}\van};
+            \end{scope}}
+    \end{tikzpicture}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy tô màu \textbf{vàng} vào ngôi sao có từ chứa chữ \textbf{a} và tô màu \textbf{hồng} vào ngôi sao có từ chứa chữ \textbf{o}.
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}
+        \node[inner sep=0pt] at (8.25,0.65) {\includegraphics[height=3.4cm]{p15_meocauvong.png}};
+        \foreach \tu/\x/\y in {cỏ/1.3/1.0,na/4.2/0.35,mỏ/12.3/0.35,cá/15.2/1.0,
+                               ca/1.3/-2.2,thỏ/4.75/-2.35,ba/8.25/-2.1,tỏ/11.75/-2.35,vá/15.2/-2.2}{
+            \begin{scope}[shift={(\x,\y)}]\PNsaoto{\tu}\end{scope}}
+    \end{tikzpicture}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy tô màu tên tương ứng với hình nhé!
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}[font=\Large\bfseries]
+        \foreach \hinh/\a/\b/\mau [count=\k] in {p15_nui.png/núi/nỏ/x,p15_tau.png/ô tô/tàu/,p15_piano.png/pi a nô/pa tê/,
+                                                p15_tao.png/táo/na/,p15_thu.png/quyển vở/lá thư/,p15_cumeo.png/cú mèo/vẹt/}{
+            \pgfmathtruncatemacro{\cot}{mod(\k-1,2)}\pgfmathtruncatemacro{\hang}{div(\k-1,2)}
+            \begin{scope}[shift={(8.7*\cot,-3.25*\hang)}]
+                \draw[thick,rounded corners=8pt] (-0.9,-1.45) rectangle (7.4,1.55);
+                \node[inner sep=0pt] at (1.3,0.05) {\includegraphics[height=2.4cm,width=3.1cm,keepaspectratio]{\hinh}};
+                \ifx\mau\empty\def\nen{white}\else\def\nen{PKxanhnuoc!35}\fi
+                \node[draw,thick,fill=\nen,rounded corners=3pt,minimum width=3.4cm,minimum height=0.9cm] at (5.3,0.65) {\a};
+                \node[draw,thick,fill=white,rounded corners=3pt,minimum width=3.4cm,minimum height=0.9cm] at (5.3,-0.6) {\b};
+            \end{scope}}
+    \end{tikzpicture}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy nối và đọc các từ sau!
+    \TThinh[10cm]{p15_image22.png}
+\end{bt}
+
+\begin{bt}
+    Nối tên các con vật với dấu phù hợp!
+    \TThinh[10cm]{p15_image23.png}
+\end{bt}
+
+\begin{bt}
+    Bé hãy vẽ và tô bức tranh sau:
+    \PNdong{0.5cm}{16.5cm}{p15_image24.png}
+\end{bt}
+
+\begin{bt}
+    Bé hãy vẽ các sợi tơ cho mạng nhện con nhé!
+    \PNdong{0cm}{\linewidth}{p15_image25.png}
+\end{bt}
+
+%---------- Bài bổ sung (Tiếng Việt) ----------
+\begin{bt}
+    Bé hãy nhìn tranh, đọc tiếng và khoanh vào dấu thanh đúng của mỗi tiếng.
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}
+        \foreach \hinh/\tu [count=\k] in {p15_ga.png/ga,p15_tu.png/tu,p15_re.png/re,p15_ta.png/ta,
+                                          p15_nui.png/nui,p15_co.png/co,p15_mi.png/mi,p15_hocon.png/hô}{
+            \pgfmathtruncatemacro{\cot}{mod(\k-1,4)}\pgfmathtruncatemacro{\hang}{div(\k-1,4)}
+            \begin{scope}[shift={(4.3*\cot,-4.2*\hang)}]
+                \draw[thick,rounded corners=8pt,fill=PKvangnhat!35] (-2.0,-2.05) rectangle (2.0,1.85);
+                \PNtranh[1.75cm]{0,0.8}{\hinh}
+                \node[font=\LARGE] at (0,-0.55) {\tu};
+                \foreach \dt [count=\j] in {huyen,sac,hoi,nga,nang}{
+                    \begin{scope}[shift={(0.72*\j-2.16,-1.5)}]
+                        \fill[white,draw=PKxanhdam!70,thick] (0,0) circle (0.29);
+                        \PNdau{\dt}
+                    \end{scope}}
+            \end{scope}}
+    \end{tikzpicture}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy ghép âm với vần để được tiếng, rồi viết tiếng đó vào ô trống.
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}[font=\LARGE]
+        \foreach \hinh/\am/\van/\mau [count=\k] in {p15_bo.png/b/ơ/bơ,p15_de.png/d/ê/,p15_tho.png/th/ỏ/,
+                                                   p15_ga.png/g/à/,p15_thuyen.png/đ/ò/,p15_no.png/n/ơ/}{
+            \pgfmathtruncatemacro{\cot}{mod(\k-1,2)}\pgfmathtruncatemacro{\hang}{div(\k-1,2)}
+            \begin{scope}[shift={(8.75*\cot,-2.5*\hang)}]
+                \draw[thick,rounded corners=8pt,fill=PKvangnhat!35] (-1.3,-1.05) rectangle (7.1,1.05);
+                \node[inner sep=0pt] at (0,0) {\includegraphics[height=1.6cm,width=2.3cm,keepaspectratio]{\hinh}};
+                \node[draw=PKdo!80!black,thick,fill=PKhong!25,rounded corners=4pt,minimum width=1.0cm,minimum height=1.0cm,text=PKdo] at (1.85,0) {\am};
+                \node at (2.65,0) {$+$};
+                \node[draw=PKxanhdam,thick,fill=PKxanhnuoc!20,rounded corners=4pt,minimum width=1.0cm,minimum height=1.0cm] at (3.45,0) {\van};
+                \draw[-latex,very thick,gray!80!black] (4.1,0) -- (4.75,0);
+                \node[draw,thick,fill=white,rounded corners=4pt,minimum width=1.9cm,minimum height=1.0cm,font=\LARGE\bfseries,text=PKxanhdam] at (5.85,0) {\mau};
+            \end{scope}}
+    \end{tikzpicture}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy giúp thỏ con tìm đường đến củ cà rốt: tô màu các ô có chữ \textbf{ô}.
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}[font=\LARGE]
+        \foreach \hangchu [count=\rr from 0] in {{ô,ô,o,ô,ô,ô,ơ,a},{ơ,ô,a,ô,o,ô,ă,o},{a,ô,ô,ô,ơ,ô,o,â},{o,ă,ơ,a,â,ô,ô,ơ},{â,o,a,ơ,o,ă,ô,ô}}{
+            \foreach \chu [count=\cc from 0] in \hangchu{
+                \node[draw=PKxanhdam!70,thick,rounded corners=5pt,fill=PKvangnhat!45,minimum size=1.45cm,text height=1.6ex,text depth=0pt] at (1.55*\cc,-1.55*\rr) {\chu};}}
+        \node[inner sep=0pt] at (-2.05,0.1) {\includegraphics[height=1.7cm]{p15_tho.png}};
+        \draw[-latex,very thick,PKdo] (-1.25,-0.75) -- (-0.8,-0.2);
+        \node[inner sep=0pt,rotate=-30] at (12.75,-6.2) {\includegraphics[height=1.7cm]{p15_carot.png}};
+        \draw[-latex,very thick,PKdo] (11.6,-6.2) -- (12.15,-6.2);
+    \end{tikzpicture}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy tô màu quả bóng: chữ \textbf{m} tô màu \textbf{đỏ}, chữ \textbf{n} tô màu \textbf{xanh}, chữ \textbf{l} tô màu \textbf{vàng}.
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}
+        % chú thích màu
+        \foreach \chu/\mau/\x in {m/PKdo/-4.2,n/PKxanhnuoc/0,l/PKvang/4.2}{
+            \begin{scope}[shift={(\x,3.6)},scale=0.6]\PNbongto{}{\mau}\end{scope}
+            \node[font=\bfseries\LARGE,anchor=west] at (\x+0.55,3.6) {= \chu};}
+        % chùm bóng
+        \coordinate (nut) at (0,-3.6);
+        \foreach \chu/\x/\y in {m/-6.0/0.6,n/-4.5/1.6,l/-3.0/0.4,n/-1.5/1.7,m/0/0.5,l/1.5/1.75,m/3.0/0.45,n/4.5/1.6,l/6.0/0.6,
+                                n/-5.1/-1.25,l/-2.55/-1.2,m/0/-1.35,n/2.55/-1.2,m/5.1/-1.25}{
+            \draw[gray!70!black,thin] (\x,\y-0.75) .. controls (\x*0.5,\y-1.6) and (0.1,-2.4) .. (nut);}
+        \foreach \chu/\x/\y in {m/-6.0/0.6,n/-4.5/1.6,l/-3.0/0.4,n/-1.5/1.7,m/0/0.5,l/1.5/1.75,m/3.0/0.45,n/4.5/1.6,l/6.0/0.6,
+                                n/-5.1/-1.25,l/-2.55/-1.2,m/0/-1.35,n/2.55/-1.2,m/5.1/-1.25}{
+            \begin{scope}[shift={(\x,\y)}]\PNbongto{\chu}{white}\end{scope}}
+        \fill[PKdo] (nut) -- ++(-0.35,0.2) -- ++(0,-0.4) -- cycle (nut) -- ++(0.35,0.2) -- ++(0,-0.4) -- cycle;
+        \fill[PKdo!70!black] (nut) circle (0.09);
+    \end{tikzpicture}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy viết các tiếng sau vào vở ô li (tô theo chữ mờ rồi viết tiếp).
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}
+        \def\oli{0.42}
+        \fill[white] (0,0) rectangle (40*\oli,-18*\oli);
+        \draw[PKtim!30,thin] (0,-18*\oli) grid[step=\oli] (40*\oli,0);
+        \foreach \tu [count=\k] in {bơ,cỏ,đò,nơ}{
+            \pgfmathsetmacro{\yy}{-(4*\k+1)*\oli}
+            \draw[PKtim!75,thick] (0,\yy) -- (40*\oli,\yy);
+            \node[anchor=base west,inner sep=0pt,font=\Huge,scale=2.1] at (0.5,\yy) {\tu};
+            \node[anchor=base west,inner sep=0pt,font=\Huge,scale=2.1,text=gray!40] at (12*\oli,\yy) {\tu};}
+        \draw[PKtim!75,thick] (0,0) rectangle (40*\oli,-18*\oli);
+    \end{tikzpicture}\par}
+\end{bt}
+
+\begin{center}
+       \faGg\faGg\quad Hết \quad\faGg\faGg
+\end{center}
+\end{document}
