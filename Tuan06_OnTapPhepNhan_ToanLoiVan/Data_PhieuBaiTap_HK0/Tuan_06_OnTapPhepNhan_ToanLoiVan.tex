@@ -1,0 +1,471 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+%=========================================================
+% TĐ_PBT_IQB_HK1_Tuan06_OnTapPhepNhan_ToanLoiVan
+% Phiếu bài tập Toán tư duy cấp độ B
+%   Buổi 1: ÔN TẬP PHÉP NHÂN
+%   Buổi 2: TOÁN CÓ LỜI VĂN -- PHÉP CỘNG, PHÉP TRỪ
+% Đi kèm giáo án GiaoAn_Tuan06_OnTapPhepNhan_ToanLoiVan (số bài khớp với giáo án)
+% Soạn theo mẫu (\hktuan, bt, listEX)
+% Hình đặt trong thư mục Hinh_Tuan06_PBT/ (cùng cấp với file này), tên hình có tiền tố t06_
+% Đường dẫn tính từ thư mục của main.tex khi biên dịch main.tex
+\graphicspath{{Hinh_GiaoAn_Tuan06/}{Data_PhieuBaiTap_HK0/Hinh_GiaoAn_Tuan06/}{Hinh_Tuan06_PBT/}{Data_PhieuBaiTap_HK0/Hinh_Tuan06_PBT/}}
+%=========================================================
+
+%---------- Màu dùng riêng cho phiếu ----------
+\definecolor{TTcam}{HTML}{F39C34}
+\definecolor{TTcamdam}{HTML}{C9731A}
+\definecolor{TTxanh}{HTML}{4F86C6}
+\definecolor{TTxanhdam}{HTML}{2D5F99}
+\definecolor{TTdo}{HTML}{C4313A}
+
+%---------- Lệnh dùng riêng cho phiếu ----------
+% Chèn hình căn giữa, dính liền với đề bài phía trên (không bị tách trang)
+% Tham số tùy chọn = chiều cao tối đa của hình (mặc định 8cm); hình không rộng quá khổ giấy
+\providecommand{\TThinh}{}\renewcommand{\TThinh}[2][8cm]{\par\nopagebreak\vspace{2pt}\nopagebreak{\centering\includegraphics[height=#1,width=\linewidth,keepaspectratio]{#2}\par}\vspace{2pt}}
+% Chỗ chấm điền
+\providecommand{\TTcham}[1][3cm]{\makebox[#1]{\dotfill}}
+% Ô vuông trống để điền dấu hoặc Đ/S
+\providecommand{\TTo}{}\renewcommand{\TTo}{\hspace{3pt}\framebox[0.75cm]{\rule{0pt}{0.42cm}}\hspace{3pt}}
+% Dòng thông tin học sinh
+\providecommand{\TTthongtin}{%
+  \noindent\begin{tabular}{|p{7.6cm}|p{4cm}|p{4cm}|}
+    \hline
+    \textbf{Họ và Tên HS:}\dotfill & \textbf{Lớp:}\dotfill & \textbf{Ngày:}\dotfill \\
+    \hline
+  \end{tabular}\par\medskip}
+% Đánh lại số bài từ 1 cho buổi 2 (chỉ khi môi trường bt có bộ đếm tên bt)
+\makeatletter
+\providecommand{\TTdatlaibai}{\@ifundefined{c@bt}{}{\setcounter{bt}{0}}}
+\makeatother
+% Khung "Bài giải" có n dòng kẻ chấm: \TTbaigiai{n}
+\providecommand{\TTbaigiai}{}\renewcommand{\TTbaigiai}[1]{\par\nopagebreak\vspace{4pt}{\centering\underline{\textbf{Bài giải}}\par}\nopagebreak
+  \foreach \i in {1,...,#1}{\vspace{9pt}\noindent\makebox[\linewidth]{\dotfill}\par}\medskip}
+% n dòng kẻ chấm (không có chữ "Bài giải"): \TTdongcham{n}
+\providecommand{\TTdongcham}{}\renewcommand{\TTdongcham}[1]{\par\nopagebreak
+  \foreach \i in {1,...,#1}{\vspace{9pt}\noindent\makebox[\linewidth]{\dotfill}\par}\medskip}
+% Ô li nhỏ để đặt tính (4 cột x 4 hàng)
+\providecommand{\TTluoi}{}\renewcommand{\TTluoi}{\tikz\draw[black!25,step=0.55cm] (0,0) grid (2.2,2.2);}
+% Một ô hình ở Bài 1 (Buổi 1): \TTohinh{nhãn}{tên hình}{chiều cao}
+\providecommand{\TTohinh}{}\renewcommand{\TTohinh}[3]{%
+  \begin{minipage}[t]{0.48\linewidth}
+    #1\par\nopagebreak
+    \parbox[c][3.1cm][c]{\linewidth}{\centering\includegraphics[height=#3,width=\linewidth,keepaspectratio]{#2}}\par
+    Phép cộng: \TTcham[5.6cm]\par\vspace{6pt}
+    Phép nhân: \TTcham[5.6cm]
+  \end{minipage}}
+% Thẻ số (TikZ)
+\tikzset{TTthe/.style={draw=black!30,fill=white,rounded corners=4pt,minimum width=1.2cm,minimum height=1.45cm,font=\huge\bfseries,text=mauchinh}}
+\renewcommand{\lop}{B}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       BUỔI 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setcounter{section}{3} % không chỉnh sửa
+\hktuan{1}{14}
+\par\medskip % xuống dòng: tiêu đề không nằm chung dòng với khung HK1 - Tuần 6
+{\centering
+        {\color{mauchinh!120}\bfseries\Large PHIẾU BÀI TẬP TOÁN TƯ DUY CẤP ĐỘ B}\\[3pt]
+        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: ÔN TẬP PHÉP NHÂN (BUỔI 1)}\par}
+\vspace{6pt}
+\TTthongtin
+
+\begin{bt}
+    Quan sát hình rồi viết phép cộng và phép nhân thích hợp.
+    \par\nopagebreak\vspace{4pt}\nopagebreak
+        \noindent\TTohinh{a) Có 3 lốc sữa, mỗi lốc 4 hộp.}{ga06_locsua.png}{1.6cm}\hfill
+    \TTohinh{b) Có 4 lọ hoa, mỗi lọ 5 bông.}{ga06_lohoa.png}{2.9cm}\par\vspace{12pt}
+    \noindent\TTohinh{c) Có 5 đĩa cam, mỗi đĩa 3 quả.}{ga06_diacam.png}{1.6cm}\hfill
+    \TTohinh{d) Có 4 hộp bút, mỗi hộp 8 chiếc.}{ga06_hopbut.png}{2.7cm}\par
+\end{bt}
+
+\begin{bt}
+    Nối mỗi tổng với phép nhân thích hợp.
+    \par\nopagebreak\vspace{6pt}\nopagebreak{\centering
+    \begin{tikzpicture}[
+        tong/.style={draw=TTcamdam,fill=TTcam!12,thick,rounded corners=6pt,minimum width=2.9cm,minimum height=0.95cm,font=\large},
+        nhan/.style={draw=TTxanhdam,fill=TTxanh!10,thick,rounded corners=6pt,minimum width=2.9cm,minimum height=0.95cm,font=\large}]
+        \foreach \x/\t [count=\k] in {0/{2 + 2 + 2},3.4/{5 + 5 + 5 + 5},6.8/{3 + 3},10.2/{6 + 6 + 6},13.6/{4 + 4 + 4 + 4}}{
+            \node[tong] (t\k) at (\x,2.6) {$\t$};
+            \fill (t\k.south) ++(0,-0.12) circle (2.4pt);}
+        \foreach \x/\t [count=\k] in {0/{5 \times 4},3.4/{6 \times 3},6.8/{2 \times 3},10.2/{4 \times 4},13.6/{3 \times 2}}{
+            \node[nhan] (n\k) at (\x,0) {$\t$};
+            \fill (n\k.north) ++(0,0.12) circle (2.4pt);}
+    \end{tikzpicture}\par}
+\end{bt}
+
+\begin{bt}
+    Viết số thích hợp vào chỗ trống (theo mẫu).
+    \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
+        \renewcommand{\arraystretch}{1.6}
+        \begin{tabular}{|>{\centering\arraybackslash}p{4cm}|>{\centering\arraybackslash}p{2.8cm}|>{\centering\arraybackslash}p{2.8cm}|>{\centering\arraybackslash}p{2.8cm}|}
+            \hline
+            \textbf{Phép nhân} & \textbf{Thừa số} & \textbf{Thừa số} & \textbf{Tích} \\ \hline
+            $6 \times 4 = 24$ & \textit{6} & \textit{4} & \textit{24} \\ \hline
+            $7 \times 3 = 21$ & & & \\ \hline
+            $9 \times 5 = 45$ & & & \\ \hline
+            \TTcham[3cm] & 8 & 2 & \\ \hline
+            \TTcham[3cm] & 5 & 6 & \\ \hline
+        \end{tabular}\par}
+\end{bt}
+\newpage
+\begin{bt}
+    Tính nhẩm.
+    \begin{multicols}{4}
+    \begin{listEX}
+        \item $2 \times 7 =$ \TTcham[1.1cm]
+        \item $3 \times 6 =$ \TTcham[1.1cm]
+        \item $4 \times 8 =$ \TTcham[1.1cm]
+        \item $5 \times 9 =$ \TTcham[1.1cm]
+        \item $6 \times 7 =$ \TTcham[1.1cm]
+        \item $7 \times 8 =$ \TTcham[1.1cm]
+        \item $8 \times 6 =$ \TTcham[1.1cm]
+        \item $9 \times 9 =$ \TTcham[1.1cm]
+        \item $6 \times 1 =$ \TTcham[1.1cm]
+        \item $1 \times 9 =$ \TTcham[1.1cm]
+        \item $7 \times 0 =$ \TTcham[1.1cm]
+        \item $0 \times 5 =$ \TTcham[1.1cm]
+        \item $8 \times 9 =$ \TTcham[1.1cm]
+        \item $9 \times 4 =$ \TTcham[1.1cm]
+        \item $5 \times 5 =$ \TTcham[1.1cm]
+        \item $7 \times 7 =$ \TTcham[1.1cm]
+    \end{listEX}
+    \end{multicols}
+\end{bt}
+
+\begin{bt}
+    Điền số thích hợp vào chỗ chấm.
+    \begin{multicols}{4}
+    \begin{listEX}
+        \item $6 \times$ \TTcham[0.9cm] $= 30$
+        \item \TTcham[0.9cm] $\times\, 4 = 28$
+        \item $9 \times$ \TTcham[0.9cm] $= 9$
+        \item \TTcham[0.9cm] $\times\, 8 = 0$
+    \end{listEX}
+    \end{multicols}
+\end{bt}
+\begin{bt}
+    Viết tiếp số thích hợp vào chỗ chấm theo quy luật.
+    \begin{listEX}
+        \item $2,\ 4,\ 6,\ 8,$ \TTcham[1cm], \TTcham[1cm], $14,$ \TTcham[1cm]
+        \item $5,\ 10,\ 15,$ \TTcham[1cm], $25,$ \TTcham[1cm], \TTcham[1cm], $40$
+        \item $3,\ 6,\ 9,$ \TTcham[1cm], \TTcham[1cm], $18,$ \TTcham[1cm], $24$
+        \item $36,\ 32,\ 28,$ \TTcham[1cm], \TTcham[1cm], $16,$ \TTcham[1cm]
+    \end{listEX}
+\end{bt}
+\begin{bt}
+    Điền dấu $>$, $<$, $=$ vào ô trống mà không cần tính. Giải thích cho bạn bên cạnh vì sao con điền dấu đó.
+    \begin{multicols}{2}
+    \begin{listEX}
+        \item $4 \times 5$ \TTo\ $5 \times 4$
+        \item $7 \times 6$ \TTo\ $7 \times 8$
+        \item $13 \times 3$ \TTo\ $12 \times 3$
+        \item $5 + 5 + 5 + 5$ \TTo\ $5 \times 3$
+        \item $9 \times 0$ \TTo\ $1 \times 0$
+        \item $8 \times 1$ \TTo\ $8 + 1$
+        \item $9 \times 6$ \TTo\ $6 \times 9$
+        \item $25 \times 2$ \TTo\ $25 \times 4$
+    \end{listEX}
+    \end{multicols}
+\end{bt}
+
+\begin{bt}
+    Trong mỗi cặp, khoanh vào phép nhân có tích lớn hơn (không cần tính).
+    \begin{multicols}{2}
+    \begin{listEX}
+        \item \makebox[2.4cm][l]{$6 \times 7$}\makebox[2.4cm][l]{$6 \times 9$}
+        \item \makebox[2.4cm][l]{$25 \times 4$}\makebox[2.4cm][l]{$24 \times 4$}
+        \item \makebox[2.4cm][l]{$18 \times 3$}\makebox[2.4cm][l]{$18 \times 2$}
+        \item \makebox[2.4cm][l]{$7 \times 5$}\makebox[2.4cm][l]{$5 \times 8$}
+        \item \makebox[2.4cm][l]{$4 + 4 + 4$}\makebox[2.4cm][l]{$4 \times 4$}
+        \item \makebox[2.4cm][l]{$9 \times 0$}\makebox[2.4cm][l]{$1 \times 9$}
+    \end{listEX}
+    \end{multicols}
+\end{bt}
+
+\begin{bt}
+    Trả lời các câu hỏi sau.
+    \begin{listEX}
+        \item Một phép nhân có thừa số thứ nhất là 6, thừa số thứ hai là 5. Nếu tăng thừa số thứ hai thêm 2 đơn vị thì tích tăng thêm bao nhiêu đơn vị?
+        \TTdongcham{2}
+        \item Cho phép nhân $8 \times 5 = 40$. Nếu thay số 5 bằng số 3 thì tích tăng hay giảm bao nhiêu đơn vị?
+        \TTdongcham{2}
+        \item Trong một phép nhân, nếu tăng thừa số thứ nhất thêm 3 đơn vị thì tích tăng 15 đơn vị. Tìm thừa số thứ hai.
+        \TTdongcham{2}
+    \end{listEX}
+\end{bt}
+
+\begin{bt}
+    Đúng ghi Đ, sai ghi S vào ô trống.
+    \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
+        \renewcommand{\arraystretch}{1.55}
+        \begin{tabular}{|>{\raggedright\arraybackslash}p{12.4cm}|>{\centering\arraybackslash}p{1.4cm}|}
+            \hline
+            a) $7 \times 4 = 4 \times 7$ & \\ \hline
+            b) $9 \times 0 = 9$ & \\ \hline
+            c) $1 \times 6 = 6$ & \\ \hline
+            d) $8 \times 5 < 8 \times 4$ & \\ \hline
+            e) $3 \times 5 = 3 + 3 + 3 + 3 + 3$ & \\ \hline
+            f) Trong phép nhân $6 \times 3 = 18$, số 18 được gọi là thừa số. & \\ \hline
+        \end{tabular}\par}
+\end{bt}
+
+\begin{bt}
+    Mỗi chiếc ô tô con có 4 bánh xe. Hỏi 6 chiếc ô tô như thế có bao nhiêu bánh xe?
+    \TTbaigiai{3}
+\end{bt}
+
+\begin{bt}
+    Mỗi tuần lễ có 7 ngày. Hỏi 3 tuần lễ có bao nhiêu ngày?
+    \TTbaigiai{3}
+\end{bt}
+
+\begin{bt}
+    Mỗi đĩa có 3 quả cam. Ngày Tết, bà bày 9 đĩa như thế. Hỏi bà bày tất cả bao nhiêu quả cam?
+    \TTbaigiai{3}
+\end{bt}
+
+\begin{bt}
+    Mỗi chuồng có 5 con thỏ. Hỏi 7 chuồng như thế có tất cả bao nhiêu con thỏ?
+    \TTbaigiai{3}
+\end{bt}
+
+\begin{bt}
+    Cho phép nhân $5 \times 8 = 40$. Nếu đổi số 8 thành số 6 thì tích tăng hay giảm bao nhiêu đơn vị?
+    \TTdongcham{3}
+\end{bt}
+
+\begin{bt}
+    Mỗi hộp có 6 cái bánh. Mẹ mua 4 hộp như thế. Cả nhà đã ăn hết 9 cái bánh. Hỏi còn lại bao nhiêu cái bánh?
+    \TTbaigiai{5}
+\end{bt}
+
+\begin{bt}
+    Trong sân có 5 chiếc xe đạp và 4 chiếc xe ba bánh. Mỗi xe đạp có 2 bánh, mỗi xe ba bánh có 3 bánh. Hỏi trong sân có tất cả bao nhiêu bánh xe?
+    \TTbaigiai{6}
+\end{bt}
+\newpage
+\begin{bt}
+    Mỗi bàn học có 2 bạn ngồi. Lớp 2A có 9 bàn. Cô giáo kê thêm 3 bàn như thế.
+    \begin{listEX}
+        \item Lớp có thể xếp thêm bao nhiêu bạn ngồi?
+        \item Bây giờ lớp có thể xếp tất cả bao nhiêu bạn ngồi?
+    \end{listEX}
+    \TTbaigiai{7}
+\end{bt}
+
+\begin{bt}
+    Nhà Lan nuôi 4 chuồng thỏ, mỗi chuồng 6 con. Nhà Hoa nuôi 3 chuồng thỏ, mỗi chuồng 8 con. Nhà nào nuôi nhiều thỏ hơn? Nhiều hơn mấy con?
+    \TTbaigiai{7}
+\end{bt}
+%---------- PHÁT TRIỂN TƯ DUY (Buổi 1) ----------
+% Dán đoạn này ngay SAU phần "BÀI TOÁN NÂNG CAO" của Buổi 1, TRƯỚC khối "%  BUỔI 2"
+% Ghi chú nguồn dạng toán (chữ nghiêng, màu xám)
+\providecommand{\TTnguon}{}\renewcommand{\TTnguon}[1]{{\small\itshape\color{black!55}(#1)}}
+
+\begin{bt}
+    Mỗi con bọ rùa có 6 chân. Trên một chiếc lá có một số con bọ rùa. Bạn Na đếm được tất cả 18 cái chân. Hỏi trên chiếc lá có mấy con bọ rùa?
+    \TTbaigiai{3}
+\end{bt}
+
+\begin{bt}
+    Mỗi hình giống nhau thay cho cùng một số. Em hãy tìm số thích hợp.
+    \par\nopagebreak\vspace{6pt}\nopagebreak{\centering\Large
+        $\bigstar + \bigstar + \bigstar = 12$ \qquad\qquad $\bullet = \bigstar \times 2$\par}
+    \vspace{8pt}
+    \begin{listEX}
+        \item $\bigstar =$ \TTcham[1.5cm]
+        \item $\bullet =$ \TTcham[1.5cm]
+        \item $\bigstar \times \bullet =$ \TTcham[1.5cm]
+    \end{listEX}
+\end{bt}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       BUỔI 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\TTdatlaibai
+{\centering
+        {\color{mauchinh!120}\bfseries\Large PHIẾU BÀI TẬP TOÁN TƯ DUY CẤP ĐỘ B}\\[3pt]
+        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: TOÁN CÓ LỜI VĂN -- PHÉP CỘNG,\\[2pt] PHÉP TRỪ (BUỔI 2)}\par}
+\vspace{6pt}
+\TTthongtin
+%---------- Lệnh cho Bài 1, Bài 2 (Buổi 2) ----------
+% Bài 1: số -- ô trống -- số -- dấu = -- chỗ chấm, mỗi phần rộng cố định nên thẳng cột
+\providecommand{\TTdien}{}\renewcommand{\TTdien}[2]{\hfill\makebox[0.9cm][r]{$#1$}\TTo\makebox[0.75cm][l]{$#2$}\makebox[0.45cm]{$=$}\TTcham[1.6cm]}
+% Bài 2: ô li tiểu học để đặt tính: 4 x 4 ô vuông lớn 8 mm (nét đậm),
+% mỗi ô lớn chia 4 x 4 ô li nhỏ 2 mm (nét mảnh)
+\providecommand{\TTluoilon}{}\renewcommand{\TTluoilon}{\tikz{%
+  \draw[black!20,line width=0.3pt,step=2mm] (0,0) grid (3.2,3.2);%
+  \draw[black!55,line width=0.5pt,step=8mm] (0,0) grid (3.2,3.2);%
+  \draw[black!55,line width=0.5pt] (0,0) rectangle (3.2,3.2);}}
+
+\begin{bt}
+    Viết dấu $+$ hoặc $-$ vào ô trống rồi tính.
+    \begin{listEX}
+        \item Trên cây có 9 quả na, bà hái xuống 4 quả. \TTdien{9}{4}
+        \item Hộp có 6 bút chì, bố mua thêm 5 bút chì. \TTdien{6}{5}
+        \item Lớp có 14 bạn nam và 13 bạn nữ. \TTdien{14}{13}
+        \item Có 20 quả bóng bay, 8 quả bị vỡ. \TTdien{20}{8}
+        \item Đĩa có 15 cái bánh, em ăn 3 cái. \TTdien{15}{3}
+        \item Ao có 12 con vịt, có thêm 6 con xuống ao. \TTdien{12}{6}
+    \end{listEX}
+\end{bt}
+
+\begin{bt}
+    Đặt tính rồi tính.
+    \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
+        \setlength{\tabcolsep}{0.7cm}
+        \begin{tabular}{ccc}
+            $34 + 25$ & $48 + 17$ & $25 + 8$ \\[3pt]
+            \TTluoilon & \TTluoilon & \TTluoilon \\[12pt]
+            $63 - 27$ & $45 - 12$ & $90 - 36$ \\[3pt]
+            \TTluoilon & \TTluoilon & \TTluoilon \\ [12pt]
+             $45 - 28$ & $81 - 12$ & $73 + 17$ \\[3pt]
+            \TTluoilon & \TTluoilon & \TTluoilon \\
+        \end{tabular}\par}
+\end{bt}
+\newpage
+\begin{bt}
+    Tủ sách của lớp có 48 quyển truyện. Các bạn góp thêm 17 quyển. Hỏi tủ sách của lớp có tất cả bao nhiêu quyển truyện?
+    \TTbaigiai{3}
+\end{bt}
+
+\begin{bt}
+    Buổi sáng, cửa hàng bán được 34 quả bưởi. Buổi chiều, cửa hàng bán được 25 quả bưởi. Hỏi cả ngày cửa hàng bán được bao nhiêu quả bưởi?
+    \TThinh[3.2cm]{ga06_robuoi.png}
+    \par\nopagebreak{\centering\begin{tabular}{p{0.45\linewidth}p{0.45\linewidth}}\centering Buổi sáng: \textbf{34 quả} & \centering\arraybackslash Buổi chiều: \textbf{25 quả}\end{tabular}\par}
+    \noindent\begin{minipage}[t]{0.36\linewidth}
+        \textbf{Tóm tắt}
+        \TTdongcham{3}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.6\linewidth}
+        \TTbaigiai{3}
+    \end{minipage}
+\end{bt}
+
+\begin{bt}
+    Trên dây điện có 12 con chim sẻ đang đậu. Có 5 con bay đi. Hỏi trên dây điện còn lại bao nhiêu con chim sẻ?
+    \TThinh[3cm]{ga06_chimse.png}
+    \TTbaigiai{3}
+\end{bt}
+
+\begin{bt}
+    Cửa hàng có 63 kg gạo, đã bán được 27 kg. Hỏi cửa hàng còn lại bao nhiêu ki-lô-gam gạo?
+    \TTbaigiai{3}
+\end{bt}
+\begin{bt}
+    Nhà bác Ba nuôi 42 con gà. Bác bán đi 15 con. Hỏi nhà bác Ba còn lại bao nhiêu con gà?
+    \TTbaigiai{3}
+\end{bt}
+
+\begin{bt}
+    Tổ Một trồng được 26 cây. Tổ Hai trồng được nhiều hơn tổ Một 7 cây. Hỏi tổ Hai trồng được bao nhiêu cây?\par
+    Viết số thích hợp vào chỗ chấm trong phần tóm tắt rồi giải bài toán.
+    \par\nopagebreak\vspace{4pt}\nopagebreak
+    \noindent\begin{minipage}[t]{0.42\linewidth}
+        \textbf{Tóm tắt}\par\vspace{9pt}
+        Tổ Một: \TTcham[1.2cm] cây\par\vspace{9pt}
+        Tổ Hai nhiều hơn tổ Một: \TTcham[1.2cm] cây\par\vspace{9pt}
+        Tổ Hai: \TTcham[1.2cm] cây?
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.54\linewidth}
+        \TTbaigiai{3}
+    \end{minipage}
+\end{bt}
+
+\begin{bt}
+    Anh cao 95 cm. Em thấp hơn anh 18 cm. Hỏi em cao bao nhiêu xăng-ti-mét?\par
+    Viết tóm tắt rồi giải bài toán.
+    \par\nopagebreak\vspace{4pt}\nopagebreak
+    \noindent\begin{minipage}[t]{0.42\linewidth}
+        \textbf{Tóm tắt}
+        \TTdongcham{3}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.54\linewidth}
+        \TTbaigiai{3}
+    \end{minipage}
+\end{bt}
+\newpage
+\begin{bt}
+    Nhìn tóm tắt, em hãy nêu bài toán rồi giải bài toán đó.
+    \par\nopagebreak\vspace{4pt}\nopagebreak
+    \noindent\begin{minipage}[t]{0.42\linewidth}
+        \textbf{Tóm tắt}\par\vspace{6pt}
+        Thùng cam: 40 quả\par\vspace{6pt}
+        Thùng quýt ít hơn thùng cam: 15 quả\par\vspace{6pt}
+        Thùng quýt: \dots\ quả?
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.54\linewidth}
+        \textbf{Bài toán}
+        \TTdongcham{3}
+    \end{minipage}
+    \TTbaigiai{3}
+\end{bt}
+\begin{bt}
+    Bao gạo thứ nhất nặng 35 kg. Bao gạo thứ hai nặng hơn bao thứ nhất 18 kg. Hỏi bao gạo thứ hai nặng bao nhiêu ki-lô-gam?
+    \TTbaigiai{3}
+\end{bt}
+
+\begin{bt}
+    Xe buýt có 28 hành khách. Đến bến, có 9 người xuống xe và 6 người lên xe. Hỏi lúc này trên xe có bao nhiêu hành khách?
+    \TTbaigiai{5}
+\end{bt}
+
+\begin{bt}
+    Tổ Một gấp được 34 ngôi sao. Tổ Hai gấp được ít hơn tổ Một 9 ngôi sao. Hỏi cả hai tổ gấp được bao nhiêu ngôi sao?
+    \TTbaigiai{5}
+\end{bt}
+
+\begin{bt}
+    Sau khi mẹ mua thêm 15 quả trứng thì trong tủ lạnh có tất cả 40 quả trứng. Hỏi lúc đầu trong tủ lạnh có bao nhiêu quả trứng?
+    \TTbaigiai{3}
+\end{bt}
+
+\begin{bt}
+    Bình cho bạn 12 cái kẹo thì Bình còn lại 18 cái kẹo. Hỏi lúc đầu Bình có bao nhiêu cái kẹo?
+    \TTbaigiai{3}
+\end{bt}
+
+\begin{bt}
+    Bao gạo nặng 45 kg. Bao gạo nặng hơn bao ngô 18 kg. Hỏi bao ngô nặng bao nhiêu ki-lô-gam?\par
+    \TTbaigiai{5}
+\end{bt}
+
+\begin{bt}
+    Cây bút chì dài 17 cm. Cây thước kẻ dài hơn bút chì 13 cm. Cục tẩy ngắn hơn bút chì 12 cm.
+    \begin{listEX}
+        \item Cây thước kẻ dài bao nhiêu xăng-ti-mét?
+        \item Cục tẩy dài bao nhiêu xăng-ti-mét?
+    \end{listEX}
+    \TTbaigiai{5}
+\end{bt}
+%---------- PHÁT TRIỂN TƯ DUY (Buổi 2) ----------
+% Dán đoạn này ngay SAU phần "BÀI TOÁN NÂNG CAO" của Buổi 2, TRƯỚC khối \begin{center} ... Hết ... \end{center}
+% Ghi chú nguồn dạng toán (chữ nghiêng, màu xám)
+\providecommand{\TTnguon}{}\renewcommand{\TTnguon}[1]{{\small\itshape\color{black!55}(#1)}}
+\newpage
+\begin{bt}
+    Trên cành cây có một số con chim đậu. Có 6 con bay đi, sau đó có 4 con khác bay đến. Lúc này trên cành có 10 con chim. Hỏi lúc đầu trên cành có bao nhiêu con chim?
+    \TTbaigiai{5}
+\end{bt}
+
+\begin{bt}
+    Các bạn xếp thành một hàng dọc. Bạn An đứng thứ 5 tính từ đầu hàng và cũng đứng thứ 5 tính từ cuối hàng. Hỏi hàng đó có bao nhiêu bạn?
+    \TTdongcham{5}
+\end{bt}
+
+\begin{bt}
+    Năm nay mẹ 32 tuổi, con 7 tuổi.
+    \begin{listEX}
+        \item Năm nay mẹ hơn con bao nhiêu tuổi?
+        \item Sau 3 năm nữa, mẹ hơn con bao nhiêu tuổi?
+    \end{listEX}
+    \TTbaigiai{7}
+\end{bt}
+
+
+\begin{center}
+       \faGg\faGg\quad Hết \quad\faGg\faGg
+\end{center}
+\end{document}
