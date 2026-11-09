@@ -1,0 +1,762 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+%=========================================================
+% TĐ_GiaoAn_IQB_HK1_Tuan06_OnTapPhepNhan_ToanLoiVan
+% Giáo án Toán tư duy cấp độ B
+%   Buổi 1: ÔN TẬP PHÉP NHÂN (90 phút)
+%   Buổi 2: TOÁN CÓ LỜI VĂN -- PHÉP CỘNG, PHÉP TRỪ (90 phút)
+% Soạn theo mẫu (\hktuan, \subsection, hd, vd, luuy)
+% Hình đặt trong thư mục Hinh_GiaoAn_Tuan06/ (cùng cấp với file này), tên hình có tiền tố ga06_
+\graphicspath{{Hinh_GiaoAn_Tuan06/}{Data_GiaoAn_HK0/Hinh_GiaoAn_Tuan06/}}
+%=========================================================
+
+%---------- Màu dùng riêng cho giáo án ----------
+\definecolor{gaTim}{HTML}{5A3EA8}     % mực tím (vở HS)
+\definecolor{gaDo}{HTML}{C4313A}      % bút đỏ GV
+\definecolor{gaXanhLa}{HTML}{3F8A4F}
+\definecolor{gaCam}{HTML}{E08A1E}
+\definecolor{gaBang}{HTML}{23453A}    % bảng đen (xanh)
+\definecolor{gaGo}{HTML}{8A5A2B}      % khung gỗ
+\definecolor{gaPhanVang}{HTML}{F5DC78}
+\definecolor{gaPhanHong}{HTML}{F4A9B8}
+\definecolor{gaPhanXanh}{HTML}{A9DCF0}
+\definecolor{gaBangGiay}{HTML}{4F86C6}
+\definecolor{gaT1}{HTML}{2F7F9E}\definecolor{gaT2}{HTML}{5A3EA8}\definecolor{gaT3}{HTML}{D07A1F}
+\definecolor{gaT4}{HTML}{3F8A4F}\definecolor{gaT5}{HTML}{C4313A}\definecolor{gaT6}{HTML}{6B7A72}
+
+%---------- Lệnh dùng riêng cho giáo án ----------
+% Chèn hình căn giữa, dính liền với đoạn phía trên; tham số = chiều cao tối đa
+\providecommand{\TThinh}{}\renewcommand{\TThinh}[2][8cm]{\par\nopagebreak\vspace{2pt}\nopagebreak{\centering\includegraphics[height=#1,width=\linewidth,keepaspectratio]{#2}\par}\vspace{2pt}}
+% Chỗ chấm điền
+\providecommand{\TTcham}[1][3cm]{\makebox[#1]{\dotfill}}
+% Chú thích hình
+\providecommand{\GAchuthich}{}\renewcommand{\GAchuthich}[1]{\par\nopagebreak{\centering\small\textit{#1}\par}\medskip}
+% Tiêu đề mục nhỏ trong một hoạt động
+\providecommand{\GAmucnho}{}\renewcommand{\GAmucnho}[1]{\par\addvspace{4pt}\noindent{\color{mauchinh}\bfseries #1}\par\nopagebreak\addvspace{2pt}}
+% Lời GV nói với HS (in nghiêng, có dấu ngoặc kép)
+\providecommand{\GAloi}{}\renewcommand{\GAloi}[1]{\textit{“#1”}}
+% Đáp án gợi ý cho GV (chữ xám)
+\providecommand{\GAdapan}{}\renewcommand{\GAdapan}[1]{\textcolor{black!55}{(#1)}}
+% Khung chốt kiến thức
+\providecommand{\GAchot}{}\renewcommand{\GAchot}[1]{\par\smallskip\noindent\fcolorbox{mauchinh}{white}{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{#1}}\par\smallskip}
+% Thẻ từ khóa: \GAchip{màu}{chữ}
+\providecommand{\GAchip}{}\renewcommand{\GAchip}[2]{\tikz[baseline=(c.base)]\node(c)[draw=#1,text=#1,rounded corners=6pt,inner xsep=5pt,inner ysep=2pt,font=\small]{#2};}
+% Ô trống cần điền, bên trong ghi đáp án màu xám cho GV: \GAo{đáp án}
+\providecommand{\GAo}{}\renewcommand{\GAo}[1]{\tikz[baseline=(o.base)]\node(o)[draw=gaCam,line width=0.8pt,fill=gaPhanVang!25,rounded corners=2pt,minimum width=0.9cm,minimum height=0.62cm,inner sep=1pt,text=black!45]{#1};}
+% Bài trình bày trong vở ô li: \GAvo{dòng 1\\ dòng 2\\ ...}
+\newsavebox{\GAvohop}\newlength{\GAvocao}
+\providecommand{\GAvo}{}\renewcommand{\GAvo}[1]{\par\smallskip\noindent
+  \sbox{\GAvohop}{\parbox{\dimexpr\linewidth-24pt\relax}{\color{gaTim}\fontsize{12.5pt}{8mm}\selectfont\itshape #1}}%
+  \setlength{\GAvocao}{\ht\GAvohop}\addtolength{\GAvocao}{\dp\GAvohop}\addtolength{\GAvocao}{10pt}%
+  \begin{tikzpicture}
+    \fill[gaTim!2] (0,0) rectangle (\linewidth-0.8pt,\GAvocao);
+    \begin{scope}
+      \clip (0,0) rectangle (\linewidth-0.8pt,\GAvocao);
+      \draw[gaTim!12,line width=0.3pt] (0,0) grid[xstep=8mm,ystep=2mm] (\linewidth,\GAvocao);
+      \draw[gaTim!32,line width=0.4pt] (0,0) grid[xstep=8mm,ystep=8mm] (\linewidth,\GAvocao);
+    \end{scope}
+    \draw[gaTim!45] (0,0) rectangle (\linewidth-0.8pt,\GAvocao);
+    \node[anchor=south west,inner sep=0pt] at (12pt,5pt) {\usebox{\GAvohop}};
+  \end{tikzpicture}\par\smallskip}
+% Thanh thời lượng 90 phút: \GAthoigian{bắt đầu/số phút/nhãn/màu, ...}
+\newlength{\GAphut}
+\providecommand{\GAthoigian}{}\renewcommand{\GAthoigian}[1]{\par\smallskip\noindent
+  \setlength{\GAphut}{\linewidth}\addtolength{\GAphut}{-4pt}\divide\GAphut by 90
+  \begin{tikzpicture}[x=\GAphut,y=1cm]
+    \foreach \bd/\sp/\nhan/\mau in {#1}{
+      \fill[\mau] (\bd,0) rectangle (\bd+\sp,0.62);
+      \draw[white,line width=1.5pt] (\bd+\sp,0) -- (\bd+\sp,0.62);
+      \node[white,font=\scriptsize\bfseries] at (\bd+\sp/2,0.31) {\nhan};
+    }
+  \end{tikzpicture}\par\smallskip}
+% Một ô thẻ số
+\providecommand{\GAthe}{}\renewcommand{\GAthe}[3][black!25]{\node[draw=#1,fill=white,rounded corners=4pt,minimum width=1.25cm,minimum height=1.5cm,font=\huge\bfseries,text=mauchinh] at #2 {#3};}
+
+%---------- Hình minh họa bài toán nhiều hơn / ít hơn (kiểu SGK lớp 2) ----------
+% Ngoặc xanh phía trên (chân quay xuống): \GAngoacTren{x1}{x2}{y}{nhãn}
+\providecommand{\GAngoacTren}{}\renewcommand{\GAngoacTren}[4]{%
+  \draw[gaXanhLa,line width=1.1pt,rounded corners=1.5pt] (#1,#3-0.16) -- (#1,#3) -- (#2,#3) -- (#2,#3-0.16);
+  \draw[gaXanhLa,line width=1.1pt] ({(#1+#2)/2},#3) -- ({(#1+#2)/2},#3+0.14);
+  \node[above,inner sep=2pt] at ({(#1+#2)/2},#3+0.12) {#4};}
+% Ngoặc xanh phía dưới (chân quay lên): \GAngoacDuoi{x1}{x2}{y}{nhãn}
+\providecommand{\GAngoacDuoi}{}\renewcommand{\GAngoacDuoi}[4]{%
+  \draw[gaXanhLa,line width=1.1pt,rounded corners=1.5pt] (#1,#3+0.16) -- (#1,#3) -- (#2,#3) -- (#2,#3+0.16);
+  \draw[gaXanhLa,line width=1.1pt] ({(#1+#2)/2},#3) -- ({(#1+#2)/2},#3-0.14);
+  \node[below,inner sep=2pt] at ({(#1+#2)/2},#3-0.12) {#4};}
+% Hình nhãn vở và quả bóng bay (tô màu = đã biết; nét đứt = chưa biết)
+\tikzset{
+  GAnhanvo/.pic={
+    \path[pic actions,rounded corners=2.5pt,line width=0.8pt] (-0.29,-0.21) rectangle (0.29,0.21);
+    \draw[pic actions,fill=none,line width=0.6pt] (-0.18,0.06) -- (0.18,0.06) (-0.18,-0.07) -- (0.08,-0.07);},
+  GAbong/.pic={
+    \path[pic actions,line width=0.8pt] (0,0.14) ellipse [x radius=0.21,y radius=0.27];
+    \path[pic actions,line width=0.6pt] (0,-0.13) -- (-0.05,-0.2) -- (0.05,-0.2) -- cycle;
+    \draw[pic actions,fill=none,line width=0.5pt] (0,-0.2) .. controls (0.09,-0.32) and (-0.09,-0.42) .. (0,-0.52);},
+  GAbiet/.style={draw=gaBangGiay!80!black,fill=gaPhanXanh},
+  GAchuabiet/.style={draw=black!45,densely dashed,fill=white}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       BUỔI 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setcounter{section}{3} % không chỉnh sửa
+\renewcommand{\lop}{B}
+\hktuan{1}{14}
+\par\medskip
+%\textbf{Người soạn: }
+\begin{center}
+        {\color{mauchinh!120}\bfseries\Large ÔN TẬP PHÉP NHÂN (BUỔI 1)}
+\end{center}
+
+\subsection{MỤC TIÊU CẦN ĐẠT}
+\begin{itemize}
+    \item HS nhắc lại được ý nghĩa phép nhân (mối liên hệ giữa phép nhân và phép cộng): $a \times b$ là $a$ được lấy $b$ lần (tổng của $b$ số hạng, mỗi số hạng bằng $a$); gọi đúng tên \textbf{thừa số}, \textbf{tích}.
+    \item HS thuộc bảng nhân 2 -- 9; viết được phép nhân từ hình ảnh; so sánh hai tích mà không cần tính; giải được bài toán tăng, giảm thừa số và các bài toán có lời văn về phép nhân.
+    \item HS nắm vững quy tắc nhân với 1, nhân với 0 và tính chất giao hoán $a \times b = b \times a$.
+\end{itemize}
+
+\subsection{TIẾN TRÌNH DẠY HỌC}
+\begin{itemize}
+    \item \textbf{Đồ dùng dạy học:} giáo án, PBT, sách Titan, bảng con, nam châm, con dấu, sticker, bảng nhân 2 -- 9 in khổ lớn (có ô trống), thẻ số.
+\end{itemize}
+\vspace{2pt}
+%---------------------------------------------------------
+\subsubsection{SỬA BÀI TẬP VỀ NHÀ -- ÔN BẢNG NHÂN}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 20 phút
+        \item Tạo không khí sôi nổi; kiểm tra nhanh bảng nhân 2 -- 9; rút kinh nghiệm lỗi sai ở BTVN.
+    \end{itemize}
+\end{hd}
+
+\GAmucnho{a) Trò chơi “Truyền điện” (5 phút)}
+\begin{itemize}
+    \item GV nói một phép nhân, ví dụ \GAloi{$3 \times 4$}, và chỉ vào một HS. HS trả lời \GAloi{12}, rồi tự nêu một phép nhân khác và gọi bạn tiếp theo trả lời.
+    \item Bạn trả lời sai hoặc quá 5 giây thì bị loại.
+    \item HS trụ lại cuối cùng sẽ được thưởng sticker.
+\end{itemize}
+
+\GAmucnho{b) Ôn tập bảng nhân 2 -- 9: điền số còn thiếu (7 phút)}
+\begin{itemize}
+    \item GV treo bảng nhân khổ lớn có ô trống, chia lớp thành 2 đội chơi tiếp sức: mỗi lượt một HS lên điền một ô. Đội điền đúng và nhanh hơn thắng.
+    \item Sau khi chơi, GV hỏi: \GAloi{Đi sang phải một ô thì tích thay đổi thế nào?} \GAdapan{tích thêm đúng bằng số ở đầu hàng, ví dụ hàng 4: $4, 8, 12, \dots$ -- mỗi ô thêm 4}
+\end{itemize}
+\begin{center}
+\begin{tikzpicture}[x=1.4cm,y=0.72cm,font=\bfseries]
+    % hàng tiêu đề
+    \node[draw=mauchinh,fill=mauchinh,text=white,minimum width=1.4cm,minimum height=0.72cm] at (0,0) {$\times$};
+    \foreach \c in {1,...,10}{\node[draw=mauchinh,fill=mauchinh!15,text=mauchinh,minimum width=1.4cm,minimum height=0.72cm] at (\c,0) {\c};}
+    % các hàng của bảng nhân, kèm danh sách cột để trống
+    \foreach \r/\trong in {2/{3,6,9},3/{2,5,7,10},4/{4,6,8},5/{3,5,9},6/{2,4,7,10},7/{3,6,8},8/{2,5,9},9/{4,7,10}}{
+        \node[draw=mauchinh,fill=mauchinh!15,text=mauchinh,minimum width=1.4cm,minimum height=0.72cm] at (0,1-\r) {\r};
+        \foreach \c in {1,...,10}{
+            \pgfmathtruncatemacro{\tich}{\r*\c}
+            \node[draw=black!30,minimum width=1.4cm,minimum height=0.72cm] at (\c,1-\r) {\tich};}
+        \foreach \c in \trong{
+            \pgfmathtruncatemacro{\tich}{\r*\c}
+            \node[draw=gaCam,line width=0.8pt,fill=gaPhanVang!35,text=black!35,font=\small,minimum width=1.4cm-0.8pt,minimum height=0.72cm-0.8pt] at (\c,1-\r) {\tich};}
+    }
+\end{tikzpicture}
+\end{center}
+\GAchuthich{Bảng nhân 2 -- 9. Ô vàng là ô HS cần điền (số màu xám là đáp án cho GV, khi in cho HS thì xóa đi).}
+
+Tiếp theo, GV cho HS làm nhanh trên bảng con (mỗi câu giơ bảng một lần):
+\begin{multicols}{2}
+\begin{enumerate}[1)]
+    \item $2 \times \GAo{7} = 14$
+    \item $\GAo{8} \times 5 = 40$
+    \item $4 \times \GAo{9} = 36$
+    \item $\GAo{9} \times 6 = 54$
+    \item $7 \times \GAo{6} = 42$
+    \item $\GAo{8} \times 8 = 64$
+    \item $3 \times 9 = \GAo{27}$
+    \item $9 \times \GAo{7} = 63$
+\end{enumerate}
+\end{multicols}
+Điền số còn thiếu vào dãy số (đếm thêm):
+\begin{itemize}
+    \item[a)] $3,\ 6,\ \GAo{9},\ 12,\ \GAo{15},\ 18,\ \GAo{21}$ \hfill \GAdapan{đếm thêm 3}
+    \item[b)] $7,\ 14,\ \GAo{21},\ 28,\ \GAo{35},\ \GAo{42}$ \hfill \GAdapan{đếm thêm 7}
+    \item[c)] $9,\ 18,\ 27,\ \GAo{36},\ \GAo{45},\ 54$ \hfill \GAdapan{đếm thêm 9}
+\end{itemize}
+
+\GAmucnho{c) Sửa bài tập về nhà (8 phút)}
+\begin{itemize}
+    \item GV chọn 2 -- 3 bài làm có lỗi sai thường gặp (che tên HS), chiếu lên bảng; HS tìm lỗi và nói cách sửa.
+    \item GV khen HS làm đúng, dán sticker cho HS tiến bộ.
+\end{itemize}
+\begin{luuy}
+    \textbf{Lỗi sai thường gặp khi ôn bảng nhân:}
+    \begin{itemize}
+        \item Nhầm các tích “gần nhau” trong bảng: $6 \times 7 = 48$, $7 \times 8 = 54$, $8 \times 6 = 42$\dots{} GV cho HS đọc lại cả hàng bằng cách đếm thêm để tự kiểm tra.
+        \item Nhầm phép nhân với phép cộng: $2 \times 3 = 5$; $\GAo{} \times 5 = 40$ HS điền 35 (lấy $40 - 5$).
+        \item Đếm thêm sai bước khi điền dãy số (đếm thêm 1 thay vì đếm thêm 3, 7, 9). GV nhắc: \GAloi{Hai số liền nhau hơn kém nhau mấy đơn vị?}
+    \end{itemize}
+\end{luuy}
+%---------------------------------------------------------
+\subsubsection{ÔN Ý NGHĨA PHÉP NHÂN}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 15 phút
+        \item HS viết được phép cộng các số hạng bằng nhau và phép nhân tương ứng từ hình ảnh; xác định đúng thừa số thứ nhất (số lượng của một nhóm) và thừa số thứ hai (số nhóm).
+    \end{itemize}
+\end{hd}
+\GAmucnho{a) Những đĩa cam của bà}
+GV dẫn chuyện: \GAloi{Sáng nay bà đi chợ mua cam về bày lên bàn thờ ngày rằm. Bà bày thành từng đĩa như thế này.} GV đưa hình ví dụ (Hình 1).
+\TThinh[2.4cm]{ga06_diacam.png}
+\GAchuthich{Hình 1. Bà bày cam thành 5 đĩa, mỗi đĩa 3 quả.}
+\begin{itemize}
+    \item \GAloi{Mỗi đĩa có mấy quả cam?} \hfill (3 quả)
+    \item \GAloi{Có mấy đĩa như thế?} \hfill (5 đĩa)
+    \item \GAloi{Muốn biết có tất cả bao nhiêu quả, con viết phép cộng thế nào?} \hfill ($3+3+3+3+3 = 15$)
+    \item \GAloi{Số 3 được lấy mấy lần?} \hfill (5 lần, ta viết $3 \times 5 = 15$)
+\end{itemize}
+\GAchot{\textbf{Vậy:} Thừa số thứ nhất là số lượng của \textbf{một nhóm} (3 quả trong một đĩa). Thừa số thứ hai là \textbf{số nhóm} (5 đĩa). Vì vậy viết $3 \times 5$, không viết $5 \times 3$.}
+
+\GAmucnho{b) Khay trứng -- đếm theo hàng và theo cột}
+\TThinh[4.2cm]{ga06_khaytrung.png}
+\GAchuthich{Hình 2. Khay trứng có 2 hàng, mỗi hàng 5 quả.}
+\begin{itemize}
+    \item GV khoanh hàng 1 bằng phấn đỏ: \GAloi{Mỗi hàng mấy quả? Có mấy hàng?} \hfill ($5 \times 2 = 10$)
+    \item GV khoanh cột 1 bằng phấn tím: \GAloi{Mỗi cột mấy quả? Có mấy cột?} \hfill ($2 \times 5 = 10$)
+    \item \GAloi{Số trứng trong khay có thay đổi không?} \GAdapan{Không, vẫn là 10 quả. Vậy $5 \times 2 = 2 \times 5$}
+\end{itemize}
+\GAchot{\textbf{Tính chất giao hoán:} Khi đổi chỗ các thừa số thì tích không thay đổi: $a \times b = b \times a$.}
+
+\GAmucnho{Luyện tập trong PBT: Bài 1}
+\begin{bt}
+Quan sát hình, viết phép cộng rồi viết phép nhân thích hợp.
+\begin{enumerate}[a)]
+    \item Mẹ mua 3 lốc sữa, mỗi lốc 4 hộp.
+    \TThinh[1.9cm]{ga06_locsua.png}
+    \TTcham[1.5cm] $+$ \TTcham[1.5cm] $+$ \TTcham[1.5cm] $=$ \TTcham[1.5cm] $\Rightarrow$ \TTcham[1.5cm] $\times$ \TTcham[1.5cm] $=$ \TTcham[1.5cm]\par
+    \GAdapan{$4 + 4 + 4 = 12 \Rightarrow 4 \times 3 = 12$}
+    \item Cô bày 4 lọ hoa, mỗi lọ 5 bông.
+    \TThinh[3cm]{ga06_lohoa.png}
+    \TTcham[1.5cm] $+$ \TTcham[1.5cm] $+$ \TTcham[1.5cm] $+$ \TTcham[1.5cm] $=$ \TTcham[1.5cm] $\Rightarrow$ \TTcham[1.5cm] $\times$ \TTcham[1.5cm] $=$ \TTcham[1.5cm]\par
+    \GAdapan{$5 + 5 + 5 + 5 = 20 \Rightarrow 5 \times 4 = 20$}
+\end{enumerate}
+\end{bt}
+\begin{luuy}
+    \textbf{Lỗi sai thường gặp:}
+    \begin{itemize}
+        \item Viết ngược thứ tự thừa số: thấy “3 lốc, mỗi lốc 4 hộp” liền viết $3 \times 4$ (lấy số xuất hiện trước). GV hỏi lại: \GAloi{Số nào được lấy nhiều lần?} -- số hộp trong một lốc (4) là thừa số thứ nhất.
+        \item Viết sai số số hạng: viết $4 + 4 = 8$ hoặc $4 + 4 + 4 + 4$ (đếm thiếu, đếm thừa nhóm). GV cho HS chỉ tay vào từng nhóm khi viết số hạng.
+        \item Nhầm nhóm có số lượng khác nhau vẫn viết được phép nhân (ví dụ $3 + 4 + 3$). Nhắc HS: chỉ viết thành phép nhân khi \textbf{các số hạng bằng nhau}.
+    \end{itemize}
+\end{luuy}
+%---------------------------------------------------------
+\newpage
+\subsubsection{THÀNH PHẦN PHÉP NHÂN -- NHÂN VỚI 1, NHÂN VỚI 0}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 10 phút
+        \item HS gọi đúng tên thừa số, tích; vận dụng nhanh quy tắc nhân với 1 và nhân với 0.
+    \end{itemize}
+\end{hd}
+\GAmucnho{a) Thành phần của phép nhân}
+\begin{itemize}
+    \item GV viết phép nhân $7 \times 3 = 21$ lên bảng và vấn đáp HS:
+    \item \GAloi{Số 7 được gọi là gì?} \hfill (thừa số)
+    \item \GAloi{Số 3 được gọi là gì?} \hfill (thừa số)
+    \item \GAloi{Số 21 được gọi là gì?} \hfill (tích)
+    \item \GAloi{$7 \times 3$ có được gọi là tích không?} \hfill (có, $7 \times 3$ cũng gọi là tích)
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}
+    \GAthe{(0,0)}{7}
+    \node[font=\huge] at (1.15,0) {$\times$};
+    \GAthe{(2.3,0)}{3}
+    \node[font=\huge] at (3.45,0) {$=$};
+    \node[draw=black!25,fill=white,rounded corners=4pt,minimum width=1.6cm,minimum height=1.5cm,font=\huge\bfseries,text=mauchinh] at (4.75,0) {21};
+    \foreach \x/\ten in {0/Thừa số, 2.3/Thừa số, 4.75/Tích}{
+        \draw[gaDo,->,>=stealth,thick] (\x,-1.45) -- (\x,-0.85);
+        \node[gaDo,font=\bfseries] at (\x,-1.75) {\ten};
+    }
+\end{tikzpicture}
+\end{center}
+
+\GAmucnho{b) Nhân với 1 và nhân với 0}
+\begin{itemize}
+    \item \GAloi{Bà chỉ bày 1 đĩa cam, mỗi đĩa 3 quả. Có mấy quả?} \GAdapan{$3 \times 1 = 3$. Số nào nhân với 1 cũng bằng chính số đó}
+    \item GV treo Hình 3: \GAloi{Các con ăn hết cam rồi, còn lại 4 cái đĩa. Mỗi đĩa có mấy quả?} \GAdapan{0 quả. $0+0+0+0 = 0$, nên $0 \times 4 = 0$}
+\end{itemize}
+\TThinh[1.2cm]{ga06_diatrong.png}
+\GAchuthich{Hình 3. 4 cái đĩa trống, mỗi đĩa 0 quả.}
+\GAchot{\centering $a \times 1 = 1 \times a = a$ \qquad\qquad $a \times 0 = 0 \times a = 0$}
+\begin{vd}
+    Vấn đáp nhanh:
+    \begin{multicols}{4}
+    \begin{enumerate}
+        \item $9 \times 1 =$ \dots \hfill (9)
+        \item $1 \times 8 =$ \dots \hfill (8)
+        \item $6 \times 0 =$ \dots \hfill (0)
+        \item $0 \times 7 =$ \dots \hfill (0)
+    \end{enumerate}
+    \end{multicols}
+\end{vd}
+\begin{luuy}
+    \textbf{Lỗi sai thường gặp:}
+    \begin{itemize}
+        \item Nhầm nhân với 0 thành cộng với 0: $6 \times 0 = 6$. Nhầm nhân với 1 thành cộng với 1: $1 \times 8 = 9$. GV cho HS nhắc lại bằng hình ảnh: \GAloi{6 cái đĩa, mỗi đĩa không có quả nào thì có mấy quả?}
+        \item Gọi sai tên thành phần: gọi 21 là “tổng”, gọi 7 là “số hạng” (lẫn với phép cộng). GV nhấn mạnh: phép cộng có \textbf{số hạng -- tổng}, phép nhân có \textbf{thừa số -- tích}.
+    \end{itemize}
+\end{luuy}
+
+%---------------------------------------------------------
+\newpage
+\subsubsection{“CHIẾC CÂN KÌ DIỆU” -- SO SÁNH KHÔNG CẦN TÍNH, TĂNG GIẢM THỪA SỐ}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 20 phút
+        \item HS so sánh hai tích có một thừa số bằng nhau mà không cần tính; tìm được tích tăng (giảm) bao nhiêu khi một thừa số thay đổi.
+    \end{itemize}
+\end{hd}
+\GAmucnho{a) So sánh không cần tính}
+\TThinh[4.6cm]{ga06_candia.png}
+\GAchuthich{Hình 4. Cân nghiêng về phía $15 \times 6$, vì 15 được lấy 6 lần nhiều hơn 15 được lấy 4 lần.}
+GV phân tích mẫu theo 3 bước:
+\begin{itemize}
+    \item \textbf{Bước 1.} Tìm thừa số giống nhau: cả hai vế đều có thừa số 15.
+    \item \textbf{Bước 2.} So sánh thừa số còn lại: $4 < 6$.
+    \item \textbf{Bước 3.} Kết luận: $15 \times 4 < 15 \times 6$ (không cần tính ra 60 và 90).
+\end{itemize}
+\GAchot{\textbf{Vậy:} Hai tích có một thừa số bằng nhau, tích nào có thừa số còn lại lớn hơn thì tích đó lớn hơn.}
+\begin{bt}
+Điền dấu $>$, $<$, $=$ vào chỗ chấm.
+\begin{multicols}{2}
+\begin{enumerate}[a)]
+    \item $4 \times 5$ \dots\ $5 \times 4$ \hfill \GAdapan{$=$, đổi chỗ thừa số}
+    \item $7 \times 6$ \dots\ $7 \times 8$ \hfill \GAdapan{$<$, vì $6 < 8$}
+    \item $13 \times 3$ \dots\ $12 \times 3$ \hfill \GAdapan{$>$, vì $13 > 12$}
+    \item $5+5+5+5$ \dots\ $5 \times 3$ \hfill \GAdapan{$>$, vì $5 \times 4 > 5 \times 3$}
+    \item $9 \times 0$ \dots\ $1 \times 0$ \hfill \GAdapan{$=$, đều bằng 0}
+    \item $8 \times 1$ \dots\ $8 + 1$ \hfill \GAdapan{$<$, vì $8 < 9$}
+\end{enumerate}
+\end{multicols}
+\end{bt}
+\begin{luuy}
+    \textbf{Lỗi sai thường gặp:}
+    \begin{itemize}
+        \item Chỉ so sánh thừa số thứ nhất, không để ý thừa số giống nhau nằm ở vị trí nào (câu c: thừa số giống nhau là 3 ở vị trí thứ hai).
+        \item Câu d: HS đếm sai số số hạng hoặc so sánh $5$ với $3$. GV hướng dẫn đổi tổng thành phép nhân trước: $5+5+5+5 = 5 \times 4$.
+        \item Câu e, f: HS nghĩ $9 \times 0 > 1 \times 0$ vì $9 > 1$; nghĩ $8 \times 1 = 8 + 1$. Nhắc lại quy tắc nhân với 0, nhân với 1.
+    \end{itemize}
+\end{luuy}
+\GAmucnho{b) “Thẻ số của Pi” -- tích tăng bao nhiêu?}
+\begin{center}
+\begin{tikzpicture}
+    \GAthe{(0,0)}{4}
+    \node[font=\huge] at (1.05,0) {$\times$};
+    \GAthe{(2.1,0)}{6}
+    \node[font=\huge] at (3.15,0) {$=$};
+    \node[draw=black!25,fill=white,rounded corners=4pt,minimum width=1.6cm,minimum height=1.5cm,font=\huge\bfseries,text=mauchinh] at (4.35,0) {24};
+    \draw[thick,->,>=stealth] (5.45,0) -- (6.35,0);
+    \GAthe{(7.3,0)}{4}
+    \node[font=\huge] at (8.35,0) {$\times$};
+    \node[draw=gaCam,line width=1.2pt,fill=gaCam!8,rounded corners=4pt,minimum width=1.25cm,minimum height=1.5cm,font=\huge\bfseries,text=gaDo,rotate=-7] at (9.4,0) {9};
+    \node[font=\huge] at (10.45,0) {$=$};
+    \node[draw=black!40,dashed,fill=white,rounded corners=4pt,minimum width=1.25cm,minimum height=1.5cm,font=\huge\bfseries,text=black!40] at (11.5,0) {?};
+    \draw[gaDo,thick,dashed,->,>=stealth] (2.1,0.9) to[bend left=22] node[above,font=\small\itshape]{lật ngược thẻ 6 thành 9} (9.4,0.95);
+\end{tikzpicture}
+\end{center}
+\GAchuthich{Hình 5. Pi xếp phép nhân $4 \times 6 = 24$ bằng thẻ số, rồi vô tình lật ngược thẻ 6 thành thẻ 9.}
+\textbf{Đề bài.} Pi xếp phép nhân $4 \times 6 = 24$. Do sơ ý, Pi lật ngược thẻ số 6 thành số 9.
+\begin{enumerate}[a)]
+    \item Phép tính mới là gì? Tính kết quả.
+    \item Tích mới tăng thêm bao nhiêu đơn vị so với tích ban đầu?
+\end{enumerate}
+
+\GAvo{a) Phép tính mới: $4 \times 9 = 36$\\
+b) Cách 1: Tích tăng thêm: $36 - 24 = 12$ (đơn vị)\\
+\phantom{b) }Cách 2: Thừa số thứ hai tăng: $9 - 6 = 3$ (đơn vị)\\
+\phantom{b) Cách 2: }Tích tăng thêm: $4 \times 3 = 12$ (đơn vị)}
+GV giảng Cách 2: \GAloi{Thừa số thứ hai tăng 3 nghĩa là số 4 được lấy thêm 3 lần nữa, nên tích tăng thêm $4 \times 3 = 12$.}
+\GAchot{\textbf{Vậy:}\par\smallskip
+{\centering\begin{tabular}{@{}r@{\ $=$\ }l@{}}
+    Tích tăng thêm & Thừa số thứ nhất $\times$ Số đơn vị thừa số thứ hai tăng thêm\\[2pt]
+    Tích giảm đi   & Thừa số thứ nhất $\times$ Số đơn vị thừa số thứ hai giảm đi
+\end{tabular}\par}}
+
+\GAmucnho{Luyện tập trong PBT: Bài 9}
+\begin{enumerate}
+    \item Một phép nhân có thừa số thứ nhất là 6, thừa số thứ hai là 5. Nếu tăng thừa số thứ hai thêm 2 đơn vị thì tích tăng thêm bao nhiêu đơn vị? \GAdapan{$6 \times 2 = 12$ đơn vị}
+    \item Cho phép nhân $8 \times 5 = 40$. Nếu thay số 5 bằng số 3 thì tích tăng hay giảm bao nhiêu đơn vị? \GAdapan{giảm; $8 \times 3 = 24$, $40 - 24 = 16$; hoặc thừa số thứ hai giảm $5 - 3 = 2$ nên tích giảm $8 \times 2 = 16$ đơn vị}
+    \item Trong một phép nhân, nếu tăng thừa số thứ nhất thêm 3 đơn vị thì tích tăng 15 đơn vị. Tìm thừa số thứ hai. \GAdapan{tăng thừa số thứ nhất 3 đơn vị thì tích tăng thêm 3 được lấy số lần bằng thừa số thứ hai; mà $3 \times 5 = 15$ nên thừa số thứ hai là 5}
+\end{enumerate}
+\begin{luuy}
+    \textbf{Lỗi sai thường gặp:}
+    \begin{itemize}
+        \item Trả lời “tích tăng 3 đơn vị” (bằng số đơn vị thừa số tăng). GV quay lại hình ảnh: \GAloi{Thêm 3 lần, mỗi lần lấy 4 thì thêm bao nhiêu?}
+        \item Nhân nhầm với thừa số vừa thay đổi: Bài 9 câu 1 tính $5 \times 2 = 10$ thay vì $6 \times 2 = 12$.
+        \item Trả lời tích mới thay cho phần tăng thêm (trả lời 36 thay vì 12); quên nói “tăng” hay “giảm” ở câu 2.
+    \end{itemize}
+\end{luuy}
+
+%---------------------------------------------------------
+\subsubsection{GIẢI BÀI TOÁN CÓ LỜI VĂN BẰNG PHÉP NHÂN}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 10 phút
+        \item HS nhận ra “mỗi nhóm có bao nhiêu” và “có mấy nhóm”; trình bày bài giải đủ 3 phần: câu lời giải -- phép tính -- đáp số.
+    \end{itemize}
+\end{hd}
+\begin{vd}
+    Mỗi hộp có 8 chiếc bút màu. Cô giáo mua 4 hộp như thế. Hỏi cô giáo mua tất cả bao nhiêu chiếc bút màu?
+\end{vd}
+\TThinh[2.6cm]{ga06_hopbut.png}
+\GAchuthich{Hình 6. 4 hộp bút màu, mỗi hộp 8 chiếc.}
+\begin{itemize}
+    \item GV hướng dẫn gạch chân từ khóa: \underline{mỗi hộp 8 chiếc}, \underline{4 hộp}, \underline{tất cả bao nhiêu chiếc}.
+    \item \GAloi{Số 8 được lấy mấy lần?} \hfill (4 lần $\Rightarrow 8 \times 4$)
+\end{itemize}
+\GAvo{\centerline{\underline{Bài giải}}
+\hspace*{2em}Cô giáo mua tất cả số bút màu là:\\
+\hspace*{4em}$8 \times 4 = 32$ (chiếc)\\
+\hspace*{6em}Đáp số: 32 chiếc bút màu.}
+\begin{luuy}
+    \textbf{Lỗi sai thường gặp:}
+    \begin{itemize}
+        \item Viết $4 \times 8$ (số hộp nhân số bút). Kết quả vẫn đúng nhưng chưa đúng ý nghĩa: số bút trong \textbf{một} hộp phải là thừa số thứ nhất.
+        \item Dùng phép cộng $8 + 4 = 12$ vì thấy chữ “tất cả”. GV hỏi: \GAloi{Có mấy hộp? Mỗi hộp có bao nhiêu? Số 8 được lấy mấy lần?}
+        \item Ghi sai đơn vị: $8 \times 4 = 32$ (hộp); thiếu câu lời giải hoặc thiếu đáp số.
+    \end{itemize}
+\end{luuy}
+
+\GAmucnho{Luyện tập trong PBT: Bài 11, 12, 13}
+
+\subsubsection{LUYỆN TẬP}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 10 phút
+        \item GV cho HS làm bài trong PBT.
+    \end{itemize}
+\end{hd}
+%---------------------------------------------------------
+\subsubsection{CỦNG CỐ -- GIAO BÀI TẬP VỀ NHÀ}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 5 phút
+        \item GV giao BTVN tùy theo tình hình lớp.
+    \end{itemize}
+\end{hd}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       BUỔI 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\setcounter{subsection}{0}
+\begin{center}
+        \resizebox{\linewidth}{!}{\color{mauchinh!120}\bfseries\Large TOÁN CÓ LỜI VĂN: PHÉP CỘNG, PHÉP TRỪ (BUỔI 2)}
+\end{center}
+
+\subsection{MỤC TIÊU CẦN ĐẠT}
+\begin{itemize}
+    \item HS nhận biết các dạng bài toán có lời văn giải bằng một phép tính: \textbf{gộp, thêm} (phép cộng); \textbf{bớt, tìm phần còn lại} (phép trừ); \textbf{nhiều hơn, ít hơn}.
+    \item HS đọc đề, gạch chân từ khóa, tóm tắt bằng lời hoặc bằng hình ảnh minh họa; chọn đúng phép tính.
+    \item HS cộng, trừ (có nhớ) đúng trong phạm vi 100; trình bày bài giải đủ 3 phần.
+\end{itemize}
+
+\subsection{TIẾN TRÌNH DẠY HỌC}
+\begin{itemize}
+    \item \textbf{Đồ dùng dạy học:} giáo án, PBT, sách Titan, bút lông, nam châm, con dấu, sticker.
+\end{itemize}
+\vspace{2pt}
+%---------------------------------------------------------
+\subsubsection{SỬA BÀI TẬP VỀ NHÀ}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 10 phút
+        \item GV sửa kĩ các lỗi sai của HS trong BTVN.
+    \end{itemize}
+\end{hd}
+
+%---------------------------------------------------------
+\subsubsection{ÔN TẬP GIẢI BÀI TOÁN CÓ LỜI VĂN}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 40 phút
+        \item HS nắm được quy trình 4 bước; phân loại được các từ khóa thường gặp.
+    \end{itemize}
+\end{hd}
+\setcounter{vd}{0}
+\begin{itemize}
+    \item GV đọc tình huống, HS trả lời nhanh: \GAloi{Số lượng nhiều lên hay ít đi? Ta làm phép tính gì?}
+    \begin{enumerate}
+        \item \GAloi{Trong lồng có 7 chú gà con, mẹ mua thêm 3 chú nữa.} \hfill \GAdapan{nhiều lên, phép cộng: $7 + 3 = 10$ chú gà}
+        \item \GAloi{Bé có 10 cái kẹo, bé cho em 4 cái.} \hfill \GAdapan{ít đi, phép trừ: $10 - 4 = 6$ cái kẹo}
+        \item \GAloi{Lớp em có 12 bạn nam và 15 bạn nữ.} \hfill \GAdapan{gộp, phép cộng: $12 + 15 = 27$ bạn}
+        \item \GAloi{Trên sân có 9 bạn đá bóng, 2 bạn về nhà.} \hfill \GAdapan{ít đi, phép trừ: $9 - 2 = 7$ bạn}
+    \end{enumerate}
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[buoc/.style={draw=mauchinh,rounded corners=5pt,text width=0.205\linewidth,minimum height=2.5cm,align=left,inner sep=6pt,anchor=north west}]
+    \node[buoc] at (0,0) {{\color{mauchinh}\bfseries\footnotesize BƯỚC 1}\\ \textbf{Đọc kĩ đề}\\ \small Đọc 2 lần, gạch chân số và từ khóa, khoanh câu hỏi.};
+    \node[buoc] at (0.25\linewidth,0) {{\color{mauchinh}\bfseries\footnotesize BƯỚC 2}\\ \textbf{Tóm tắt}\\ \small Viết gọn “Có\dots\ Thêm/Bớt\dots\ Hỏi\dots” hoặc quan sát hình minh họa.};
+    \node[buoc] at (0.5\linewidth,0) {{\color{mauchinh}\bfseries\footnotesize BƯỚC 3}\\ \textbf{Chọn phép tính}\\ \small Số lượng nhiều lên hay ít đi? Đề hỏi phần lớn hay phần bé?};
+    \node[buoc] at (0.75\linewidth,0) {{\color{mauchinh}\bfseries\footnotesize BƯỚC 4}\\ \textbf{Trình bày, thử lại}\\ \small Lời giải -- phép tính -- đáp số. Thử lại bằng phép tính ngược.};
+\end{tikzpicture}
+\end{center}
+\begin{itemize}
+    \item GV vấn đáp HS về các từ khóa trong bài thường làm phép cộng hoặc phép trừ.
+\end{itemize}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{|p{0.44\linewidth}|p{0.44\linewidth}|}
+    \hline
+    {\color{gaXanhLa}\bfseries Thường làm phép cộng} & {\color{gaDo}\bfseries Thường làm phép trừ} \\
+    \GAchip{gaXanhLa}{tất cả} \GAchip{gaXanhLa}{cả hai} \GAchip{gaXanhLa}{thêm} \GAchip{gaXanhLa}{mua thêm} \GAchip{gaXanhLa}{được cho} \GAchip{gaXanhLa}{lên xe} \GAchip{gaXanhLa}{nhiều hơn} \GAchip{gaXanhLa}{cao hơn} \GAchip{gaXanhLa}{nặng hơn}
+    & \GAchip{gaDo}{còn lại} \GAchip{gaDo}{bớt} \GAchip{gaDo}{cho đi} \GAchip{gaDo}{bán đi} \GAchip{gaDo}{bay đi} \GAchip{gaDo}{ăn hết} \GAchip{gaDo}{xuống xe} \GAchip{gaDo}{ít hơn} \GAchip{gaDo}{thấp hơn} \\
+    \hline
+\end{tabular}
+\end{center}
+\begin{luuy}
+    Từ khóa chỉ là \textbf{gợi ý}, không phải “luật”. Ví dụ: “Lan cho em 4 cái kẹo thì Lan \textbf{còn lại} 6 cái. Hỏi lúc đầu Lan có bao nhiêu cái kẹo?” -- có chữ “còn lại” nhưng phải làm phép cộng $6 + 4 = 10$; còn “Hỏi \textbf{tất cả} có bao nhiêu?” với các nhóm bằng nhau lại làm phép nhân. GV luôn hỏi HS: \GAloi{Đề hỏi gì? Phần đó lớn hơn hay bé hơn số đã cho?}
+\end{luuy}
+%---------------------------------------------------------
+\GAmucnho{Dạng 1: Gộp và thêm -- giải bằng phép cộng}
+\begin{vd}
+    Trên xe buýt có 25 hành khách. Đến bến, có thêm 8 người lên xe và không có ai xuống. Hỏi trên xe buýt lúc này có tất cả bao nhiêu hành khách?
+\end{vd}
+\TThinh[4.4cm]{ga06_xebuyt.png}
+\GAchuthich{Hình 7. Xe buýt tuyến 32 đang chở 25 hành khách vào bến; 8 người đang chờ lên xe.}
+\begin{itemize}
+    \item \GAloi{Lúc đầu trên xe có bao nhiêu hành khách?} \hfill (25)
+    \item \GAloi{Có thêm bao nhiêu người?} \hfill (8)
+    \item \GAloi{Số người trên xe nhiều lên hay ít đi?} \hfill (nhiều lên $\Rightarrow$ phép cộng)
+\end{itemize}
+\noindent\begin{minipage}[t]{0.38\linewidth}
+    \textbf{Tóm tắt:}
+    \GAvo{Có: 25 hành khách\\ Thêm: 8 hành khách\\ Có tất cả: \dots\ hành khách?}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}
+    \textbf{Bài giải:}
+    \GAvo{\centerline{\underline{Bài giải}}
+    Trên xe có tất cả số hành khách là:\\
+    \hspace*{2em}$25 + 8 = 33$ (hành khách)\\
+    \hspace*{4em}Đáp số: 33 hành khách.}
+\end{minipage}
+\GAmucnho{Luyện tập trong PBT: Bài 3, Bài 4}
+\begin{bt}
+Buổi sáng, cửa hàng bán được 34 quả bưởi. Buổi chiều, cửa hàng bán được 25 quả bưởi. Hỏi cả ngày cửa hàng bán được bao nhiêu quả bưởi?
+\TThinh[3.6cm]{ga06_robuoi.png}
+\par\nopagebreak{\centering\begin{tabular}{p{0.45\linewidth}p{0.45\linewidth}}\centering Buổi sáng: \textbf{34 quả} & \centering\arraybackslash Buổi chiều: \textbf{25 quả}\end{tabular}\par}
+\GAvo{\centerline{\underline{Bài giải}}
+\hspace*{2em}Cả ngày cửa hàng bán được số quả bưởi là:\\
+\hspace*{4em}$34 + 25 = 59$ (quả)\\
+\hspace*{6em}Đáp số: 59 quả bưởi.}
+\end{bt}
+\begin{bt}
+Tủ sách của lớp có 48 quyển truyện. Các bạn góp thêm 17 quyển. Hỏi tủ sách của lớp có tất cả bao nhiêu quyển truyện?
+\GAvo{\centerline{\underline{Bài giải}}
+\hspace*{2em}Tủ sách của lớp có tất cả số quyển truyện là:\\
+\hspace*{4em}$48 + 17 = 65$ (quyển)\\
+\hspace*{6em}Đáp số: 65 quyển truyện.}
+\end{bt}
+\begin{luuy}
+    \textbf{Lỗi sai thường gặp (Dạng 1):}
+    \begin{itemize}
+        \item Quên nhớ khi cộng có nhớ: $48 + 17 = 55$ (8 cộng 7 bằng 15, viết 5 nhưng quên nhớ 1 sang hàng chục). GV cho HS đặt tính dọc và nói to “viết 5, nhớ 1”.
+        \item Câu lời giải chép lại câu hỏi “Hỏi trên xe có tất cả bao nhiêu hành khách là:” hoặc viết quá ngắn “Số hành khách:”. Cách nhớ: \textbf{bỏ chữ “Hỏi”, đổi “bao nhiêu” thành “số”, thêm chữ “là”}.
+        \item Ghi sai hoặc thiếu đơn vị: $25 + 8 = 33$ (người) rồi đáp số “33 hành khách”; viết đơn vị không có ngoặc đơn; đáp số chỉ ghi “33”.
+    \end{itemize}
+\end{luuy}
+%---------------------------------------------------------
+\GAmucnho{Dạng 2: Bớt -- tìm phần còn lại -- giải bằng phép trừ}
+
+\begin{vd}
+    Bể cá nhà Na có 18 con cá vàng. Mẹ chuyển 6 con sang bể nhỏ. Hỏi bể cá lớn còn lại bao nhiêu con cá vàng?
+\end{vd}
+\TThinh[4.6cm]{ga06_beca.png}
+\GAchuthich{Hình 8. Mẹ chuyển 6 con cá vàng từ bể lớn sang bể nhỏ.}
+\begin{itemize}
+    \item \GAloi{Số cá trong bể lớn nhiều lên hay ít đi?} \hfill (ít đi $\Rightarrow$ phép trừ)
+\end{itemize}
+\textbf{Bài giải mẫu:}
+\GAvo{\centerline{\underline{Bài giải}}
+\hspace*{2em}Bể cá lớn còn lại số con cá vàng là:\\
+\hspace*{4em}$18 - 6 = 12$ (con)\\
+\hspace*{6em}Đáp số: 12 con cá vàng.}
+\GAmucnho{Luyện tập trong PBT: Bài 5, Bài 6}
+
+\begin{bt}
+Trên dây điện có 12 con chim sẻ đang đậu. Có 5 con bay đi. Hỏi trên dây điện còn lại bao nhiêu con chim sẻ?
+\TThinh[3.4cm]{ga06_chimse.png}
+\GAvo{\centerline{\underline{Bài giải}}
+\hspace*{2em}Trên dây điện còn lại số con chim sẻ là:\\
+\hspace*{4em}$12 - 5 = 7$ (con)\\
+\hspace*{6em}Đáp số: 7 con chim sẻ.}
+\end{bt}
+
+\begin{bt}
+Cửa hàng có 63 kg gạo, đã bán được 27 kg. Hỏi cửa hàng còn lại bao nhiêu ki-lô-gam gạo?
+\GAvo{\centerline{\underline{Bài giải}}
+\hspace*{2em}Cửa hàng còn lại số ki-lô-gam gạo là:\\
+\hspace*{4em}$63 - 27 = 36$ (kg)\\
+\hspace*{6em}Đáp số: 36 kg gạo.}
+\end{bt}
+\begin{luuy}
+    \textbf{Lỗi sai thường gặp (Dạng 2):}
+    \begin{itemize}
+        \item Trừ có nhớ sai: $63 - 27 = 44$ (lấy số lớn trừ số bé ở hàng đơn vị: $7 - 3 = 4$). GV nhắc: \GAloi{3 không trừ được 7, lấy 13 trừ 7 bằng 6, viết 6 nhớ 1.}
+        \item Viết ngược phép trừ: $6 - 18$; hoặc thấy hai số liền làm phép cộng $18 + 6 = 24$ mà không đọc kĩ “chuyển đi”, “bay đi”.
+        \item Câu lời giải sai đối tượng: “Bể cá nhỏ có số con cá vàng là:” (đề hỏi bể lớn). GV cho HS khoanh vào câu hỏi trước khi viết lời giải.
+        \item Thử lại: lấy kết quả cộng với số đã bớt phải ra số ban đầu ($36 + 27 = 63$).
+    \end{itemize}
+\end{luuy}
+%---------------------------------------------------------
+\GAmucnho{Dạng 3: Nhiều hơn -- ít hơn -- tóm tắt bằng hình ảnh minh họa}
+\begin{luuy}
+    HS lớp 2 \textbf{chưa học vẽ sơ đồ đoạn thẳng}. GV dùng hình ảnh đồ vật xếp thành 2 hàng thẳng cột (đồ dùng trực quan hoặc nam châm trên bảng) như hình dưới: hàng trên là số đã biết, hàng dưới gồm phần \textbf{bằng} hàng trên (vẽ nét đứt) và phần \textbf{nhiều hơn} hoặc phần \textbf{ít hơn}. Ngoặc ở dưới cùng có dấu “?” là phần đề hỏi.
+\end{luuy}
+
+\GAmucnho{a) Bài toán về nhiều hơn}
+\begin{vd}
+    Lan có 7 cái nhãn vở. Hoa có nhiều hơn Lan 4 cái nhãn vở. Hỏi Hoa có bao nhiêu cái nhãn vở?
+\end{vd}
+GV gắn nam châm (hoặc nhãn vở thật) lên bảng thành 2 hàng như hình:
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,font=\large]
+    \node[anchor=east,font=\bfseries\large] at (0.2,1.7) {Lan:};
+    \node[anchor=east,font=\bfseries\large] at (0.2,0) {Hoa:};
+    % Hàng của Lan: 7 nhãn vở
+    \foreach \i in {1,...,7}{\pic[GAbiet] at (0.8*\i,1.7) {GAnhanvo};}
+    % Hàng của Hoa: 7 nhãn vở bằng của Lan (nét đứt) và 4 nhãn vở nhiều hơn (tô màu)
+    \draw[black!45,densely dashed,rounded corners=4pt] (0.42,-0.36) rectangle (5.98,0.36);
+    \foreach \i in {1,...,7}{\pic[GAchuabiet] at (0.8*\i,0) {GAnhanvo};}
+    \foreach \i in {8,...,11}{\pic[draw=gaCam!80!black,fill=gaPhanVang] at (0.8*\i,0) {GAnhanvo};}
+    % Các ngoặc
+    \GAngoacTren{0.45}{5.95}{2.1}{7}
+    \GAngoacTren{6.1}{9.1}{0.4}{Nhiều hơn 4}
+    \GAngoacDuoi{0.45}{9.1}{-0.5}{?}
+\end{tikzpicture}
+\end{center}
+\begin{itemize}
+    \item \GAloi{Hàng trên là của ai? Lan có mấy cái?} \hfill (Lan có 7 cái)
+    \item \GAloi{Hàng của Hoa có phần nào bằng của Lan?} \hfill (phần nét đứt: 7 cái)
+    \item \GAloi{Hoa có thêm mấy cái nữa?} \hfill (thêm 4 cái)
+    \item \GAloi{Vậy muốn tìm số nhãn vở của Hoa ta làm phép tính gì?} \hfill (phép cộng $7 + 4$)
+\end{itemize}
+\GAvo{\centerline{\underline{Bài giải}}
+\hspace*{2em}Hoa có số cái nhãn vở là:\\
+\hspace*{4em}$7 + 4 = 11$ (cái)\\
+\hspace*{6em}Đáp số: 11 cái nhãn vở.}
+\GAchot{\textbf{Vậy:} Tìm số \textbf{nhiều hơn}, ta lấy số đã biết \textbf{cộng} với phần nhiều hơn.}
+
+\GAmucnho{b) Bài toán về ít hơn}
+\begin{vd}
+    Bình có 12 quả bóng bay. An có ít hơn Bình 5 quả bóng bay. Hỏi An có bao nhiêu quả bóng bay?
+\end{vd}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,font=\large]
+    \node[anchor=east,font=\bfseries\large] at (0.2,1.9) {Bình:};
+    \node[anchor=east,font=\bfseries\large] at (0.2,0) {An:};
+    % Hàng của Bình: 12 quả bóng nhiều màu
+    \foreach \i in {1,...,12}{
+        \pgfmathtruncatemacro{\k}{mod(\i,3)}
+        \ifcase\k \def\mau{gaPhanHong}\or\def\mau{gaPhanVang}\or\def\mau{gaPhanXanh}\fi
+        \pic[draw=black!60,fill=\mau] at (0.8*\i,1.9) {GAbong};}
+    % Hàng của An: 7 quả bóng (nét đứt, chưa biết)
+    \draw[black!45,densely dashed,rounded corners=4pt] (0.42,-0.6) rectangle (5.98,0.48);
+    \foreach \i in {1,...,7}{\pic[GAchuabiet] at (0.8*\i,0) {GAbong};}
+    % Các ngoặc
+    \GAngoacTren{0.45}{9.95}{2.5}{12}
+    \GAngoacDuoi{6.05}{9.95}{1.15}{Ít hơn 5}
+    \GAngoacDuoi{0.45}{5.95}{-0.82}{?}
+\end{tikzpicture}
+\end{center}
+\begin{itemize}
+    \item \GAloi{Bình có mấy quả bóng?} \hfill (12 quả)
+    \item \GAloi{An có nhiều hơn hay ít hơn Bình? Ít hơn mấy quả?} \hfill (ít hơn 5 quả)
+    \item GV che 5 quả bóng cuối của Bình: \GAloi{Số bóng của An bằng số bóng của Bình bớt đi 5 quả. Ta làm phép tính gì?} \hfill (phép trừ $12 - 5$)
+\end{itemize}
+\GAvo{\centerline{\underline{Bài giải}}
+\hspace*{2em}An có số quả bóng bay là:\\
+\hspace*{4em}$12 - 5 = 7$ (quả)\\
+\hspace*{6em}Đáp số: 7 quả bóng bay.}
+\GAchot{\textbf{Vậy:} Tìm số \textbf{ít hơn}, ta lấy số đã biết \textbf{trừ} đi phần ít hơn.}
+
+\GAmucnho{c) Vận dụng với số lớn hơn -- tóm tắt bằng lời}
+Khi HS đã hiểu qua hình ảnh, GV đưa bài toán có số lớn (không vẽ được hết đồ vật), HS tóm tắt bằng lời.
+\begin{vd}
+    Lan có 23 cái nhãn vở. Hoa có nhiều hơn Lan 9 cái nhãn vở. Hỏi Hoa có bao nhiêu cái nhãn vở?
+\end{vd}
+\noindent\begin{minipage}[t]{0.42\linewidth}
+    \textbf{Tóm tắt:}
+    \GAvo{Lan: 23 cái\\ Hoa nhiều hơn Lan: 9 cái\\ Hoa: \dots\ cái?}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.54\linewidth}
+    \textbf{Bài giải:}
+    \GAvo{\centerline{\underline{Bài giải}}
+    Hoa có số cái nhãn vở là:\\
+    \hspace*{2em}$23 + 9 = 32$ (cái)\\
+    \hspace*{4em}Đáp số: 32 cái nhãn vở.}
+\end{minipage}
+\begin{vd}
+    Thùng to đựng 45 \textit{l} nước. Thùng nhỏ đựng ít hơn thùng to 12 \textit{l} nước. Hỏi thùng nhỏ đựng bao nhiêu lít nước?
+\end{vd}
+\noindent\begin{minipage}[c]{0.36\linewidth}
+    \centering\includegraphics[width=\linewidth]{ga06_thungnuoc.png}\\[2pt]
+    {\small\textit{Hình 9. Thùng to và thùng nhỏ.}}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.6\linewidth}
+    \textbf{Tóm tắt:}
+    \GAvo{Thùng to: 45 \textit{l}\\ Thùng nhỏ ít hơn thùng to: 12 \textit{l}\\ Thùng nhỏ: \dots\ \textit{l}?}
+\end{minipage}
+\GAvo{\centerline{\underline{Bài giải}}
+\hspace*{2em}Thùng nhỏ đựng số lít nước là:\\
+\hspace*{4em}$45 - 12 = 33$ (\textit{l})\\
+\hspace*{6em}Đáp số: 33 \textit{l} nước.}
+
+\GAmucnho{Luyện tập trong PBT: Bài 8, 9. Tóm tắt bằng lời rồi giải}
+\begin{enumerate}[a)]
+    \item Tổ Một trồng được 26 cây. Tổ Hai trồng được nhiều hơn tổ Một 7 cây. Hỏi tổ Hai trồng được bao nhiêu cây?
+    \GAdapan{Tóm tắt: Tổ Một: 26 cây; Tổ Hai nhiều hơn tổ Một: 7 cây; Tổ Hai: \dots\ cây?}
+    \GAvo{\centerline{\underline{Bài giải}}
+    \hspace*{2em}Tổ Hai trồng được số cây là:\\
+    \hspace*{4em}$26 + 7 = 33$ (cây)\\
+    \hspace*{6em}Đáp số: 33 cây.}
+    \item Anh cao 95 cm. Em thấp hơn anh 18 cm. Hỏi em cao bao nhiêu xăng-ti-mét?
+    \GAdapan{Tóm tắt: Anh: 95 cm; Em thấp hơn anh: 18 cm; Em: \dots\ cm?}
+    \GAvo{\centerline{\underline{Bài giải}}
+    \hspace*{2em}Em cao số xăng-ti-mét là:\\
+    \hspace*{4em}$95 - 18 = 77$ (cm)\\
+    \hspace*{6em}Đáp số: 77 cm.}
+\end{enumerate}
+\begin{luuy}
+    \textbf{Lỗi sai thường gặp (Dạng 3):}
+    \begin{itemize}
+        \item Lấy luôn phần “nhiều hơn / ít hơn” làm đáp số: trả lời “Hoa có 4 cái” hoặc “An có 5 quả”. GV chỉ vào hình: phần 4 cái chỉ là phần \textbf{thêm}, Hoa còn có phần bằng của Lan nữa.
+        \item Nhầm đối tượng: “Tổ Hai trồng nhiều hơn tổ Một” nhưng HS lại tính số cây của tổ Một. GV hỏi: \GAloi{Ai nhiều hơn? Ai ít hơn? Đề hỏi bạn nào?}
+        \item Câu lời giải sai: “Hoa có nhiều hơn số nhãn vở là:” -- đúng phải là “Hoa có số cái nhãn vở là:”.
+        \item Trừ có nhớ sai ở câu b: $95 - 18 = 83$ ($8 - 5 = 3$, lấy số lớn trừ số bé). Đúng: $15 - 8 = 7$, viết 7 nhớ 1; $9 - 1 - 1 = 7$; kết quả 77.
+        \item Đơn vị lít viết là \textit{l} (chữ l thường, viết nghiêng), không viết “L” hay “lít” trong ngoặc đơn.
+    \end{itemize}
+\end{luuy}
+
+%---------------------------------------------------------
+\newpage
+
+\subsubsection{LUYỆN TẬP}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 30 phút
+        \item GV cho HS làm bài trong PBT.
+    \end{itemize}
+\end{hd}
+\subsubsection{CỦNG CỐ -- GIAO BÀI TẬP VỀ NHÀ}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 10 phút
+        \item GV giao BTVN tùy tình hình lớp.
+    \end{itemize}
+\end{hd}
+
+
+\begin{center}
+       \faGg\faGg\quad Hết \quad\faGg\faGg
+\end{center}
+\end{document}
