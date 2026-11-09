@@ -45,7 +45,7 @@
 % Ô trống cần điền, bên trong ghi đáp án màu xám cho GV: \GAo{đáp án}
 \providecommand{\GAo}{}\renewcommand{\GAo}[1]{\tikz[baseline=(o.base)]\node(o)[draw=gaCam,line width=0.8pt,fill=gaPhanVang!25,rounded corners=2pt,minimum width=0.9cm,minimum height=0.62cm,inner sep=1pt,text=black!45]{#1};}
 % Bài trình bày trong vở ô li (kiểu vở 4 ô li của HS tiểu học): \GAvo{dòng 1\\ dòng 2\\ ...}
-% Mỗi dòng chữ nằm đúng trên một dòng kẻ đậm; mỗi dòng kẻ cao 8 mm, chia 4 ô li (2 mm); có kẻ lề đỏ bên trái.
+% Ô vuông lớn 8 mm (nét đậm) chia thành 4 x 4 ô li nhỏ 2 mm (nét mảnh); mỗi dòng chữ nằm đúng trên một dòng kẻ đậm.
 \newsavebox{\GAvohop}\newlength{\GAvocao}\newlength{\GAvorong}
 \providecommand{\GAvo}{}\renewcommand{\GAvo}[1]{\par\smallskip\noindent
   \setlength{\GAvorong}{\linewidth}\addtolength{\GAvorong}{-0.8pt}%
@@ -57,11 +57,10 @@
     \fill[white] (0,0) rectangle (\GAvorong,\GAvocao);
     \begin{scope}
       \clip (0,0) rectangle (\GAvorong,\GAvocao);
-      \draw[gaTim!28,line width=0.3pt] (0,0) grid[xstep=100cm,ystep=2mm] (\GAvorong,\GAvocao);
-      \draw[gaTim!65,line width=0.5pt] (0,0) grid[xstep=8mm,ystep=8mm] (\GAvorong,\GAvocao);
+      \draw[black!20,line width=0.3pt] (0,0) grid[step=2mm] (\GAvorong,\GAvocao);
+      \draw[black!55,line width=0.5pt] (0,0) grid[step=8mm] (\GAvorong,\GAvocao);
     \end{scope}
-    \draw[gaDo!75,line width=0.7pt] (8mm,0) -- (8mm,\GAvocao);
-    \draw[gaTim!60] (0,0) rectangle (\GAvorong,\GAvocao);
+    \draw[black!55,line width=0.5pt] (0,0) rectangle (\GAvorong,\GAvocao);
     \node[anchor=base west,inner sep=0pt] at (10mm,8mm) {\usebox{\GAvohop}};
   \end{tikzpicture}\par\smallskip}
 % Thanh thời lượng 90 phút: \GAthoigian{bắt đầu/số phút/nhãn/màu, ...}
