@@ -6,94 +6,96 @@
 %=========================================================
 \providecommand{\DAbai}{}\renewcommand{\DAbai}[1]{\par\smallskip\noindent{\color{mauchinh}\bfseries Bài #1.}\ }
 \providecommand{\DAphan}{}\renewcommand{\DAphan}[1]{\par\medskip\noindent{\bfseries\color{orange!80!black}#1}\par\nopagebreak}
+% Bài giải mẫu theo đúng cách trình bày lớp 2: \DAgiai{câu lời giải}{phép tính}{đáp số}
+\providecommand{\DAgiai}{}\renewcommand{\DAgiai}[3]{\par\noindent\hspace*{0.6cm}\begin{minipage}[t]{15.5cm}\textit{Bài giải}\\ #1\\ \hspace*{0.8cm}#2\\ Đáp số: #3\end{minipage}\par}
+% Bài nhiều bước: \DAnhieu{\DAb{câu lời giải}{phép tính}\DAb{câu lời giải}{phép tính}}{đáp số}
+\providecommand{\DAb}{}\renewcommand{\DAb}[2]{#1\\ \hspace*{0.8cm}#2\\ }
+\providecommand{\DAnhieu}{}\renewcommand{\DAnhieu}[2]{\par\noindent\hspace*{0.6cm}\begin{minipage}[t]{15.5cm}\textit{Bài giải}\\ #1Đáp số: #2\end{minipage}\par}
 
 \par\medskip
 {\centering
-        {\color{mauchinh!120}\bfseries\Large ĐÁP ÁN VÀ HƯỚNG DẪN GIẢI - DÀNH CHO GIÁO VIÊN}\\[3pt]
-        {\color{mauchinh!120}\bfseries\Large ÔN TẬP PHÉP NHÂN VÀ BÀI TOÁN CÓ LỜI VĂN}\par}
+        {\color{mauchinh!120}\bfseries\Large ĐÁP ÁN VÀ HƯỚNG DẪN GIẢI}\\[3pt]
+        {\color{mauchinh!120}\bfseries\Large (DÀNH CHO GIÁO VIÊN) - ÔN TẬP PHÉP NHÂN VÀ BÀI TOÁN CÓ LỜI VĂN}\par}
 \vspace{6pt}
 
-\noindent\textit{Lưu ý: các bài phần C mô phỏng \textbf{dạng} đề của các kì thi Kangaroo, SASMO, Olympic Toán Singapore, Violympic, không phải trích nguyên văn đề thi. Với phần C, nên cho HS tự thử (vẽ hình, lập bảng) trước khi gợi ý.}
+\noindent\textit{Lưu ý: (1) Phần A và B chỉ dùng bảng nhân $2$ và bảng nhân $5$, đúng chương trình Toán lớp 2. (2) Các bài phần C mô phỏng \textbf{dạng} đề của các kì thi Kangaroo, SASMO, Olympic Toán Singapore, Violympic, không phải trích nguyên văn đề thi; một số bài cần thử nhiều trường hợp hoặc cộng các số hạng bằng nhau (HS chưa học bảng nhân $3$, $4$, $6$). (3) Bài giải theo mẫu: câu lời giải, phép tính kèm đơn vị trong ngoặc, đáp số; số dòng kẻ trên phiếu tương ứng với số bước giải.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{BUỔI 1. ÔN TẬP PHÉP NHÂN}
 \DAphan{Phần A}
-\DAbai{1} a) $2\times5=10$; b) $5\times4=20$; c) $2\times7=14$; d) $5\times8=40$; e) $2+2+2+2+2+2=12$; f) $5+5+5+5=20$.
+\DAbai{1} a) $2+2+2+2+2=2\times5=10$; b) $5+5+5+5=5\times4=20$; c) $2\times6=2+2+2+2+2+2=12$; d) $5\times4=5+5+5+5=20$.
 
-\DAbai{2} $8;\ 25;\ 16;\ 45;\ 12;\ 35;\ 20;\ 15;\ 18;\ 50$.
+\DAbai{2} a) $2$ và $6$ gọi là \textbf{thừa số}; $12$ gọi là \textbf{tích}. b) Từ trái sang phải: cột 1 tích là $14$; cột 2 thừa số còn thiếu là $6$ ($5\times6=30$); cột 3 thừa số còn thiếu là $2$ ($2\times9=18$); cột 4 tích là $50$; cột 5 thừa số còn thiếu là $8$ ($2\times8=16$).
 
-\DAbai{3} a) $2,4,6,\mathbf{8,10},12,\mathbf{14},16$; b) $5,10,15,\mathbf{20,25,30},35,\mathbf{40}$; c) $20,18,16,\mathbf{14,12},10,\mathbf{8},6$; d) $50,45,40,\mathbf{35,30},25,\mathbf{20},15$.
+\DAbai{3} Hàng $2\times$ số: $6;\ 10;\ 14;\ 18$ (các ô theo thứ tự $3,5,7,9$). Hàng $5\times$ số: $15;\ 25;\ 35;\ 45$.
 
-\DAbai{4} $12>10$; $15<16$; $20=20$; $35>18$; $30=30$ (vì $5\times5+5=30$); $18<19$ (vì $5\times3+4=19$).
+\DAbai{4} $2\times7\to14$; $5\times6\to30$; $2\times9\to18$; $5\times8\to40$; $2\times5\to10$.
 
-\DAbai{5} $7;\ 7;\ 9;\ 9;\ 5;\ 10$.
+\DAbai{5} $12>10$; $15<16$; $20=20$; $35>18$; $2\times5=5\times2$ (đổi chỗ các thừa số, tích không đổi); $30=30$ (vì $5\times5+5=25+5=30$).
 
-\DAbai{6} Hình 1 (theo hàng): $5+5+5=15$; $5\times3=15$. Hình 2 (theo cột): $3+3+3+3+3=15$; $3\times5=15$. Hình 3 (theo hàng): $2+2+2+2+2=10$; $2\times5=10$.
-
-\noindent\textit{Gợi ý GV:} cùng một hình chấm tròn nhưng nhìn theo hàng hay theo cột đều cho kết quả $15$; từ đây HS nhận ra $5\times3=3\times5$.
+\DAbai{6} Hình 1: $4$ nhóm, mỗi nhóm $5$ chấm: $5+5+5+5=20$; $5\times4=20$. Hình 2: $5$ nhóm, mỗi nhóm $2$ chấm: $2+2+2+2+2=10$; $2\times5=10$. Hình 3: $3$ nhóm, mỗi nhóm $5$ chấm: $5+5+5=15$; $5\times3=15$.
 
 \DAphan{Phần B}
-\DAbai{7} a) $30+14=44$; b) $16-9=7$; c) $20+6=26$; d) $50-35=15$; e) $18+10=28$; f) $40-20=20$.
+\DAbai{7} $7;\ 7;\ 9;\ 9;\ 5;\ 10$.
 
-\DAbai{8} Số vào $3\to$ số ra $13$; số vào $6\to$ số ra $28$; số ra $23\to$ số vào $5$; số ra $48\to$ số vào $10$; số vào $7\to$ số ra $33$; số ra $3\to$ số vào $1$.\par
-\noindent\textit{Gợi ý GV:} với các câu hỏi ngược (biết số ra), HS làm ngược lại: cộng $2$ rồi chia cho $5$ (tìm số nhân với $5$ để được số đó), ví dụ $23+2=25=5\times5$.
+\DAbai{8} a) $30+14=44$; b) $16-9=7$; c) $18+25=43$; d) $35-18=17$; e) $50-23=27$; f) $20+37=57$. \textit{Lưu ý:} cả sáu biểu thức đều có dạng ``tích $\pm$ một số'', HS tính tích trước (đúng thứ tự từ trái sang phải).
 
-\DAbai{9} a) $20,\ 24$ (cộng $4$); b) $22,\ 27$ (cộng $5$); c) $16,\ 32$ (nhân $2$); d) $16,\ 22$ (cộng thêm $1,2,3,4,5,6$ lần lượt).
+\DAbai{9} a) $8,\ 10,\ 14$ (đếm thêm $2$); b) $35,\ 30,\ 20$ (đếm bớt $5$); c) $20,\ 24$ (đếm thêm $4$); d) $22,\ 27$ (đếm thêm $5$); e) $16,\ 32$ (mỗi số bằng $2$ lần số liền trước); f) $16,\ 22$ (số cộng thêm tăng dần $1,2,3,4,5,6$).
 
-\DAbai{10} a) Đ; b) S, sửa $5\times8=40$; c) Đ ($30-10=20$); d) S, sửa $2\times9+5=18+5=23$.
+\DAbai{10} Số vào $3\to13$; $6\to28$; $7\to33$. Số ra $23\to$ số vào $5$ (vì $5\times5-2=23$); số ra $48\to$ số vào $10$; số ra $3\to$ số vào $1$. \textit{Gợi ý:} với câu hỏi ngược, HS cộng $2$ rồi tìm số nhân với $5$ ra kết quả đó.
+
+\DAbai{11} a) Đ; b) S, sửa $5\times8=40$; c) Đ ($30-10=20$); d) S, sửa $2\times9+5=18+5=23$.
 
 \DAphan{Phần C - Thử thách}
-\DAbai{11} a) $4$ và $5$; b) $3$ và $4$; c) $6$ và $3$.\par
-\noindent\textit{Cách làm:} liệt kê các cặp số có tích đã cho (ví dụ $20=2\times10=4\times5$) rồi kiểm tra điều kiện về tổng hoặc hiệu.
+\DAbai{12} a) $2$ và $5$; b) $4$ và $5$; c) $3$ và $4$. \textit{Cách làm:} liệt kê các cặp số có tích đã cho (ví dụ $20=2\times10=4\times5$) rồi kiểm tra tổng.
 
-\DAbai{12} a) $\bigstar=5$ (vì $5+5+5+5=20$), $\heartsuit=7$ (vì $5\times7=35$), $\bigstar+\heartsuit=12$. b) $\clubsuit=6$, $\spadesuit=5$ (vì $6\times5=30$), $\clubsuit+\spadesuit=11$.
+\DAbai{13} a) $\bigstar=5$ (vì $5+5+5+5=20$), $\heartsuit=7$ (vì $5\times7=35$), $\bigstar+\heartsuit=12$. b) $\clubsuit=6$, $\spadesuit=5$ (vì $6\times5=30$), $\clubsuit+\spadesuit=11$.
 
-\DAbai{13} a) $2\times5+5\times5=10+25=35$. b) $5\times8-5\times3-5\times2=40-15-10=15$ (hoặc $5\times(8-3-2)=5\times3=15$). c) Ghép cặp: $(1+10)+(2+9)+(3+8)+(4+7)+(5+6)=11\times5=55$. d) $(2+12)+(4+10)+(6+8)=14\times3=42$.
+\DAbai{14} a) $10,\ 20,\ 30,\ 40,\ 50$ (các số có chữ số hàng đơn vị là $0$). b) Số bí mật là $30$.
 
-\DAbai{14} a) $4\times3=12$ que. b) Hình đầu cần $4$ que, mỗi hình tiếp theo chỉ thêm $3$ que: $4+3+3=10$ que. c) $4+3\times4=16$ que (quy luật: $n$ hình vuông liền nhau cần $3\times n+1$ que).
+\DAbai{15} a) $2\times5+5\times5=10+25=35$. b) Ghép cặp: $(1+10)+(2+9)+(3+8)+(4+7)+(5+6)=11+11+11+11+11=55$. c) $(2+12)+(4+10)+(6+8)=14+14+14=42$.
 
-\DAbai{15} $9$ hình vuông nhỏ ($1\times1$) $+\ 4$ hình vuông $2\times2$ $+\ 1$ hình vuông $3\times3=14$ hình vuông.
+\DAbai{16} a) $4+4+4=12$ que. b) Hình vuông đầu cần $4$ que, mỗi hình vuông tiếp theo chỉ cần thêm $3$ que: $4+3+3=10$ que. c) $4+3+3+3+3=16$ que.
+
+\DAbai{17} $9$ hình vuông nhỏ ($1\times1$) $+\ 4$ hình vuông ($2\times2$) $+\ 1$ hình vuông ($3\times3$) $=14$ hình vuông.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{BUỔI 2. ÔN TẬP BÀI TOÁN CÓ LỜI VĂN}
 \DAphan{Phần A}
-\DAbai{1} a) $5\times6=30$ (quả cam). b) $2\times9=18$ (bánh xe). c) $5\times8=40$ (ngón tay).
+\DAbai{1} a) $5\times6=30$; đáp số $30$ quả cam. b) $2\times9=18$; đáp số $18$ bánh xe.
 
-\DAbai{2} a) B ($5\times3$); b) C ($20-5$); c) B ($2\times7$).
+\DAbai{2} a) B (Số chiếc bút $7$ bạn mua là:). b) C (Số quả táo còn lại là:).
 
-\DAbai{3} a) $18+17=35$ (bạn). b) $72-29=43$ (quả trứng).
+\DAbai{3} Đề 1 $\to2\times7$; đề 2 $\to15-6$; đề 3 $\to9+5$; đề 4 $\to5\times4$.
 
-\DAbai{4} a) $24+9=33$ (cây). b) $45-17=28$ (viên bi).
-
-\DAbai{5} (Đáp án mẫu) a) Câu hỏi: ``Hỏi có tất cả bao nhiêu chiếc bút?'' $\ \to 5\times4=20$ (chiếc bút). b) Câu hỏi: ``Hỏi $8$ con gà có tất cả bao nhiêu cái chân?'' $\ \to 2\times8=16$ (cái chân).
+\DAbai{4} \DAgiai{Số cây tổ 2 trồng được là:}{$24+9=33$ (cây)}{$33$ cây.}
+\DAgiai{Số viên bi An có là:}{$45-17=28$ (viên)}{$28$ viên bi.}
 
 \DAphan{Phần B}
-\DAbai{6} Số cái bánh mẹ mua: $5\times4=20$ (cái). Số bánh còn lại: $20-7=13$ (cái). Đáp số: $13$ cái bánh.
+\DAbai{5} Thứ tự đúng: \textbf{D, A, B, C, E}.
 
-\DAbai{7} Cách 1: số con vật là $7+5=12$ (con); số chân là $12\times2=24$ (chân). Cách 2: chân gà $7\times2=14$ (chân), chân vịt $5\times2=10$ (chân), tất cả $14+10=24$ (chân). Đáp số: $24$ cái chân.
+\DAbai{6} \DAnhieu{\DAb{Số cái bánh mẹ mua là:}{$5\times4=20$ (cái)}\DAb{Số cái bánh còn lại là:}{$20-7=13$ (cái)}}{$13$ cái bánh.}
+\textit{Tóm tắt mẫu:} Mỗi hộp: $5$ cái; $4$ hộp: ? cái; đã ăn: $7$ cái; còn lại: ? cái.
 
-\DAbai{8} Tiền $3$ chiếc bút: $2\times3=6$ (nghìn đồng). Tiền $2$ quyển vở: $5\times2=10$ (nghìn đồng). Tổng tiền: $6+10=16$ (nghìn đồng). Tiền trả lại: $20-16=4$ (nghìn đồng). Đáp số: $4$ nghìn đồng.
+\DAbai{7} a) Bài giải của An \textbf{sai}. b) An sai ở \textbf{phép tính} (đáng lẽ phải nhân vì mỗi bàn có $2$ bạn, có $7$ bàn như thế), kéo theo đáp số sai. c) \DAgiai{Số bạn ngồi là:}{$2\times7=14$ (bạn)}{$14$ bạn.}
 
-\DAbai{9} Số kẹo của Hà: $5\times3=15$ (cái). Mai nhiều hơn Hà: $17-15=2$ (cái). Đáp số: Mai nhiều hơn, nhiều hơn $2$ cái kẹo.
+\DAbai{8} \DAnhieu{\DAb{Số kẹo của Hà là:}{$5\times3=15$ (cái)}\DAb{Mai có nhiều kẹo hơn Hà số cái là:}{$17-15=2$ (cái)}}{Mai nhiều hơn, $2$ cái kẹo.}
 
-\DAbai{10} Nam gấp: $2\times5=10$ (chiếc). Hạnh gấp: $10-3=7$ (chiếc). Cả hai bạn: $10+7=17$ (chiếc). Đáp số: $17$ chiếc thuyền.
+\DAbai{9} (Đáp án mẫu) Đề toán: ``Mỗi đĩa có $5$ cái kẹo. Hỏi $7$ đĩa như thế có tất cả bao nhiêu cái kẹo?'' \DAgiai{Số cái kẹo $7$ đĩa có là:}{$5\times7=35$ (cái)}{$35$ cái kẹo.} Chấp nhận mọi đề đúng ngữ cảnh và đúng phép tính $5\times7$.
 
-\DAbai{11} (Đáp án mẫu) ``Mỗi đĩa có $5$ cái kẹo. Hỏi $7$ đĩa như thế có bao nhiêu cái kẹo?'' $\ \to 5\times7=35$ (cái kẹo). Chấp nhận mọi đề toán đúng ngữ cảnh và đúng phép tính $5\times7$.
+\DAbai{10} \DAnhieu{\DAb{Số tiền $3$ chiếc bút là:}{$2\times3=6$ (nghìn đồng)}\DAb{Số tiền Nam phải trả là:}{$6+5=11$ (nghìn đồng)}\DAb{Số tiền cô bán hàng trả lại Nam là:}{$20-11=9$ (nghìn đồng)}}{$9$ nghìn đồng.}
 
 \DAphan{Phần C - Thử thách}
-\DAbai{12} Thử: $5$ gà, $2$ thỏ có $5\times2+2\times4=18$ chân (chưa đủ); $4$ gà, $3$ thỏ có $4\times2+3\times4=8+12=20$ chân (đủ). Đáp số: $4$ con gà và $3$ con thỏ.\par
-\noindent\textit{Cách giải nhanh (cho HS khá giỏi):} giả sử cả $7$ con đều là gà thì có $14$ chân; còn thiếu $20-14=6$ chân; mỗi lần đổi một gà thành một thỏ thì thêm $2$ chân, nên có $6:2=3$ thỏ và $7-3=4$ gà.
+\DAbai{11} Thử: $5$ gà, $2$ thỏ có $5\times2+2\times4=10+8=18$ chân (chưa đủ); $4$ gà, $3$ thỏ có $4\times2+3\times4=8+12=20$ chân (đủ). Đáp số: $4$ con gà và $3$ con thỏ.\par
+\noindent\textit{Gợi ý cho HS khá giỏi:} giả sử cả $7$ con đều là gà thì có $14$ chân, còn thiếu $6$ chân; mỗi lần đổi một gà thành một thỏ thì thêm $2$ chân, cần đổi $3$ lần, nên có $3$ thỏ và $4$ gà.
 
-\DAbai{13} Các cây trồng tại các vị trí $0,2,4,6,8,10$ m nên có $6$ cây. Đáp số: $6$ cây. \textit{Lưu ý: $5$ khoảng cách nhưng có $6$ cây vì trồng cả hai đầu.}
+\DAbai{12} Các cây trồng tại các vị trí $0,\ 2,\ 4,\ 6,\ 8,\ 10$ m nên có $6$ cây. Đáp số: $6$ cây. \textit{Lưu ý:} có $5$ khoảng cách nhưng có $6$ cây vì trồng cả hai đầu.
 
-\DAbai{14} Cuối ngày 1: $3-1=2$ m. Cuối ngày 2: $4$ m. Cuối ngày 3: $6$ m. Ngày thứ 4, ốc bò thêm $3$ m, lên $6+3=9\geq8$ nên tới đỉnh cột. Đáp số: $4$ ngày. \textit{(Lỗi thường gặp: trả lời $3$ ngày vì quên rằng ở ngày cuối ốc sên lên tới đỉnh thì không bị tụt xuống nữa.)}
+\DAbai{13} Bảng: ngày 1: $3$ m, $2$ m; ngày 2: $5$ m, $4$ m; ngày 3: $7$ m, $6$ m; ngày 4: sáng lên $6+3=9$ m, đã tới (vượt) đỉnh cột $8$ m nên không bị tụt nữa. Đáp số: $4$ ngày. \textit{Lỗi thường gặp:} trả lời $3$ ngày vì quên rằng ở ngày cuối ốc sên lên tới đỉnh thì không bị tụt xuống nữa.
 
-\DAbai{15} Thử: em $4$ tuổi, anh $8$ tuổi thì $4+8=12$ và $8=2\times4$. Đáp số: anh $8$ tuổi, em $4$ tuổi.\par
-\noindent\textit{Gợi ý GV:} vẽ sơ đồ đoạn thẳng: em là $1$ phần, anh là $2$ phần, tổng là $3$ phần bằng nhau, mỗi phần $12:3=4$.
+\DAbai{14} Bảng: em $3$ tuổi, anh $7$ tuổi, tổng $10$; em $4$ tuổi, anh $8$ tuổi, tổng $12$ (đủ). Đáp số: anh $8$ tuổi, em $4$ tuổi.
 
-\DAbai{16} $A$ bắt tay $3$ bạn, $B$ bắt thêm $2$ bạn ($C,D$), $C$ bắt thêm $1$ bạn ($D$): $3+2+1=6$. Đáp số: $6$ cái bắt tay.
-
-\DAbai{17} Mai đứng sau $3$ bạn và đứng trước $4$ bạn: $3+1+4=8$ (cũng bằng $4+5-1=8$). Đáp số: $8$ bạn.
+\DAbai{15} Có $6$ đoạn thẳng nên có $6$ cái bắt tay: $AB,\ AC,\ AD,\ BC,\ BD,\ CD$ (hoặc $3+2+1=6$). Đáp số: $6$ cái bắt tay.
 
 \begin{center}
        \faGg\faGg\quad Hết \quad\faGg\faGg
