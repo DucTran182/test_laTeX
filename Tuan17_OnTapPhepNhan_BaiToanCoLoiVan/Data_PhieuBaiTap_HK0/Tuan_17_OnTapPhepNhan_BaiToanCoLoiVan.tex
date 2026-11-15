@@ -2,10 +2,10 @@
 \begin{document}
 %=========================================================
 % TĐ_PBT_IQA_HK1_Tuan17_OnTapPhepNhan_BaiToanCoLoiVan
-% Phiếu bài tập Toán tư duy cấp độ A (lớp 2)
-% Chủ đề ÔN TẬP PHÉP NHÂN (Buổi 1) và ÔN TẬP BÀI TOÁN CÓ LỜI VĂN (Buổi 2)
-% Kiến thức: bảng nhân 2, bảng nhân 5; thừa số, tích; bài toán một bước và hai bước tính.
-% Mỗi buổi chia 3 phần: A (khá) -> B (nâng cao) -> C (thử thách, dạng đề thi Toán quốc tế / toàn quốc)
+% Phiếu bài tập Toán tư duy cấp độ A (lớp 2) - Ôn tập lần 3 (Buổi 1) và lần 4 (Buổi 2), mỗi buổi 90 phút
+%   Buổi 1: ÔN TẬP PHÉP NHÂN (bảng nhân 2, bảng nhân 5)
+%   Buổi 2: ÔN TẬP BÀI TOÁN CÓ LỜI VĂN (phép cộng, phép trừ trong phạm vi 100)
+% Mỗi buổi chia 3 phần: A (khá) -> B (nâng cao) -> C (thử thách, dạng đề thi Toán quốc tế và trong nước)
 % Soạn theo mẫu (\hktuan, bt, listEX). Không dùng hình ảnh ngoài: mọi hình đều vẽ bằng TikZ.
 % Đáp án và hướng dẫn giải: xem file DapAn_Tuan_17_OnTapPhepNhan_BaiToanCoLoiVan.tex
 %=========================================================
@@ -60,6 +60,9 @@
 % \TTtomtat{dòng 1}{dòng 2}: tóm tắt cho sẵn, mỗi dòng dạng "Mỗi đĩa: & 5 quả cam"
 \providecommand{\TTtomtat}{}\renewcommand{\TTtomtat}[2]{%
   \par\smallskip\noindent\textbf{Tóm tắt}\par\noindent\hspace*{0.8cm}\begin{tabular}{@{}l@{\quad}l@{}}#1\\ #2\end{tabular}\par\smallskip}
+% Hộp đề toán dùng trong bài nối: \TTdeto{đề toán}
+\tikzset{TTdeto/.style={anchor=west,text width=10.4cm,align=left,draw,rounded corners=3pt,inner sep=4pt,font=\small}}
+\tikzset{TTpt/.style={draw,thick,rounded corners=3pt,minimum width=2.4cm,minimum height=0.8cm,font=\sffamily\large}}
 
 %---------- Màu và hình vẽ TikZ ----------
 \definecolor{TTxanh}{RGB}{100,180,240}\definecolor{TTxanhdam}{RGB}{30,110,200}
@@ -68,41 +71,34 @@
 \tikzset{
   TTochu/.style={draw,thick,rounded corners=3pt,minimum width=2.4cm,minimum height=0.72cm,inner sep=2pt,font=\sffamily\large},
 }
-% Các nhóm chấm tròn: \TTnhom{số nhóm}{số chấm mỗi nhóm}{màu}
-\providecommand{\TTnhom}{}\renewcommand{\TTnhom}[3]{%
-  \begin{tikzpicture}[scale=0.7]
-    \pgfmathtruncatemacro{\sohang}{div(#2+1,2)}
-    \foreach \g in {1,...,#1}{%
-      \draw[rounded corners=6pt,gray!70,fill=gray!6] (1.45*\g-1.4,-0.1) rectangle (1.45*\g-0.1,1.7);
-      \foreach \i in {1,...,#2}{%
-        \pgfmathsetmacro{\px}{1.45*\g-1.0+0.5*mod(\i-1,2)}
-        \pgfmathsetmacro{\py}{0.8+0.25*(\sohang-1)-0.5*div(\i-1,2)}
-        \fill[#3,draw=black!60,thin] (\px,\py) circle (0.2);}}
-  \end{tikzpicture}}
 % Một que diêm (từ điểm thứ nhất đến điểm thứ hai)
 \providecommand{\TTque}{}\renewcommand{\TTque}[2]{\draw[line width=2.2pt,brown!70!black,line cap=round] #1--#2;\fill[red!80!black] #1 circle (2.2pt);}
 % Hình vuông làm từ 4 que diêm, góc dưới trái tại (x,y), cạnh 1 đơn vị
 \providecommand{\TThvque}{}\renewcommand{\TThvque}[2]{%
   \TTque{(#1,#2)}{(#1+1,#2)}\TTque{(#1+1,#2)}{(#1+1,#2+1)}\TTque{(#1+1,#2+1)}{(#1,#2+1)}\TTque{(#1,#2+1)}{(#1,#2)}}
+% Quả cân: \TTcan{x}{y}{số ghi trên quả cân}{màu}
+\providecommand{\TTcan}{}\renewcommand{\TTcan}[4]{%
+  \draw[thick,fill=#4!35] (#1-0.45,#2) -- (#1-0.28,#2+0.55) -- (#1+0.28,#2+0.55) -- (#1+0.45,#2) -- cycle;
+  \node[font=\sffamily\bfseries\small] at (#1,#2+0.25) {#3};}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                       BUỔI 1
+%                       BUỔI 1  (90 phút)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\setcounter{section}{3} % không chỉnh sửa
 \hktuan{1}{17}
 \par\medskip
 {\centering
         {\color{mauchinh!120}\bfseries\Large PHIẾU BÀI TẬP TOÁN TƯ DUY CẤP ĐỘ A}\\[3pt]
-        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: ÔN TẬP PHÉP NHÂN (BUỔI 1)}\par}
+        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: ÔN TẬP PHÉP NHÂN (BUỔI 1 - 90 PHÚT)}\par}
 \vspace{6pt}
 \TTthongtin
-\TTgoiy{\textbf{Ghi nhớ:} Tổng của các số hạng bằng nhau viết được thành phép nhân. Ví dụ: $5+5+5=15$ viết là $5\times3=15$. Trong phép nhân $5\times3=15$: $5$ và $3$ là \textbf{thừa số}, $15$ là \textbf{tích}.}
+\TTgoiy{\textbf{Ghi nhớ:} Tổng của các số hạng bằng nhau viết được thành phép nhân. Ví dụ: $5+5+5=15$ viết là $5\times3=15$. Trong phép nhân $5\times3=15$: $5$ và $3$ là \textbf{thừa số}, $15$ là \textbf{tích}. Bài làm trong phạm vi bảng nhân $2$ và bảng nhân $5$.}
 
 %---------------------------------------------------------
-\TTphan{A}{CỦNG CỐ - KHỞI ĐỘNG}{1}
+\TTphan{A}{CỦNG CỐ (khoảng 25 phút)}{1}
 
 \begin{bt}
-    Viết mỗi tổng sau thành một phép nhân rồi tính. Viết mỗi phép nhân thành tổng rồi tính (theo mẫu).
+    Viết mỗi tổng thành một phép nhân rồi tính. Viết mỗi phép nhân thành tổng rồi tính (theo mẫu).
     \par\nopagebreak\smallskip
     \noindent\textit{Mẫu:} $5+5+5=5\times 3=15$ \hspace{1cm} $2\times4=2+2+2+2=8$
     \par\nopagebreak\vspace{2pt}
@@ -135,22 +131,6 @@
 \end{bt}
 
 \begin{bt}
-    Điền số còn thiếu vào bảng nhân $2$ và bảng nhân $5$.
-    \TTbatdauhinh
-    {\centering
-    \renewcommand{\arraystretch}{1.6}
-    \begin{tabular}{|c|*{10}{>{\centering\arraybackslash}p{1cm}|}}
-        \hline
-        \textbf{Số} & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
-        \hline
-        $\mathbf{2\times}$ \textbf{số} & 2 & 4 & & 8 & & 12 & & 16 & & 20 \\
-        \hline
-        $\mathbf{5\times}$ \textbf{số} & 5 & 10 & & 20 & & 30 & & 40 & & 50 \\
-        \hline
-    \end{tabular}\par}
-\end{bt}
-
-\begin{bt}
     Nối phép tính với kết quả đúng.
     \TTbatdauhinh
     {\centering
@@ -172,29 +152,21 @@
 \end{bt}
 
 \begin{bt}
-    Quan sát hình rồi hoàn thành.
-    \TTbatdauhinh
-    \noindent\begin{minipage}[b]{0.32\linewidth}\centering
-        \TTnhom{4}{5}{TTcam}\\[2pt]{\small Hình 1}
-    \end{minipage}\hfill
-    \begin{minipage}[b]{0.32\linewidth}\centering
-        \TTnhom{5}{2}{TTxanh}\\[2pt]{\small Hình 2}
-    \end{minipage}\hfill
-    \begin{minipage}[b]{0.32\linewidth}\centering
-        \TTnhom{3}{5}{TTla}\\[2pt]{\small Hình 3}
-    \end{minipage}\par\smallskip
+    Giải các bài toán sau.
     \begin{listEX}
-        \item Hình 1 có \TTdien[0.7cm] nhóm, mỗi nhóm có \TTdien[0.7cm] chấm tròn.\par
-        $\TTdien[0.7cm]+\TTdien[0.7cm]+\TTdien[0.7cm]+\TTdien[0.7cm]=\TTdien[0.7cm]$\hspace{1cm}$\TTdien[0.7cm]\times\TTdien[0.7cm]=\TTdien[0.7cm]$
-        \item Hình 2 có \TTdien[0.7cm] nhóm, mỗi nhóm có \TTdien[0.7cm] chấm tròn.\par
-        $\TTdien[0.7cm]+\TTdien[0.7cm]+\TTdien[0.7cm]+\TTdien[0.7cm]+\TTdien[0.7cm]=\TTdien[0.7cm]$\hspace{1cm}$\TTdien[0.7cm]\times\TTdien[0.7cm]=\TTdien[0.7cm]$
-        \item Hình 3 có \TTdien[0.7cm] nhóm, mỗi nhóm có \TTdien[0.7cm] chấm tròn.\par
-        $\TTdien[0.7cm]+\TTdien[0.7cm]+\TTdien[0.7cm]=\TTdien[0.7cm]$\hspace{1cm}$\TTdien[0.7cm]\times\TTdien[0.7cm]=\TTdien[0.7cm]$
+        \item Mỗi đĩa có $5$ quả cam. Hỏi $6$ đĩa như thế có tất cả bao nhiêu quả cam?
+        \TTtomtat{Mỗi đĩa: & $5$ quả cam}{$6$ đĩa: & ? quả cam}
+        \noindent\textbf{Bài giải}\par
+        \noindent $6$ đĩa có số quả cam là:\par
+        \noindent\hspace*{1.2cm}$5\times\TTdien[0.8cm]=\TTdien[0.8cm]$ (quả)\par
+        \noindent\textbf{Đáp số:} \TTdien[0.8cm] quả cam.
+        \item Mỗi chiếc xe đạp có $2$ bánh xe. Hỏi $9$ chiếc xe đạp như thế có tất cả bao nhiêu bánh xe?
+        \TTgiai{1}
     \end{listEX}
 \end{bt}
 
 %---------------------------------------------------------
-\TTphan{B}{NÂNG CAO}{2}
+\TTphan{B}{NÂNG CAO (khoảng 30 phút)}{2}
 
 \begin{bt}
     Tìm số thích hợp điền vào ô trống.
@@ -217,12 +189,13 @@
 \end{bt}
 
 \begin{bt}
-    Tìm quy luật rồi viết tiếp vào chỗ chấm.
+    \textbf{So sánh khéo.} Không tính kết quả từng vế, em hãy điền dấu $>$, $<$, $=$ thích hợp vào ô trống.
+    \TTgoiy{\textbf{Gợi ý:} $5\times4$ là $4$ nhóm $5$; $5\times5$ là $5$ nhóm $5$, tức là nhiều hơn $5\times4$ đúng một nhóm $5$.}
     \par\nopagebreak\vspace{2pt}
     {\renewcommand{\arraystretch}{1.9}\noindent\begin{tabular}{@{\hspace{0.45cm}}p{8.1cm}p{8.1cm}@{}}
-        a) $2,\ 4,\ 6,\ \TTcham[0.9cm],\ \TTcham[0.9cm],\ 12,\ \TTcham[0.9cm],\ 16$ & b) $50,\ 45,\ 40,\ \TTcham[0.9cm],\ \TTcham[0.9cm],\ 25,\ \TTcham[0.9cm],\ 15$ \\
-        c) $4,\ 8,\ 12,\ 16,\ \TTcham[0.9cm],\ \TTcham[0.9cm]$ & d) $2,\ 7,\ 12,\ 17,\ \TTcham[0.9cm],\ \TTcham[0.9cm]$ \\
-        e) $1,\ 2,\ 4,\ 8,\ \TTcham[0.9cm],\ \TTcham[0.9cm]$ & f) $1,\ 2,\ 4,\ 7,\ 11,\ \TTcham[0.9cm],\ \TTcham[0.9cm]$ \\
+        a) $2\times7\ \TTdien\ 2\times6+2$ & b) $5\times8\ \TTdien\ 5\times7+5$ \\
+        c) $2\times9\ \TTdien\ 2\times10-2$ & d) $5\times6\ \TTdien\ 5\times5+4$ \\
+        e) $5\times4\ \TTdien\ 5\times5-4$ & f) $2\times8\ \TTdien\ 2\times7+3$ \\
     \end{tabular}}
 \end{bt}
 
@@ -256,19 +229,14 @@
     \end{tabular}}
 \end{bt}
 
-%---------------------------------------------------------
-\TTphan{C}{THỬ THÁCH TƯ DUY (dạng đề thi quốc tế và toàn quốc)}{3}
-
 \begin{bt}
-    \TTnguon{Dạng đề Kangaroo}
-    Tìm hai số thỏa mãn điều kiện (mỗi số từ $1$ đến $10$):
-    \TTgoiy{\textbf{Gợi ý:} liệt kê các cặp số có tích đã cho (dùng bảng nhân hoặc cộng các số hạng bằng nhau), rồi kiểm tra tổng.}
-    \begin{listEX}
-        \item Tích của hai số bằng $10$ và tổng của hai số bằng $7$. Hai số đó là \TTcham[1.2cm] và \TTcham[1.2cm].
-        \item Tích của hai số bằng $20$ và tổng của hai số bằng $9$. Hai số đó là \TTcham[1.2cm] và \TTcham[1.2cm].
-        \item Tích của hai số bằng $12$ và tổng của hai số bằng $7$. Hai số đó là \TTcham[1.2cm] và \TTcham[1.2cm].
-    \end{listEX}
+    Mẹ mua $4$ hộp bánh, mỗi hộp có $5$ cái bánh. Cả nhà đã ăn hết $7$ cái bánh. Hỏi còn lại bao nhiêu cái bánh?
+    \TTviettt{2}
+    \TTgiai{2}
 \end{bt}
+
+%---------------------------------------------------------
+\TTphan{C}{THỬ THÁCH TƯ DUY - câu hỏi từ các kì thi Toán (khoảng 35 phút)}{3}
 
 \begin{bt}
     \TTnguon{Dạng đề SASMO - Toán Singapore}
@@ -290,7 +258,29 @@
     \end{listEX}
 \end{bt}
 
-\newpage
+\begin{bt}
+    \TTnguon{Dạng đề Olympic Toán - bài toán quả cân}
+    Cô giáo có rất nhiều quả cân loại $2$ kg và loại $5$ kg. Em hãy tìm cách dùng \textbf{ít quả cân nhất} để cân đúng:
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}[font=\sffamily]
+        \TTcan{0}{0}{5 kg}{orange}\TTcan{1.2}{0}{2 kg}{cyan}
+        \node[right,font=\sffamily\small] at (2.0,0.3) {(quả cân loại $5$ kg và loại $2$ kg)};
+    \end{tikzpicture}\par}
+    \par\smallskip
+    {\renewcommand{\arraystretch}{1.7}\noindent\hspace*{0.45cm}\begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf{Cân nặng} & \textbf{Số quả $5$ kg} & \textbf{Số quả $2$ kg} & \textbf{Tất cả số quả cân} \\
+        \hline
+        $9$ kg & & & \\
+        \hline
+        $12$ kg & & & \\
+        \hline
+        $14$ kg & & & \\
+        \hline
+    \end{tabular}}
+\end{bt}
+
 \begin{bt}
     \TTnguon{Dạng đề Olympic Toán - bài toán Gauss}
     Tính nhanh.
@@ -337,47 +327,47 @@
 \end{center}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                       BUỔI 2
+%                       BUỔI 2  (90 phút)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \TTdatlaibai
 \par\medskip
 {\centering
         {\color{mauchinh!120}\bfseries\Large PHIẾU BÀI TẬP TOÁN TƯ DUY CẤP ĐỘ A}\\[3pt]
-        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: ÔN TẬP BÀI TOÁN CÓ LỜI VĂN (BUỔI 2)}\par}
+        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: ÔN TẬP BÀI TOÁN CÓ LỜI VĂN\\[2pt] PHÉP CỘNG, PHÉP TRỪ (BUỔI 2 - 90 PHÚT)}\par}
 \vspace{6pt}
 \TTthongtin
 
-\TTgoiy{\textbf{Cách trình bày bài giải:} (1) Đọc kĩ đề, viết \textbf{tóm tắt}. (2) Viết \textbf{câu lời giải}. (3) Viết \textbf{phép tính} kèm tên đơn vị trong ngoặc. (4) Viết \textbf{đáp số}. \textit{Ví dụ:} Số quả cam có tất cả là: $5\times6=30$ (quả). Đáp số: $30$ quả cam.}
+\TTgoiy{\textbf{Cách trình bày bài giải:} (1) Viết \textbf{tóm tắt}. (2) Viết \textbf{câu lời giải}. (3) Viết \textbf{phép tính} kèm đơn vị trong ngoặc. (4) Viết \textbf{đáp số}. \textit{Ví dụ:} Số quả cam có tất cả là: $38+25=63$ (quả). Đáp số: $63$ quả cam. \textbf{Chú ý:} ``nhiều hơn'', ``thêm'' thường là cộng; ``ít hơn'', ``còn lại'' thường là trừ, nhưng phải đọc kĩ đề vì có bài bị ``đánh lừa''!}
 
 %---------------------------------------------------------
-\TTphan{A}{CỦNG CỐ - KHỞI ĐỘNG}{1}
+\TTphan{A}{CỦNG CỐ (khoảng 25 phút)}{1}
 
 \begin{bt}
     Đọc tóm tắt rồi hoàn thành bài giải.
     \begin{listEX}
-        \item Mỗi đĩa có $5$ quả cam. Hỏi $6$ đĩa như thế có tất cả bao nhiêu quả cam?
-        \TTtomtat{Mỗi đĩa: & $5$ quả cam}{$6$ đĩa: & ? quả cam}
+        \item Lan có $38$ nhãn vở, Hà có $25$ nhãn vở. Hỏi cả hai bạn có bao nhiêu nhãn vở?
+        \TTtomtat{Lan: & $38$ nhãn vở}{Hà: & $25$ nhãn vở \quad Cả hai bạn: ? nhãn vở}
         \noindent\textbf{Bài giải}\par
-        \noindent $6$ đĩa có số quả cam là:\par
-        \noindent\hspace*{1.2cm}$5\times\TTdien[0.8cm]=\TTdien[0.8cm]$ (quả)\par
-        \noindent\textbf{Đáp số:} \TTdien[0.8cm] quả cam.
-        \item Mỗi chiếc xe đạp có $2$ bánh xe. Hỏi $9$ chiếc xe đạp như thế có tất cả bao nhiêu bánh xe?
-        \TTtomtat{Mỗi xe đạp: & $2$ bánh xe}{$9$ xe đạp: & ? bánh xe}
+        \noindent Số nhãn vở cả hai bạn có là:\par
+        \noindent\hspace*{1.2cm}$38+25=\TTdien[0.8cm]$ (nhãn vở)\par
+        \noindent\textbf{Đáp số:} \TTdien[0.8cm] nhãn vở.
+        \item Mẹ có $71$ quả trứng, mẹ đã bán $36$ quả. Hỏi mẹ còn lại bao nhiêu quả trứng?
+        \TTtomtat{Có: & $71$ quả trứng}{Đã bán: & $36$ quả trứng \quad Còn lại: ? quả trứng}
         \noindent\textbf{Bài giải}\par
-        \noindent $9$ chiếc xe đạp có số bánh xe là:\par
-        \noindent\hspace*{1.2cm}\TTdien[0.8cm]$\times$\TTdien[0.8cm]$=$\TTdien[0.8cm] (\TTcham[1.8cm])\par
-        \noindent\textbf{Đáp số:} \TTdien[0.8cm] \TTcham[3cm].
+        \noindent Số quả trứng mẹ còn lại là:\par
+        \noindent\hspace*{1.2cm}\TTdien[0.8cm]$-$\TTdien[0.8cm]$=$\TTdien[0.8cm] (quả)\par
+        \noindent\textbf{Đáp số:} \TTdien[0.8cm] quả trứng.
     \end{listEX}
 \end{bt}
 
 \begin{bt}
-    Khoanh vào chữ cái đặt trước câu lời giải đúng.
+    Khoanh vào chữ cái đặt trước phép tính đúng để giải bài toán.
     \begin{listEX}
-        \item Mỗi bạn mua $2$ chiếc bút. Hỏi $7$ bạn mua bao nhiêu chiếc bút?\par
-        \textbf{A.} Số bạn mua là: \hspace{0.4cm} \textbf{B.} Số chiếc bút $7$ bạn mua là: \hspace{0.4cm} \textbf{C.} Số bút còn lại là:
-        \item Cô có $20$ quả táo, cô cho các bạn $5$ quả. Hỏi cô còn lại bao nhiêu quả táo?\par
-        \textbf{A.} Số quả táo cô có là: \hspace{0.4cm} \textbf{B.} Số quả táo cô cho là: \hspace{0.4cm} \textbf{C.} Số quả táo còn lại là:
+        \item Bao gạo nếp nặng $35$ kg. Bao gạo tẻ nặng hơn bao gạo nếp $12$ kg. Hỏi bao gạo tẻ nặng bao nhiêu ki-lô-gam?\par
+        \textbf{A.} $35+12$ \hspace{1.2cm} \textbf{B.} $35-12$ \hspace{1.2cm} \textbf{C.} $35+35$
+        \item Thùng thứ nhất có $62$ l dầu. Thùng thứ hai có ít hơn thùng thứ nhất $17$ l dầu. Hỏi thùng thứ hai có bao nhiêu lít dầu?\par
+        \textbf{A.} $62+17$ \hspace{1.2cm} \textbf{B.} $62-17$ \hspace{1.2cm} \textbf{C.} $17-62$
     \end{listEX}
 \end{bt}
 
@@ -387,15 +377,15 @@
     \TTbatdauhinh
     {\centering
     \begin{tikzpicture}[font=\small]
-        \node[anchor=west,text width=10.4cm,align=left,draw,rounded corners=3pt,inner sep=4pt] (a1) at (0,0) {Mỗi bạn có $2$ quyển vở. Hỏi $7$ bạn có bao nhiêu quyển vở?};
-        \node[anchor=west,text width=10.4cm,align=left,draw,rounded corners=3pt,inner sep=4pt] (a2) at (0,-1.4) {Lan có $15$ quyển truyện, Lan cho bạn $6$ quyển. Hỏi Lan còn bao nhiêu quyển?};
-        \node[anchor=west,text width=10.4cm,align=left,draw,rounded corners=3pt,inner sep=4pt] (a3) at (0,-2.8) {Hà có $9$ viên bi, Nam có $5$ viên bi. Hỏi cả hai bạn có bao nhiêu viên bi?};
-        \node[anchor=west,text width=10.4cm,align=left,draw,rounded corners=3pt,inner sep=4pt] (a4) at (0,-4.2) {Mỗi hộp có $5$ cái bút. Hỏi $4$ hộp như thế có bao nhiêu cái bút?};
+        \node[TTdeto] (a1) at (0,0) {Lan có $36$ viên bi, Hà có $27$ viên bi. Hỏi hai bạn có tất cả bao nhiêu viên bi?};
+        \node[TTdeto] (a2) at (0,-1.4) {Cô có $50$ quả cam, cô cho đi $18$ quả. Hỏi cô còn lại bao nhiêu quả cam?};
+        \node[TTdeto] (a3) at (0,-2.8) {Lan cho bạn $8$ quyển truyện thì còn lại $15$ quyển. Hỏi lúc đầu Lan có bao nhiêu quyển truyện?};
+        \node[TTdeto] (a4) at (0,-4.2) {Bình có $45$ viên bi. An có ít hơn Bình $17$ viên bi. Hỏi An có bao nhiêu viên bi?};
         \foreach \k in {1,2,3,4}{\fill (a\k.east) ++(0.25,0) circle (2.5pt);}
-        \node[draw,thick,rounded corners=3pt,minimum width=2.4cm,minimum height=0.8cm,font=\sffamily\large] (b1) at (13.8,0) {$9+5$};
-        \node[draw,thick,rounded corners=3pt,minimum width=2.4cm,minimum height=0.8cm,font=\sffamily\large] (b2) at (13.8,-1.4) {$5\times4$};
-        \node[draw,thick,rounded corners=3pt,minimum width=2.4cm,minimum height=0.8cm,font=\sffamily\large] (b3) at (13.8,-2.8) {$2\times7$};
-        \node[draw,thick,rounded corners=3pt,minimum width=2.4cm,minimum height=0.8cm,font=\sffamily\large] (b4) at (13.8,-4.2) {$15-6$};
+        \node[TTpt] (b1) at (13.8,0) {$15+8$};
+        \node[TTpt] (b2) at (13.8,-1.4) {$45-17$};
+        \node[TTpt] (b3) at (13.8,-2.8) {$36+27$};
+        \node[TTpt] (b4) at (13.8,-4.2) {$50-18$};
         \foreach \k in {1,2,3,4}{\fill (b\k.west) ++(-0.25,0) circle (2.5pt);}
     \end{tikzpicture}\par}
 \end{bt}
@@ -430,101 +420,135 @@
 \end{bt}
 
 %---------------------------------------------------------
-\TTphan{B}{NÂNG CAO (bài toán hai bước tính, bài toán có suy luận)}{2}
+\TTphan{B}{NÂNG CAO (khoảng 35 phút)}{2}
 
 \begin{bt}
     Bạn Lan giải bài toán sau nhưng các bước bị xáo trộn. Em hãy sắp xếp lại cho đúng thứ tự.
-    \par\smallskip\noindent\textbf{Đề:} Mỗi bó có $5$ bông hoa. Lan có $3$ bó hoa, Lan cho bạn $4$ bông. Hỏi Lan còn lại bao nhiêu bông hoa?
+    \par\smallskip\noindent\textbf{Đề:} Thùng thứ nhất có $35$ l nước. Thùng thứ hai có nhiều hơn thùng thứ nhất $12$ l nước. Hỏi cả hai thùng có bao nhiêu lít nước?
     \par\smallskip
     {\renewcommand{\arraystretch}{1.25}\noindent\begin{tabular}{@{\hspace{0.45cm}}l@{\ }l}
-        \textbf{A.} & $5\times3=15$ (bông) \\
-        \textbf{B.} & Số bông hoa Lan còn lại là: \\
-        \textbf{C.} & $15-4=11$ (bông) \\
-        \textbf{D.} & Số bông hoa Lan có tất cả là: \\
-        \textbf{E.} & Đáp số: $11$ bông hoa. \\
+        \textbf{A.} & $35+47=82$ (l) \\
+        \textbf{B.} & Số lít nước thùng thứ hai có là: \\
+        \textbf{C.} & $35+12=47$ (l) \\
+        \textbf{D.} & Số lít nước cả hai thùng có là: \\
+        \textbf{E.} & Đáp số: $82$ l nước. \\
     \end{tabular}}
     \par\smallskip\noindent Thứ tự đúng là: \TTdien[0.8cm]\ $\to$\ \TTdien[0.8cm]\ $\to$\ \TTdien[0.8cm]\ $\to$\ \TTdien[0.8cm]\ $\to$\ \TTdien[0.8cm]
 \end{bt}
 
 \newpage
 \begin{bt}
-    Mẹ mua $4$ hộp bánh, mỗi hộp có $5$ cái bánh. Cả nhà đã ăn hết $7$ cái bánh. Hỏi còn lại bao nhiêu cái bánh?
-    \TTviettt{2}
-    \TTgiai{2}
-\end{bt}
-
-\begin{bt}
-    Bạn An giải bài toán sau:
-    \par\smallskip\noindent\textbf{Đề:} Mỗi bàn có $2$ bạn ngồi. Hỏi $7$ bàn như thế có bao nhiêu bạn ngồi?
+    Bạn Bình giải bài toán sau:
+    \par\smallskip\noindent\textbf{Đề:} Nam có $30$ nhãn vở. Nam có ít hơn Mai $8$ nhãn vở. Hỏi Mai có bao nhiêu nhãn vở?
     \par\smallskip
     {\noindent\hspace*{0.45cm}\begin{tabular}{|l|}
         \hline
         \textbf{Bài giải} \\
-        Số bạn ngồi là: \\
-        $2+7=9$ (bạn) \\
-        Đáp số: $9$ bạn. \\
+        Số nhãn vở của Mai là: \\
+        $30-8=22$ (nhãn vở) \\
+        Đáp số: $22$ nhãn vở. \\
         \hline
     \end{tabular}}
     \begin{listEX}
-        \item Bài giải của An đúng hay sai? \TTcham[2cm]\hspace{0.5cm}An sai ở: \textbf{A.} câu lời giải \hspace{0.2cm}\textbf{B.} phép tính \hspace{0.2cm}\textbf{C.} đáp số
+        \item Bài giải của Bình đúng hay sai? \TTcham[2cm]
+        \item Em hãy giải thích: ``Nam có \textbf{ít hơn} Mai'' thì ai có nhiều nhãn vở hơn? \TTcham[3cm]
         \item Em hãy giải lại cho đúng.
     \end{listEX}
     \TTgiai{1}
 \end{bt}
 
 \begin{bt}
-    Hà có $3$ túi kẹo, mỗi túi có $5$ cái kẹo. Mai có $17$ cái kẹo. Hỏi ai có nhiều kẹo hơn và nhiều hơn bao nhiêu cái?
+    Tìm số lúc đầu.
+    \begin{listEX}
+        \item Lan có một số nhãn vở. Lan cho bạn $8$ nhãn vở thì còn lại $15$ nhãn vở. Hỏi lúc đầu Lan có bao nhiêu nhãn vở?
+        \TTgiai{1}
+        \item Trong giỏ có một số quả cam. Mẹ bỏ thêm $14$ quả cam thì trong giỏ có $50$ quả. Hỏi lúc đầu trong giỏ có bao nhiêu quả cam?
+        \TTgiai{1}
+    \end{listEX}
+\end{bt}
+
+\begin{bt}
+    Trên xe buýt có $45$ người. Đến bến, có $18$ người xuống xe và $12$ người lên xe. Hỏi lúc này trên xe có bao nhiêu người?
     \TTgiai{2}
 \end{bt}
 
-\newpage
 \begin{bt}
-    Dựa vào tóm tắt dưới đây, em hãy đặt một đề toán có lời văn rồi giải bài toán đó.
-    \TTtomtat{Mỗi đĩa: & $5$ cái kẹo}{$7$ đĩa: & ? cái kẹo}
-    \par\smallskip\noindent\textbf{Đề toán:}\ \dotfill\par\vspace{8pt}\noindent\dotfill
-    \TTgiai{1}
-\end{bt}
-
-\begin{bt}
-    Một chiếc bút giá $2$ nghìn đồng, một quyển vở giá $5$ nghìn đồng. Nam mua $3$ chiếc bút và $1$ quyển vở, Nam đưa cho cô bán hàng tờ $20$ nghìn đồng. Hỏi cô bán hàng trả lại Nam bao nhiêu nghìn đồng?
-    \TTgiai{3}
+    Bảng dưới đây cho biết số quyển sách bốn tổ trong lớp đã góp cho thư viện.
+    \TTbatdauhinh
+    {\centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \textbf{Tổ} & Tổ 1 & Tổ 2 & Tổ 3 & Tổ 4 \\
+        \hline
+        \textbf{Số quyển sách} & 18 & 25 & 19 & 23 \\
+        \hline
+    \end{tabular}\par}
+    \par\smallskip
+    \begin{listEX}
+        \item Tổ nào góp nhiều sách nhất? \TTcham[2cm]\hspace{0.5cm} Tổ nào góp ít sách nhất? \TTcham[2cm]
+        \item Tổ góp nhiều sách nhất góp nhiều hơn tổ góp ít sách nhất bao nhiêu quyển?\par
+        Phép tính: \TTcham[4cm] = \TTcham[2cm] (quyển)
+        \item Tổ 3 và tổ 4 góp tất cả bao nhiêu quyển sách?\par
+        Phép tính: \TTcham[4cm] = \TTcham[2cm] (quyển)
+    \end{listEX}
 \end{bt}
 
 %---------------------------------------------------------
-\TTphan{C}{THỬ THÁCH TƯ DUY (dạng đề thi quốc tế và toàn quốc)}{3}
+\TTphan{C}{THỬ THÁCH TƯ DUY - câu hỏi từ các kì thi Toán (khoảng 30 phút)}{3}
 
 \begin{bt}
-    \TTnguon{Dạng đề Kangaroo - gà và thỏ}
-    Trong một chuồng có gà và thỏ. Bác nông dân đếm được $7$ cái đầu và $20$ cái chân. Hỏi trong chuồng có bao nhiêu con gà, bao nhiêu con thỏ?
-    \TTgoiy{\textbf{Gợi ý:} gà có $2$ chân, thỏ có $4$ chân. Em thử từng trường hợp và ghi vào bảng.}
-    \TTbatdauhinh
-    {\centering
-    \renewcommand{\arraystretch}{1.3}
-    \begin{tabular}{|c|c|c|c|}
-        \hline
-        \textbf{Số gà} & \textbf{Số thỏ} & \textbf{Số chân} & \textbf{Đủ 20 chân?} \\
-        \hline
-        6 & 1 & $6\times2+1\times4=16$ & Chưa \\
-        \hline
-        5 & 2 & & \\
-        \hline
-        4 & 3 & & \\
-        \hline
-    \end{tabular}\par}
-    \par\smallskip\noindent Có \TTcham[1.2cm] con gà và \TTcham[1.2cm] con thỏ.
+    \TTnguon{Dạng đề Olympic Toán - tính nhanh}
+    Tính nhanh bằng cách ghép các số thích hợp.
+    \TTgoiy{\textbf{Ví dụ:} $27+35+13=(27+13)+35=40+35=75$.}
+    \begin{listEX}
+        \item $25+38+15+12=\TTcham[2.5cm]$
+        \item $64+28-28=\TTcham[2.5cm]$
+        \item $50-18-2=\TTcham[2.5cm]$
+        \item $11+12+13+14+15=\TTcham[2.5cm]$
+    \end{listEX}
 \end{bt}
 
 \begin{bt}
-    \TTnguon{Dạng đề Olympic Toán - bài toán trồng cây}
-    Một đoạn đường dài $10$ m. Người ta trồng cây từ đầu đường đến cuối đường (trồng cả hai đầu), hai cây liền nhau cách nhau $2$ m. Hỏi cần trồng tất cả bao nhiêu cây?
+    \TTnguon{Dạng đề Kangaroo - chữ số bị che}
+    Mỗi ô vuông ẩn một chữ số. Em hãy tìm các chữ số đó.
+    \par\smallskip
+    {\centering
+    $\begin{array}{r@{\ }c@{\ }c}
+        & 4 & \TTdien[0.7cm] \\
+        +\ & \TTdien[0.7cm] & 7 \\
+        \hline
+        & 9 & 1
+    \end{array}$
+    \hspace{3cm}
+    $\begin{array}{r@{\ }c@{\ }c}
+        & 8 & \TTdien[0.7cm] \\
+        -\ & \TTdien[0.7cm] & 5 \\
+        \hline
+        & 4 & 8
+    \end{array}$\par}
+    \TTgoiy{\textbf{Gợi ý:} xét chữ số hàng đơn vị trước, nhớ xem phép tính có nhớ hay không.}
+\end{bt}
+
+\begin{bt}
+    \TTnguon{Dạng đề SASMO - bài toán về tuổi}
+    Anh hơn em $4$ tuổi. Tổng số tuổi của hai anh em là $12$ tuổi. Hỏi anh bao nhiêu tuổi, em bao nhiêu tuổi?
+    \TTgoiy{\textbf{Gợi ý:} thử các tuổi của em rồi tính tuổi anh ($=$ tuổi em $+4$) và tổng hai tuổi.}
     \TTbatdauhinh
     {\centering
-    \begin{tikzpicture}[font=\sffamily\small]
-        \draw[very thick] (0,0)--(10,0);
-        \foreach \x in {0,2,...,10}{\draw[thick] (\x,-0.15)--(\x,0.15);\node[below=3pt] at (\x,-0.1) {\x\,m};}
-        \node[above,font=\sffamily\bfseries] at (5,0.2) {10 m};
-    \end{tikzpicture}\par}
-    \par\smallskip\noindent\textbf{Cách làm:}\ \TTcham[9.2cm]\ \textbf{Đáp số:}\ \TTcham[3cm]
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Tuổi em} & \textbf{Tuổi anh} & \textbf{Tổng hai tuổi} \\
+        \hline
+        2 & 6 & 8 \\
+        \hline
+        3 & & \\
+        \hline
+        4 & & \\
+        \hline
+    \end{tabular}\par}
+    \par\medskip\noindent Anh \TTcham[1.2cm] tuổi, em \TTcham[1.2cm] tuổi.
 \end{bt}
 
 \newpage
@@ -552,36 +576,32 @@
 \end{bt}
 
 \begin{bt}
-    \TTnguon{Dạng đề SASMO - bài toán về tuổi}
-    Anh hơn em $4$ tuổi. Tổng số tuổi của hai anh em là $12$ tuổi. Hỏi anh bao nhiêu tuổi, em bao nhiêu tuổi?
-    \TTgoiy{\textbf{Gợi ý:} thử các tuổi của em rồi tính tuổi anh ($=$ tuổi em $+4$) và tổng hai tuổi.}
+    \TTnguon{Dạng đề Toán Singapore - nhiều hơn, ít hơn}
+    An có nhiều hơn Bình $6$ viên bi. An cho Bình $2$ viên bi. Hỏi bây giờ ai có nhiều bi hơn và nhiều hơn bao nhiêu viên?
+    \TTgoiy{\textbf{Gợi ý:} chọn một số bi cụ thể cho Bình (ví dụ $10$ viên), tính số bi của An, rồi cho bi và so sánh. Thử thêm một số khác để kiểm tra.}
     \TTbatdauhinh
     {\centering
     \renewcommand{\arraystretch}{1.5}
-    \begin{tabular}{|c|c|c|}
+    \begin{tabular}{|c|c|c|c|c|}
         \hline
-        \textbf{Tuổi em} & \textbf{Tuổi anh} & \textbf{Tổng hai tuổi} \\
+        & \multicolumn{2}{c|}{\textbf{Lúc đầu}} & \multicolumn{2}{c|}{\textbf{Sau khi An cho Bình 2 viên}} \\
         \hline
-        2 & 6 & 8 \\
+        & Bình & An & Bình & An \\
         \hline
-        3 & & \\
+        Thử 1 & 10 & 16 & & \\
         \hline
-        4 & & \\
+        Thử 2 & 20 & & & \\
         \hline
     \end{tabular}\par}
-    \par\medskip\noindent Anh \TTcham[1.2cm] tuổi, em \TTcham[1.2cm] tuổi.
+    \par\medskip\noindent Bây giờ \TTcham[1.5cm] có nhiều bi hơn, nhiều hơn \TTcham[1.2cm] viên bi.
 \end{bt}
 
 \begin{bt}
-    \TTnguon{Dạng đề Kangaroo - bắt tay}
-    Có $4$ bạn $A,\ B,\ C,\ D$ gặp nhau. Hai bạn bất kì bắt tay nhau đúng một lần. Em hãy nối các bạn bắt tay nhau bằng một đoạn thẳng rồi đếm xem có tất cả bao nhiêu cái bắt tay.
-    \TTbatdauhinh
-    {\centering
-    \begin{tikzpicture}[font=\sffamily\large]
-        \foreach \p/\x/\y in {A/0/2,B/3/2,C/3/0,D/0/0}{\fill (\x,\y) circle (3pt);}
-        \node[above left] at (0,2) {A};\node[above right] at (3,2) {B};\node[below right] at (3,0) {C};\node[below left] at (0,0) {D};
-    \end{tikzpicture}\par}
-    \par\medskip\noindent Có tất cả \TTcham[1.5cm] cái bắt tay.
+    \TTnguon{Dạng đề Violympic - xếp hàng}
+    Các bạn học sinh xếp thành một hàng dọc. Mai đứng thứ $4$ tính từ đầu hàng và đứng thứ $5$ tính từ cuối hàng. Hỏi hàng đó có tất cả bao nhiêu bạn?
+    \TTgoiy{\textbf{Gợi ý:} em hãy vẽ hàng bằng các chấm tròn, đánh dấu vị trí của Mai rồi đếm.}
+    \par\smallskip\noindent\textbf{Em vẽ vào đây:}\par\vspace{1.4cm}
+    \TTdapso
 \end{bt}
 
 \begin{center}
