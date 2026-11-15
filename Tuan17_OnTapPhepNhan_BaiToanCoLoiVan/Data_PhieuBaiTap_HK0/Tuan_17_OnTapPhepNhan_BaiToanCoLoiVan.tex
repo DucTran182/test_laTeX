@@ -3,9 +3,9 @@
 %=========================================================
 % TĐ_PBT_IQA_HK1_Tuan17_OnTapPhepNhan_BaiToanCoLoiVan
 % Phiếu bài tập Toán tư duy cấp độ A (lớp 2) - Ôn tập lần 3 (Buổi 1) và lần 4 (Buổi 2), mỗi buổi 90 phút
-%   Buổi 1: ÔN TẬP PHÉP NHÂN (bảng nhân 2, bảng nhân 5)
+%   Buổi 1: ÔN TẬP PHÉP NHÂN (bảng nhân từ 2 đến 9)
 %   Buổi 2: ÔN TẬP BÀI TOÁN CÓ LỜI VĂN (phép cộng, phép trừ trong phạm vi 100)
-% Mỗi buổi chia 3 phần: A (khá) -> B (nâng cao) -> C (thử thách, dạng đề thi Toán quốc tế và trong nước)
+% Bài tập được sắp xếp theo từng DẠNG (từ khá đến nâng cao, cuối cùng là dạng toán tư duy dạng đề thi Toán quốc tế và trong nước)
 % Soạn theo mẫu (\hktuan, bt, listEX). Không dùng hình ảnh ngoài: mọi hình đều vẽ bằng TikZ.
 % Đáp án và hướng dẫn giải: xem file DapAn_Tuan_17_OnTapPhepNhan_BaiToanCoLoiVan.tex
 %=========================================================
@@ -28,14 +28,10 @@
 \makeatother
 % Bắt đầu phần hình vẽ TikZ ngay dưới đề bài
 \providecommand{\TTbatdauhinh}{}\renewcommand{\TTbatdauhinh}{\par\nopagebreak\vspace{4pt}\nopagebreak}
-% Ngôi sao mức độ: \TTsao{số sao}
-\providecommand{\TTsao}{}\renewcommand{\TTsao}[1]{\foreach \s in {1,...,#1}{$\bigstar$}}
-% Tiêu đề từng phần A, B, C trong khung: \TTphan{chữ cái}{tên phần}{số sao}
-\providecommand{\TTphan}{}\renewcommand{\TTphan}[3]{%
-  \par\medskip\noindent
-  \begin{tcolorbox}[colback=mauchinh!8,colframe=mauchinh,boxrule=0.7pt,arc=3pt,left=6pt,right=6pt,top=3pt,bottom=3pt]
-    {\color{mauchinh}\bfseries PHẦN #1.\ #2}\hfill{\color{orange!85!black}\TTsao{#3}}
-  \end{tcolorbox}\par\nopagebreak\vspace{2pt}}
+% Tiêu đề từng DẠNG bài tập: \TTdang{số dạng}{tên dạng}
+\providecommand{\TTdang}{}\renewcommand{\TTdang}[2]{%
+  \par\medskip\noindent{\large\bfseries\color{mauchinh}DẠNG #1.\ #2}\par\nopagebreak\vspace{1pt}%
+  \noindent{\color{mauchinh}\rule{\linewidth}{0.7pt}}\par\nopagebreak\vspace{2pt}}
 % Nhãn nguồn của bài thử thách: \TTnguon{Dạng đề Kangaroo}
 \providecommand{\TTnguon}{}\renewcommand{\TTnguon}[1]{\textit{\small\color{red!70!black}[#1]}\ }
 % Khung ghi nhớ / gợi ý nhỏ
@@ -49,9 +45,9 @@
 % Không in sẵn dấu =, ngoặc đơn vị hay chữ "Đáp số" cho học sinh.
 \providecommand{\TTgiai}{}\renewcommand{\TTgiai}[1]{%
   \pgfmathtruncatemacro{\TTsodong}{2*#1+1}%
-  \par\medskip\noindent{\centering\textcolor{blue}{\textbf{\underline{Bài giải}}}\par}%
-  \foreach \b in {1,...,\TTsodong}{\par\vspace{10pt}\noindent\dotfill}%
-  \par\medskip}
+  \par\smallskip\noindent{\centering\textcolor{blue}{\textbf{\underline{Bài giải}}}\par}%
+  \foreach \b in {1,...,\TTsodong}{\par\vspace{9pt}\noindent\dotfill}%
+  \par\smallskip}
 % \TTnhap{số dòng}: dòng kẻ để học sinh tự trình bày cách làm (bài thử thách không theo mẫu cố định)
 \providecommand{\TTnhap}{}\renewcommand{\TTnhap}[1]{%
   \par\smallskip\noindent\textbf{Cách làm:}\ \dotfill\foreach \d in {2,...,#1}{\par\vspace{9pt}\noindent\dotfill}\par\vspace{4pt}}
@@ -60,9 +56,15 @@
 % \TTviettt{số dòng}: dòng kẻ để học sinh tự viết tóm tắt
 \providecommand{\TTviettt}{}\renewcommand{\TTviettt}[1]{%
   \par\smallskip\noindent\textbf{Tóm tắt}\foreach \d in {1,...,#1}{\par\vspace{9pt}\noindent\hspace*{0.8cm}\TTcham[9cm]}\par\smallskip}
-% \TTtomtat{dòng 1}{dòng 2}: tóm tắt cho sẵn, mỗi dòng dạng "Mỗi đĩa: & 5 quả cam"
+% \TTtomtat{dòng 1}{dòng 2}: tóm tắt cho sẵn có 2 dòng, mỗi dòng dạng "Mỗi đĩa: & 8 quả cam"
 \providecommand{\TTtomtat}{}\renewcommand{\TTtomtat}[2]{%
   \par\smallskip\noindent\textbf{Tóm tắt}\par\noindent\hspace*{0.8cm}\begin{tabular}{@{}l@{\quad}l@{}}#1\\ #2\end{tabular}\par\smallskip}
+% \TTtomtatba{dòng 1}{dòng 2}{dòng 3}: tóm tắt có 3 ý, cả 3 ý thẳng hàng nhau (cột tên và cột số liệu)
+\providecommand{\TTtomtatba}{}\renewcommand{\TTtomtatba}[3]{%
+  \par\smallskip\noindent\textbf{Tóm tắt}\par\noindent\hspace*{0.8cm}\begin{tabular}{@{}l@{\quad}l@{}}#1\\ #2\\ #3\end{tabular}\par\smallskip}
+% \TTtomtatds{các dòng}: tóm tắt cho sẵn gồm nhiều dòng, mỗi dòng dạng "Nhãn: & số liệu" và ngăn cách bằng \\ (các dòng thẳng hàng nhau)
+\providecommand{\TTtomtatds}{}\renewcommand{\TTtomtatds}[1]{%
+  \par\smallskip\noindent\textbf{Tóm tắt}\par\noindent\hspace*{0.8cm}\begin{tabular}{@{}l@{\quad}l@{}}#1\end{tabular}\par\smallskip}
 % Hộp đề toán dùng trong bài nối: \TTdeto{đề toán}
 \tikzset{TTdeto/.style={anchor=west,text width=10.4cm,align=left,draw,rounded corners=3pt,inner sep=4pt,font=\small}}
 \tikzset{TTpt/.style={draw,thick,rounded corners=3pt,minimum width=2.4cm,minimum height=0.8cm,font=\sffamily\large}}
@@ -81,6 +83,39 @@
   TTvuong/.style={draw,thick,minimum size=1.05cm,inner sep=0pt,font=\sffamily\large},
   TTnhan/.style={draw=none,font=\sffamily\normalsize,inner sep=1.5pt},
 }
+% Các nhóm chấm tròn (hộp bánh, túi kẹo, hộp bút...): \TTnhom{số nhóm}{số chấm mỗi nhóm}{màu}
+\providecommand{\TTnhom}{}\renewcommand{\TTnhom}[3]{%
+  \begin{tikzpicture}[scale=0.7]
+    \pgfmathtruncatemacro{\sohang}{div(#2+1,2)}
+    \foreach \g in {1,...,#1}{%
+      \draw[rounded corners=6pt,gray!70,fill=gray!6] (1.45*\g-1.4,-0.1) rectangle (1.45*\g-0.1,1.7);
+      \foreach \i in {1,...,#2}{%
+        \pgfmathsetmacro{\px}{1.45*\g-1.0+0.5*mod(\i-1,2)}
+        \pgfmathsetmacro{\py}{0.8+0.25*(\sohang-1)-0.5*div(\i-1,2)}
+        \fill[#3,draw=black!60,thin] (\px,\py) circle (0.2);}}
+  \end{tikzpicture}}
+% Các đĩa cam: \TTdiacam{số đĩa}{số quả cam mỗi đĩa (tối đa 8)}
+\providecommand{\TTdiacam}{}\renewcommand{\TTdiacam}[2]{%
+  \begin{tikzpicture}[scale=0.62]
+    \foreach \p in {1,...,#1}{%
+      \begin{scope}[shift={(2.3*\p-1.2,0)}]
+        \draw[thick,fill=gray!15] (0,0) ellipse (1.0 and 0.3);
+        \foreach \i in {1,...,#2}{%
+          \pgfmathsetmacro{\px}{-0.7+0.47*mod(\i-1,4)}
+          \pgfmathsetmacro{\py}{0.12+0.34*div(\i-1,4)}
+          \fill[orange!85,draw=orange!60!black] (\px,\py) circle (0.2);}
+      \end{scope}}
+  \end{tikzpicture}}
+% Các chiếc xe đạp: \TTxedap{số xe}
+\providecommand{\TTxedap}{}\renewcommand{\TTxedap}[1]{%
+  \begin{tikzpicture}[scale=0.55]
+    \foreach \p in {1,...,#1}{%
+      \begin{scope}[shift={(1.9*\p-1.9,0)}]
+        \draw[thick] (0,0) circle (0.42) (1.2,0) circle (0.42);
+        \draw[thick] (0,0)--(0.5,0.8)--(1.2,0) (0.5,0.8)--(0.95,0.8)--(1.2,0) (0.3,0.95)--(0.7,0.95);
+        \fill[blue!60] (0,0) circle (0.05) (1.2,0) circle (0.05);
+      \end{scope}}
+  \end{tikzpicture}}
 % Một que diêm (từ điểm thứ nhất đến điểm thứ hai)
 \providecommand{\TTque}{}\renewcommand{\TTque}[2]{\draw[line width=2.2pt,brown!70!black,line cap=round] #1--#2;\fill[red!80!black] #1 circle (2.2pt);}
 % Hình vuông làm từ 4 que diêm, góc dưới trái tại (x,y), cạnh 1 đơn vị
@@ -103,18 +138,22 @@
         {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: ÔN TẬP PHÉP NHÂN (BUỔI 1)}\par}
 \vspace{6pt}
 \TTthongtin
-\TTgoiy{\textbf{Ghi nhớ:} Tổng của các số hạng bằng nhau viết được thành phép nhân. Ví dụ: $5+5+5=15$ viết là $5\times3=15$. Trong phép nhân $5\times3=15$: $5$ và $3$ là \textbf{thừa số}, $15$ là \textbf{tích}.}
 
 %-------------------------------------------------------
+\TTdang{1}{Hiểu phép nhân - thừa số, tích - bảng nhân}
+
 \begin{bt}
     Viết mỗi tổng thành một phép nhân rồi tính. Viết mỗi phép nhân thành tổng rồi tính (theo mẫu).
     \par\nopagebreak\smallskip
     \noindent\textit{Mẫu:} $5+5+5=5\times 3=15$ \hspace{1cm} $2\times4=2+2+2+2=8$
+    \TTbatdauhinh
+    {\centering\TTnhom{3}{5}{TTcam}\par}
     \par\nopagebreak\vspace{2pt}
-    {\renewcommand{\arraystretch}{2}\noindent\begin{tabular}{@{\hspace{0.45cm}}p{8.1cm}p{8.1cm}@{}}
-        a) $2+2+2+2+2=\ \TTdien[0.7cm]\times\TTdien[0.7cm]=\ \TTdien[0.7cm]$ & b) $5+5+5+5=\ \TTdien[0.7cm]\times\TTdien[0.7cm]=\ \TTdien[0.7cm]$ \\
-        \multicolumn{2}{@{}l}{c) $2\times6=\ \TTdien[0.7cm]+\TTdien[0.7cm]+\TTdien[0.7cm]+\TTdien[0.7cm]+\TTdien[0.7cm]+\TTdien[0.7cm]=\ \TTdien[0.7cm]$} \\
-        \multicolumn{2}{@{}l}{d) $5\times4=\ \TTdien[0.7cm]+\TTdien[0.7cm]+\TTdien[0.7cm]+\TTdien[0.7cm]=\ \TTdien[0.7cm]$} \\
+    {\renewcommand{\arraystretch}{2}\noindent\begin{tabular}{@{\hspace{0.45cm}}l@{\quad}l@{}}
+        a) & $3+3+3+3+3=\ \TTdien[0.7cm]\times\TTdien[0.7cm]=\ \TTdien[0.7cm]$ \\
+        b) & $6+6+6+6=\ \TTdien[0.7cm]\times\TTdien[0.7cm]=\ \TTdien[0.7cm]$ \\
+        c) & $4\times6=\ \TTdien[0.7cm]+\TTdien[0.7cm]+\TTdien[0.7cm]+\TTdien[0.7cm]+\TTdien[0.7cm]+\TTdien[0.7cm]=\ \TTdien[0.7cm]$ \\
+        d) & $9\times3=\ \TTdien[0.7cm]+\TTdien[0.7cm]+\TTdien[0.7cm]=\ \TTdien[0.7cm]$ \\
     \end{tabular}}
 \end{bt}
 
@@ -130,11 +169,11 @@
     \renewcommand{\arraystretch}{1.6}
     \begin{tabular}{|c|c|c|c|c|c|}
         \hline
-        \textbf{Thừa số} & 2 & 5 & \ \ \ \ \ \ \ \ & 5 & 2 \\
+        \textbf{Thừa số} & 3 & 4 & \ \ \ \ \ \ \ \ & 6 & 9 \\
         \hline
-        \textbf{Thừa số} & 7 & \ \ \ \ \ \ \ \ & 9 & 10 & \ \ \ \ \ \ \ \ \\
+        \textbf{Thừa số} & 7 & \ \ \ \ \ \ \ \ & 8 & 5 & \ \ \ \ \ \ \ \ \\
         \hline
-        \textbf{Tích} & \ \ \ \ \ \ \ \ & 30 & 18 & \ \ \ \ \ \ \ \ & 16 \\
+        \textbf{Tích} & \ \ \ \ \ \ \ \ & 36 & 56 & \ \ \ \ \ \ \ \ & 72 \\
         \hline
     \end{tabular}\par}
 \end{bt}
@@ -144,125 +183,121 @@
     \TTbatdauhinh
     {\centering
     \begin{tikzpicture}[font=\sffamily\large]
-        \foreach \t [count=\k] in {2\times7,5\times6,2\times9,5\times8,2\times5}{%
+        \foreach \t [count=\k] in {3\times7,6\times4,8\times5,9\times2,7\times6}{%
             \node[TTochu] at (0,-0.85*\k) {$\t$};\fill (1.2,-0.85*\k) circle (2.5pt);}
-        \foreach \r [count=\k] in {30,10,18,14,40}{%
+        \foreach \r [count=\k] in {24,42,18,21,40}{%
             \node[TTochu] at (6,-0.85*\k) {\r};\fill (4.8,-0.85*\k) circle (2.5pt);}
     \end{tikzpicture}\par}
 \end{bt}
 
+%-------------------------------------------------------
+\newpage
+\TTdang{2}{So sánh và tìm số chưa biết}
+
 \begin{bt}
-    Điền dấu $>$, $<$, $=$ thích hợp vào ô trống.
+    Điền dấu $>$, $<$, $=$ thích hợp vào ô trống \textbf{mà không cần tính kết quả}.
+    \TTgoiy{\textbf{Gợi ý:} (1) Hai phép nhân có một thừa số giống nhau thì phép nhân nào có thừa số còn lại lớn hơn sẽ có tích lớn hơn. (2) Đổi chỗ các thừa số thì tích không đổi.}
     \par\nopagebreak\vspace{4pt}\nopagebreak
     {\renewcommand{\arraystretch}{1.8}\noindent\begin{tabular}{@{\hspace{0.45cm}}*{3}{p{5.4cm}}@{}}
-        $2\times6\ \TTdien\ 10$ & $5\times3\ \TTdien\ 2\times8$ & $5\times4\ \TTdien\ 2\times10$ \\
-        $5\times7\ \TTdien\ 2\times9$ & $2\times5\ \TTdien\ 5\times2$ & $5\times6\ \TTdien\ 5\times5+5$ \\
-    \end{tabular}}
-\end{bt}
-
-\begin{bt}
-    Giải các bài toán sau.
-    \begin{listEX}
-        \item Mỗi đĩa có $5$ quả cam. Hỏi $6$ đĩa như thế có tất cả bao nhiêu quả cam?
-        \TTtomtat{Mỗi đĩa: & $5$ quả cam}{$6$ đĩa: & ? quả cam}
-        \TTgiai{1}
-        \item Mỗi chiếc xe đạp có $2$ bánh xe. Hỏi $9$ chiếc xe đạp như thế có tất cả bao nhiêu bánh xe?
-        \TTgiai{1}
-    \end{listEX}
-\end{bt}
-
-%---------------------------------------------------------
-\begin{bt}
-    Tìm số thích hợp điền vào ô trống.
-    \par\nopagebreak\vspace{4pt}\nopagebreak
-    {\renewcommand{\arraystretch}{1.8}\noindent\begin{tabular}{@{\hspace{0.45cm}}*{3}{p{5.4cm}}@{}}
-        $2\times\TTdien=14$ & $5\times\TTdien=35$ & $\TTdien\times5=45$ \\
-        $2\times\TTdien=18$ & $5\times\TTdien=25$ & $\TTdien\times2=20$ \\
-    \end{tabular}}
-\end{bt}
-
-\begin{bt}
-    Tính giá trị của biểu thức (thực hiện phép nhân trước, rồi cộng hoặc trừ).
-    \TTgoiy{\textbf{Ví dụ:} $5\times4+6=20+6=26$.}
-    \par\nopagebreak\vspace{2pt}
-    {\renewcommand{\arraystretch}{1.9}\noindent\begin{tabular}{@{\hspace{0.45cm}}p{8.1cm}p{8.1cm}@{}}
-        a) $5\times6+14=\TTcham[2cm]$ & d) $5\times7-18=\TTcham[2cm]$ \\
-        b) $2\times8-9=\TTcham[2cm]$ & e) $5\times10-23=\TTcham[2cm]$ \\
-        c) $2\times9+25=\TTcham[2cm]$ & f) $2\times10+37=\TTcham[2cm]$ \\
-    \end{tabular}}
-\end{bt}
-
-\begin{bt}
-    Không tính kết quả từng vế, em hãy điền dấu $>$, $<$, $=$ thích hợp vào ô trống.
-    \par\nopagebreak\vspace{2pt}
-    {\renewcommand{\arraystretch}{1.9}\noindent\begin{tabular}{@{\hspace{0.45cm}}p{8.1cm}p{8.1cm}@{}}
-        a) $2\times7\ \TTdien\ 2\times6+2$ & b) $5\times8\ \TTdien\ 5\times7+5$ \\
-        c) $2\times9\ \TTdien\ 2\times10-2$ & d) $5\times6\ \TTdien\ 5\times5+4$ \\
-        e) $5\times4\ \TTdien\ 5\times5-4$ & f) $2\times8\ \TTdien\ 2\times7+3$ \\
+        a) $2\times6\ \TTdien\ 2\times8$ & b) $5\times9\ \TTdien\ 5\times7$ & c) $4\times6\ \TTdien\ 6\times4$ \\
+        d) $7\times5\ \TTdien\ 5\times8$ & e) $9\times3\ \TTdien\ 8\times3$ & f) $6\times4\ \TTdien\ 4\times7$ \\
     \end{tabular}}
 \end{bt}
 
 \begin{bt}
     Tìm số thích hợp điền vào ô trống.
-    \TTgoiy{\textbf{Ví dụ:} $2\times\square+6=20$. Ta có $20-6=14$ nên $2\times\square=14$, vậy $\square=7$.}
-    \par\nopagebreak\vspace{2pt}
-    {\renewcommand{\arraystretch}{1.9}\noindent\begin{tabular}{@{\hspace{0.45cm}}p{8.1cm}p{8.1cm}@{}}
-        a) $2\times\TTdien+6=20$ & b) $5\times\TTdien-8=17$ \\
-        c) $\TTdien\times5+15=40$ & d) $2\times\TTdien-5=9$ \\
+    \par\nopagebreak\vspace{4pt}\nopagebreak
+    {\renewcommand{\arraystretch}{1.8}\noindent\begin{tabular}{@{\hspace{0.45cm}}*{3}{p{5.4cm}}@{}}
+        a) $2\times\TTdien=14$ & b) $5\times\TTdien=35$ & c) $\TTdien\times9=45$ \\
+        d) $6\times\TTdien=24$ & e) $8\times\TTdien=64$ & f) $\TTdien\times3=27$ \\
     \end{tabular}}
 \end{bt}
+
+%-------------------------------------------------------
+\TTdang{3}{Tính nhẩm theo sơ đồ mũi tên}
 
 \begin{bt}
     Tính nhẩm theo chiều mũi tên rồi viết số thích hợp vào ô trống.
-    \TTgoiy{\textbf{Ví dụ:} $\bigcirc\,3\xrightarrow{\times5}\triangle\xrightarrow{-4}\square$. Ta có $3\times5=15$ nên $\triangle=15$; $15-4=11$ nên $\square=11$.}
     \TTbatdauhinh
     {\centering
     \begin{tikzpicture}[scale=0.92]
         % a) hình tròn 4 --x5--> tam giác --(-6)--> hình vuông
         \node[draw=none,font=\sffamily\large] at (-0.9,0.2) {a)};
         \node[TTtron] (a1) at (0,0) {4};
-        \node[TTtamgiac] (a2) at (3.4,1.0) {};
-        \node[TTvuong] (a3) at (6.8,0) {};
+        \node[TTtamgiac] (a2) at (2.8,1.0) {};
+        \node[TTvuong] (a3) at (5.6,0) {};
         \draw[-latex,thick] (a1)--node[TTnhan,sloped,above]{$\times5$}(a2);
         \draw[-latex,thick] (a2)--node[TTnhan,sloped,above]{$-6$}(a3);
         % c) hình tròn ? --x2--> hình vuông 18 --(-5)--> tam giác
-        \node[draw=none,font=\sffamily\large] at (8.9,0.2) {c)};
-        \node[TTtron] (c1) at (9.8,0) {};
-        \node[TTvuong] (c2) at (13.2,1.0) {18};
-        \node[TTtamgiac] (c3) at (16.6,0) {};
+        \node[draw=none,font=\sffamily\large] at (7.8,0.2) {c)};
+        \node[TTtron] (c1) at (8.8,0) {};
+        \node[TTvuong] (c2) at (11.6,1.0) {18};
+        \node[TTtamgiac] (c3) at (14.4,0) {};
         \draw[-latex,thick] (c1)--node[TTnhan,sloped,above]{$\times2$}(c2);
         \draw[-latex,thick] (c2)--node[TTnhan,sloped,above]{$-5$}(c3);
         % b) tam giác 3 --x5--> hình vuông --(-9)--> hình tròn --x2--> hình vuông
         \node[draw=none,font=\sffamily\large] at (-0.9,-2.8) {b)};
         \node[TTtamgiac] (b1) at (0,-3.0) {3};
-        \node[TTvuong] (b2) at (3.4,-2.0) {};
-        \node[TTtron] (b3) at (6.8,-3.0) {};
-        \node[TTvuong] (b4) at (10.2,-2.0) {};
+        \node[TTvuong] (b2) at (2.8,-2.0) {};
+        \node[TTtron] (b3) at (5.6,-3.0) {};
+        \node[TTvuong] (b4) at (8.4,-2.0) {};
         \draw[-latex,thick] (b1)--node[TTnhan,sloped,above]{$\times5$}(b2);
         \draw[-latex,thick] (b2)--node[TTnhan,sloped,above]{$-9$}(b3);
         \draw[-latex,thick] (b3)--node[TTnhan,sloped,above]{$\times2$}(b4);
+        % d) hình tròn 6 --x7--> tam giác --(-9)--> hình vuông
+        \node[draw=none,font=\sffamily\large] at (10.7,-2.8) {d)};
+        \node[TTtron] (d1) at (11.6,-3.0) {6};
+        \node[TTtamgiac] (d2) at (14.4,-2.0) {};
+        \node[TTvuong] (d3) at (17.2,-3.0) {};
+        \draw[-latex,thick] (d1)--node[TTnhan,sloped,above]{$\times7$}(d2);
+        \draw[-latex,thick] (d2)--node[TTnhan,sloped,above]{$-9$}(d3);
     \end{tikzpicture}\par}
+\end{bt}
+
+%-------------------------------------------------------
+\newpage
+\TTdang{4}{Giải bài toán có lời văn (phép nhân)}
+
+\begin{bt}
+    Giải các bài toán sau.
+    \begin{listEX}
+        \item Mỗi đĩa có $8$ quả cam. Hỏi $6$ đĩa như thế có tất cả bao nhiêu quả cam?
+        \TTbatdauhinh
+        {\centering\TTdiacam{6}{8}\par}
+        \TTtomtat{Mỗi đĩa: & $8$ quả cam}{$6$ đĩa: & ? quả cam}
+        \TTgiai{1}
+        \item Mỗi chiếc xe đạp có $2$ bánh xe. Hỏi $9$ chiếc xe đạp như thế có tất cả bao nhiêu bánh xe?
+        \TTbatdauhinh
+        {\centering\TTxedap{9}\par}
+        \TTgiai{1}
+    \end{listEX}
 \end{bt}
 
 \begin{bt}
     Mẹ mua $4$ hộp bánh, mỗi hộp có $5$ cái bánh. Cả nhà đã ăn hết $7$ cái bánh. Hỏi còn lại bao nhiêu cái bánh?
-    \TTgiai{2}
-\end{bt}
-
-\begin{bt}
-    Hà có $3$ túi kẹo, mỗi túi có $5$ cái kẹo. Mai có $17$ cái kẹo. Hỏi ai có nhiều kẹo hơn và nhiều hơn bao nhiêu cái?
+    \TTbatdauhinh
+    {\centering\TTnhom{4}{5}{TTcam}\par}
     \TTgiai{2}
 \end{bt}
 
 \newpage
 \begin{bt}
-    Cửa hàng bán bút theo hộp, mỗi hộp có $5$ chiếc bút. Buổi sáng cửa hàng bán được $6$ hộp, buổi chiều bán được $3$ hộp. Hỏi cả ngày cửa hàng bán được bao nhiêu chiếc bút?
-    \TTgiai{3}
-    \par\noindent\textbf{Thử thách:} em hãy tìm một cách giải khác \textbf{ngắn hơn} (ít phép tính hơn).
-    \TTnhap{2}
+    Hà có $3$ túi kẹo, mỗi túi có $5$ cái kẹo. Mai có $17$ cái kẹo. Hỏi ai có nhiều kẹo hơn và nhiều hơn bao nhiêu cái?
+    \TTbatdauhinh
+    {\centering\TTnhom{3}{5}{TTdo}\par}
+    \TTgiai{2}
 \end{bt}
 
-%---------------------------------------------------------
+\begin{bt}
+    Cửa hàng bán bút theo hộp, mỗi hộp có $5$ chiếc bút. Buổi sáng cửa hàng bán được $6$ hộp, buổi chiều bán được $3$ hộp. Hỏi cả ngày cửa hàng bán được bao nhiêu chiếc bút?
+    \TTbatdauhinh
+    \noindent\begin{minipage}[b]{0.6\linewidth}\centering\TTnhom{6}{5}{TTxanh}\\[2pt]{\small Buổi sáng}\end{minipage}\hfill
+    \begin{minipage}[b]{0.38\linewidth}\centering\TTnhom{3}{5}{TTxanh}\\[2pt]{\small Buổi chiều}\end{minipage}\par
+    \TTgiai{3}
+\end{bt}
+
+%-------------------------------------------------------
+\TTdang{5}{Toán tư duy - dạng đề thi Toán quốc tế và trong nước}
 
 \begin{bt}
     Mỗi hình vẽ thay cho một số (hai hình giống nhau thì thay cho cùng một số). Tìm số đó.
@@ -275,14 +310,15 @@
 \end{bt}
 
 \begin{bt}
+    Hai bảng nhân gặp nhau.
+    \par\nopagebreak
     \begin{listEX}
         \item Viết tất cả các số \textbf{vừa} có trong bảng nhân $2$ \textbf{vừa} có trong bảng nhân $5$ và không lớn hơn $50$:\par\vspace{4pt}
         \TTcham[1cm],\ \TTcham[1cm],\ \TTcham[1cm],\ \TTcham[1cm],\ \TTcham[1cm]
-        \item \textbf{Số bí mật:} số đó có trong cả hai bảng nhân $2$ và $5$, lớn hơn $20$ và bé hơn $40$. Số bí mật là \TTcham[1.5cm].
+        \item \textbf{Số bí mật:} số đó có trong cả hai bảng nhân $4$ và $6$, lớn hơn $20$ và bé hơn $30$. Số bí mật là \TTcham[1.5cm].
     \end{listEX}
 \end{bt}
 
-\newpage
 \begin{bt}
     Cô giáo có rất nhiều quả cân loại $2$ kg và loại $5$ kg. Em hãy tìm cách dùng \textbf{ít quả cân nhất} để cân đúng:
     \TTbatdauhinh
@@ -307,7 +343,6 @@
 
 \begin{bt}
     Tính nhanh.
-    \TTgoiy{\textbf{Gợi ý:} hãy ghép các số thành từng cặp có tổng bằng nhau. Ví dụ: $(1+10),\ (2+9),\ (3+8),\dots$ Nếu có phép nhân thì tính từng tích trước.}
     \begin{listEX}
         \item $2+2+2+2+2+5+5+5+5+5=\TTcham[2.2cm]$
         \item $1+2+3+4+5+6+7+8+9+10=\TTcham[2.2cm]$
@@ -333,16 +368,16 @@
 \end{bt}
 
 \begin{bt}
-    Lan có $2$ chiếc áo (áo xanh, áo đỏ) và $5$ chiếc váy (váy trắng, vàng, hồng, tím, cam). Lan chọn một áo và một váy để mặc. Em hãy nối mỗi chiếc áo với từng chiếc váy để tìm tất cả các cách chọn, rồi viết phép nhân tính số cách.
+    Lan có $3$ chiếc áo (áo xanh, áo đỏ, áo vàng) và $4$ chiếc váy (váy trắng, hồng, tím, cam). Lan chọn một áo và một váy để mặc. Em hãy nối mỗi chiếc áo với từng chiếc váy để tìm tất cả các cách chọn, rồi viết phép nhân tính số cách.
     \TTbatdauhinh
     {\centering
-    \begin{tikzpicture}[font=\sffamily\small,scale=0.8]
-        \node[draw,rounded corners=3pt,fill=blue!15,minimum width=2cm,minimum height=0.7cm] (a1) at (0,0.9) {Áo xanh};
-        \node[draw,rounded corners=3pt,fill=red!15,minimum width=2cm,minimum height=0.7cm] (a2) at (0,-0.9) {Áo đỏ};
-        \foreach \t [count=\k] in {Váy trắng,Váy vàng,Váy hồng,Váy tím,Váy cam}{%
-            \node[draw,rounded corners=3pt,minimum width=2cm,minimum height=0.6cm] (v\k) at (6,2.4-1.2*\k+1.2) {\t};}
-        \fill (a1.east) circle (2pt);\fill (a2.east) circle (2pt);
-        \foreach \k in {1,...,5}{\fill (v\k.west) circle (2pt);}
+    \begin{tikzpicture}[font=\sffamily\small,scale=0.85]
+        \foreach \t/\m [count=\k] in {Áo xanh/blue!15,Áo đỏ/red!15,Áo vàng/yellow!30}{%
+            \node[draw,rounded corners=3pt,fill=\m,minimum width=2cm,minimum height=0.7cm] (a\k) at (0,1.5-1.5*\k+1.5) {\t};}
+        \foreach \t [count=\k] in {Váy trắng,Váy hồng,Váy tím,Váy cam}{%
+            \node[draw,rounded corners=3pt,minimum width=2cm,minimum height=0.6cm] (v\k) at (6,2.25-1.5*\k+1.5) {\t};}
+        \foreach \k in {1,2,3}{\fill (a\k.east) circle (2pt);}
+        \foreach \k in {1,...,4}{\fill (v\k.west) circle (2pt);}
     \end{tikzpicture}\par}
     \par\smallskip\noindent Số cách chọn một bộ đồ là: \TTcham[3cm] $=$ \TTcham[1.5cm] (cách)
 \end{bt}
@@ -363,18 +398,17 @@
 \vspace{6pt}
 \TTthongtin
 
-\TTgoiy{\textbf{Cách trình bày bài giải:} (1) Viết \textbf{tóm tắt}. (2) Viết \textbf{câu lời giải}. (3) Viết \textbf{phép tính} kèm đơn vị trong ngoặc. (4) Viết \textbf{đáp số}. \textit{Ví dụ:} Số quả cam có tất cả là: $38+25=63$ (quả). Đáp số: $63$ quả cam. \textbf{Chú ý:} ``nhiều hơn'', ``thêm'' thường là cộng; ``ít hơn'', ``còn lại'' thường là trừ, nhưng phải đọc kĩ đề vì có bài bị ``đánh lừa''!}
-
 %---------------------------------------------------------
+\TTdang{1}{Bài toán một bước tính - đọc tóm tắt, chọn phép tính, nối đề toán}
 
 \begin{bt}
     Đọc tóm tắt rồi viết bài giải.
     \begin{listEX}
         \item Lan có $38$ nhãn vở, Hà có $25$ nhãn vở. Hỏi cả hai bạn có bao nhiêu nhãn vở?
-        \TTtomtat{Lan: & $38$ nhãn vở}{Hà: & $25$ nhãn vở \quad Cả hai bạn: ? nhãn vở}
+        \TTtomtatba{Lan: & $38$ nhãn vở}{Hà: & $25$ nhãn vở}{Cả hai bạn: & ? nhãn vở}
         \TTgiai{1}
         \item Mẹ có $71$ quả trứng, mẹ đã bán $36$ quả. Hỏi mẹ còn lại bao nhiêu quả trứng?
-        \TTtomtat{Có: & $71$ quả trứng}{Đã bán: & $36$ quả trứng \quad Còn lại: ? quả trứng}
+        \TTtomtatba{Có: & $71$ quả trứng}{Đã bán: & $36$ quả trứng}{Còn lại: & ? quả trứng}
         \TTgiai{1}
     \end{listEX}
 \end{bt}
@@ -409,36 +443,20 @@
 \end{bt}
 
 \begin{bt}
-    Nhìn sơ đồ đoạn thẳng, viết bài giải rồi tính.
-    \TTbatdauhinh
-    \noindent\begin{minipage}[t]{0.49\linewidth}\centering
-        \begin{tikzpicture}[font=\sffamily\small,scale=0.95]
-            \node[anchor=east] at (0,0.5) {Tổ 1};\node[anchor=east] at (0,-0.4) {Tổ 2};
-            \draw[thick,fill=blue!10] (0.1,0.2) rectangle (3.1,0.8);\node at (1.6,0.5) {24 cây};
-            \draw[thick,fill=blue!10] (0.1,-0.7) rectangle (3.1,-0.1);
-            \draw[thick,fill=orange!30] (3.1,-0.7) rectangle (4.3,-0.1);\node at (3.7,-0.4) {9};
-            \draw[decorate,decoration={brace,mirror,amplitude=4pt}] (0.1,-0.8)--(4.3,-0.8) node[midway,below=4pt] {?};
-        \end{tikzpicture}\\[2pt]
-        Tổ 1 trồng $24$ cây. Tổ 2 trồng nhiều hơn tổ 1 là $9$ cây. Hỏi tổ 2 trồng bao nhiêu cây?
-    \end{minipage}\hfill
-    \begin{minipage}[t]{0.49\linewidth}\centering
-        \begin{tikzpicture}[font=\sffamily\small,scale=0.95]
-            \node[anchor=east] at (0,0.5) {Bình};\node[anchor=east] at (0,-0.4) {An};
-            \draw[thick,fill=blue!10] (0.1,0.2) rectangle (4.3,0.8);\node at (2.2,0.5) {45 viên};
-            \draw[thick,fill=blue!10] (0.1,-0.7) rectangle (2.6,-0.1);
-            \draw[thick,dashed,fill=orange!30] (2.6,-0.7) rectangle (4.3,-0.1);\node at (3.45,-0.4) {17};
-            \draw[decorate,decoration={brace,mirror,amplitude=4pt}] (0.1,-0.8)--(2.6,-0.8) node[midway,below=4pt] {?};
-        \end{tikzpicture}\\[2pt]
-        Bình có $45$ viên bi. An có ít hơn Bình $17$ viên bi. Hỏi An có bao nhiêu viên bi?
-    \end{minipage}\par
+    Đọc tóm tắt rồi viết bài giải (bài toán \textbf{nhiều hơn}, \textbf{ít hơn}).
     \begin{listEX}
-        \item \TTgiai{1}
-        \item \TTgiai{1}
+        \item Tổ 1 trồng $24$ cây. Tổ 2 trồng nhiều hơn tổ 1 là $9$ cây. Hỏi tổ 2 trồng bao nhiêu cây?
+        \TTtomtatba{Tổ 1: & $24$ cây}{Tổ 2 nhiều hơn tổ 1: & $9$ cây}{Tổ 2: & ? cây}
+        \TTgiai{1}
+        \item Bình có $45$ viên bi. An có ít hơn Bình $17$ viên bi. Hỏi An có bao nhiêu viên bi?
+        \TTtomtatba{Bình: & $45$ viên bi}{An ít hơn Bình: & $17$ viên bi}{An: & ? viên bi}
+        \TTgiai{1}
     \end{listEX}
 \end{bt}
 
 %---------------------------------------------------------
 \newpage
+\TTdang{2}{Phân tích đề toán - sắp xếp các bước giải, tìm lỗi sai, tìm số lúc đầu}
 
 \begin{bt}
     Bạn Lan giải bài toán sau nhưng các bước bị xáo trộn. Em hãy sắp xếp lại cho đúng thứ tự.
@@ -471,42 +489,60 @@
     \TTgiai{1}
 \end{bt}
 
+\newpage
 \begin{bt}
     Tìm số lúc đầu.
     \begin{listEX}
         \item Lan có một số nhãn vở. Lan cho bạn $8$ nhãn vở thì còn lại $15$ nhãn vở. Hỏi lúc đầu Lan có bao nhiêu nhãn vở?
+        \TTbatdauhinh
+        {\centering
+        \begin{tikzpicture}[font=\sffamily\small]
+            \node[TTtron,minimum size=1.3cm] (a1) at (0,0) {?};
+            \node[TTtron,minimum size=1.3cm] (a2) at (5,0) {15};
+            \draw[-latex,thick] (a1)--node[TTnhan,above]{cho bạn $8$ nhãn vở}(a2);
+            \node[below=2pt,font=\sffamily\scriptsize] at (a1.south) {lúc đầu};
+            \node[below=2pt,font=\sffamily\scriptsize] at (a2.south) {còn lại};
+        \end{tikzpicture}\par}
         \TTgiai{1}
         \item Trong giỏ có một số quả cam. Mẹ bỏ thêm $14$ quả cam thì trong giỏ có $50$ quả. Hỏi lúc đầu trong giỏ có bao nhiêu quả cam?
+        \TTbatdauhinh
+        {\centering
+        \begin{tikzpicture}[font=\sffamily\small]
+            \node[TTtron,minimum size=1.3cm] (b1) at (0,0) {?};
+            \node[TTtron,minimum size=1.3cm] (b2) at (5,0) {50};
+            \draw[-latex,thick] (b1)--node[TTnhan,above]{bỏ thêm $14$ quả cam}(b2);
+            \node[below=2pt,font=\sffamily\scriptsize] at (b1.south) {lúc đầu};
+            \node[below=2pt,font=\sffamily\scriptsize] at (b2.south) {sau khi bỏ thêm};
+        \end{tikzpicture}\par}
         \TTgiai{1}
     \end{listEX}
 \end{bt}
 
+%---------------------------------------------------------
 \newpage
+\TTdang{3}{Bài toán hai, ba bước tính}
+
 \begin{bt}
     Mai có $15$ nhãn vở. Lan có nhiều hơn Mai $9$ nhãn vở. Hà có nhiều hơn Lan $12$ nhãn vở. Hỏi cả ba bạn có tất cả bao nhiêu nhãn vở?
+    \TTtomtatds{Mai: & $15$ nhãn vở \\ Lan nhiều hơn Mai: & $9$ nhãn vở \\ Hà nhiều hơn Lan: & $12$ nhãn vở \\ Cả ba bạn: & ? nhãn vở}
     \TTgiai{3}
 \end{bt}
 
 \begin{bt}
     Thùng thứ nhất đựng $24$ l dầu. Thùng thứ hai đựng nhiều hơn thùng thứ nhất $11$ l dầu. Thùng thứ ba đựng ít hơn thùng thứ hai $8$ l dầu. Hỏi cả ba thùng đựng tất cả bao nhiêu lít dầu?
-    \TTbatdauhinh
-    {\centering
-    \begin{tikzpicture}[font=\sffamily\small,scale=0.85]
-        \node[anchor=east] at (0,1.0) {Thùng 1};\node[anchor=east] at (0,0) {Thùng 2};\node[anchor=east] at (0,-1.0) {Thùng 3};
-        \draw[thick,fill=blue!10] (0.1,0.75) rectangle (3.6,1.25);\node at (1.85,1.0) {24 l};
-        \draw[thick,fill=blue!10] (0.1,-0.25) rectangle (3.6,0.25);\draw[thick,fill=orange!30] (3.6,-0.25) rectangle (4.7,0.25);\node at (4.15,0) {11};
-        \draw[thick,fill=blue!10] (0.1,-1.25) rectangle (3.9,-0.75);\draw[thick,dashed,fill=orange!30] (3.9,-1.25) rectangle (4.7,-0.75);\node at (4.3,-1.0) {8};
-    \end{tikzpicture}\par}
-    \TTgiai{4}
+    \TTtomtatds{Thùng 1: & $24$ l \\ Thùng 2 nhiều hơn thùng 1: & $11$ l \\ Thùng 3 ít hơn thùng 2: & $8$ l \\ Cả ba thùng: & ? l}
+    \TTgiai{3}
 \end{bt}
 
 \newpage
 \begin{bt}
     Quyển truyện dày $100$ trang. Ngày thứ nhất Nam đọc được $28$ trang. Ngày thứ hai Nam đọc nhiều hơn ngày thứ nhất $9$ trang. Hỏi Nam còn phải đọc bao nhiêu trang nữa thì hết quyển truyện?
+    \TTtomtatds{Quyển truyện: & $100$ trang \\ Ngày thứ nhất: & $28$ trang \\ Ngày thứ hai nhiều hơn ngày thứ nhất: & $9$ trang \\ Còn phải đọc: & ? trang}
     \TTgiai{3}
 \end{bt}
 
 %---------------------------------------------------------
+\TTdang{4}{Toán tư duy - dạng đề thi Toán quốc tế và trong nước}
 
 \begin{bt}
     Mỗi ô vuông ẩn một chữ số. Em hãy tìm các chữ số đó.
@@ -529,29 +565,37 @@
 
 \begin{bt}
     Một con ốc sên bò lên một cái cột cao $8$ m. Ban ngày nó bò lên được $3$ m, ban đêm nó bị tụt xuống $1$ m. Hỏi sau mấy ngày thì con ốc sên lên tới đỉnh cột?
-    \TTgoiy{\textbf{Gợi ý:} ghi lại độ cao của ốc sên sau mỗi buổi sáng và sau mỗi buổi tối. Chú ý: khi lên tới đỉnh cột thì ốc sên không còn bị tụt xuống nữa.}
     \TTbatdauhinh
-    {\centering
-    \renewcommand{\arraystretch}{1.3}
-    \begin{tabular}{|c|c|c|}
-        \hline
-        \textbf{Ngày} & \textbf{Độ cao sau buổi sáng} & \textbf{Độ cao sau buổi tối} \\
-        \hline
-        Ngày 1 & 3 m & 2 m \\
-        \hline
-        Ngày 2 & \ \ \ \ \ \ \ \ \ \ \ \ & \ \ \ \ \ \ \ \ \ \ \ \ \\
-        \hline
-        Ngày 3 & & \\
-        \hline
-        Ngày 4 & & \\
-        \hline
-    \end{tabular}\par}
+    \noindent\begin{minipage}[c]{0.22\linewidth}\centering
+        \begin{tikzpicture}[font=\sffamily\scriptsize,scale=0.8]
+            \draw[thick,fill=brown!15] (0,0) rectangle (0.5,4.0);
+            \foreach \y in {0,1,...,8}{\draw[thick] (0.5,0.5*\y)--(0.7,0.5*\y);\node[anchor=west] at (0.7,0.5*\y) {\y\,m};}
+            \node[above,font=\sffamily\scriptsize\bfseries] at (0.25,4.0) {đỉnh cột};
+            \fill[green!50!black] (-0.3,0.0) ellipse (0.28 and 0.14);\draw[thick,green!50!black] (-0.58,0.0)--(-0.7,0.25);
+            \draw[thick,fill=orange!60] (-0.15,0.2) circle (0.14);
+        \end{tikzpicture}
+    \end{minipage}\hfill
+    \begin{minipage}[c]{0.76\linewidth}\centering
+        \renewcommand{\arraystretch}{1.3}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \textbf{Ngày} & \textbf{Độ cao sau buổi sáng} & \textbf{Độ cao sau buổi tối} \\
+            \hline
+            Ngày 1 & 3 m & 2 m \\
+            \hline
+            Ngày 2 & \ \ \ \ \ \ \ \ \ \ \ \ & \ \ \ \ \ \ \ \ \ \ \ \ \\
+            \hline
+            Ngày 3 & & \\
+            \hline
+            Ngày 4 & & \\
+            \hline
+        \end{tabular}
+    \end{minipage}\par
     \TTdapso
 \end{bt}
 
 \begin{bt}
     An có nhiều hơn Bình $6$ viên bi. An cho Bình $2$ viên bi. Hỏi bây giờ ai có nhiều bi hơn và nhiều hơn bao nhiêu viên?
-    \TTgoiy{\textbf{Gợi ý:} chọn một số bi cụ thể cho Bình (ví dụ $10$ viên), tính số bi của An, rồi cho bi và so sánh. Thử thêm một số khác để kiểm tra.}
     \TTbatdauhinh
     {\centering
     \renewcommand{\arraystretch}{1.3}
@@ -571,7 +615,6 @@
 
 \begin{bt}
     An có $45$ viên bi, Bình có $29$ viên bi. An cho Bình một số viên bi để hai bạn có số bi \textbf{bằng nhau}. Hỏi An phải cho Bình bao nhiêu viên bi?
-    \TTgoiy{\textbf{Gợi ý:} thử An cho Bình $1,\ 2,\ 3,\dots$ viên bi rồi so sánh số bi của hai bạn (An bớt đi bao nhiêu thì Bình thêm bấy nhiêu).}
     \TTbatdauhinh
     {\centering
     \renewcommand{\arraystretch}{1.3}
@@ -590,6 +633,8 @@
 \end{bt}
 
 \begin{bt}
+    Số có hai chữ số.
+    \par\nopagebreak
     \begin{listEX}
         \item Viết tất cả các số có hai chữ số mà tổng hai chữ số bằng $5$:\par\vspace{4pt}
         \TTcham[1cm],\ \TTcham[1cm],\ \TTcham[1cm],\ \TTcham[1cm],\ \TTcham[1cm]
