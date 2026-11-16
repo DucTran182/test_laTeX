@@ -46,6 +46,8 @@
 }
 % Ô trống nằm trong dòng chữ
 \providecommand{\SSo}{}\renewcommand{\SSo}{\hspace{4pt}\tikz[baseline=-0.75ex]\node[SSo]{};\hspace{4pt}}
+% Ô điền sẵn (mẫu), chữ đỏ: \SSomau{46}
+\providecommand{\SSomau}{}\renewcommand{\SSomau}[1]{\hspace{4pt}\tikz[baseline=-0.75ex]\node[SSo]{\textcolor{red}{\bfseries #1}};\hspace{4pt}}
 % Hai ý trên một dòng, thẳng cột: \SShaicot{ý trái}{ý phải}
 \providecommand{\SShaicot}{}\renewcommand{\SShaicot}[2]{\parbox[t]{0.5\linewidth}{#1}\parbox[t]{0.48\linewidth}{#2}}
 % Tên màu pastel xoay vòng theo số thứ tự 0..4
@@ -443,8 +445,7 @@
 % Liền trước - số - liền sau: \SSlien{số}{liền trước}{liền sau}{1 = ô mẫu (đã điền, có khung)}
 \providecommand{\SSlien}{}\renewcommand{\SSlien}[4]{%
   \begin{tikzpicture}[font=\normalfont\bfseries\large]
-    \ifnum#4=1 \draw[rounded corners=6pt,thick,draw=orange,fill=SSkem] (-0.75,-0.95) rectangle (4.75,1.0);
-      \node[orange,font=\normalfont\bfseries\small] at (4.2,0.72) {Mẫu};\fi
+    \ifnum#4=1 \node[orange,font=\normalfont\bfseries\large] at (3.0,0.95) {Mẫu};\fi
     \node[SSo,minimum width=1.05cm,minimum height=0.9cm] (a) at (0,0) {\textcolor{red}{#2}};
     \node[SSthe=SSvang,circle,minimum size=1.2cm,inner sep=0pt] (b) at (2.0,0) {#1};
     \node[SSo,minimum width=1.05cm,minimum height=0.9cm] (c) at (4.0,0) {\textcolor{red}{#3}};
@@ -578,7 +579,8 @@
 \begin{bt}
     Tìm số hoặc chữ số thích hợp điền vào ô trống.
     \begin{listEX}
-        \item \SShaicot{45 \textless\ \SSo\ \textless\ 47}{69 \textgreater\ \SSo\ \textgreater\ 67}
+        \item 45 \textless\ \SSomau{46}\ \textless\ 47 \hspace{1cm}\textcolor{orange}{\bfseries Mẫu}
+        \item \SShaicot{69 \textgreater\ \SSo\ \textgreater\ 67}{52 \textless\ \SSo\ \textless\ 54}
         \item \SShaicot{7\SSo\ \textgreater\ 78}{\SSo 5 \textgreater\ 85}
         \item Các chữ số có thể điền vào ô trống để 4\SSo\ \textless\ 42 là: \TTcham[3cm]
         \item Viết các số lớn hơn 47 và bé hơn 53: \TTcham[5cm]
