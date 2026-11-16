@@ -1,0 +1,802 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+%=========================================================
+% TĐ_GiaoAn_IQA_HK1_Tuan17_SoSanhCacSoTrongPhamVi100
+% Giáo án Toán tư duy cấp độ A - Chủ đề SO SÁNH CÁC SỐ TRONG PHẠM VI 100
+% (Buổi 1, Buổi 2) - bản biên soạn lại: tăng trò chơi, câu hỏi gợi mở, phân hóa HS,
+% gắn từng hoạt động với các bài trong PBT Tuần 17.
+% Soạn theo mẫu (\hktuan, \subsection, hd, vd, luuy)
+% Toàn bộ hình minh họa được vẽ bằng TikZ (không dùng file ảnh), tiền tố lệnh: GA
+% Cần các thư viện TikZ có sẵn trong main: shapes.geometric, arrows, calc, patterns
+%=========================================================
+
+\usetikzlibrary{shadings}
+% Không kéo giãn khoảng cách dọc để dồn trang đầy (khôi phục ở cuối file)
+\makeatletter\let\GAluutextbottom\@textbottom\raggedbottom\makeatother
+
+%---------- Lệnh dùng riêng cho giáo án (giống các tuần trước) ----------
+% Chỗ chấm điền
+\providecommand{\TTcham}[1][3cm]{\makebox[#1]{\dotfill}}
+% Tiêu đề mục nhỏ trong một hoạt động
+\providecommand{\GAmucnho}{}\renewcommand{\GAmucnho}[1]{\par\addvspace{4pt}\noindent{\color{mauchinh}\bfseries #1}\par\nopagebreak\addvspace{2pt}}
+% Lời GV nói với HS (in nghiêng, có dấu ngoặc kép)
+\providecommand{\GAloi}{}\renewcommand{\GAloi}[1]{\textit{“#1”}}
+% Dòng chủ đề: một dòng, tự thu nhỏ vừa khổ nếu quá dài
+\providecommand{\GAtieude}{}\renewcommand{\GAtieude}[1]{\sbox0{\color{mauchinh!120}\bfseries\Large #1}\ifdim\wd0>\linewidth\resizebox{\linewidth}{!}{\usebox0}\else\usebox0\fi}
+
+%---------- Màu dùng cho hình vẽ ----------
+\definecolor{GAxanh}{RGB}{100,170,235}\definecolor{GAxanhdam}{RGB}{30,100,180}
+\definecolor{GAla}{RGB}{150,205,120}\definecolor{GAladam}{RGB}{45,125,60}
+\definecolor{GAvang}{RGB}{255,215,90}\definecolor{GAcam}{RGB}{250,150,60}
+\definecolor{GAdo}{RGB}{225,70,70}\definecolor{GAhong}{RGB}{250,170,200}
+\definecolor{GAtim}{RGB}{170,140,220}\definecolor{GAnau}{RGB}{125,80,45}
+\definecolor{GAkem}{RGB}{255,247,220}\definecolor{GAnuoc}{RGB}{205,232,250}
+\definecolor{GAxam}{RGB}{228,232,238}\definecolor{GAnaudam}{RGB}{85,50,25}
+\definecolor{GAsoxanh}{RGB}{25,70,170}\definecolor{GAsolo}{RGB}{0,150,170}
+\definecolor{GAsohong}{RGB}{245,95,90}\definecolor{GAsoxam}{RGB}{120,115,125}
+
+%---------- Kiểu dùng chung ----------
+\tikzset{
+  % thẻ số tròn góc, màu pastel: GAthe=<tên màu>
+  GAthe/.style={draw=#1!65!black,thick,fill=#1!25,rounded corners=6pt,minimum width=1.1cm,minimum height=0.95cm,inner sep=0pt,font=\normalfont\bfseries\Large},
+  % ô trống để học sinh điền
+  GAo/.style={draw,thick,rounded corners=3pt,minimum width=0.95cm,minimum height=0.8cm,inner sep=0pt,fill=white},
+}
+
+%================ HÌNH VẼ (một số hình dùng chung với PBT Tuần 17) ================
+
+% Khối chục - đơn vị: \GAkhoi{số chục}{số đơn vị} (vẽ từ gốc tọa độ, cao 1,9cm)
+\providecommand{\GAkhoi}{}\renewcommand{\GAkhoi}[2]{%
+  \ifnum#1>0 \foreach \c in {1,...,#1}{%
+    \begin{scope}[shift={(0.28*\c-0.28,0)}]
+      \shade[left color=GAxanh!70!white,right color=GAxanh] (0,0) rectangle (0.22,1.9);
+      \foreach \r in {1,...,9}{\draw[GAxanhdam!70,very thin] (0,0.19*\r)--(0.22,0.19*\r);}
+      \draw[GAxanhdam,thin] (0,0) rectangle (0.22,1.9);
+    \end{scope}}\fi
+  \ifnum#2>0 \foreach \u in {1,...,#2}{%
+    \pgfmathtruncatemacro{\cot}{mod(\u-1,3)}\pgfmathtruncatemacro{\hang}{div(\u-1,3)}%
+    \shade[left color=GAcam!60!white,right color=GAcam] (0.28*#1+0.12+0.25*\cot,0.25*\hang) rectangle ++(0.21,0.21);
+    \draw[GAcam!45!black,thin] (0.28*#1+0.12+0.25*\cot,0.25*\hang) rectangle ++(0.21,0.21);}\fi}
+
+% Cá sấu há miệng (quay mặt sang phải, dài khoảng 4cm, bản lề tại gốc tọa độ)
+\providecommand{\GAcasau}{}\renewcommand{\GAcasau}{%
+  \begin{scope}[line join=round]
+    % thân và đuôi phía sau đầu
+    \fill[GAla!80!GAladam,draw=GAladam!80!black,thick] (-0.1,0.5) .. controls (-0.8,0.52) and (-1.5,0.25) .. (-2.4,-0.1) .. controls (-1.5,-0.3) and (-0.8,-0.38) .. (-0.1,-0.5) -- cycle;
+    % gai lưng
+    \foreach \x in {-0.35,-0.75,-1.15,-1.55,-1.95}{\fill[GAladam!85!black] (\x-0.1,0.4+0.1*\x)--(\x,0.56+0.1*\x)--(\x+0.1,0.4+0.1*\x)--cycle;}
+    % hàm dưới
+    \fill[GAla!75!GAladam,draw=GAladam!80!black,thick] (-0.3,0.02) .. controls (-0.4,-0.4) and (0.2,-0.55) .. (0.8,-0.5) .. controls (1.2,-0.47) and (1.5,-0.38) .. (1.75,-0.3) .. controls (1.95,-0.25) and (1.95,0.0) .. (1.75,0.02) -- cycle;
+    \fill[pink!80!red!60] (0.1,0.0) .. controls (0.5,-0.2) and (1.2,-0.18) .. (1.6,-0.04) -- (1.6,0.02) -- cycle;
+    \foreach \x in {0.55,0.85,1.15,1.45}{\fill[white,draw=gray!70,very thin] (\x-0.07,0.02)--(\x,0.16)--(\x+0.07,0.02)--cycle;}
+    % hàm trên mở ra 30 độ
+    \begin{scope}[rotate around={30:(0,0)}]
+      \foreach \x in {0.55,0.85,1.15,1.45}{\fill[white,draw=gray!70,very thin] (\x-0.07,0.0)--(\x,-0.14)--(\x+0.07,0.0)--cycle;}
+      \fill[GAla,draw=GAladam!80!black,thick] (0,0) .. controls (-0.3,0.05) and (-0.3,0.6) .. (0.1,0.65) .. controls (0.5,0.75) and (1.0,0.5) .. (1.6,0.38) .. controls (1.95,0.34) and (1.95,0.04) .. (1.7,0.0) -- cycle;
+      \fill[white] (0.3,0.5) circle (0.15);\fill[black] (0.34,0.5) circle (0.08);\fill[white] (0.37,0.54) circle (0.025);
+      \fill[GAladam] (1.7,0.24) circle (0.035);
+      \draw[GAladam!70!black,thin,line cap=round] (0.12,0.66)--(0.0,0.72) (0.3,0.7)--(0.3,0.78);
+    \end{scope}
+  \end{scope}}
+
+% Khung ghi nhớ "Mẹo vui" so sánh bằng cá sấu
+\providecommand{\GAmeo}{}\renewcommand{\GAmeo}{%
+  \begin{tikzpicture}[font=\normalfont]
+    \draw[rounded corners=10pt,thick,draw=GAla!70!GAladam,fill=GAla!12] (0,0) rectangle (16.4,4.3);
+    \draw[GAla!50!GAladam,thin,dashed] (8.2,1.1)--(8.2,3.2);
+    \node[fill=GAla!70!GAladam,text=white,rounded corners=4pt,font=\normalfont\bfseries,inner sep=3.5pt] at (2.0,4.3) {Mẹo vui};
+    \node[font=\normalfont\bfseries\normalsize] at (8.2,3.65) {Cá sấu luôn há miệng về phía số lớn hơn!};
+    % ví dụ 1: 80 > 45 (cá sấu quay mặt về phía số lớn, bên trái)
+    \begin{scope}[shift={(4.3,2.3)}]
+      \node[GAthe=GAvang,circle,minimum size=1.15cm] at (-3.0,0) {80};
+      \begin{scope}[shift={(0.2,-0.2)},xscale=-0.75,yscale=0.75]\GAcasau\end{scope}
+      \node[GAthe=GAxanh,circle,minimum size=1.15cm] at (3.0,0) {45};
+      \node[font=\normalfont\bfseries\large] at (0,-1.4) {80 \textgreater\ 45};
+    \end{scope}
+    % ví dụ 2: 36 < 59 (cá sấu quay mặt về phía số lớn, bên phải)
+    \begin{scope}[shift={(12.1,2.3)}]
+      \node[GAthe=GAxanh,circle,minimum size=1.15cm] at (-3.0,0) {36};
+      \begin{scope}[shift={(-0.2,-0.2)},scale=0.75]\GAcasau\end{scope}
+      \node[GAthe=GAvang,circle,minimum size=1.15cm] at (3.0,0) {59};
+      \node[font=\normalfont\bfseries\large] at (0,-1.4) {36 \textless\ 59};
+    \end{scope}
+    \node[font=\normalfont\small] at (8.2,0.3) {Hai số bằng nhau thì dùng dấu =.};
+  \end{tikzpicture}}
+
+% Liền trước - số - liền sau: \GAlien{số}{liền trước}{liền sau}{1 = ô mẫu (đã điền, có khung)}
+\providecommand{\GAlien}{}\renewcommand{\GAlien}[4]{%
+  \begin{tikzpicture}[font=\normalfont\bfseries\large]
+    \ifnum#4=1 \node[orange,font=\normalfont\bfseries\large] at (3.0,0.95) {Mẫu};\fi
+    \node[GAo,minimum width=1.05cm,minimum height=0.9cm] (a) at (0,0) {\textcolor{red}{#2}};
+    \node[GAthe=GAvang,circle,minimum size=1.2cm,inner sep=0pt] (b) at (2.0,0) {#1};
+    \node[GAo,minimum width=1.05cm,minimum height=0.9cm] (c) at (4.0,0) {\textcolor{red}{#3}};
+    \draw[-latex,very thick,GAxanhdam] (a.east)--(b.west);\draw[-latex,very thick,GAxanhdam] (b.east)--(c.west);
+    \node[font=\normalfont\scriptsize\mdseries,anchor=north] at (0,-0.55) {liền trước};
+    \node[font=\normalfont\scriptsize\mdseries,anchor=north] at (4.0,-0.55) {liền sau};
+  \end{tikzpicture}}
+
+% Tên màu pastel xoay vòng theo số thứ tự 0..4
+\providecommand{\GAmaule}{}\renewcommand{\GAmaule}[1]{\ifcase#1 GAxanh\or GAla\or GAvang\or GAhong\or GAtim\fi}
+
+% Ô vuông nhỏ để đánh dấu (chẵn / lẻ)
+\providecommand{\GAocheck}{}\renewcommand{\GAocheck}{\raisebox{-0.6mm}{\framebox[4mm]{\rule{0pt}{4mm}}}}
+
+\providecommand{\GAcamicon}{}\renewcommand{\GAcamicon}{%
+  \shade[ball color=orange] (0,0) circle (0.3);
+  \fill[GAla!80!GAladam,rotate around={20:(0.0,0.3)}] (0,0.3) ellipse (0.1 and 0.04);
+  \fill[orange!50!brown] (0.1,0.0) circle (0.012) (-0.05,-0.12) circle (0.012) (-0.12,0.05) circle (0.012) (0.0,0.13) circle (0.012) (0.14,-0.1) circle (0.012);
+  \fill[white,opacity=0.5] (-0.13,0.1) ellipse (0.04 and 0.08);}
+
+\providecommand{\GAdauicon}{}\renewcommand{\GAdauicon}{%
+  \shade[ball color=red!85!black] (0,-0.28) .. controls (-0.3,-0.05) and (-0.28,0.2) .. (-0.12,0.2) .. controls (-0.05,0.22) and (0.05,0.22) .. (0.12,0.2) .. controls (0.28,0.2) and (0.3,-0.05) .. (0,-0.28);
+  \foreach \x/\y in {-0.1/0.08,0.0/0.1,0.1/0.08,-0.14/-0.03,-0.04/-0.01,0.06/-0.01,0.15/-0.03,-0.08/-0.12,0.03/-0.12,0.1/-0.13,-0.02/-0.2}{\fill[yellow!70!orange] (\x,\y) ellipse (0.016 and 0.024);}
+  \fill[GAladam] (0,0.2) -- (-0.2,0.25) -- (-0.06,0.27) -- (-0.1,0.36) -- (0,0.29) -- (0.1,0.36) -- (0.06,0.27) -- (0.2,0.25) -- cycle;}
+
+\providecommand{\GAhoa}{}\renewcommand{\GAhoa}{% bông hoa có thân, tâm tại gốc
+  \draw[GAladam,line width=2.4pt,line cap=round] (0,-0.2)--(0,-1.0);
+  \fill[GAla,draw=GAladam,thin] (0,-0.75) .. controls (0.3,-0.55) and (0.5,-0.7) .. (0.45,-0.9) .. controls (0.2,-0.95) and (0.05,-0.85) .. (0,-0.75);
+  \foreach \a in {0,45,...,315}{\shade[ball color=GAhong!90!GAdo,rotate=\a] (0,0.38) ellipse (0.17 and 0.26);}
+  \shade[ball color=GAvang] (0,0) circle (0.22);\fill[GAcam!70!GAnau] (-0.06,0.05) circle (0.02) (0.07,0.0) circle (0.02) (0,-0.09) circle (0.02);}
+
+% Chú ếch con ngồi (tâm tại gốc tọa độ, cao khoảng 1,4cm, rộng khoảng 1,6cm)
+\providecommand{\GAech}{}\renewcommand{\GAech}{%
+  \begin{scope}[line join=round]
+  % --- chân sau gập hai bên ---
+  \foreach \s in {-1,1}{%
+    \begin{scope}[xscale=\s]
+      \fill[GAla!85!black,draw=green!35!black,thick] (0.28,-0.55) .. controls (0.95,-0.6) and (0.95,0.05) .. (0.55,0.02) .. controls (0.35,0.0) and (0.25,-0.3) .. cycle;
+      % bàn chân sau có 3 ngón
+      \fill[GAla!85!black,draw=green!35!black,thick] (0.45,-0.55) .. controls (0.7,-0.62) .. (0.92,-0.58)
+        .. controls (0.98,-0.62) and (0.96,-0.68) .. (0.9,-0.67) .. controls (0.75,-0.66) .. (0.62,-0.66)
+        .. controls (0.55,-0.7) .. (0.45,-0.68) -- cycle;
+    \end{scope}}
+  % --- thân ---
+  \fill[GAla,draw=green!35!black,thick] (0,-0.62) .. controls (-0.55,-0.62) and (-0.6,-0.1) .. (-0.5,0.15)
+     -- (0.5,0.15) .. controls (0.6,-0.1) and (0.55,-0.62) .. (0,-0.62);
+  % bụng
+  \fill[yellow!35!green!25] (0,-0.28) ellipse (0.28 and 0.3);
+  % --- chân trước ---
+  \foreach \s in {-1,1}{%
+    \begin{scope}[xscale=\s]
+      \fill[GAla,draw=green!35!black,thick] (0.24,0.0) .. controls (0.32,-0.3) .. (0.28,-0.58) -- (0.16,-0.58) .. controls (0.18,-0.3) .. (0.14,-0.05) -- cycle;
+      \fill[GAla,draw=green!35!black,thick] (0.22,-0.6) ellipse (0.12 and 0.05);
+    \end{scope}}
+  % --- đầu ---
+  \fill[GAla,draw=green!35!black,thick] (0,0.33) ellipse (0.66 and 0.36);
+  % mắt lồi
+  \foreach \x in {-0.33,0.33}{%
+    \fill[GAla,draw=green!35!black,thick] (\x,0.68) circle (0.21);
+    \fill[white] (\x,0.69) circle (0.14);
+    \fill[black] (\x+0.02,0.68) circle (0.075);
+    \fill[white] (\x+0.05,0.71) circle (0.025);}
+  % đốm trên đầu
+  \fill[green!45!black,opacity=0.5] (-0.08,0.52) circle (0.045) (0.1,0.55) circle (0.035) (0.0,0.6) circle (0.03);
+  % má hồng
+  \fill[pink!85] (-0.45,0.27) ellipse (0.1 and 0.06) (0.45,0.27) ellipse (0.1 and 0.06);
+  % miệng cười rộng
+  \draw[green!25!black,thick,line cap=round] (-0.42,0.33) .. controls (-0.2,0.08) and (0.2,0.08) .. (0.42,0.33);
+  % lỗ mũi
+  \fill[green!25!black] (-0.06,0.45) circle (0.018) (0.06,0.45) circle (0.018);
+  \end{scope}}
+
+%---------- Trái cây (tâm tại gốc tọa độ, cao khoảng 0,9cm) ----------
+\providecommand{\GAthanhlong}{}\renewcommand{\GAthanhlong}{%
+  \foreach \x/\y/\r in {-0.3/0.2/55,0.3/0.2/-55,-0.3/-0.1/75,0.3/-0.1/-75,-0.16/0.4/25,0.16/0.4/-25,-0.2/-0.33/110,0.2/-0.33/-110}{%
+    \fill[green!55!black,rotate around={\r:(\x,\y)}] (\x-0.06,\y)--(\x,\y+0.16)--(\x+0.06,\y)--cycle;}
+  \fill[green!55!black] (-0.05,0.38)--(-0.13,0.62)--(0,0.46)--(0.13,0.62)--(0.05,0.38)--cycle;
+  \shade[ball color=magenta!80!red] (0,0) ellipse (0.3 and 0.4);
+  \fill[white] (-0.1,0.06) circle (0.05) (0.1,0.06) circle (0.05);\fill[black] (-0.1,0.06) circle (0.025) (0.1,0.06) circle (0.025);
+  \draw[black,thin,line cap=round] (-0.07,-0.05) arc (200:340:0.08);
+  \fill[pink,opacity=0.7] (-0.19,-0.04) circle (0.04) (0.19,-0.04) circle (0.04);}
+% Quả cam (màu sáng hơn quả cam dùng chung)
+\providecommand{\GAcamtrai}{}\renewcommand{\GAcamtrai}{%
+  \shade[shading=radial,inner color=yellow!55!orange,outer color=orange!95!red!60] (0,0) circle (0.3);
+  \draw[orange!70!brown,thin] (0,0) circle (0.3);
+  \fill[GAla!80!GAladam,rotate around={20:(0.0,0.3)}] (0,0.3) ellipse (0.1 and 0.04);
+  \fill[orange!60!brown] (0.1,0.0) circle (0.012) (-0.05,-0.12) circle (0.012) (-0.12,0.05) circle (0.012) (0.0,0.13) circle (0.012) (0.14,-0.1) circle (0.012);
+  \fill[white,opacity=0.5] (-0.13,0.1) ellipse (0.04 and 0.08);}
+\providecommand{\GAchuoi}{}\renewcommand{\GAchuoi}{%
+  \foreach \dy in {-0.1,0.02,0.14}{%
+    \begin{scope}[shift={(0,\dy)}]
+      \shadedraw[top color=yellow!95!white,bottom color=yellow!70!orange,draw=orange!55!brown,line join=round] (-0.42,0.22) .. controls (-0.25,-0.3) and (0.28,-0.3) .. (0.44,0.3) .. controls (0.25,-0.08) and (-0.2,-0.1) .. (-0.42,0.22) -- cycle;
+      \fill[GAnaudam] (-0.44,0.2) rectangle (-0.38,0.27);\fill[GAnaudam] (0.43,0.28) circle (0.03);
+    \end{scope}}}
+\providecommand{\GAchanh}{}\renewcommand{\GAchanh}{%
+  \shade[ball color=yellow!90!orange] (-0.36,0) .. controls (-0.3,0.34) and (0.3,0.34) .. (0.36,0) .. controls (0.3,-0.34) and (-0.3,-0.34) .. (-0.36,0);
+  \fill[yellow!75!orange!85!brown] (-0.37,0) ellipse (0.06 and 0.045) (0.37,0) ellipse (0.06 and 0.045);
+  \fill[green!55!black,rotate=35] (0.05,0.3) ellipse (0.14 and 0.05);\draw[GAnau,thick] (0,0.27)--(0.05,0.34);
+  \fill[black] (-0.1,0.04) circle (0.03) (0.1,0.04) circle (0.03);
+  \draw[black,thin,line cap=round] (-0.06,-0.04) arc (200:340:0.07);
+  \fill[white,opacity=0.6] (-0.2,0.14) ellipse (0.05 and 0.025);}
+\providecommand{\GAnho}{}\renewcommand{\GAnho}{%
+  \draw[GAnau,thick,line cap=round] (0,0.3)--(0.04,0.46);
+  \fill[GAla!80!GAladam,rotate=25] (0.12,0.42) ellipse (0.13 and 0.05);
+  \foreach \y/\xs in {0.22/{-0.3,-0.1,0.1,0.3},0.04/{-0.2,0,0.2},-0.14/{-0.1,0.1},-0.3/{0}}{%
+    \foreach \x in \xs{\shade[ball color=green!65!yellow] (\x,\y) circle (0.12);}}}
+\providecommand{\GAdua}{}\renewcommand{\GAdua}{%
+  \foreach \a in {-45,-22,0,22,45}{\fill[green!50!black,rotate around={\a:(0,0.3)}] (-0.06,0.3)--(0,0.56)--(0.06,0.3)--cycle;}
+  \begin{scope}
+    \clip (0,-0.05) ellipse (0.28 and 0.38);
+    \shade[left color=yellow!80!orange,right color=orange!75!yellow] (-0.3,-0.45) rectangle (0.3,0.35);
+    \foreach \i in {-4,...,4}{\draw[orange!70!brown,thin] (0.16*\i-0.4,-0.5)--(0.16*\i+0.4,0.4);\draw[orange!70!brown,thin] (0.16*\i+0.4,-0.5)--(0.16*\i-0.4,0.4);}
+  \end{scope}
+  \draw[orange!60!brown,thin] (0,-0.05) ellipse (0.28 and 0.38);
+  \fill[white] (-0.1,0.05) circle (0.05) (0.1,0.05) circle (0.05);\fill[black] (-0.1,0.05) circle (0.025) (0.1,0.05) circle (0.025);
+  \draw[black,thin,line cap=round] (-0.06,-0.06) arc (200:340:0.07);}
+\providecommand{\GAxoai}{}\renewcommand{\GAxoai}{%
+  \shade[left color=yellow!85!orange,right color=orange!80!red] (-0.25,0.0) .. controls (-0.2,0.36) and (0.25,0.36) .. (0.32,0.05) .. controls (0.35,-0.3) and (-0.1,-0.4) .. (-0.25,0.0);
+  \fill[green!55!black,rotate=40] (0.08,0.36) ellipse (0.13 and 0.045);\draw[GAnau,thick] (0.02,0.28)--(0.06,0.36);
+  \fill[white,opacity=0.45] (-0.1,0.12) ellipse (0.05 and 0.09);}
+\providecommand{\GAduahau}{}\renewcommand{\GAduahau}{%
+  \begin{scope}[shift={(0,0.12)}]
+    \fill[green!45!black] (-0.44,0.1) -- (0.44,0.1) arc (0:-180:0.44) -- cycle;
+    \fill[green!25!white] (-0.38,0.1) -- (0.38,0.1) arc (0:-180:0.38) -- cycle;
+    \shade[top color=red!65!orange,bottom color=red!85!black] (-0.34,0.1) -- (0.34,0.1) arc (0:-180:0.34) -- cycle;
+    \foreach \x/\y/\a in {-0.17/-0.02/20,0/-0.08/0,0.17/-0.02/-20,-0.1/-0.2/10,0.1/-0.2/-10}{\fill[black,rotate around={\a:(\x,\y)}] (\x,\y) ellipse (0.025 and 0.045);}
+  \end{scope}}
+\providecommand{\GAquabo}{}\renewcommand{\GAquabo}{%
+  \shade[ball color=green!40!black] (0,0.42) .. controls (-0.1,0.38) and (-0.2,0.15) .. (-0.3,-0.05) .. controls (-0.4,-0.35) and (0.4,-0.35) .. (0.3,-0.05) .. controls (0.2,0.15) and (0.1,0.38) .. (0,0.42);
+  \begin{scope}[shift={(0,-0.04)},scale=0.84]
+    \fill[yellow!70!green] (0,0.42) .. controls (-0.1,0.38) and (-0.2,0.15) .. (-0.3,-0.05) .. controls (-0.4,-0.35) and (0.4,-0.35) .. (0.3,-0.05) .. controls (0.2,0.15) and (0.1,0.38) .. (0,0.42);
+  \end{scope}
+  \shade[ball color=brown!70!orange] (0,-0.12) circle (0.14);}
+
+% Bảng số từ 1 đến 100 có trái cây che 10 số: \GAbangso
+\providecommand{\GAbangso}{}\renewcommand{\GAbangso}{%
+  \begin{tikzpicture}[font=\normalfont\bfseries\LARGE,scale=0.9,transform shape]
+    \draw[rounded corners=14pt,thick,draw=GAxam!60!gray,fill=white] (-1.1,-9.9) rectangle (14.6,2.9);
+    \foreach \i in {0,...,19}{\pgfmathtruncatemacro{\m}{mod(\i,4)}\edef\mc{\ifcase\m GAla\or GAvang\or GAhong\or GAxam\fi}\fill[\mc] (-0.6+0.78*\i,2.45) ellipse (0.2 and 0.26);}
+    \node[font=\normalfont\bfseries\fontsize{26}{30}\selectfont] at (6.75,1.45) {Các số từ 1 đến 100};
+    \foreach \n in {1,...,100}{%
+      \pgfmathtruncatemacro{\c}{mod(\n-1,10)}\pgfmathtruncatemacro{\r}{div(\n-1,10)}\pgfmathtruncatemacro{\m}{mod(\n,4)}%
+      \edef\mc{\ifcase\m GAsoxam\or GAsoxanh\or GAsolo\or GAsohong\fi}%
+      \node[text=\mc] at (1.5*\c,-0.98*\r) {\n};}
+    \foreach \n/\f in {6/\GAthanhlong,19/\GAchuoi,25/\GAcamtrai,40/\GAchanh,44/\GAdauicon,58/\GAnho,61/\GAdua,78/\GAxoai,84/\GAduahau,100/\GAquabo}{%
+      \pgfmathtruncatemacro{\c}{mod(\n-1,10)}\pgfmathtruncatemacro{\r}{div(\n-1,10)}%
+      \fill[white] (1.5*\c-0.62,-0.98*\r-0.42) rectangle ++(1.24,0.84);
+      \begin{scope}[shift={(1.5*\c,-0.98*\r)},scale=1.55]\f\end{scope}}
+  \end{tikzpicture}}
+
+% Trục số từ 0 đến 20 có ếch con nhảy: \GAtrucso
+\providecommand{\GAtrucso}{}\renewcommand{\GAtrucso}{%
+  \begin{tikzpicture}[font=\normalfont\bfseries\large]
+    \draw[-latex,very thick,line cap=round] (-0.3,0)--(16.2,0);
+    \foreach \i in {0,...,20}{\draw[thick] (0.75*\i,0.1)--(0.75*\i,-0.1);\node at (0.75*\i,-0.5) {\i};}
+    \foreach \i/\c in {4/GAxanh,5/GAvang,6/GAhong}{\node[circle,draw=\c!60!black,fill=\c!40,minimum size=0.66cm,inner sep=0pt] at (0.75*\i,-0.5) {\i};}
+    \begin{scope}[shift={(3.75,0.88)},scale=0.95]\GAech\end{scope}
+    \draw[-latex,very thick,GAxanhdam] (3.55,-0.95) .. controls (3.4,-1.9) and (3.1,-1.9) .. (3.0,-0.98);
+    \draw[-latex,very thick,GAdo!80!black] (3.95,-0.95) .. controls (4.1,-1.9) and (4.4,-1.9) .. (4.5,-0.98);
+    \node[font=\normalfont\small\bfseries,GAxanhdam,anchor=east] at (3.2,-2.0) {số liền trước (đếm lùi 1)};
+    \node[font=\normalfont\small\bfseries,GAdo!80!black,anchor=west] at (4.3,-2.0) {số liền sau (đếm tới 1)};
+  \end{tikzpicture}}
+
+% Thẻ so sánh có dấu: \GAsosanhmau{chục 1}{đv 1}{dấu}{chục 2}{đv 2}
+\providecommand{\GAsosanhmau}{}\renewcommand{\GAsosanhmau}[5]{%
+  \begin{tikzpicture}[font=\normalfont\bfseries]
+    \pgfmathtruncatemacro{\sa}{10*#1+#2}\pgfmathtruncatemacro{\sb}{10*#4+#5}%
+    \draw[rounded corners=8pt,thick,draw=GAxanh!70,fill=GAxanh!8] (-0.3,-1.3) rectangle (7.0,2.3);
+    \begin{scope}[shift={(0.1,0)}]\GAkhoi{#1}{#2}\end{scope}
+    \begin{scope}[shift={(4.5,0)}]\GAkhoi{#4}{#5}\end{scope}
+    \node[font=\normalfont\bfseries\fontsize{34}{36}\selectfont,text=GAdo!80!black] at (3.4,0.95) {#3};
+    \node[font=\normalfont\bfseries\Large] at (1.15,-0.8) {\sa};\node[font=\normalfont\bfseries\Large] at (5.55,-0.8) {\sb};
+  \end{tikzpicture}}
+
+%================ HÌNH VẼ: BUỔI 2 ================
+% Thỏ ngồi nhìn thẳng (chân giữa tại gốc, cao khoảng 2cm)
+\providecommand{\GAtho}{}\renewcommand{\GAtho}{%
+  \foreach \s in {-1,1}{%
+    \begin{scope}[shift={(0.2*\s,1.65)},rotate=-9*\s]
+      \shadedraw[ball color=white!90!gray,draw=gray!60] (0,0) ellipse (0.13 and 0.42);
+      \fill[GAhong!80] (0,-0.02) ellipse (0.065 and 0.3);
+    \end{scope}}
+  \shadedraw[ball color=white!92!gray,draw=gray!55] (0,0.55) ellipse (0.5 and 0.55);
+  \fill[white!70!GAhong,opacity=0.6] (0,0.45) ellipse (0.26 and 0.3);
+  \foreach \s in {-1,1}{\shadedraw[ball color=white!92!gray,draw=gray!55] (0.27*\s,0.06) ellipse (0.2 and 0.1);}
+  \shadedraw[ball color=white!92!gray,draw=gray!55] (0,1.13) ellipse (0.47 and 0.4);
+  \foreach \s in {-1,1}{\fill[black] (0.19*\s,1.2) circle (0.06);\fill[white] (0.21*\s,1.23) circle (0.02);\fill[GAhong,opacity=0.7] (0.31*\s,1.04) circle (0.07);}
+  \fill[GAhong!80!GAdo] (0,1.07) ellipse (0.05 and 0.035);
+  \draw[gray!70,thin,line cap=round] (0,1.04)--(0,0.99) (0,0.99) arc (0:-90:0.07) (0,0.99) arc (180:270:0.07);
+  \draw[gray!60,very thin] (0.1,1.05)--(0.38,1.1) (0.1,1.03)--(0.38,1.0) (-0.1,1.05)--(-0.38,1.1) (-0.1,1.03)--(-0.38,1.0);}
+% Rùa nhìn nghiêng, đầu quay sang trái (rộng khoảng 2cm)
+\providecommand{\GArua}{}\renewcommand{\GArua}{%
+  \foreach \x in {-0.4,0.42}{\shadedraw[ball color=GAla!70!GAladam,draw=GAladam] (\x,0.1) ellipse (0.17 and 0.12);}
+  \fill[GAladam!80!black] (0.66,0.3) -- (0.9,0.22) -- (0.66,0.2) -- cycle;
+  \shadedraw[ball color=GAla!80!GAladam,draw=GAladam] (-0.88,0.45) ellipse (0.27 and 0.22);
+  \shadedraw[ball color=GAla!80!GAladam,draw=GAladam] (-0.6,0.33) ellipse (0.22 and 0.14);
+  \fill[white] (-0.98,0.52) circle (0.06);\fill[black] (-1.0,0.52) circle (0.03);
+  \draw[black,thin,line cap=round] (-1.08,0.4) arc (200:330:0.1);
+  \fill[GAhong,opacity=0.6] (-0.85,0.4) circle (0.04);
+  \shadedraw[ball color=GAla!55!GAladam,draw=GAladam] (-0.68,0.28) .. controls (-0.65,1.15) and (0.65,1.15) .. (0.68,0.28) -- cycle;
+  \begin{scope}
+    \clip (-0.68,0.28) .. controls (-0.65,1.15) and (0.65,1.15) .. (0.68,0.28) -- cycle;
+    \draw[GAladam!80!black,thick] (-0.25,0.28)--(-0.17,0.85) (0.25,0.28)--(0.17,0.85) (-0.5,0.62)--(0.5,0.62) (-0.2,0.85)--(0.2,0.85);
+  \end{scope}
+  \fill[yellow!60!orange,draw=GAladam,thin,rounded corners=2pt] (-0.7,0.2) rectangle (0.7,0.3);}
+% Kẹo bọc giấy: \GAkeo{màu} (rộng khoảng 0,7cm)
+\providecommand{\GAkeo}{}\renewcommand{\GAkeo}[1]{%
+  \fill[#1!70!black] (-0.14,0)--(-0.34,0.13)--(-0.34,-0.13)--cycle (0.14,0)--(0.34,0.13)--(0.34,-0.13)--cycle;
+  \shade[ball color=#1!85!white] (0,0) circle (0.16);
+  \draw[white,thin] (-0.1,0.09) arc (120:60:0.2) (-0.1,-0.02) arc (150:20:0.12);}
+% Chia kẹo cho Thỏ và Rùa: \GAchiakeo{số kẹo mỗi bạn}{thừa (0/1)}{dòng chữ dưới hình}
+\providecommand{\GAchiakeo}{}\renewcommand{\GAchiakeo}[3]{%
+  \begin{tikzpicture}[font=\normalfont,baseline=(current bounding box.north)]
+    \draw[rounded corners=10pt,thick,draw=GAvang!80!GAcam,fill=GAkem] (-0.7,-3.0) rectangle (7.1,2.7);
+    \begin{scope}[shift={(0.8,0)}]\GAtho\end{scope}
+    \begin{scope}[shift={(5.7,0)},scale=1.1]\GArua\end{scope}
+    \foreach \j in {1,...,#1}{%
+      \begin{scope}[shift={(0.8+0.8*\j-0.4*#1-0.4,-0.55)},scale=1.4]\GAkeo{GAdo}\end{scope}
+      \begin{scope}[shift={(5.7+0.8*\j-0.4*#1-0.4,-0.55)},scale=1.4]\GAkeo{GAxanh}\end{scope}}
+    \ifnum#2=1 \begin{scope}[shift={(3.25,0.75)},scale=1.4]\GAkeo{GAvang}\end{scope}
+      \draw[GAcam!90!GAdo,very thick,dashed] (3.25,0.75) circle (0.42);
+      \node[GAcam!70!GAdo,font=\normalfont\bfseries\small] at (3.25,1.4) {thừa 1};\fi
+    \node[font=\normalfont\bfseries\normalsize,align=center,text width=7.2cm,anchor=north] at (3.2,-1.1) {#3};
+  \end{tikzpicture}}
+% Thẻ chấm tròn từ 1 đến 10 (số chẵn xếp đủ cặp, số lẻ thừa một chấm): \GAthechiam
+\providecommand{\GAthechiam}{}\renewcommand{\GAthechiam}{%
+  \begin{tikzpicture}[font=\normalfont\bfseries\Large]
+    \foreach \n in {1,...,10}{%
+      \pgfmathtruncatemacro{\le}{mod(\n,2)}%
+      \ifnum\le=0 \def\mc{GAxanh}\else\def\mc{GAcam}\fi
+      \begin{scope}[shift={(1.6*\n-1.6,0)}]
+        \draw[rounded corners=5pt,thick,draw=\mc!70!black,fill=\mc!10] (0,-3.1) rectangle (1.5,0.75);
+        \draw[\mc!70!black,thick] (0,0)--(1.5,0);
+        \node at (0.75,0.38) {\n};
+        \foreach \k in {1,...,\n}{%
+          \pgfmathtruncatemacro{\cot}{mod(\k-1,2)}\pgfmathtruncatemacro{\hang}{div(\k-1,2)}%
+          \ifnum\k=\n\ifnum\le=1 \def\dc{GAcam}\else\def\dc{GAxanh}\fi\else\def\dc{GAxanh}\fi
+          \shade[ball color=\dc!55!white] (0.4+0.7*\cot,-0.4-0.55*\hang) circle (0.2);}
+        \node[font=\normalfont\small\mdseries,text=\mc!60!black] at (0.75,-3.45) {\ifnum\le=0 chẵn\else lẻ\fi};
+      \end{scope}}
+  \end{tikzpicture}}
+% Dãy số 1 - 20: số chẵn (xanh) và số lẻ (vàng) xen kẽ, mỗi lần nhảy thêm 2: \GAdaychanle
+\providecommand{\GAdaychanle}{}\renewcommand{\GAdaychanle}{%
+  \begin{tikzpicture}[font=\normalfont\bfseries]
+    \foreach \i in {1,...,20}{%
+      \pgfmathtruncatemacro{\le}{mod(\i,2)}%
+      \ifnum\le=0 \node[circle,draw=GAxanhdam,thick,fill=GAxanh!35,minimum size=0.68cm,inner sep=0pt] at (0.8*\i-0.8,0) {\i};
+      \else \node[circle,draw=GAcam!80!black,thick,fill=GAvang!55,minimum size=0.68cm,inner sep=0pt] at (0.8*\i-0.8,0) {\i};\fi}
+    \foreach \i in {2,4,...,18}{\draw[-latex,thick,GAxanhdam] (0.8*\i-0.8,0.4) to[bend left=65] (0.8*\i+0.8,0.4);}
+    \foreach \i in {1,3,...,17}{\draw[-latex,thick,GAcam!80!black] (0.8*\i-0.8,-0.4) to[bend right=65] (0.8*\i+0.8,-0.4);}
+    \node[GAxanhdam,font=\normalfont\bfseries\small] at (1.6,1.2) {+2};
+    \node[GAcam!80!black,font=\normalfont\bfseries\small] at (0.8,-1.2) {+2};
+  \end{tikzpicture}}
+% Quả trứng Phục Sinh có số để tô màu: \GAtrung{20 số}
+\providecommand{\GAtrung}{}\renewcommand{\GAtrung}[1]{%
+  \begin{tikzpicture}[font=\normalfont\bfseries\footnotesize,scale=1.6,transform shape]
+    % đất và hoa
+    \shade[top color=GAtim!50,bottom color=GAtim!80,rounded corners=4pt] (-3.6,-0.35) rectangle (3.6,0.1);
+    \foreach \x/\s in {-2.8/0.8,-2.2/0.65,2.3/0.7,2.9/0.85}{\begin{scope}[shift={(\x,0.95)},scale=\s]\GAhoa\end{scope}}
+    % quả trứng: nền tím, băng xanh, viền răng cưa trắng
+    \begin{scope}
+      \clip (0,4) .. controls (1.5,4) and (2.1,1.8) .. (1.9,1.1) .. controls (1.7,0.2) and (0.9,0) .. (0,0) .. controls (-0.9,0) and (-1.7,0.2) .. (-1.9,1.1) .. controls (-2.1,1.8) and (-1.5,4) .. (0,4);
+      \fill[GAtim!60] (-3,-0.5) rectangle (3,4.5);
+      \foreach \ya/\yb in {2.55/1.55}{%
+        \fill[GAxanh!85!GAxanhdam] (-2.2,\ya) \foreach \i in {1,...,11}{-- ({-2.2+0.4*\i},{\ya+0.25*mod(\i,2)})} \foreach \i in {11,...,0}{-- ({-2.2+0.4*\i},{\yb+0.25*mod(\i,2)})} -- cycle;}
+      \fill[GAxanh!85!GAxanhdam] (-2.2,0.75) \foreach \i in {1,...,11}{-- ({-2.2+0.4*\i},{0.75+0.25*mod(\i,2)})} -- (2.2,-0.5) -- (-2.2,-0.5) -- cycle;
+      \foreach \y in {2.55,1.55,0.75}{\draw[white!94!GAtim,line width=5pt,line join=round] (-2.2,\y) \foreach \i in {1,...,11}{-- ({-2.2+0.4*\i},{\y+0.25*mod(\i,2)})};}
+    \end{scope}
+    % số trên quả trứng
+    \foreach \x/\y [count=\k] in {-0.55/3.25,0.4/3.6,-0.05/2.98,0.95/3.1,-1.6/2.0,-0.95/2.2,-0.3/1.95,0.35/2.2,1.0/1.95,1.62/2.15,-1.5/1.1,-1.0/1.0,-0.5/1.1,0.0/1.0,0.5/1.1,1.0/1.0,1.5/1.1,-0.75/0.45,0.75/0.5,0.0/0.2}{%
+      \node[circle,fill=white,minimum size=0.5cm,inner sep=0pt] at (\x,\y) {\foreach \n [count=\j] in {#1}{\ifnum\j=\k\relax\n\fi}};}
+  \end{tikzpicture}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       BUỔI 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setcounter{section}{3} % không chỉnh sửa
+\hktuan{1}{17}
+\par\medskip
+%\textbf{Người soạn: }
+\begin{center}
+        \GAtieude{CHỦ ĐỀ: SO SÁNH CÁC SỐ TRONG PHẠM VI 100 (BUỔI 1)}
+\end{center}
+
+\subsection{MỤC TIÊU CẦN ĐẠT}
+\begin{itemize}
+    \item \textbf{Kiến thức:} HS điền được số còn thiếu trong bảng số và dãy số trong phạm vi 100; đếm được cách 2, cách 5, cách 10.
+    \item \textbf{Kiến thức:} HS biết số liền trước, số liền sau và số ở giữa của một số.
+    \item \textbf{Kiến thức:} HS xác định đúng chữ số hàng chục, chữ số hàng đơn vị của số có hai chữ số.
+    \item \textbf{Kiến thức:} HS so sánh thành thạo các số trong phạm vi 100 bằng các dấu \textgreater, \textless, =; sắp xếp được các số theo thứ tự từ bé đến lớn và từ lớn đến bé.
+    \item \textbf{Năng lực:} HS nêu được lí do vì sao số này lớn hơn (hay bé hơn) số kia; biết hợp tác trong nhóm 2 -- 3 bạn.
+    \item \textbf{Phẩm chất:} HS hào hứng, kiên nhẫn, biết chờ lượt và cổ vũ bạn.
+\end{itemize}
+
+\subsection{TIẾN TRÌNH DẠY HỌC}
+\textbf{Đồ dùng dạy học:} giáo án, PBT, bút, khăn ẩm, laptop/TV, con dấu, sticker trái cây, bảng số 1 -- 100 có trái cây che số (in khổ lớn hoặc chiếu lên TV), thẻ số, bảng con, bút màu.
+
+\begin{luuy}
+    \textbf{Cách tính điểm cả buổi:} mỗi nhóm có một “cây ăn quả” vẽ trên bảng. Trả lời đúng, làm nhanh hoặc hợp tác tốt đều được dán một quả (sticker trái cây). Cuối buổi, nhóm nhiều quả nhất là “Nhà vườn giỏi nhất” và được tặng sticker.
+\end{luuy}
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.35}
+    \begin{tabular}{|>{\centering\arraybackslash}p{0.8cm}|>{\raggedright\arraybackslash}p{8.2cm}|>{\centering\arraybackslash}p{1.8cm}|>{\raggedright\arraybackslash}p{4.6cm}|}
+        \hline
+        \textbf{HĐ} & \textbf{Nội dung} & \textbf{Thời gian} & \textbf{Bài tập áp dụng} \\ \hline
+        1 & Khởi động -- Sửa BTVN, kiểm tra nhanh & 20 phút & -- \\ \hline
+        2 & “Trái cây giấu số” -- ôn các số trong phạm vi 100 & 15 phút & Sách TiTan: Bài 1; 5 \\ \hline
+        3 & “Ếch con nhảy trên trục số” -- số liền trước, số liền sau & 20 phút & Sách TiTan: Bài 6; 7; 8 \\ \hline
+        4 & “Cá sấu so sánh số” -- so sánh và sắp xếp số & 20 phút & PBT: Bài 1 -- 6 (Bài 7, 8 cho HS khá, giỏi); sách TiTan: Bài 2; 3; 4; 9 \\ \hline
+        5 & Củng cố -- Giao BTVN & 10 phút & PBT: Bài 9; 10 \\ \hline
+    \end{tabular}
+\end{center}
+
+%---------------------------------------------------------
+\subsubsection{KHỞI ĐỘNG -- SỬA BÀI TẬP VỀ NHÀ}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 20 phút
+        \item Ổn định lớp, sửa BTVN và kiểm tra nhanh kiến thức của buổi học trước.
+    \end{itemize}
+\end{hd}
+\GAmucnho{Sửa BTVN: “Bác sĩ chữa bài” (10 phút)}
+\begin{itemize}
+    \item GV chọn 2 -- 3 bài làm có lỗi sai thường gặp (che tên HS) và chiếu lên TV. GV đóng vai “bác sĩ”: \GAloi{Bài toán này đang bị ốm ở chỗ nào? Bác sĩ nhí nào chữa giúp cô?}
+    \item HS giơ tay chỉ chỗ sai, giải thích và sửa lại. GV khen cả bạn tìm ra lỗi lẫn bạn dũng cảm cho cả lớp sửa bài của mình. Cuối cùng HS tự sửa bài trong PBT bằng bút màu khác.
+\end{itemize}
+\GAmucnho{Kiểm tra nhanh: “Tia chớp 5 câu” (10 phút)}
+\begin{itemize}
+    \item Mỗi HS một bảng con. GV đọc từng câu, đếm 3 giây rồi cả lớp cùng giơ bảng. Bạn trả lời đúng cả 5 câu được dán một quả vào “cây ăn quả” của nhóm.
+\end{itemize}
+\begin{vd}
+    Câu hỏi gợi ý:
+    \begin{enumerate}
+        \item Viết số “bảy mươi lăm”. \hfill (75)
+        \item Số 48 gồm mấy chục, mấy đơn vị? \hfill (4 chục, 8 đơn vị)
+        \item Điền số còn thiếu: 56, 57, \TTcham[1cm], 59, 60. \hfill (58)
+        \item Số tròn chục lớn nhất có hai chữ số là số nào? \hfill (90)
+        \item Đếm cách 5: 5, 10, \TTcham[1cm], 20, 25. \hfill (15)
+    \end{enumerate}
+\end{vd}
+
+%---------------------------------------------------------
+\subsubsection{TRÒ CHƠI “TRÁI CÂY GIẤU SỐ”}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 15 phút
+        \item HS đọc đúng các số từ 1 đến 100, tìm được số còn thiếu nhờ quy luật của bảng số; ôn đếm cách 2, cách 5, cách 10.
+    \end{itemize}
+\end{hd}
+\begin{itemize}
+    \item \textbf{Câu chuyện dẫn dắt:} \GAloi{Chú gấu Mật Ong lỡ làm đổ giỏ trái cây lên bảng số của lớp mình. Mười loại trái cây đang che mất mười số. Các nhóm hãy giúp gấu tìm lại những số bị che nhé!}
+    \item GV chiếu bảng số 1 -- 100 lên TV (hoặc dán bảng số khổ lớn lên bảng) như hình bên dưới.
+    \item \textbf{Cách chơi:} nhóm nào giơ tay trước thì được trả lời. HS nói số bị che và giải thích cách tìm (ví dụ: \GAloi{Quả chuối nằm sau số 18 nên là số 19}). Đúng thì nhóm được dán một quả; sai thì nhóm khác được bổ sung.
+    \item \textbf{Câu hỏi gợi mở để HS tự phát hiện quy luật:}
+    \begin{itemize}
+        \item[--] \GAloi{Đi sang phải một ô thì số thay đổi thế nào?} (thêm 1)
+        \item[--] \GAloi{Đi xuống một hàng thì sao?} (thêm 10; chữ số hàng chục tăng 1, chữ số hàng đơn vị giữ nguyên)
+        \item[--] \GAloi{Cột cuối cùng có điểm gì đặc biệt?} (toàn số tròn chục: 10, 20, \dots, 100)
+    \end{itemize}
+\end{itemize}
+\begin{center}
+    \GAbangso
+\end{center}
+\begin{itemize}
+    \item \textbf{Ôn đếm cách 2, cách 5, cách 10:} HS dùng bút màu khác nhau tô các số khi đếm cách 2 (2, 4, 6, \dots), cách 5 (5, 10, 15, \dots), cách 10 (10, 20, 30, \dots). GV hỏi: \GAloi{Những số nào được tô cả hai màu của cách 5 và cách 10?} (10, 20, \dots, 100).
+\end{itemize}
+\begin{luuy}
+    \textbf{Đáp án dành cho GV} (số bị trái cây che):
+    \par\smallskip
+    \centering
+    \renewcommand{\arraystretch}{1.25}
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        thanh long & chuối & cam & chanh & dâu \\ \hline
+        \textbf{6} & \textbf{19} & \textbf{25} & \textbf{40} & \textbf{44} \\ \hline
+        nho & dứa & xoài & dưa hấu & bơ \\ \hline
+        \textbf{58} & \textbf{61} & \textbf{78} & \textbf{84} & \textbf{100} \\ \hline
+    \end{tabular}
+    \par\smallskip
+    \raggedright
+    Phân hóa: HS chậm được gợi ý “nhìn số bên cạnh hoặc số ở trên, ở dưới”; HS nhanh được thử thách: \GAloi{Tìm tất cả số có chữ số 5 ở hàng đơn vị.}
+\end{luuy}
+\GAmucnho{Bài tập áp dụng: Bài 1; 5 sách TiTan}
+
+%---------------------------------------------------------
+\subsubsection{SỐ LIỀN TRƯỚC, SỐ LIỀN SAU -- “ẾCH CON NHẢY TRÊN TRỤC SỐ”}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 20 phút
+        \item HS xác định đúng số liền trước, số liền sau và số ở giữa trong phạm vi 100.
+    \end{itemize}
+\end{hd}
+\GAmucnho{a) Nhắc lại trong phạm vi 20 bằng trục số}
+\begin{itemize}
+    \item GV vẽ trục số từ 0 đến 20 lên bảng (hoặc chiếu hình dưới đây) và đặt chú ếch con ở số 5: \GAloi{Ếch con nhảy lùi một bước thì đến số mấy? Nhảy tới một bước thì đến số mấy?}
+\end{itemize}
+\begin{center}
+    \GAtrucso
+\end{center}
+\begin{itemize}
+    \item GV chốt: \textbf{số liền trước} là số đứng ngay trước, tìm bằng cách \textbf{đếm lùi 1}; \textbf{số liền sau} là số đứng ngay sau, tìm bằng cách \textbf{đếm tới 1}.
+    \item Ví dụ: số liền trước của 5 là 4; số liền sau của 5 là 6.
+\end{itemize}
+\GAmucnho{b) Trò chơi “Xếp hàng theo số”}
+\begin{itemize}
+    \item GV mời 3 bạn lên bảng, mỗi bạn cầm một thẻ số. Bạn đứng giữa cầm số GV đưa ra (ví dụ 29), hai bạn còn lại phải tự tìm thẻ của mình: \textbf{28} đứng bên trái, \textbf{30} đứng bên phải. Cả lớp đọc to: \GAloi{Liền trước của 29 là 28, liền sau của 29 là 30}.
+    \item GV gọi lần lượt từng HS, đưa một số và yêu cầu nói số liền trước, số liền sau. Mỗi bạn nên được nói ít nhất một lượt.
+\end{itemize}
+\begin{vd}
+    Ví dụ trình bày (ô đỏ là đáp án):
+    \par\nopagebreak\vspace{6pt}{\centering\GAlien{29}{28}{30}{0}\par}
+\end{vd}
+\GAmucnho{c) Mở rộng trong phạm vi 100 và số ở giữa}
+\begin{itemize}
+    \item GV dùng bảng số 1 -- 100: số liền trước nằm ngay bên trái, số liền sau nằm ngay bên phải. Lưu ý các “số đổi hàng”: liền sau của 39 là 40; liền trước của 50 là 49; liền sau của 99 là 100.
+    \item \textbf{Số ở giữa:} số ở giữa 28 và 30 là 29. Số ở giữa 8 và 14 là các số 9, 10, 11, 12, 13. GV hướng dẫn HS đếm tiếp từ số bé đến số liền trước số lớn.
+\end{itemize}
+\begin{luuy}
+    Lỗi HS hay gặp, GV chú ý sửa ngay:
+    \begin{itemize}
+        \item Nhầm số liền trước với số liền sau $\Rightarrow$ cho HS nhảy trên trục số: lùi là liền trước, tới là liền sau.
+        \item Viết liền sau của 39 là 310 hoặc 30 $\Rightarrow$ cho HS đếm tiếp trên bảng số: 38, 39, \textbf{40}.
+        \item Lấy cả hai đầu khi tìm số ở giữa (ví dụ giữa 8 và 14 mà viết cả 8 và 14) $\Rightarrow$ nhắc: số ở giữa không gồm hai số đã cho.
+    \end{itemize}
+\end{luuy}
+\GAmucnho{Bài tập áp dụng: Bài 6; 7; 8 sách TiTan}
+
+%---------------------------------------------------------
+\subsubsection{SO SÁNH VÀ SẮP XẾP SỐ -- “CÁ SẤU SO SÁNH SỐ”}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 20 phút
+        \item HS so sánh được hai số có hai chữ số (và số 100) bằng chữ số hàng chục, hàng đơn vị; sắp xếp đúng các số theo thứ tự từ bé đến lớn và từ lớn đến bé.
+    \end{itemize}
+\end{hd}
+\GAmucnho{a) Nhắc lại chữ số hàng chục, chữ số hàng đơn vị}
+\begin{itemize}
+    \item GV viết các số bất kì lên bảng: 23; 50; 68; 72; 91; \dots và yêu cầu HS xác định chữ số hàng chục, chữ số hàng đơn vị (có thể dùng khối chục -- đơn vị để minh họa).
+\end{itemize}
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|*{6}{>{\centering\arraybackslash}p{2.3cm}|}}
+        \hline
+        \textbf{Số} & 23 & 50 & 68 & 72 & 91 \\ \hline
+        \textbf{Hàng chục} & 2 & 5 & 6 & 7 & 9 \\ \hline
+        \textbf{Hàng đơn vị} & 3 & 0 & 8 & 2 & 1 \\ \hline
+    \end{tabular}
+\end{center}
+\GAmucnho{b) Cách so sánh hai số có hai chữ số}
+\begin{itemize}
+    \item \textbf{Bước 1:} so sánh chữ số \textbf{hàng chục} trước. Số nào có hàng chục lớn hơn thì số đó lớn hơn.
+    \item \textbf{Bước 2:} nếu hàng chục bằng nhau thì so sánh chữ số \textbf{hàng đơn vị}. Số nào có hàng đơn vị lớn hơn thì số đó lớn hơn.
+    \item Nếu cả hàng chục và hàng đơn vị đều bằng nhau thì hai số bằng nhau. Số 100 có ba chữ số nên lớn hơn mọi số có hai chữ số.
+\end{itemize}
+\begin{center}
+    \GAsosanhmau{3}{5}{\textless}{4}{8}\hfill\GAsosanhmau{6}{4}{\textless}{6}{9}
+\end{center}
+\begin{itemize}
+    \item \textbf{Ví dụ 1:} 35 và 48. Hàng chục: 3 chục bé hơn 4 chục nên 35 bé hơn 48 (35 \textless\ 48).
+    \item \textbf{Ví dụ 2:} 64 và 69. Hàng chục bằng nhau (cùng 6 chục), hàng đơn vị: 4 bé hơn 9 nên 64 bé hơn 69 (64 \textless\ 69).
+\end{itemize}
+\GAmucnho{c) Trò chơi “Cá sấu đói”}
+\begin{itemize}
+    \item GV giới thiệu mẹo nhớ dấu: \textbf{cá sấu luôn há miệng về phía số lớn hơn}. GV viết hai số lên bảng, HS dùng hai cánh tay làm “miệng cá sấu” mở về phía số lớn rồi cả lớp đọc: \GAloi{Bốn mươi lăm bé hơn năm mươi tư}.
+    \item Mỗi lượt, GV gọi 2 bạn lên bảng thi xem ai viết dấu đúng và nhanh hơn. Bạn thắng được dán một quả vào cây của nhóm.
+\end{itemize}
+\begin{center}
+    \GAmeo
+\end{center}
+\GAmucnho{d) Sắp xếp các số: “Đoàn sâu đo xếp hàng”}
+\begin{itemize}
+    \item GV mời 5 bạn lên bảng, mỗi bạn cầm một thẻ số (ví dụ 23, 35, 21, 12, 27). Cả lớp giúp “đoàn sâu đo” xếp hàng từ bé đến lớn, sau đó xếp ngược lại từ lớn đến bé.
+    \item \textbf{Mẹo:} tìm số bé nhất (hoặc lớn nhất) trước, rồi gạch nó đi; lặp lại cho đến khi hết số. Làm xong cần kiểm tra lại: có đủ số lượng số như ban đầu không?
+\end{itemize}
+\begin{luuy}
+    Lỗi HS hay gặp, GV chú ý sửa ngay:
+    \begin{itemize}
+        \item So sánh chữ số hàng đơn vị trước (ví dụ nhầm 64 \textless\ 46) $\Rightarrow$ nhắc: \GAloi{Luôn nhìn hàng chục trước!}
+        \item Nhầm hai dấu \textgreater\ và \textless\ $\Rightarrow$ dùng mẹo cá sấu, miệng luôn mở về số lớn.
+        \item Quên 100 là số lớn nhất trong phạm vi 100 $\Rightarrow$ cho HS so sánh 100 với 99, 90 để thấy 100 lớn hơn.
+        \item Khi sắp xếp bị sót hoặc lặp số $\Rightarrow$ yêu cầu HS đếm lại số lượng số trước và sau khi xếp.
+    \end{itemize}
+\end{luuy}
+\GAmucnho{Bài tập áp dụng}
+\begin{itemize}
+    \item \textbf{PBT:} Bài 1 (điền dấu), Bài 2 (nhìn hình điền dấu), Bài 3 (khoanh số lớn nhất), Bài 4 (khoanh số bé nhất), Bài 5 và Bài 6 (sắp xếp theo thứ tự).
+    \item \textbf{HS khá, giỏi:} Bài 7 (cửa hàng trái cây), Bài 8 (tìm số, chữ số thích hợp). \textbf{Sách TiTan:} Bài 2; 3; 4; 9.
+\end{itemize}
+
+%---------------------------------------------------------
+\subsubsection{CỦNG CỐ -- GIAO BÀI TẬP VỀ NHÀ}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 10 phút
+        \item HS tự tổng kết bài học; GV đánh giá nhanh mức độ hiểu bài.
+    \end{itemize}
+\end{hd}
+\begin{itemize}
+    \item \textbf{“Vé ra về”:} mỗi HS nhận một mẩu giấy nhỏ, viết hai số có hai chữ số bất kì rồi điền dấu so sánh đúng giữa hai số; sau đó nói cho GV nghe vì sao em chọn dấu đó. Bạn nộp vé đúng được đóng dấu “Quả ngọt hôm nay”.
+    \item GV đếm quả, tuyên dương nhóm “Nhà vườn giỏi nhất” và các bạn tiến bộ.
+    \item \textbf{BTVN:} GV giao BTVN phù hợp với HS lớp mình (gợi ý: Bài 9, Bài 10 trong PBT cho HS khá, giỏi).
+\end{itemize}
+
+\GAmucnho{GIÁO VIÊN RÚT KINH NGHIỆM BÀI HỌC}
+Tổng hợp các lỗi HS hay gặp khi dạy chủ đề này nhằm khắc phục và chỉnh sửa giáo án hoàn thiện hơn.
+\par\medskip
+\noindent\TTcham[\linewidth]\par\medskip
+\noindent\TTcham[\linewidth]\par\medskip
+\noindent\TTcham[\linewidth]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       BUỔI 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\setcounter{subsection}{0}
+\begin{center}
+        \GAtieude{CHỦ ĐỀ: SO SÁNH CÁC SỐ TRONG PHẠM VI 100 (BUỔI 2)}
+\end{center}
+
+\subsection{MỤC TIÊU CẦN ĐẠT}
+\begin{itemize}
+    \item \textbf{Kiến thức:} HS so sánh và sắp xếp thành thạo các số trong phạm vi 100.
+    \item \textbf{Kiến thức:} HS nhận biết và xác định được số chẵn, số lẻ.
+    \item \textbf{Kiến thức:} HS xác định được số chẵn, số lẻ tiếp theo hoặc nằm trong một khoảng cho trước (HS khá, giỏi).
+    \item \textbf{Năng lực:} HS quan sát, nhận ra quy luật xen kẽ của số chẵn và số lẻ; giải thích được vì sao một số là chẵn (hay lẻ).
+    \item \textbf{Phẩm chất:} HS tích cực tham gia trò chơi, biết chia sẻ và làm việc cùng bạn.
+\end{itemize}
+
+\subsection{TIẾN TRÌNH DẠY HỌC}
+\textbf{Đồ dùng dạy học:} giáo án, PBT, bút, khăn ẩm, laptop/TV, con dấu, sticker trái cây, một bịch kẹo, hộp màu, hình Thỏ và Rùa (in hoặc chiếu), thẻ số, bút màu đỏ và xanh dương.
+
+\begin{center}
+    \renewcommand{\arraystretch}{1.35}
+    \begin{tabular}{|>{\centering\arraybackslash}p{0.8cm}|>{\raggedright\arraybackslash}p{8.2cm}|>{\centering\arraybackslash}p{1.8cm}|>{\raggedright\arraybackslash}p{4.6cm}|}
+        \hline
+        \textbf{HĐ} & \textbf{Nội dung} & \textbf{Thời gian} & \textbf{Bài tập áp dụng} \\ \hline
+        1 & Khởi động -- Sửa BTVN, kiểm tra nhanh & 20 phút & -- \\ \hline
+        2 & “Chia kẹo cho Thỏ và Rùa” -- giới thiệu số chẵn, số lẻ & 30 phút & PBT: Bài 1 -- 4 \\ \hline
+        3 & Số chẵn, số lẻ tiếp theo; số chẵn, số lẻ trong một khoảng & 20 phút & PBT: Bài 6, 7, 8 (HS khá, giỏi: Bài 12) \\ \hline
+        4 & “Trứng Phục Sinh” -- tô màu số chẵn, số lẻ & 10 phút & PBT: Bài 5 \\ \hline
+        5 & Củng cố -- Giao BTVN & 10 phút & PBT: Bài 9 -- 11 \\ \hline
+    \end{tabular}
+\end{center}
+
+%---------------------------------------------------------
+\subsubsection{KHỞI ĐỘNG -- SỬA BÀI TẬP VỀ NHÀ}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 20 phút
+        \item Ổn định lớp; sửa BTVN; kiểm tra nhanh kiến thức so sánh, sắp xếp số của buổi 1.
+    \end{itemize}
+\end{hd}
+\GAmucnho{Sửa BTVN (10 phút)}
+\begin{itemize}
+    \item GV gọi HS lên bảng chữa các bài còn nhiều bạn làm sai, mỗi bạn chữa một bài và giải thích cách làm. Các bạn còn lại là “giám khảo”: giơ ngón cái nếu đồng ý, giơ ngón tay xuống nếu chưa đồng ý và nói lí do.
+\end{itemize}
+\GAmucnho{Kiểm tra nhanh: “Rung chuông vàng mini” (10 phút)}
+\begin{itemize}
+    \item Mỗi HS một bảng con. GV đọc 5 câu, HS viết đáp án và giơ bảng khi nghe tiếng chuông. Bạn trả lời đúng cả 5 câu được dán một quả vào “cây ăn quả” của nhóm.
+\end{itemize}
+\begin{vd}
+    Câu hỏi gợi ý:
+    \begin{enumerate}
+        \item Điền dấu: 45 \TTcham[0.8cm] 54. \hfill (\textless)
+        \item Khoanh số lớn nhất: 28; 82; 38; 8. \hfill (82)
+        \item Xếp các số 36; 63; 33 theo thứ tự từ bé đến lớn. \hfill (33; 36; 63)
+        \item Số liền trước của 70 là số nào? \hfill (69)
+        \item Số bé nhất có hai chữ số là số nào? \hfill (10)
+    \end{enumerate}
+\end{vd}
+
+%---------------------------------------------------------
+\subsubsection{GIỚI THIỆU SỐ CHẴN, SỐ LẺ -- “CHIA KẸO CHO THỎ VÀ RÙA”}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 30 phút
+        \item HS hiểu thế nào là số chẵn, số lẻ; nhận biết nhanh số chẵn, số lẻ nhờ chữ số hàng đơn vị.
+    \end{itemize}
+\end{hd}
+\GAmucnho{a) Khám phá: chia kẹo cho hai bạn}
+\begin{itemize}
+    \item GV chuẩn bị một bịch kẹo, đặt hình Thỏ và Rùa lên bảng. \textbf{Dẫn dắt:} \GAloi{Cô có một số kẹo, chúng ta cùng chia kẹo cho bạn Thỏ và bạn Rùa. Mỗi lần chia, Thỏ một cái, Rùa một cái.}
+    \item \textbf{Luật chơi:} nếu kẹo chia đều cho hai bạn mà \textbf{không thừa} cái nào thì số kẹo đó là \textbf{SỐ CHẴN}. Nếu còn \textbf{thừa 1 cái} thì số kẹo đó là \textbf{SỐ LẺ}.
+    \item GV thực hiện ví dụ: 2 kẹo chia đều cho 2 bạn thì vừa đủ, nên 2 là số chẵn. 3 kẹo chia cho 2 bạn thì thừa 1 cái, nên 3 là số lẻ.
+\end{itemize}
+\begin{center}
+    \GAchiakeo{1}{0}{2 kẹo: mỗi bạn 1 kẹo, không thừa.\\ Vậy 2 là số chẵn.}\hfill\GAchiakeo{1}{1}{3 kẹo: mỗi bạn 1 kẹo, thừa 1 kẹo.\\ Vậy 3 là số lẻ.}
+\end{center}
+\begin{itemize}
+    \item GV lặp lại với 4, 5, 6, 7 kẹo cho HS hiểu. Sau đó gọi lần lượt từng bạn chọn một số kẹo, chia thật bằng kẹo hoặc bằng thẻ chấm tròn rồi cho biết số đó chẵn hay lẻ.
+\end{itemize}
+\begin{center}
+    \GAthechiam
+\end{center}
+\GAmucnho{b) Định nghĩa số chẵn, số lẻ}
+\begin{itemize}
+    \item Sau khi HS đã hiểu, GV đưa ra kết luận: \textbf{số chẵn} là số có chữ số hàng đơn vị là 0; 2; 4; 6; 8. \textbf{Số lẻ} là số có chữ số hàng đơn vị là 1; 3; 5; 7; 9. GV nhấn mạnh: \GAloi{Muốn biết chẵn hay lẻ, chỉ cần nhìn chữ số cuối cùng!}
+    \item GV đưa ví dụ (38, 57, 100, 71, 0, \dots), sau đó yêu cầu mỗi HS nêu một ví dụ về số chẵn và một ví dụ về số lẻ.
+    \item \textbf{Trò chơi “Đứng lên -- Ngồi xuống”:} GV đọc một số bất kì; gặp số chẵn HS đứng lên và vỗ tay, gặp số lẻ HS ngồi xuống. Bạn nào làm sai thì làm một động tác vui rồi chơi tiếp.
+\end{itemize}
+\begin{luuy}
+    Lỗi HS hay gặp, GV chú ý sửa ngay:
+    \begin{itemize}
+        \item Nhìn chữ số hàng chục để xác định chẵn, lẻ (ví dụ thấy 2 trong 27 nên cho là số chẵn) $\Rightarrow$ nhắc: \GAloi{Chỉ nhìn chữ số hàng đơn vị!}
+        \item Quên số tròn chục (10, 20, \dots, 100) và số 0 là số chẵn.
+        \item Nhầm dãy số lẻ với dãy số tròn chục.
+    \end{itemize}
+    \textbf{Đáp án Bài 2 (khoanh số chẵn):} 4; 6; 8; 10; 14; 52; 36; 28; 34; 12; 58; 18; 10.\par
+    \textbf{Đáp án Bài 3 (khoanh số lẻ):} 1; 5; 77; 31; 45; 37; 31; 9; 55; 89; 35.
+\end{luuy}
+\GAmucnho{Luyện tập trong PBT: Bài 1, 2, 3, 4}
+\begin{itemize}
+    \item \textbf{Bài 1:} khoanh vào từng đôi bọ rùa rồi cho biết số bọ rùa là số chẵn hay số lẻ. \textbf{Bài 2, Bài 3:} khoanh tròn vào số chẵn, số lẻ. \textbf{Bài 4:} xếp các số vào hai ô “Số chẵn”, “Số lẻ”.
+\end{itemize}
+
+%---------------------------------------------------------
+\subsubsection{SỐ CHẴN, SỐ LẺ TIẾP THEO}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 20 phút
+        \item HS nhận ra quy luật xen kẽ của số chẵn và số lẻ; tìm được số chẵn, số lẻ liền trước, liền sau và nằm trong một khoảng cho trước.
+    \end{itemize}
+\end{hd}
+\begin{itemize}
+    \item Đây là dạng bài khó hơn. Nếu HS khá, giỏi đã thành thạo xác định số chẵn, số lẻ thì GV hướng dẫn tiếp phần này; nếu HS chưa thành thạo thì GV cho luyện thêm các bài tìm số chẵn, số lẻ (Bài 6, Bài 7 trong PBT) trước.
+    \item GV cho HS quan sát dãy số 1 -- 20: số chẵn và số lẻ \textbf{xen kẽ} nhau, cứ nhảy \textbf{2 bước} thì gặp một số cùng loại. Vì vậy \textbf{số chẵn tiếp theo (hoặc số lẻ tiếp theo) hơn số đang xét 2 đơn vị}.
+\end{itemize}
+\begin{center}
+    \GAdaychanle
+\end{center}
+\begin{itemize}
+    \item GV nhắc lại về số liền trước, số liền sau, số ở giữa, nhưng \textbf{chú ý yêu cầu của đề}: số đó phải là số chẵn hay số lẻ thì mới cho kết quả chính xác.
+    \item \textbf{Ví dụ:} “Số chẵn liền trước của 10”. Số liền trước của 10 là 9, nhưng đề yêu cầu số chẵn mà 9 là số lẻ, nên phải lùi thêm một số nữa: số chẵn liền trước của 10 là \textbf{8}.
+    \item GV lặp lại với vài ví dụ khác để HS hiểu rõ (xem bảng).
+\end{itemize}
+\begin{vd}
+    \begin{tabular}{@{}l@{\hspace{1.2cm}}l@{}}
+        Số chẵn liền sau của 10 là: \textbf{12} & Số lẻ liền trước của 28 là: \textbf{27} \\[3pt]
+        Số lẻ liền sau của 35 là: \textbf{37} & Số chẵn ở giữa 5 và 10 là: \textbf{6; 8} \\[3pt]
+        Số lẻ ở giữa 12 và 18 là: \textbf{13; 15; 17} & Số chẵn liền trước của 10 là: \textbf{8} \\
+    \end{tabular}
+\end{vd}
+\GAmucnho{Luyện tập trong PBT: Bài 6, 7, 8}
+\begin{itemize}
+    \item \textbf{Bài 6:} nối cá với xô số chẵn, số lẻ. \textbf{Bài 7:} điền số nhà (dãy bên trái là số chẵn, dãy bên phải là số lẻ). \textbf{Bài 8:} viết số liền trước, số liền sau. HS khá, giỏi làm thêm \textbf{Bài 12} (số chẵn, số lẻ liền trước, liền sau và ở giữa).
+\end{itemize}
+
+%---------------------------------------------------------
+\subsubsection{TÔ MÀU -- “TRỨNG PHỤC SINH”}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 10 phút
+        \item HS phân loại nhanh số chẵn, số lẻ và củng cố bằng hoạt động tô màu.
+    \end{itemize}
+\end{hd}
+\begin{itemize}
+    \item GV chiếu (hoặc phát) quả trứng bên dưới: \textbf{số chẵn tô màu hồng, số lẻ tô màu vàng}. Cả lớp tô chung để làm mẫu, sau đó HS làm \textbf{Bài 5} trong PBT (tô màu đỏ vào số chẵn, màu xanh dương vào số lẻ).
+\end{itemize}
+\begin{center}
+    \GAtrung{23,91,62,76,34,55,97,48,82,83,60,33,82,16,95,63,88,59,46,78}
+\end{center}
+\begin{luuy}
+    \textbf{Đáp án (quả trứng):} số chẵn (tô hồng): 62; 76; 34; 48; 82; 60; 82; 16; 88; 46; 78. Số lẻ (tô vàng): 23; 91; 55; 97; 83; 33; 95; 63; 59.
+\end{luuy}
+
+%---------------------------------------------------------
+\subsubsection{CỦNG CỐ -- GIAO BÀI TẬP VỀ NHÀ}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 10 phút
+        \item HS nhắc lại kiến thức trọng tâm; GV nhận xét, khen thưởng.
+    \end{itemize}
+\end{hd}
+\begin{itemize}
+    \item \textbf{“Hộp quà bí mật”:} chuyền hộp quà theo nhạc, nhạc dừng ở bạn nào thì bạn đó bốc một câu hỏi trong hộp (ví dụ: \GAloi{85 là số chẵn hay số lẻ? Vì sao?}; \GAloi{Số chẵn liền sau của 20 là số nào?}; \GAloi{So sánh 47 và 74}).
+    \item GV nhắc lại: so sánh bằng hàng chục trước; số chẵn tận cùng 0, 2, 4, 6, 8, số lẻ tận cùng 1, 3, 5, 7, 9. Tuyên dương nhóm “Nhà vườn giỏi nhất” và các bạn tiến bộ.
+    \item \textbf{BTVN:} GV giao BTVN phù hợp với tình hình lớp (gợi ý: Bài 9, 10, 11 trong PBT).
+\end{itemize}
+
+\GAmucnho{GIÁO VIÊN RÚT KINH NGHIỆM BÀI HỌC}
+Tổng hợp các lỗi HS hay gặp khi dạy chủ đề này nhằm khắc phục và chỉnh sửa giáo án hoàn thiện hơn.
+\par\medskip
+\noindent\TTcham[\linewidth]\par\medskip
+\noindent\TTcham[\linewidth]\par\medskip
+\noindent\TTcham[\linewidth]
+
+\begin{center}
+       \faGg\faGg\quad Hết \quad\faGg\faGg
+\end{center}
+\clearpage
+\makeatletter\let\@textbottom\GAluutextbottom\makeatother
+\end{document}
