@@ -114,12 +114,11 @@
 % Hàng số có một số đã khoanh sẵn (mẫu): \SShangsomau{a,b,c,...}{thứ tự số được khoanh}
 \providecommand{\SShangsomau}{}\renewcommand{\SShangsomau}[2]{%
   \begin{tikzpicture}
-    \useasboundingbox (0,-0.475) rectangle (6.9,0.475);% chữ "Mẫu" nhô lên, không làm hàng cao hơn
+    \useasboundingbox (0,-0.475) rectangle (6.9,0.475);% vòng khoanh không làm hàng cao hơn
     \foreach \x [count=\k] in {#1}{%
       \pgfmathtruncatemacro{\m}{mod(\k-1,5)}\edef\mc{\SSmaule{\m}}%
       \node[SSthe=\mc] at (0.55+1.28*\k-1.28,0) {\x};}
     \draw[red,very thick] (0.55+1.28*#2-1.28,0) ellipse (0.78 and 0.68);
-    \node[orange,font=\normalfont\bfseries\normalsize] at (0.55+1.28*#2-1.28,0.82) {Mẫu};
   \end{tikzpicture}}
 
 % Sâu đo: \SSsaudohang{màu}{5 số}{chữ ô đầu}{chữ ô cuối}{1 = ô to dần, 0 = ô nhỏ dần}
@@ -541,7 +540,7 @@
 
 \begin{bt}
     Khoanh tròn vào số lớn nhất trong mỗi hàng.
-    \par\nopagebreak\vspace{22pt}\nopagebreak
+    \par\nopagebreak\vspace{6pt}\nopagebreak
     \noindent\begin{minipage}[t]{0.49\linewidth}\SShangsomau{12,62,9,10,18}{2}\end{minipage}\hfill
     \begin{minipage}[t]{0.49\linewidth}\SShangso{88,46,9,10,92}\end{minipage}\par\smallskip
     \noindent\begin{minipage}[t]{0.49\linewidth}\SShangso{4,60,27,35,48}\end{minipage}\hfill
