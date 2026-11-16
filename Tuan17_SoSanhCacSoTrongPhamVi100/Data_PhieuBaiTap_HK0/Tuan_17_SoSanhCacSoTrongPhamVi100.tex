@@ -30,7 +30,7 @@
 
 %---------- Màu dùng cho hình vẽ ----------
 \definecolor{SSxanh}{RGB}{100,170,235}\definecolor{SSxanhdam}{RGB}{30,100,180}
-\definecolor{SSla}{RGB}{130,200,100}\definecolor{SSladam}{RGB}{45,125,60}
+\definecolor{SSla}{RGB}{150,205,120}\definecolor{SSladam}{RGB}{45,125,60}
 \definecolor{SSvang}{RGB}{255,215,90}\definecolor{SScam}{RGB}{250,150,60}
 \definecolor{SSdo}{RGB}{225,70,70}\definecolor{SShong}{RGB}{250,170,200}
 \definecolor{SStim}{RGB}{170,140,220}\definecolor{SSnau}{RGB}{125,80,45}
@@ -40,12 +40,14 @@
 %---------- Kiểu dùng chung ----------
 \tikzset{
   % thẻ số tròn góc, màu pastel: SSthe=<tên màu>
-  SSthe/.style={draw=#1!65!black,thick,fill=#1!25,rounded corners=6pt,minimum width=1.1cm,minimum height=0.95cm,inner sep=0pt,font=\sffamily\bfseries\Large},
+  SSthe/.style={draw=#1!65!black,thick,fill=#1!25,rounded corners=6pt,minimum width=1.1cm,minimum height=0.95cm,inner sep=0pt,font=\normalfont\bfseries\Large},
   % ô trống để học sinh điền
   SSo/.style={draw,thick,rounded corners=3pt,minimum width=0.95cm,minimum height=0.8cm,inner sep=0pt,fill=white},
 }
 % Ô trống nằm trong dòng chữ
-\providecommand{\SSo}{}\renewcommand{\SSo}{\tikz[baseline=-0.75ex]\node[SSo]{};}
+\providecommand{\SSo}{}\renewcommand{\SSo}{\hspace{4pt}\tikz[baseline=-0.75ex]\node[SSo]{};\hspace{4pt}}
+% Hai ý trên một dòng, thẳng cột: \SShaicot{ý trái}{ý phải}
+\providecommand{\SShaicot}{}\renewcommand{\SShaicot}[2]{\parbox[t]{0.5\linewidth}{#1}\parbox[t]{0.48\linewidth}{#2}}
 % Tên màu pastel xoay vòng theo số thứ tự 0..4
 \providecommand{\SSmaule}{}\renewcommand{\SSmaule}[1]{\ifcase#1 SSxanh\or SSla\or SSvang\or SShong\or SStim\fi}
 
@@ -64,13 +66,13 @@
     \draw[SScam!45!black,thin] (0.28*#1+0.12+0.25*\cot,0.25*\hang) rectangle ++(0.21,0.21);}\fi}
 % Thẻ so sánh bằng hình: \SSsosanh{chục 1}{đv 1}{chục 2}{đv 2}
 \providecommand{\SSsosanh}{}\renewcommand{\SSsosanh}[4]{%
-  \begin{tikzpicture}[font=\sffamily]
+  \begin{tikzpicture}[font=\normalfont]
     \draw[rounded corners=8pt,thick,draw=SSxanh!70,fill=SSxanh!8] (-0.3,-1.3) rectangle (7.0,2.3);
     \begin{scope}[shift={(0.1,0)}]\SSkhoi{#1}{#2}\end{scope}
     \begin{scope}[shift={(4.5,0)}]\SSkhoi{#3}{#4}\end{scope}
     \node[SSo,minimum width=1.1cm,minimum height=0.95cm] at (3.4,0.95) {};
-    \node[anchor=east,font=\sffamily\small] at (0.45,-0.75) {Số:};\node[SSo] at (1.15,-0.75) {};
-    \node[anchor=east,font=\sffamily\small] at (4.85,-0.75) {Số:};\node[SSo] at (5.55,-0.75) {};
+    \node[anchor=east,font=\normalfont\small] at (0.45,-0.75) {Số:};\node[SSo] at (1.15,-0.75) {};
+    \node[anchor=east,font=\normalfont\small] at (4.85,-0.75) {Số:};\node[SSo] at (5.55,-0.75) {};
   \end{tikzpicture}}
 
 % Cá sấu há miệng (quay mặt sang phải, dài khoảng 4cm, bản lề tại gốc tọa độ)
@@ -97,55 +99,39 @@
 \providecommand{\SSbongso}{}\renewcommand{\SSbongso}[2]{%
   \node[SSthe=#2,circle,minimum size=1.15cm] {#1};}
 
-% Vương miện (số lớn nhất) và ốc sên (số bé nhất), vẽ tại gốc tọa độ
-\providecommand{\SSvuongmien}{}\renewcommand{\SSvuongmien}{%
-  \begin{scope}[scale=1.4]
-    \fill[SSvang!95!orange,draw=orange!70!black,thick,line join=round] (-0.34,-0.2)--(-0.42,0.27)--(-0.18,0.07)--(0,0.36)--(0.18,0.07)--(0.42,0.27)--(0.34,-0.2)--cycle;
-    \fill[orange!70!black] (-0.34,-0.2) rectangle (0.34,-0.13);
-    \fill[SSdo] (0,-0.01) circle (0.05);\fill[SSxanh] (-0.2,-0.03) circle (0.035);\fill[SSxanh] (0.2,-0.03) circle (0.035);
-    \fill[SSdo] (-0.42,0.27) circle (0.04);\fill[SSdo] (0,0.36) circle (0.04);\fill[SSdo] (0.42,0.27) circle (0.04);
-  \end{scope}}
-\providecommand{\SSocsen}{}\renewcommand{\SSocsen}{%
-  \begin{scope}[scale=1.45]
-    \draw[line width=7pt,line cap=round,SSla!60!yellow!60] (-0.38,-0.18)--(0.32,-0.18);
-    \draw[line width=7pt,line cap=round,SSla!60!yellow!60] (-0.38,-0.18)--(-0.4,-0.02);
-    \draw[SSladam,thick,line cap=round] (-0.42,0.04)--(-0.5,0.2) (-0.36,0.04)--(-0.33,0.22);
-    \fill[SSladam] (-0.5,0.2) circle (0.025);\fill[SSladam] (-0.33,0.22) circle (0.025);
-    \shade[ball color=SScam!70!SSvang] (0.08,0.02) circle (0.24);
-    \draw[SSnau,thin] (0.08,0.02) circle (0.24);
-    \draw[SSnaudam,thin,domain=0:880,samples=60,variable=\t,smooth] plot ({0.08+0.00022*\t*cos(\t)},{0.02+0.00022*\t*sin(\t)});
-  \end{scope}}
-% Một hàng số để khoanh: \SShangso{biểu tượng}{a,b,c,...}
-\providecommand{\SShangso}{}\renewcommand{\SShangso}[2]{%
+% Một hàng số để khoanh: \SShangso{a,b,c,...}
+\providecommand{\SShangso}{}\renewcommand{\SShangso}[1]{%
   \begin{tikzpicture}
-    \begin{scope}[shift={(0.4,0)}]#1\end{scope}
-    \foreach \x [count=\k] in {#2}{%
+    \foreach \x [count=\k] in {#1}{%
       \pgfmathtruncatemacro{\m}{mod(\k-1,5)}\edef\mc{\SSmaule{\m}}%
-      \node[SSthe=\mc] at (1.15+1.28*\k,0) {\x};}
+      \node[SSthe=\mc] at (0.55+1.28*\k-1.28,0) {\x};}
   \end{tikzpicture}}
 
-% Sâu đo: \SSsaudohang{màu}{5 số}{chữ ô đầu}{chữ ô cuối}  (kèm 5 ô trống bên phải)
-\providecommand{\SSsaudohang}{}\renewcommand{\SSsaudohang}[4]{%
-  \begin{tikzpicture}[font=\sffamily\bfseries\large]
+% Sâu đo: \SSsaudohang{màu}{5 số}{chữ ô đầu}{chữ ô cuối}{1 = ô to dần, 0 = ô nhỏ dần}
+\providecommand{\SSsaudohang}{}\renewcommand{\SSsaudohang}[5]{%
+  \begin{tikzpicture}[font=\normalfont\bfseries\large,scale=0.92,transform shape]
     % chân
-    \foreach \k in {1,...,5}{\draw[#1!40!black,line width=1.6pt,line cap=round] (0.95*\k+0.05,-0.4)--(0.95*\k-0.08,-0.72) (0.95*\k+0.4,-0.4)--(0.95*\k+0.5,-0.7);}
-    % thân
-    \foreach \k in {1,...,5}{\shade[ball color=#1!60!white] (0.95*\k+0.2,0) circle (0.52);\draw[#1!55!black,thin] (0.95*\k+0.2,0) circle (0.52);}
-    \foreach \x [count=\k] in {#2}{\node[font=\sffamily\bfseries\large] at (0.95*\k+0.2,0) {\x};}
+    \foreach \k in {1,...,5}{\draw[#1!70!black,line width=1.5pt,line cap=round] (0.95*\k+0.05,-0.4)--(0.95*\k-0.08,-0.72) (0.95*\k+0.4,-0.4)--(0.95*\k+0.5,-0.7);}
+    % thân (màu pastel)
+    \foreach \k in {1,...,5}{\shade[ball color=#1!40!white] (0.95*\k+0.2,0) circle (0.52);\draw[#1!70!white,thin] (0.95*\k+0.2,0) circle (0.52);}
+    \foreach \x [count=\k] in {#2}{\node at (0.95*\k+0.2,0) {\x};}
     % râu
-    \draw[#1!35!black,thick,line cap=round] (-0.12,0.55) .. controls (-0.25,0.95) and (-0.05,1.1) .. (0.12,1.05);
-    \draw[#1!35!black,thick,line cap=round] (0.2,0.6) .. controls (0.2,0.95) and (0.4,1.1) .. (0.55,1.02);
-    \fill[#1!35!black] (0.12,1.05) circle (0.06) (0.55,1.02) circle (0.06);
+    \draw[#1!75!black,thick,line cap=round] (-0.12,0.55) .. controls (-0.25,0.95) and (-0.05,1.1) .. (0.12,1.05);
+    \draw[#1!75!black,thick,line cap=round] (0.2,0.6) .. controls (0.2,0.95) and (0.4,1.1) .. (0.55,1.02);
+    \fill[#1!75!black] (0.12,1.05) circle (0.06) (0.55,1.02) circle (0.06);
     % đầu
-    \shade[ball color=#1!70!black] (0,0) circle (0.66);
+    \shade[ball color=#1!75!white] (0,0) circle (0.66);
+    \draw[#1!70!white,thin] (0,0) circle (0.66);
     \fill[white] (-0.12,0.12) circle (0.17);\fill[black] (-0.16,0.12) circle (0.085);\fill[white] (-0.19,0.16) circle (0.025);
     \fill[SShong,opacity=0.7] (-0.38,-0.17) ellipse (0.12 and 0.07);
-    \draw[white,thick,line cap=round] (-0.5,-0.05) .. controls (-0.38,-0.34) and (-0.05,-0.36) .. (0.08,-0.15);
-    % ô trống để sắp xếp
-    \foreach \i in {0,...,4}{\draw[thick,rounded corners=3pt,fill=white] (6.6+1.1*\i,-0.5) rectangle ++(1.0,1.0);}
-    \node[font=\sffamily\small\itshape,anchor=north] at (7.1,-0.55) {#3};
-    \node[font=\sffamily\small\itshape,anchor=north] at (11.0,-0.55) {#4};
-    \draw[-latex,thick,gray] (6.6,0.78)--(12.1,0.78);
+    \draw[#1!75!black,thick,line cap=round] (-0.5,-0.05) .. controls (-0.38,-0.34) and (-0.05,-0.36) .. (0.08,-0.15);
+    % ô trống: to dần (bé -> lớn) hoặc nhỏ dần (lớn -> bé)
+    \ifnum#5=1 \def\SSds{0.7/6.6,0.85/7.38,1.0/8.31,1.15/9.39,1.3/10.62}\def\SSxa{6.95}\def\SSxb{11.27}%
+    \else \def\SSds{1.3/6.6,1.15/7.98,1.0/9.21,0.85/10.29,0.7/11.22}\def\SSxa{7.25}\def\SSxb{11.57}\fi
+    \foreach \sz/\xo in \SSds {\draw[thick,rounded corners=3pt,fill=white] (\xo,-\sz/2) rectangle ++(\sz,\sz);}
+    \node[font=\normalfont\small\itshape,anchor=north] at (\SSxa,-0.78) {#3};
+    \node[font=\normalfont\small\itshape,anchor=north] at (\SSxb,-0.78) {#4};
+    \draw[-latex,thick,gray] (6.6,0.85)--(12.1,0.85);
   \end{tikzpicture}}
 
 % ---- Cửa hàng trái cây ----
@@ -170,7 +156,7 @@
   \fill[SSladam] (0,0.2) -- (-0.2,0.25) -- (-0.06,0.27) -- (-0.1,0.36) -- (0,0.29) -- (0.1,0.36) -- (0.06,0.27) -- (0.2,0.25) -- cycle;}
 % Thùng gỗ đựng trái cây: \SSthung{biểu tượng}{tên}{số}
 \providecommand{\SSthung}{}\renewcommand{\SSthung}[3]{%
-  \begin{tikzpicture}[font=\sffamily]
+  \begin{tikzpicture}[font=\normalfont]
     \fill[black,opacity=0.12] (1.6,-0.08) ellipse (1.75 and 0.14);
     % đống quả
     \foreach \x/\y in {0.55/0.95,1.25/0.95,1.95/0.95,2.65/0.95,0.9/1.45,1.6/1.45,2.3/1.45,1.25/1.95,1.95/1.95}{\begin{scope}[shift={(\x,\y)}]#1\end{scope}}
@@ -179,12 +165,12 @@
     \draw[SSnaudam,thick] (0,0) rectangle (3.2,1.1);
     \draw[SSnaudam,thin] (0,0.37)--(3.2,0.37) (0,0.73)--(3.2,0.73);
     \foreach \x in {0.12,3.08}{\fill[SSnaudam] (\x,0.2) circle (0.03) (\x,0.55) circle (0.03) (\x,0.9) circle (0.03);}
-    \node[draw=SSnaudam,fill=white,rounded corners=3pt,minimum width=2.5cm,minimum height=0.62cm,inner sep=1pt,font=\sffamily\bfseries\small] at (1.6,0.55) {#2: #3 quả};
+    \node[draw=SSnaudam,fill=white,rounded corners=3pt,minimum width=2.7cm,minimum height=0.6cm,inner sep=1pt,font=\normalfont\bfseries\footnotesize] at (1.6,0.55) {#2: #3 quả};
   \end{tikzpicture}}
 
 % Bục nhận giải: \SSbuc  (3 bục: hạng 2 - hạng 1 - hạng 3), có ô viết tên và điểm
 \providecommand{\SSbuc}{}\renewcommand{\SSbuc}{%
-  \begin{tikzpicture}[font=\sffamily\bfseries]
+  \begin{tikzpicture}[font=\normalfont\bfseries]
     % ô viết tên
     \foreach \x/\y in {2.1/2.3,5.3/3.2,8.5/1.9}{
       \node[draw,thick,rounded corners=4pt,fill=white,minimum width=2.6cm,minimum height=0.75cm] at (\x,\y+1.0) {};}
@@ -193,9 +179,9 @@
     \shade[top color=yellow!35,bottom color=orange!70!yellow] (3.9,0) rectangle (6.7,2.6);
     \shade[top color=orange!25,bottom color=brown!60] (7.2,0) rectangle (9.8,1.3);
     \draw[thick,draw=black!70] (0.8,0) rectangle (3.4,1.7) (3.9,0) rectangle (6.7,2.6) (7.2,0) rectangle (9.8,1.3);
-    \node[font=\sffamily\bfseries\Huge,text=black!55] at (2.1,0.85) {2};
-    \node[font=\sffamily\bfseries\Huge,text=orange!60!brown] at (5.3,1.3) {1};
-    \node[font=\sffamily\bfseries\Huge,text=brown!70!black] at (8.5,0.65) {3};
+    \node[font=\normalfont\bfseries\Huge,text=black!55] at (2.1,0.85) {2};
+    \node[font=\normalfont\bfseries\Huge,text=orange!60!brown] at (5.3,1.3) {1};
+    \node[font=\normalfont\bfseries\Huge,text=brown!70!black] at (8.5,0.65) {3};
     % huy chương
     \foreach \x/\y/\c in {2.1/2.0/gray!55,5.3/2.9/yellow!80!orange,8.5/1.6/brown!55!orange}{
       \begin{scope}[shift={(\x,\y-0.05)}]
@@ -223,10 +209,10 @@
     \shade[shading=radial,inner color=#2!12!white,outer color=#2!70!white] (0,0) ellipse (0.55 and 0.68);
     \draw[#2!60!black,thin] (0,0) ellipse (0.55 and 0.68);
     \fill[white,opacity=0.6] (-0.25,0.3) ellipse (0.08 and 0.14);
-    \node[font=\sffamily\bfseries\Large] at (0,0) {#3};
+    \node[font=\normalfont\bfseries\Large] at (0,0) {#3};
   \end{scope}}
 \providecommand{\SShuyhieu}{}\renewcommand{\SShuyhieu}[3]{%
-  \node[star,star points=12,star point ratio=1.16,draw=#2!60!black,thick,fill=#2!35,minimum size=1.35cm,inner sep=0pt,font=\sffamily\bfseries\Large] at (#1) {#3};}
+  \node[star,star points=12,star point ratio=1.16,draw=#2!60!black,thick,fill=#2!35,minimum size=1.35cm,inner sep=0pt,font=\normalfont\bfseries\Large] at (#1) {#3};}
 % Hàng bóng bay (số chẵn): \SSbonghang{a,b,...}; hàng huy hiệu (số lẻ): \SShuyhieuhang{a,b,...}
 \providecommand{\SSbonghang}{}\renewcommand{\SSbonghang}[1]{%
   \begin{tikzpicture}
@@ -257,54 +243,54 @@
   \fi}
 % Một ô bài tập ghép đôi: \SSdoibai{số con}
 \providecommand{\SSdoibai}{}\renewcommand{\SSdoibai}[1]{%
-  \begin{tikzpicture}[font=\sffamily]
+  \begin{tikzpicture}[font=\normalfont]
     \draw[rounded corners=8pt,thick,draw=SSxanh!70,fill=SSxanh!6] (-0.7,-2.45) rectangle (7.45,1.0);
     \begin{scope}[shift={(0.2,0)}]\SSdoicore{#1}{0}\end{scope}
-    \node[anchor=west,font=\sffamily\normalsize] at (-0.45,-1.95) {Có \textbf{#1} con. \textbf{#1} là số \SSocheck\ chẵn \quad\SSocheck\ lẻ};
+    \node[anchor=west,font=\normalfont\normalsize] at (-0.45,-1.95) {Có \textbf{#1} con. \textbf{#1} là số \SSocheck\ chẵn \quad\SSocheck\ lẻ};
   \end{tikzpicture}}
 % Khung ghi nhớ số chẵn - số lẻ
 \providecommand{\SSghinho}{}\renewcommand{\SSghinho}{%
-  \begin{tikzpicture}[font=\sffamily]
+  \begin{tikzpicture}[font=\normalfont]
     \draw[rounded corners=10pt,thick,draw=SSxanh!80,fill=SSxanh!7] (0,0) rectangle (16.4,5.9);
-    \node[fill=SSxanh!80!SSxanhdam,text=white,rounded corners=4pt,font=\sffamily\bfseries,inner sep=3.5pt] at (2.0,5.9) {Ghi nhớ};
+    \node[fill=SSxanh!80!SSxanhdam,text=white,rounded corners=4pt,font=\normalfont\bfseries,inner sep=3.5pt] at (2.0,5.9) {Ghi nhớ};
     \draw[SSxanh!60,thin,dashed] (8.2,1.6)--(8.2,5.3);
     % chẵn: 6 bọ rùa = 3 đôi
     \begin{scope}[shift={(2.95,4.4)}]\SSdoicore{6}{1}\end{scope}
-    \node[align=center,text width=7.2cm,font=\sffamily\normalsize] at (4.1,2.15) {6 bạn bọ rùa ghép được 3 đôi, \textbf{không thừa} bạn nào.\\ Vậy \textbf{6 là số chẵn}.};
+    \node[align=center,text width=7.2cm,font=\normalfont\normalsize] at (4.1,2.15) {6 bạn bọ rùa ghép được 3 đôi, \textbf{không thừa} bạn nào.\\ Vậy \textbf{6 là số chẵn}.};
     % lẻ: 7 bọ rùa = 3 đôi và thừa 1
     \begin{scope}[shift={(10.6,4.4)}]\SSdoicore{7}{1}\end{scope}
-    \node[align=center,text width=7.2cm,font=\sffamily\normalsize] at (12.3,2.15) {7 bạn bọ rùa ghép được 3 đôi, \textbf{thừa 1} bạn.\\ Vậy \textbf{7 là số lẻ}.};
-    \node[draw=SSxanhdam,fill=SSnuoc!70,rounded corners=5pt,text width=7.4cm,align=center,inner sep=3pt,font=\sffamily\small] at (4.1,0.7) {Số chẵn có chữ số tận cùng là \textbf{0, 2, 4, 6, 8}.};
-    \node[draw=SSdo!80!black,fill=SShong!35,rounded corners=5pt,text width=7.4cm,align=center,inner sep=3pt,font=\sffamily\small] at (12.3,0.7) {Số lẻ có chữ số tận cùng là \textbf{1, 3, 5, 7, 9}.};
+    \node[align=center,text width=7.2cm,font=\normalfont\normalsize] at (12.3,2.15) {7 bạn bọ rùa ghép được 3 đôi, \textbf{thừa 1} bạn.\\ Vậy \textbf{7 là số lẻ}.};
+    \node[draw=SSxanhdam,fill=SSnuoc!70,rounded corners=5pt,text width=7.4cm,align=center,inner sep=3pt,font=\normalfont\small] at (4.1,0.7) {Số chẵn có chữ số tận cùng là \textbf{0, 2, 4, 6, 8}.};
+    \node[draw=SSdo!80!black,fill=SShong!35,rounded corners=5pt,text width=7.4cm,align=center,inner sep=3pt,font=\normalfont\small] at (12.3,0.7) {Số lẻ có chữ số tận cùng là \textbf{1, 3, 5, 7, 9}.};
   \end{tikzpicture}}
 
 % Khung ghi nhớ "Mẹo vui" so sánh bằng cá sấu
 \providecommand{\SSmeo}{}\renewcommand{\SSmeo}{%
-  \begin{tikzpicture}[font=\sffamily]
+  \begin{tikzpicture}[font=\normalfont]
     \draw[rounded corners=10pt,thick,draw=SSla!70!SSladam,fill=SSla!12] (0,0) rectangle (16.4,4.3);
     \draw[SSla!50!SSladam,thin,dashed] (8.2,1.1)--(8.2,3.2);
-    \node[fill=SSla!70!SSladam,text=white,rounded corners=4pt,font=\sffamily\bfseries,inner sep=3.5pt] at (2.0,4.3) {Mẹo vui};
-    \node[font=\sffamily\bfseries\normalsize] at (8.2,3.65) {Cá sấu luôn há miệng về phía số lớn hơn!};
+    \node[fill=SSla!70!SSladam,text=white,rounded corners=4pt,font=\normalfont\bfseries,inner sep=3.5pt] at (2.0,4.3) {Mẹo vui};
+    \node[font=\normalfont\bfseries\normalsize] at (8.2,3.65) {Cá sấu luôn há miệng về phía số lớn hơn!};
     % ví dụ 1: 80 > 45 (cá sấu quay mặt về phía số lớn, bên trái)
     \begin{scope}[shift={(4.3,2.3)}]
       \node[SSthe=SSvang,circle,minimum size=1.15cm] at (-3.0,0) {80};
       \begin{scope}[shift={(0.2,-0.2)},xscale=-0.75,yscale=0.75]\SScasau\end{scope}
       \node[SSthe=SSxanh,circle,minimum size=1.15cm] at (3.0,0) {45};
-      \node[font=\sffamily\bfseries\large] at (0,-1.4) {80 $>$ 45};
+      \node[font=\normalfont\bfseries\large] at (0,-1.4) {80 \textgreater\ 45};
     \end{scope}
     % ví dụ 2: 36 < 59 (cá sấu quay mặt về phía số lớn, bên phải)
     \begin{scope}[shift={(12.1,2.3)}]
       \node[SSthe=SSxanh,circle,minimum size=1.15cm] at (-3.0,0) {36};
       \begin{scope}[shift={(-0.2,-0.2)},scale=0.75]\SScasau\end{scope}
       \node[SSthe=SSvang,circle,minimum size=1.15cm] at (3.0,0) {59};
-      \node[font=\sffamily\bfseries\large] at (0,-1.4) {36 $<$ 59};
+      \node[font=\normalfont\bfseries\large] at (0,-1.4) {36 \textless\ 59};
     \end{scope}
-    \node[font=\sffamily\small] at (8.2,0.3) {Hai số bằng nhau thì dùng dấu $=$.};
+    \node[font=\normalfont\small] at (8.2,0.3) {Hai số bằng nhau thì dùng dấu =.};
   \end{tikzpicture}}
 
 % Hàng so sánh trong thẻ: \SSsosanhhang{a/b, c/d, ...}  (4 thẻ mỗi hàng)
 \providecommand{\SSsosanhluoi}{}\renewcommand{\SSsosanhluoi}[1]{%
-  \begin{tikzpicture}[font=\sffamily\bfseries\Large]
+  \begin{tikzpicture}[font=\normalfont\bfseries\Large]
     \foreach \a/\b [count=\k] in {#1}{%
       \pgfmathtruncatemacro{\cot}{mod(\k-1,4)}\pgfmathtruncatemacro{\hang}{div(\k-1,4)}\pgfmathtruncatemacro{\m}{mod(\cot,5)}\edef\mc{\SSmaule{\m}}%
       \begin{scope}[shift={(4.2*\cot,-1.2*\hang)}]
@@ -326,17 +312,17 @@
   \draw[SSladam,thick,line cap=round] (0.2,0.98) .. controls (0.3,1.3) and (0.65,1.35) .. (0.7,1.12);}
 % Khung bí ngô: \SShopbingo{tiêu đề}{t = bí ở góc trên trái, b = bí ở góc dưới phải}
 \providecommand{\SShopbingo}{}\renewcommand{\SShopbingo}[2]{%
-  \begin{tikzpicture}[font=\sffamily\bfseries]
+  \begin{tikzpicture}[font=\normalfont\bfseries]
     \draw[rounded corners=18pt,very thick,draw=SSdo!70!SSnau,fill=SSkem] (0,0) rectangle (7.8,4.6);
-    \ifx#2t \node[text=SSdo!75!SSnau,font=\sffamily\bfseries\LARGE] at (4.3,3.95) {#1};
+    \ifx#2t \node[text=SSdo!75!SSnau,font=\normalfont\bfseries\LARGE] at (4.3,3.95) {#1};
       \begin{scope}[shift={(0.35,4.25)},scale=0.85]\SSbingo\end{scope}
-    \else \node[text=SSdo!75!SSnau,font=\sffamily\bfseries\LARGE] at (3.5,3.95) {#1};
+    \else \node[text=SSdo!75!SSnau,font=\normalfont\bfseries\LARGE] at (3.5,3.95) {#1};
       \begin{scope}[shift={(7.45,0.45)},scale=0.85]\SSbingo\end{scope}\fi
   \end{tikzpicture}}
 
 % Cây thông Noel: \SScaythong{13 số}
 \providecommand{\SScaythong}{}\renewcommand{\SScaythong}[1]{%
-  \begin{tikzpicture}[font=\sffamily\bfseries\small]
+  \begin{tikzpicture}[font=\normalfont\bfseries\small]
     % quà dưới gốc
     \shade[left color=SSdo!70,right color=SSdo] (-2.7,0) rectangle (-1.6,0.75);\draw[SSdo!50!black,thin] (-2.7,0) rectangle (-1.6,0.75);
     \fill[SSvang] (-2.2,0) rectangle (-2.1,0.75) (-2.7,0.32) rectangle (-1.6,0.42);
@@ -365,7 +351,7 @@
 
 % Cây mùa thu: \SScaythu{10 số}
 \providecommand{\SScaythu}{}\renewcommand{\SScaythu}[1]{%
-  \begin{tikzpicture}[font=\sffamily\bfseries\small]
+  \begin{tikzpicture}[font=\normalfont\bfseries\small]
     % mặt đất
     \shade[top color=SSla!55!SSvang,bottom color=SSla!80!SSladam] (-3.5,0) .. controls (-1.8,0.7) and (1.8,0.7) .. (3.5,0) .. controls (1.8,-0.4) and (-1.8,-0.4) .. (-3.5,0);
     % thân và cành: lần 1 viền đậm, lần 2 màu gỗ
@@ -398,7 +384,7 @@
     \path[top color=#1!85!white,bottom color=#1!30!white,draw=#1!45!black,thick] (0.98,0) .. controls (0.75,0.55) and (-0.35,0.6) .. (-0.72,0) .. controls (-0.35,-0.6) and (0.75,-0.55) .. (0.98,0);
     \draw[#1!50!black,thick] (0.52,0.37) .. controls (0.42,0.15) and (0.42,-0.15) .. (0.52,-0.36);
     \fill[white,draw=#1!45!black,thin] (0.76,0.13) circle (0.1);\fill[black] (0.79,0.13) circle (0.055);
-    \node[font=\sffamily\bfseries\normalsize,fill=white,fill opacity=0.8,text opacity=1,rounded corners=3pt,inner sep=1.5pt] at (0.02,-0.02) {#2};
+    \node[font=\normalfont\bfseries\normalsize,fill=white,fill opacity=0.8,text opacity=1,rounded corners=3pt,inner sep=1.5pt] at (0.02,-0.02) {#2};
   \end{scope}}
 % Xô đựng cá: \SSxo{màu}{chữ}
 \providecommand{\SSxo}{}\renewcommand{\SSxo}[2]{%
@@ -408,7 +394,7 @@
   \draw[#1!50!black,thick] (-1.0,0.1) .. controls (-0.7,-0.2) and (0.7,-0.2) .. (1.0,0.1) -- (1.3,1.9) -- (-1.3,1.9) -- cycle;
   \fill[#1!40!black] (0,1.9) ellipse (1.3 and 0.27);\draw[#1!30!black,thick] (0,1.9) ellipse (1.3 and 0.27);
   \fill[#1!25!SSnuoc,opacity=0.9] (0,1.9) ellipse (1.15 and 0.2);
-  \node[fill=white,draw=#1!50!black,rounded corners=4pt,minimum width=1.7cm,minimum height=0.6cm,inner sep=2pt,font=\sffamily\bfseries] at (0,0.95) {#2};}
+  \node[fill=white,draw=#1!50!black,rounded corners=4pt,minimum width=1.7cm,minimum height=0.6cm,inner sep=2pt,font=\normalfont\bfseries] at (0,0.95) {#2};}
 % Bài nối cá với xô: \SSnoica{8 số}  (số chẵn: xô trên, số lẻ: xô dưới)
 \providecommand{\SSnoica}{}\renewcommand{\SSnoica}[1]{%
   \begin{tikzpicture}
@@ -434,14 +420,14 @@
   \draw[#2!45!black,thin,line join=round] (-0.2,1.4) -- (1.05,2.3) -- (2.3,1.4) -- cycle;
   \fill[SSnau,draw=SSnaudam,thin] (0.22,0) rectangle (0.78,0.95);\fill[SSvang] (0.68,0.45) circle (0.03);
   \fill[SSnuoc,draw=SSnaudam,thin] (1.2,0.8) rectangle (1.85,1.25);\draw[SSnaudam,thin] (1.525,0.8)--(1.525,1.25) (1.2,1.025)--(1.85,1.025);
-  \node[draw=SSnaudam,thick,fill=white,rounded corners=3pt,minimum width=0.95cm,minimum height=0.5cm,inner sep=0pt,font=\sffamily\bfseries\small] at (1.5,0.4) {#3};}
+  \node[draw=SSnaudam,thick,fill=white,rounded corners=3pt,minimum width=0.95cm,minimum height=0.5cm,inner sep=0pt,font=\normalfont\bfseries\small] at (1.5,0.4) {#3};}
 % Cây xanh nhỏ
 \providecommand{\SScaynho}{}\renewcommand{\SScaynho}{%
   \fill[SSnau] (-0.06,0) rectangle (0.06,0.45);
   \shade[ball color=SSla!80!SSladam] (0,0.8) circle (0.38);}
 % Hai dãy nhà: \SSpho{6 số hàng trên}{6 số hàng dưới} (để trống ô bằng {}, ví dụ {2,4,,8,,12})
 \providecommand{\SSpho}{}\renewcommand{\SSpho}[2]{%
-  \begin{tikzpicture}[font=\sffamily]
+  \begin{tikzpicture}[font=\normalfont]
     \foreach \hang/\ds/\tenhang/\mauhang in {0/{#1}/{Dãy nhà bên trái đường}/SSxanh,-3.9/{#2}/{Dãy nhà bên phải đường}/SSdo}{%
       \begin{scope}[shift={(0,\hang)}]
         \shade[top color=SSla!45!white,bottom color=SSla!75!SSvang,rounded corners=8pt] (-0.2,-0.3) rectangle (16.6,0.3);
@@ -451,19 +437,21 @@
           \edef\mt{\ifcase\m SSvang\or SSnuoc\or SShong\or SSla\or SSkem\or SStim\fi}%
           \edef\mm{\ifcase\m SSdo\or SSxanhdam\or SSnau\or SScam\or SSladam\or SSdo\fi}%
           \begin{scope}[shift={(2.8*\k-2.8+0.1,0.3)}]\SSnha{\mt}{\mm}{\so}\end{scope}}
-        \node[anchor=south west,fill=\mauhang!80!black,text=white,rounded corners=3pt,inner sep=3pt,font=\sffamily\bfseries\small] at (-0.2,2.65) {\tenhang};
+        \node[anchor=south west,fill=\mauhang!80!black,text=white,rounded corners=3pt,inner sep=3pt,font=\normalfont\bfseries\small] at (-0.2,2.65) {\tenhang};
       \end{scope}}
   \end{tikzpicture}}
 
-% Liền trước - số - liền sau: \SSlien{số}
-\providecommand{\SSlien}{}\renewcommand{\SSlien}[1]{%
-  \begin{tikzpicture}[font=\sffamily\bfseries\large]
-    \node[SSo,minimum width=1.05cm,minimum height=0.9cm] (a) at (0,0) {};
+% Liền trước - số - liền sau: \SSlien{số}{liền trước}{liền sau}{1 = ô mẫu (đã điền, có khung)}
+\providecommand{\SSlien}{}\renewcommand{\SSlien}[4]{%
+  \begin{tikzpicture}[font=\normalfont\bfseries\large]
+    \ifnum#4=1 \draw[rounded corners=6pt,thick,draw=orange,fill=SSkem] (-0.75,-0.95) rectangle (4.75,1.0);
+      \node[orange,font=\normalfont\bfseries\small] at (4.2,0.72) {Mẫu};\fi
+    \node[SSo,minimum width=1.05cm,minimum height=0.9cm] (a) at (0,0) {\textcolor{red}{#2}};
     \node[SSthe=SSvang,circle,minimum size=1.2cm,inner sep=0pt] (b) at (2.0,0) {#1};
-    \node[SSo,minimum width=1.05cm,minimum height=0.9cm] (c) at (4.0,0) {};
+    \node[SSo,minimum width=1.05cm,minimum height=0.9cm] (c) at (4.0,0) {\textcolor{red}{#3}};
     \draw[-latex,very thick,SSxanhdam] (a.east)--(b.west);\draw[-latex,very thick,SSxanhdam] (b.east)--(c.west);
-    \node[font=\sffamily\scriptsize\mdseries,anchor=north] at (0,-0.55) {liền trước};
-    \node[font=\sffamily\scriptsize\mdseries,anchor=north] at (4.0,-0.55) {liền sau};
+    \node[font=\normalfont\scriptsize\mdseries,anchor=north] at (0,-0.55) {liền trước};
+    \node[font=\normalfont\scriptsize\mdseries,anchor=north] at (4.0,-0.55) {liền sau};
   \end{tikzpicture}}
 
 %================ Ong tìm hoa (mê cung số lẻ) ================
@@ -488,28 +476,28 @@
   \shade[ball color=SSvang] (0,0) circle (0.22);\fill[SScam!70!SSnau] (-0.06,0.05) circle (0.02) (0.07,0.0) circle (0.02) (0,-0.09) circle (0.02);}
 % Mê cung: \SSmecung{{6 số},...} gồm 5 hàng, mỗi hàng 6 số
 \providecommand{\SSmecung}{}\renewcommand{\SSmecung}[1]{%
-  \begin{tikzpicture}[font=\sffamily\bfseries\Large]
+  \begin{tikzpicture}[font=\normalfont\bfseries\Large]
     \foreach \hang [count=\i] in {#1}{\foreach \so [count=\j] in \hang{%
       \draw[rounded corners=8pt,thick,draw=SScam!80!SSvang,fill=SSvang!25] (1.85*\j-0.85,-1.2*\i-0.5) rectangle ++(1.7,1.0);
       \node at (1.85*\j,-1.2*\i) {\so};}}
     \begin{scope}[shift={(-1.0,-1.2)},scale=1.3]\SSong\end{scope}
-    \node[font=\sffamily\bfseries\small,text=SScam!60!SSnau] at (-1.0,-0.4) {Ong thợ};
+    \node[font=\normalfont\bfseries\small,text=SScam!60!SSnau] at (-1.0,-0.4) {Ong thợ};
     \draw[-latex,very thick,SScam!80!SSnau] (-0.15,-1.2)--(0.35,-1.2);
     \draw[-latex,very thick,SScam!80!SSnau] (11.3,-6.0)--(11.95,-6.0);
     \begin{scope}[shift={(13.0,-5.6)},scale=1.4]\SShoa\end{scope}
-    \node[font=\sffamily\bfseries\small,text=SSdo!70!black] at (13.0,-4.65) {Hoa mật};
+    \node[font=\normalfont\bfseries\small,text=SSdo!70!black] at (13.0,-4.65) {Hoa mật};
   \end{tikzpicture}}
 
 % Ba thẻ số: \SSlabai{a}{b}{c}
 \providecommand{\SSlabai}{}\renewcommand{\SSlabai}[3]{%
-  \begin{tikzpicture}[font=\sffamily\bfseries,scale=0.85,transform shape]
+  \begin{tikzpicture}[font=\normalfont\bfseries,scale=0.85,transform shape]
     \foreach \d/\x/\a/\c in {#1/0/-8/SSdo,#2/2.7/0/SSxanhdam,#3/5.4/8/SSladam}{%
       \begin{scope}[shift={(\x,0)},rotate=\a]
         \fill[black,opacity=0.12,rounded corners=7pt] (-0.82,-1.18) rectangle (0.92,1.3);
         \draw[rounded corners=7pt,very thick,draw=\c,fill=white] (-0.85,-1.25) rectangle (0.85,1.25);
-        \node[text=\c,font=\sffamily\bfseries\fontsize{40}{44}\selectfont] at (0,0) {\d};
-        \node[text=\c,font=\sffamily\bfseries\small] at (-0.55,0.95) {\d};
-        \node[text=\c,font=\sffamily\bfseries\small,rotate=180] at (0.55,-0.95) {\d};
+        \node[text=\c,font=\normalfont\bfseries\fontsize{40}{44}\selectfont] at (0,0) {\d};
+        \node[text=\c,font=\normalfont\bfseries\small] at (-0.55,0.95) {\d};
+        \node[text=\c,font=\normalfont\bfseries\small,rotate=180] at (0.55,-0.95) {\d};
       \end{scope}}
   \end{tikzpicture}}
 
@@ -526,14 +514,14 @@
 \TTthongtin
 
 \begin{bt}
-    Nhìn hình, viết số rồi điền dấu $>$, $<$, $=$ vào ô trống.
+    Nhìn hình, viết số rồi điền dấu \textgreater, \textless, = vào ô trống.
     \par\nopagebreak\vspace{4pt}\nopagebreak
     \noindent\SSsosanh{2}{3}{3}{2}\hfill\SSsosanh{4}{5}{3}{8}\par\medskip
     \noindent\SSsosanh{2}{7}{2}{7}\hfill\SSsosanh{6}{1}{5}{9}\par
 \end{bt}
 
 \begin{bt}
-    Điền dấu $>$, $<$, $=$ thích hợp vào ô trống.
+    Điền dấu \textgreater, \textless, = thích hợp vào ô trống.
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering\SSmeo\par}\vspace{8pt}
     {\centering\SSsosanhluoi{10/20,35/48,89/98,12/14,100/100,60/40,29/28,90/91,100/10,50/50,64/46,36/36,100/99,35/45,47/37,27/30,48/49,36/46,68/69,52/62,69/79,55/52,38/37,83/82}\par}
 \end{bt}
@@ -541,39 +529,39 @@
 \begin{bt}
     Khoanh tròn vào số lớn nhất trong mỗi hàng.
     \par\nopagebreak\vspace{6pt}\nopagebreak
-    \noindent\begin{minipage}[t]{0.49\linewidth}\SShangso{\SSvuongmien}{12,62,9,10}\end{minipage}\hfill
-    \begin{minipage}[t]{0.49\linewidth}\SShangso{\SSvuongmien}{88,46,9,10,92}\end{minipage}\par\medskip
-    \noindent\begin{minipage}[t]{0.49\linewidth}\SShangso{\SSvuongmien}{4,60,27,35,48}\end{minipage}\hfill
-    \begin{minipage}[t]{0.49\linewidth}\SShangso{\SSvuongmien}{20,78,46,24,16}\end{minipage}\par\medskip
-    \noindent\begin{minipage}[t]{0.49\linewidth}\SShangso{\SSvuongmien}{100,98,4,29,50}\end{minipage}\hfill
-    \begin{minipage}[t]{0.49\linewidth}\SShangso{\SSvuongmien}{58,36,99,5,30}\end{minipage}\par
+    \noindent\begin{minipage}[t]{0.49\linewidth}\SShangso{12,62,9,10}\end{minipage}\hfill
+    \begin{minipage}[t]{0.49\linewidth}\SShangso{88,46,9,10,92}\end{minipage}\par\smallskip
+    \noindent\begin{minipage}[t]{0.49\linewidth}\SShangso{4,60,27,35,48}\end{minipage}\hfill
+    \begin{minipage}[t]{0.49\linewidth}\SShangso{20,78,46,24,16}\end{minipage}\par\smallskip
+    \noindent\begin{minipage}[t]{0.49\linewidth}\SShangso{100,98,4,29,50}\end{minipage}\hfill
+    \begin{minipage}[t]{0.49\linewidth}\SShangso{58,36,99,5,30}\end{minipage}\par
 \end{bt}
 
 \begin{bt}
     Khoanh tròn vào số bé nhất trong mỗi hàng.
     \par\nopagebreak\vspace{6pt}\nopagebreak
-    \noindent\begin{minipage}[t]{0.49\linewidth}\SShangso{\SSocsen}{25,7,80,30,100}\end{minipage}\hfill
-    \begin{minipage}[t]{0.49\linewidth}\SShangso{\SSocsen}{90,10,28,58,45}\end{minipage}\par\medskip
-    \noindent\begin{minipage}[t]{0.49\linewidth}\SShangso{\SSocsen}{54,45,23,79,16}\end{minipage}\hfill
-    \begin{minipage}[t]{0.49\linewidth}\SShangso{\SSocsen}{12,9,99,76,26}\end{minipage}\par\medskip
-    \noindent\begin{minipage}[t]{0.49\linewidth}\SShangso{\SSocsen}{38,40,99,27,89}\end{minipage}\hfill
-    \begin{minipage}[t]{0.49\linewidth}\SShangso{\SSocsen}{3,76,23,14,64}\end{minipage}\par
+    \noindent\begin{minipage}[t]{0.49\linewidth}\SShangso{25,7,80,30,100}\end{minipage}\hfill
+    \begin{minipage}[t]{0.49\linewidth}\SShangso{90,10,28,58,45}\end{minipage}\par\smallskip
+    \noindent\begin{minipage}[t]{0.49\linewidth}\SShangso{54,45,23,79,16}\end{minipage}\hfill
+    \begin{minipage}[t]{0.49\linewidth}\SShangso{12,9,99,76,26}\end{minipage}\par\smallskip
+    \noindent\begin{minipage}[t]{0.49\linewidth}\SShangso{38,40,99,27,89}\end{minipage}\hfill
+    \begin{minipage}[t]{0.49\linewidth}\SShangso{3,76,23,14,64}\end{minipage}\par
 \end{bt}
 
 \begin{bt}
     Sắp xếp các số trên mình mỗi chú sâu đo vào các ô trống theo thứ tự từ bé đến lớn.
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
-        \SSsaudohang{SSla}{23,35,21,12,27}{bé nhất}{lớn nhất}\par\vspace{6pt}
-        \SSsaudohang{SSla}{34,50,62,42,67}{bé nhất}{lớn nhất}\par\vspace{6pt}
-        \SSsaudohang{SSla}{26,71,73,56,33}{bé nhất}{lớn nhất}\par}
+        \SSsaudohang{SSla}{23,35,21,12,27}{bé nhất}{lớn nhất}{1}\par\vspace{2pt}
+        \SSsaudohang{SSla}{34,50,62,42,67}{bé nhất}{lớn nhất}{1}\par\vspace{2pt}
+        \SSsaudohang{SSla}{26,71,73,56,33}{bé nhất}{lớn nhất}{1}\par}
 \end{bt}
 
 \begin{bt}
     Sắp xếp các số trên mình mỗi chú sâu đo vào các ô trống theo thứ tự từ lớn đến bé.
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
-        \SSsaudohang{SSxanh}{21,31,18,28,15}{lớn nhất}{bé nhất}\par\vspace{6pt}
-        \SSsaudohang{SSxanh}{33,23,56,42,37}{lớn nhất}{bé nhất}\par\vspace{6pt}
-        \SSsaudohang{SSxanh}{62,31,23,57,39}{lớn nhất}{bé nhất}\par}
+        \SSsaudohang{SSxanh}{21,31,18,28,15}{lớn nhất}{bé nhất}{0}\par\vspace{2pt}
+        \SSsaudohang{SSxanh}{33,23,56,42,37}{lớn nhất}{bé nhất}{0}\par\vspace{2pt}
+        \SSsaudohang{SSxanh}{62,31,23,57,39}{lớn nhất}{bé nhất}{0}\par}
 \end{bt}
 
 \begin{bt}
@@ -584,16 +572,16 @@
         \item Loại quả nào có nhiều quả nhất? \TTcham[4cm]
         \item Loại quả nào có ít quả nhất? \TTcham[4cm]
         \item Viết số quả của các loại trái cây theo thứ tự từ bé đến lớn: \TTcham[5.5cm]
-        \item Điền dấu $>$, $<$, $=$: \hspace{0.5cm} 64 \SSo\ 46 \hspace{0.8cm} 60 \SSo\ 69 \hspace{0.8cm} 46 \SSo\ 60
+        \item Điền dấu \textgreater, \textless, =: \hspace{0.5cm} 64 \SSo\ 46 \hspace{0.8cm} 60 \SSo\ 69 \hspace{0.8cm} 46 \SSo\ 60
     \end{listEX}
 \end{bt}
 
 \begin{bt}
     Tìm số hoặc chữ số thích hợp điền vào ô trống.
     \begin{listEX}
-        \item $45 < \SSo < 47$ \hspace{2cm} $69 > \SSo > 67$
-        \item $7\SSo > 78$ \hspace{2.6cm} $\SSo 5 > 85$
-        \item Các chữ số có thể điền vào ô trống để $4\SSo < 42$ là: \TTcham[3cm]
+        \item \SShaicot{45 \textless\ \SSo\ \textless\ 47}{69 \textgreater\ \SSo\ \textgreater\ 67}
+        \item \SShaicot{7\SSo\ \textgreater\ 78}{\SSo 5 \textgreater\ 85}
+        \item Các chữ số có thể điền vào ô trống để 4\SSo\ \textless\ 42 là: \TTcham[3cm]
         \item Viết các số lớn hơn 47 và bé hơn 53: \TTcham[5cm]
     \end{listEX}
 \end{bt}
@@ -608,7 +596,8 @@
     \begin{listEX}
         \item Lan có 38 viên bi, Bình có 40 viên bi. Nam có số bi nhiều hơn Lan nhưng ít hơn Bình. Hỏi Nam có bao nhiêu viên bi?\\[4pt]
         Nam có: \TTcham[2.5cm] viên bi.
-        \item Số lớn nhất có hai chữ số khác nhau là: \TTcham[2cm] \hspace{0.6cm} Số bé nhất có hai chữ số là: \TTcham[2cm]
+        \item Số lớn nhất có hai chữ số khác nhau là: \TTcham[2cm]
+        \item Số bé nhất có hai chữ số là: \TTcham[2cm]
         \item Số có hai chữ số, lớn hơn 54, bé hơn 60 và có chữ số hàng đơn vị là 7 là số: \TTcham[2cm]
         \item Có bao nhiêu số lớn hơn 45 và bé hơn 50? \TTcham[2cm]
     \end{listEX}
@@ -675,8 +664,8 @@
 \begin{bt}
     Viết số liền trước và số liền sau của mỗi số vào ô trống.
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
-        \SSlien{29}\hfill\SSlien{54}\hfill\SSlien{80}\par\vspace{10pt}
-        \SSlien{99}\hfill\SSlien{36}\hfill\SSlien{61}\par}
+        \SSlien{29}{28}{30}{1}\hfill\SSlien{54}{}{}{0}\hfill\SSlien{80}{}{}{0}\par\vspace{10pt}
+        \SSlien{99}{}{}{0}\hfill\SSlien{36}{}{}{0}\hfill\SSlien{61}{}{}{0}\par}
 \end{bt}
 
 \newpage
@@ -690,8 +679,8 @@
     Ba tấm thẻ số 3, 5, 8 được xếp thành các số có hai chữ số khác nhau. Em hãy viết số theo yêu cầu.
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering\SSlabai{3}{5}{8}\par}
     \begin{listEX}
-        \item Số chẵn lớn nhất là: \TTcham[2cm] \hspace{0.6cm} Số chẵn bé nhất là: \TTcham[2cm]
-        \item Số lẻ lớn nhất là: \TTcham[2cm] \hspace{0.9cm} Số lẻ bé nhất là: \TTcham[2cm]
+        \item \SShaicot{Số chẵn lớn nhất là: \TTcham[2cm]}{Số chẵn bé nhất là: \TTcham[2cm]}
+        \item \SShaicot{Số lẻ lớn nhất là: \TTcham[2cm]}{Số lẻ bé nhất là: \TTcham[2cm]}
     \end{listEX}
 \end{bt}
 
@@ -709,10 +698,10 @@
 \begin{bt}
     (Không bắt buộc) Điền số thích hợp vào chỗ trống.
     \begin{listEX}
-        \item Số liền trước của 12 là: \TTcham[1.8cm] \hspace{0.6cm} Số liền sau của 68 là: \TTcham[1.8cm]
+        \item \SShaicot{Số liền trước của 12 là: \TTcham[1.8cm]}{Số liền sau của 68 là: \TTcham[1.8cm]}
         \item Các số nằm giữa 8 và 14 là: \TTcham[5cm]
-        \item Số chẵn liền sau của 10 là: \TTcham[1.8cm] \hspace{0.6cm} Số lẻ liền trước của 28 là: \TTcham[1.8cm]
-        \item Số lẻ liền sau của 35 là: \TTcham[1.8cm] \hspace{0.6cm} Số chẵn ở giữa 5 và 10 là: \TTcham[2.2cm]
+        \item \SShaicot{Số chẵn liền sau của 10 là: \TTcham[1.8cm]}{Số lẻ liền trước của 28 là: \TTcham[1.8cm]}
+        \item \SShaicot{Số lẻ liền sau của 35 là: \TTcham[1.8cm]}{Số chẵn ở giữa 5 và 10 là: \TTcham[2.2cm]}
         \item Số lẻ ở giữa 12 và 18 là: \TTcham[3cm]
     \end{listEX}
 \end{bt}
