@@ -23,6 +23,8 @@
     \textbf{Họ và Tên HS:}\dotfill & \textbf{Lớp:}\dotfill & \textbf{Ngày:}\dotfill \\
     \hline
   \end{tabular}\par\medskip}
+% Dòng chủ đề: một dòng, tự thu nhỏ vừa khổ nếu quá dài
+\providecommand{\SStieude}{}\renewcommand{\SStieude}[1]{\sbox0{\color{mauchinh!120}\bfseries\Large #1}\ifdim\wd0>\linewidth\resizebox{\linewidth}{!}{\usebox0}\else\usebox0\fi}
 % Đánh lại số bài từ 1 cho buổi 2 (chỉ khi môi trường bt có bộ đếm tên bt)
 \makeatletter
 \providecommand{\TTdatlaibai}{\@ifundefined{c@bt}{}{\setcounter{bt}{0}}}
@@ -107,6 +109,17 @@
     \foreach \x [count=\k] in {#1}{%
       \pgfmathtruncatemacro{\m}{mod(\k-1,5)}\edef\mc{\SSmaule{\m}}%
       \node[SSthe=\mc] at (0.55+1.28*\k-1.28,0) {\x};}
+  \end{tikzpicture}}
+
+% Hàng số có một số đã khoanh sẵn (mẫu): \SShangsomau{a,b,c,...}{thứ tự số được khoanh}
+\providecommand{\SShangsomau}{}\renewcommand{\SShangsomau}[2]{%
+  \begin{tikzpicture}
+    \useasboundingbox (0,-0.475) rectangle (6.9,0.475);% chữ "Mẫu" nhô lên, không làm hàng cao hơn
+    \foreach \x [count=\k] in {#1}{%
+      \pgfmathtruncatemacro{\m}{mod(\k-1,5)}\edef\mc{\SSmaule{\m}}%
+      \node[SSthe=\mc] at (0.55+1.28*\k-1.28,0) {\x};}
+    \draw[red,very thick] (0.55+1.28*#2-1.28,0) ellipse (0.78 and 0.68);
+    \node[orange,font=\normalfont\bfseries\normalsize] at (0.55+1.28*#2-1.28,0.82) {Mẫu};
   \end{tikzpicture}}
 
 % Sâu đo: \SSsaudohang{màu}{5 số}{chữ ô đầu}{chữ ô cuối}{1 = ô to dần, 0 = ô nhỏ dần}
@@ -509,9 +522,15 @@
 \par\medskip % xuống dòng: tiêu đề không nằm chung dòng với khung HK1 - Tuần 17
 {\centering
         {\color{mauchinh!120}\bfseries\Large PHIẾU BÀI TẬP TOÁN TƯ DUY CẤP ĐỘ A}\\[3pt]
-        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: SO SÁNH CÁC SỐ\\[2pt] TRONG PHẠM VI 100 (BUỔI 1)}\par}
+        \SStieude{CHỦ ĐỀ: SO SÁNH CÁC SỐ TRONG PHẠM VI 100 (BUỔI 1)}\par}
 \vspace{6pt}
 \TTthongtin
+
+\begin{bt}
+    Điền dấu \textgreater, \textless, = thích hợp vào ô trống.
+    \par\nopagebreak\vspace{4pt}\nopagebreak{\centering\SSmeo\par}\vspace{8pt}
+    {\centering\SSsosanhluoi{10/20,35/48,89/98,12/14,100/100,60/40,29/28,90/91,100/10,50/50,64/46,36/36,100/99,35/45,47/37,27/30,48/49,36/46,68/69,52/62,69/79,55/52,38/37,83/82}\par}
+\end{bt}
 
 \begin{bt}
     Nhìn hình, viết số rồi điền dấu \textgreater, \textless, = vào ô trống.
@@ -521,15 +540,9 @@
 \end{bt}
 
 \begin{bt}
-    Điền dấu \textgreater, \textless, = thích hợp vào ô trống.
-    \par\nopagebreak\vspace{4pt}\nopagebreak{\centering\SSmeo\par}\vspace{8pt}
-    {\centering\SSsosanhluoi{10/20,35/48,89/98,12/14,100/100,60/40,29/28,90/91,100/10,50/50,64/46,36/36,100/99,35/45,47/37,27/30,48/49,36/46,68/69,52/62,69/79,55/52,38/37,83/82}\par}
-\end{bt}
-
-\begin{bt}
     Khoanh tròn vào số lớn nhất trong mỗi hàng.
-    \par\nopagebreak\vspace{6pt}\nopagebreak
-    \noindent\begin{minipage}[t]{0.49\linewidth}\SShangso{12,62,9,10}\end{minipage}\hfill
+    \par\nopagebreak\vspace{22pt}\nopagebreak
+    \noindent\begin{minipage}[t]{0.49\linewidth}\SShangsomau{12,62,9,10,18}{2}\end{minipage}\hfill
     \begin{minipage}[t]{0.49\linewidth}\SShangso{88,46,9,10,92}\end{minipage}\par\smallskip
     \noindent\begin{minipage}[t]{0.49\linewidth}\SShangso{4,60,27,35,48}\end{minipage}\hfill
     \begin{minipage}[t]{0.49\linewidth}\SShangso{20,78,46,24,16}\end{minipage}\par\smallskip
@@ -579,7 +592,7 @@
 \begin{bt}
     Tìm số hoặc chữ số thích hợp điền vào ô trống.
     \begin{listEX}
-        \item 45 \textless\ \SSomau{46}\ \textless\ 47 \hspace{1cm}\textcolor{orange}{\bfseries Mẫu}
+        \item 45 \textless\ \SSomau{46}\ \textless\ 47
         \item \SShaicot{69 \textgreater\ \SSo\ \textgreater\ 67}{52 \textless\ \SSo\ \textless\ 54}
         \item \SShaicot{7\SSo\ \textgreater\ 78}{\SSo 5 \textgreater\ 85}
         \item Các chữ số có thể điền vào ô trống để 4\SSo\ \textless\ 42 là: \TTcham[3cm]
@@ -611,7 +624,7 @@
 \TTdatlaibai
 {\centering
         {\color{mauchinh!120}\bfseries\Large PHIẾU BÀI TẬP TOÁN TƯ DUY CẤP ĐỘ A}\\[3pt]
-        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: SO SÁNH CÁC SỐ\\[2pt] TRONG PHẠM VI 100 (BUỔI 2)}\par}
+        \SStieude{CHỦ ĐỀ: SO SÁNH CÁC SỐ TRONG PHẠM VI 100 (BUỔI 2)}\par}
 \vspace{6pt}
 \TTthongtin
 
