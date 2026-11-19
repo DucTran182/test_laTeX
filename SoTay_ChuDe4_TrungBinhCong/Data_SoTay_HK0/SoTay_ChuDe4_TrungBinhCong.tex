@@ -1,0 +1,329 @@
+\documentclass[../main_SoTay_ChuDe4.tex]{subfiles}
+\begin{document}
+%=========================================================
+% Sổ tay kiến thức - Chủ đề 4: TRUNG BÌNH CỘNG
+% Gồm: kiến thức cần nhớ, từ vựng song ngữ, ví dụ minh họa, đề mẫu và đáp án
+% Chỉ dùng các gói đã nạp trong main (amsmath, tcolorbox, array, longtable, ...)
+%=========================================================
+
+%---------- Cấu hình riêng cho sổ tay ----------
+\providecolor{STxanh}{RGB}{46,49,127}
+\providecolor{STnen}{RGB}{238,241,251}
+\providecolor{STdo}{RGB}{190,40,40}
+\providecolor{STnenvang}{RGB}{255,247,222}
+\providecolor{STxanhla}{RGB}{30,120,70}
+
+% Khung kiến thức / lưu ý / lời giải
+\newtcolorbox{STkhung}[1]{colback=STnen,colframe=STxanh,fonttitle=\bfseries,
+  title={#1},breakable,boxrule=0.6pt,arc=2pt}
+\newtcolorbox{STluuy}[1]{colback=STnenvang,colframe=STdo,fonttitle=\bfseries,
+  title={#1},breakable,boxrule=0.6pt,arc=2pt}
+\newtcolorbox{STloigiai}{colback=white,colframe=STxanhla,breakable,boxrule=0.5pt,
+  arc=2pt,left=4pt,right=4pt,top=3pt,bottom=3pt}
+
+% Tiêu đề mục
+\newcommand{\STmuc}[1]{\par\bigskip\noindent{\color{STxanh}\bfseries\Large #1}\par\smallskip
+  {\color{STxanh}\hrule height 0.8pt}\par\medskip}
+\newcommand{\STmucnho}[1]{\par\medskip\noindent{\color{STxanh}\bfseries\large #1}\par\smallskip}
+
+% Chỗ chấm điền
+\providecommand{\TTcham}[1][3cm]{\makebox[#1]{\dotfill}}
+
+% Bảng: tiêu đề cột in đậm, nền nhạt
+\newcommand{\STtieude}[1]{\cellcolor{STnen}\textbf{#1}}
+\renewcommand{\arraystretch}{1.3}
+
+%---------- Tiêu đề ----------
+{\centering
+  {\color{STxanh}\bfseries\Huge SỔ TAY KIẾN THỨC}\\[6pt]
+  {\color{STxanh}\bfseries\LARGE CHỦ ĐỀ 4: TRUNG BÌNH CỘNG}\\[4pt]
+  {\itshape 18 tháng 11, 2026}\par}
+\bigskip
+
+%=========================================================
+\STmuc{1. Kiến thức cần nhớ}
+%=========================================================
+\textbf{Trung bình cộng} (TBC) của nhiều số là giá trị đại diện cho cả nhóm, bằng
+tổng các số chia cho số lượng số hạng. Toàn bộ chủ đề này xoay quanh một ý:
+\textbf{luôn đi qua ``tổng''}.
+
+\STmucnho{Công thức cốt lõi}
+\begin{STkhung}{Công thức}
+\[
+\text{TBC} = \frac{\text{Tổng các số hạng}}{\text{Số các số hạng}}
+\]
+Từ đó suy ra hai công thức ngược, dùng rất nhiều khi ``biết TBC, tìm số'':
+\[
+\text{Tổng} = \text{TBC} \times \text{Số các số hạng}
+\qquad\qquad
+\text{Số các số hạng} = \text{Tổng} : \text{TBC}
+\]
+\end{STkhung}
+
+\STmucnho{Tính chất trọng tâm}
+\begin{itemize}
+  \item TBC luôn nằm giữa số bé nhất và số lớn nhất của nhóm; kết quả nằm ngoài khoảng này là sai.
+  \item Nếu các số bằng nhau thì TBC bằng chính số đó.
+  \item Tổng các phần ``hơn TBC'' luôn bằng tổng các phần ``kém TBC'' (độ lệch so với TBC triệt tiêu nhau).
+  \item Thêm vào nhóm một số đúng bằng TBC cũ thì TBC không đổi.
+  \item Một số hạng tăng (giảm) $a$ đơn vị, các số khác giữ nguyên, thì tổng tăng (giảm) $a$ và TBC tăng (giảm) $a:n$ ($n$ là số số hạng).
+  \item Gộp nhiều nhóm: \textbf{không} cộng các TBC rồi chia; phải cộng các \textbf{tổng} rồi chia cho \textbf{tổng số phần tử}.
+\end{itemize}
+
+\STmucnho{Ba dạng trọng tâm ứng với ba hình thức thi}
+\begin{center}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{4cm}|>{\raggedright\arraybackslash}p{5.6cm}|>{\raggedright\arraybackslash}p{5.6cm}|}
+\hline
+\STtieude{Hình thức thi} & \STtieude{Dạng bài} & \STtieude{Chìa khóa giải}\\ \hline
+Trắc nghiệm Tiếng Anh (4 câu) & TBC cơ bản, ít số hạng, đề viết bằng tiếng Anh & Đọc hiểu đề $\to$ tìm tổng $\to$ bớt/thêm số $\to$ chia\\ \hline
+Điền đáp số (2 câu) & Biết TBC và mối quan hệ hơn kém giữa các số, tìm số chưa biết & Tìm tổng, rồi biểu diễn từng số theo TBC hoặc theo một số chọn làm mốc\\ \hline
+Tự luận (1 câu) & TBC thay đổi khi thêm/bớt số liệu, hoặc kết hợp nhiều nhóm đối tượng & Tổng chung : số lượng chung, trình bày từng bước và giải thích\\ \hline
+\end{tabular}
+\end{center}
+
+\STmucnho{Quy trình 4 bước giải mọi bài TBC}
+\begin{enumerate}
+  \item Xác định có bao nhiêu số hạng (hoặc bao nhiêu đối tượng) và đề cho TBC của phần nào.
+  \item Đổi TBC thành tổng: Tổng $=$ TBC $\times$ số số hạng.
+  \item Cộng/bớt/so sánh các tổng theo yêu cầu đề (bớt một số, thêm một nhóm, dùng quan hệ hơn kém).
+  \item Chia cho số lượng mới nếu cần tìm TBC, rồi kiểm tra: kết quả có nằm giữa số bé nhất và số lớn nhất không?
+\end{enumerate}
+
+\begin{STluuy}{Lỗi thường gặp}
+\begin{itemize}
+  \item Lấy trung bình của các trung bình (bỏ qua việc mỗi nhóm có số lượng khác nhau).
+  \item Quên đổi số số hạng sau khi bớt hoặc thêm số (ví dụ bớt 1 số trong 5 số thì chia cho 4, không phải 5).
+  \item Nhầm ``hơn TBC'' với ``hơn số thứ nhất'' khi đọc đề quan hệ hơn kém.
+  \item Làm tròn quá sớm với số thập phân; chỉ làm tròn ở bước cuối.
+\end{itemize}
+\end{STluuy}
+
+%=========================================================
+\STmuc{2. Từ vựng trọng tâm}
+%=========================================================
+Bộ thuật ngữ song ngữ Anh -- Việt dưới đây bao phủ gần như mọi từ xuất hiện trong đề
+trắc nghiệm tiếng Anh về trung bình cộng.
+
+\STmucnho{Thuật ngữ cốt lõi}
+\begin{center}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{4.8cm}|>{\raggedright\arraybackslash}p{4.6cm}|>{\raggedright\arraybackslash}p{5.8cm}|}
+\hline
+\STtieude{English} & \STtieude{Tiếng Việt} & \STtieude{Ghi chú}\\ \hline
+average / mean & trung bình cộng & ``average'' là từ gặp nhiều nhất trong đề\\ \hline
+sum / total & tổng & bước trung gian hầu như bài nào cũng cần\\ \hline
+number / term / value & số hạng / giá trị & ``5 numbers'' = 5 số hạng\\ \hline
+remaining numbers & các số còn lại & sau khi bớt một số ra khỏi nhóm\\ \hline
+overall / combined average & TBC chung của cả nhóm & phải tính qua tổng, không cộng các TBC\\ \hline
+missing number & số còn thiếu / số chưa biết & thường tìm bằng Tổng $-$ các số đã biết\\ \hline
+\end{tabular}
+\end{center}
+
+\STmucnho{Từ chỉ thay đổi và so sánh}
+\begin{center}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{4.8cm}|>{\raggedright\arraybackslash}p{4.6cm}|>{\raggedright\arraybackslash}p{5.8cm}|}
+\hline
+\STtieude{English} & \STtieude{Tiếng Việt} & \STtieude{Ví dụ}\\ \hline
+add / include / join & thêm vào & A new student joins the group.\\ \hline
+remove / delete / exclude & bớt ra, loại ra & One number is removed.\\ \hline
+increase / decrease by & tăng / giảm đi ($\dots$ đơn vị) & The average increases by 2.\\ \hline
+more than / greater than & lớn hơn (hơn $\dots$ đơn vị) & 6 more than the average\\ \hline
+less than / smaller than & bé hơn (kém $\dots$ đơn vị) & 8 less than the first number\\ \hline
+twice / double & gấp đôi & The first is twice the second.\\ \hline
+difference & hiệu / chênh lệch & the difference between two numbers\\ \hline
+equal to / the same as & bằng & Two numbers are equal.\\ \hline
+\end{tabular}
+\end{center}
+
+\begin{STluuy}{Lưu ý}
+``more than'' là \textbf{hơn một lượng} (phép cộng), còn ``times'' / ``twice'' là
+\textbf{gấp} (phép nhân). Đừng lẫn hai loại.
+\end{STluuy}
+
+\STmucnho{Từ vựng ngữ cảnh Toán -- Khoa học}
+\begin{center}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{7.6cm}|>{\raggedright\arraybackslash}p{7.6cm}|}
+\hline
+\STtieude{English} & \STtieude{Tiếng Việt}\\ \hline
+score / mark & điểm số\\ \hline
+temperature & nhiệt độ\\ \hline
+mass / weight & khối lượng / cân nặng\\ \hline
+height & chiều cao\\ \hline
+per day / per hour & mỗi ngày / mỗi giờ\\ \hline
+experiment & thí nghiệm\\ \hline
+data / data set & số liệu / bộ số liệu\\ \hline
+grade / class / student & khối / lớp / học sinh\\ \hline
+\end{tabular}
+\end{center}
+
+\STmucnho{Mẫu câu hỏi thường gặp}
+\begin{itemize}
+  \item \textit{What is the average of $\dots$?} $\to$ Tính trung bình cộng của $\dots$
+  \item \textit{Find the missing number.} $\to$ Tìm số còn thiếu.
+  \item \textit{What is the average of the remaining numbers?} $\to$ TBC của các số còn lại là bao nhiêu?
+  \item \textit{By how much does the average change?} $\to$ TBC thay đổi bao nhiêu đơn vị?
+  \item \textit{Which of the following is correct?} $\to$ Khẳng định nào sau đây đúng?
+\end{itemize}
+
+%=========================================================
+\STmuc{3. Ví dụ minh họa và các dạng bài cơ bản}
+%=========================================================
+Mỗi dạng dưới đây ứng với một hình thức thi, gồm nhận biết dạng, cách tư duy và lời giải mẫu.
+
+%---------- Dạng 1 ----------
+\STmucnho{Dạng 1 -- TBC cơ bản, đề bằng tiếng Anh (trắc nghiệm)}
+\textbf{Nhận biết:} ít số hạng; đề cho TBC của cả nhóm và một số cụ thể, hỏi TBC của các số còn lại.
+
+\smallskip\noindent\textbf{Ví dụ:} \textit{The average of 5 numbers is 12. If one number is 20, what is the average of the remaining 4 numbers?}
+
+\noindent\hspace*{0.5cm}\makebox[3cm][l]{\textbf{A.} 8}\makebox[3cm][l]{\textbf{B.} 10}%
+\makebox[3cm][l]{\textbf{C.} 12}\makebox[3cm][l]{\textbf{D.} 15}
+
+\smallskip\noindent\textbf{Cách tư duy:} đổi TBC thành tổng, bớt số đã biết, rồi chia cho số lượng mới.
+\begin{STloigiai}
+\begin{enumerate}
+  \item Tổng 5 số: $12\times 5=60$.
+  \item Tổng 4 số còn lại: $60-20=40$.
+  \item TBC 4 số còn lại: $40:4=10$.
+\end{enumerate}
+\textbf{Đáp án: B (10).} Kiểm tra nhanh: số 20 lớn hơn TBC 12 nên bỏ nó đi thì TBC phải giảm, $10<12$ là hợp lý.
+\end{STloigiai}
+
+%---------- Dạng 2 ----------
+\STmucnho{Dạng 2 -- Tìm số chưa biết khi biết TBC và quan hệ hơn kém (điền đáp số)}
+\textbf{Nhận biết:} đề cho TBC và các cụm ``lớn hơn/bé hơn $\dots$ đơn vị'', yêu cầu tìm một số.
+
+\smallskip\noindent\textbf{Ví dụ:} Trung bình cộng của ba số là 45. Số thứ nhất lớn hơn trung bình cộng của ba số là 6, số thứ hai bé hơn số thứ nhất là 8. Tìm số thứ ba.
+
+\smallskip\noindent\textbf{Cách tư duy:} lần lượt tìm từng số theo mốc TBC, cuối cùng lấy tổng trừ đi hai số đã biết.
+\begin{STloigiai}
+\begin{enumerate}
+  \item Tổng ba số: $45\times 3=135$.
+  \item Số thứ nhất: $45+6=51$.
+  \item Số thứ hai: $51-8=43$.
+  \item Số thứ ba: $135-51-43=41$.
+\end{enumerate}
+\textbf{Đáp số: 41.} Kiểm tra: $51+43+41=135$ và $135:3=45$. Đúng.
+
+\smallskip
+\textbf{Cách nhìn khác (độ lệch so với TBC):} số thứ nhất lệch $+6$, số thứ hai lệch $43-45=-2$;
+tổng độ lệch phải bằng 0 nên số thứ ba lệch $-4$, tức là $45-4=41$.
+\end{STloigiai}
+
+%---------- Dạng 3 ----------
+\STmucnho{Dạng 3 -- TBC thay đổi khi thêm/bớt số liệu hoặc kết hợp nhiều nhóm (tự luận)}
+\textbf{Nhận biết:} có nhiều lớp/nhóm, mỗi nhóm có số lượng và TBC riêng; yêu cầu tính TBC chung và giải thích.
+
+\smallskip\noindent\textbf{Ví dụ:} Khối 5 tham gia kiểm tra toán. Lớp 5A có 40 học sinh đạt TBC 8.5 điểm, lớp 5B có 35 học sinh đạt TBC 8.0 điểm, lớp 5C có 25 học sinh đạt TBC 9.2 điểm. Tính điểm TBC toàn khối. (Số liệu lớp 5C ở đây do mình chọn để minh họa, vì đề gốc chỉ nêu lớp 5C có số liệu phụ thuộc.)
+
+\smallskip\noindent\textbf{Cách tư duy:} tính tổng điểm của từng lớp, cộng lại, chia cho tổng số học sinh.
+Không được lấy $(8.5+8.0+9.2):3$ vì ba lớp có sĩ số khác nhau.
+\begin{STloigiai}
+\begin{enumerate}
+  \item Tổng điểm 5A: $8.5\times 40=340$.
+  \item Tổng điểm 5B: $8.0\times 35=280$.
+  \item Tổng điểm 5C: $9.2\times 25=230$.
+  \item Tổng điểm cả khối: $340+280+230=850$; tổng học sinh: $40+35+25=100$.
+  \item TBC toàn khối: $850:100=8.5$ điểm.
+\end{enumerate}
+\textbf{Đáp số: 8.5 điểm.} Giải thích: TBC chung là ``trung bình có trọng số'', lớp đông hơn kéo TBC chung về phía mình nhiều hơn. Kết quả 8.5 nằm giữa 8.0 và 9.2, hợp lý.
+\end{STloigiai}
+
+\smallskip
+Dạng biến thể thường gặp của dạng 3 là \textbf{thêm một số}: ``TBC 4 bài kiểm tra là 7.5; bài thứ 5 được 9 điểm, TBC cả 5 bài là bao nhiêu?''. Khi đó tổng mới là $7.5\times 4+9=39$ và TBC mới là $39:5=7.8$.
+
+\STmucnho{Tóm tắt cách chọn hướng giải}
+\begin{center}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{7.6cm}|>{\raggedright\arraybackslash}p{7.6cm}|}
+\hline
+\STtieude{Nếu đề có dấu hiệu} & \STtieude{Hướng giải}\\ \hline
+Biết TBC, hỏi một số hoặc TBC các số còn lại & Đổi ra tổng, bớt số đã biết, chia lại\\ \hline
+Có ``hơn/kém $\dots$ so với TBC'' & Dùng độ lệch so với TBC, tổng độ lệch bằng 0\\ \hline
+Nhiều lớp/nhóm, mỗi nhóm một TBC & Tính tổng từng nhóm, cộng lại, chia cho tổng số phần tử\\ \hline
+Thêm hoặc bớt một số liệu & Cập nhật cả tổng lẫn số lượng trước khi chia\\ \hline
+\end{tabular}
+\end{center}
+
+%=========================================================
+\STmuc{4. Đề mẫu Toán \& Khoa học}
+%=========================================================
+Đề luyện tập gồm 7 câu, bám cấu trúc $4+2+1$ của chủ đề, với ngữ cảnh thực tế (nhiệt độ,
+cân nặng, thí nghiệm, điểm số). Gợi ý thời gian: \textbf{20 phút}; làm xong mới xem đáp án.
+
+\begin{STkhung}{Chủ đề 4 trong ma trận 8 đề thi thử}
+Theo ma trận đề (8 đề, mỗi đề 7 câu: 4 trắc nghiệm + 2 điền đáp số + 1 tự luận), ở các đề
+đang xem được (Đề 1--5), Trung bình cộng chỉ nằm ở \textbf{Phần 2 (điền đáp số)} của Đề số 1 và Đề số 4.
+\end{STkhung}
+
+\begin{center}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{1.8cm}|>{\raggedright\arraybackslash}p{3.6cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{4.6cm}|}
+\hline
+\STtieude{Đề} & \STtieude{Phần 2 gồm} & \STtieude{Các phần còn lại} & \STtieude{Mục tiêu của đề}\\ \hline
+Đề số 1 & Trung bình cộng; Bài toán về tuổi & Phần 1: chủ đề 1, 2, 3, 8. Phần 3: Chuyển động & Kiểm tra tư duy nền tảng, tạo phản xạ khởi đầu\\ \hline
+Đề số 4 & Bài toán công việc chung; Trung bình cộng & Phần 1: chủ đề 2, 8, 13, 1. Phần 3: Giả thiết tạm (nâng cao) & Nâng cao tư duy giả thiết tạm và năng suất làm việc\\ \hline
+\end{tabular}
+\end{center}
+
+\noindent\textbf{Hệ quả khi ôn:} đề thi thử đòi hỏi nhất ở TBC là dạng 2 (tìm số chưa biết từ TBC và quan hệ hơn kém), nên làm kỹ Câu 5 và Câu 6 bên dưới.
+
+%---------- Phần A ----------
+\STmucnho{Phần A -- Trắc nghiệm tiếng Anh (4 câu)}
+\newcommand{\STdapan}[4]{\par\noindent\hspace*{0.5cm}%
+  \makebox[3.2cm][l]{\textbf{A.} #1}\makebox[3.2cm][l]{\textbf{B.} #2}%
+  \makebox[3.2cm][l]{\textbf{C.} #3}\makebox[3.2cm][l]{\textbf{D.} #4}\par\medskip}
+
+\noindent\textbf{Câu 1.} \textit{The average of 6 numbers is 15. If the number 25 is removed, what is the average of the remaining 5 numbers?}
+\STdapan{12}{13}{14}{15}
+
+\noindent\textbf{Câu 2.} \textit{The temperatures in a city over 5 days were $24^\circ$C, $27^\circ$C, $26^\circ$C, $25^\circ$C and $28^\circ$C. What was the average temperature?}
+\STdapan{$25^\circ$C}{$26^\circ$C}{$27^\circ$C}{$28^\circ$C}
+
+\noindent\textbf{Câu 3.} \textit{The average mass of 4 students is 40 kg. When a new student joins the group, the average mass becomes 42 kg. What is the mass of the new student?}
+\STdapan{42 kg}{45 kg}{50 kg}{52 kg}
+
+\noindent\textbf{Câu 4.} \textit{The average of three numbers is 20. The first number is twice the second number, and the third number is 12. What is the first number?}
+\STdapan{16}{24}{32}{36}
+
+%---------- Phần B ----------
+\STmucnho{Phần B -- Điền đáp số (2 câu)}
+\noindent\textbf{Câu 5.} Trung bình cộng của ba số là 60. Số thứ hai lớn hơn số thứ nhất 10 đơn vị và bé hơn số thứ ba 16 đơn vị. Tìm số thứ ba. \quad(Đáp số: \TTcham[2cm])
+
+\medskip
+\noindent\textbf{Câu 6.} Trong một thí nghiệm trồng đậu, chiều cao trung bình của 4 cây đầu tiên là 12 cm. Cây thứ năm cao hơn chiều cao trung bình của cả 5 cây là 4 cm. Tính chiều cao cây thứ năm. \quad(Đáp số: \TTcham[2cm] cm)
+
+%---------- Phần C ----------
+\STmucnho{Phần C -- Tự luận (1 câu)}
+\noindent\textbf{Câu 7.} Khi kiểm tra môn Khoa học, lớp 5A có 38 học sinh đạt điểm trung bình 8.0, lớp 5B có 42 học sinh đạt điểm trung bình 7.5, lớp 5C có 20 học sinh. Điểm trung bình của cả ba lớp là 7.8.
+\begin{enumerate}[label=\alph*)]
+  \item Tính điểm trung bình của lớp 5C.
+  \item Sau phúc khảo, 2 bạn lớp 5B được cộng thêm mỗi bạn 1 điểm. Tính lại điểm trung bình của cả ba lớp.
+\end{enumerate}
+\textit{Trình bày rõ từng bước và giải thích lập luận.}
+
+%=========================================================
+\STmuc{5. Đáp án và hướng dẫn}
+%=========================================================
+\begin{center}
+\begin{longtable}{|>{\centering\arraybackslash}p{1.2cm}|>{\centering\arraybackslash}p{2.6cm}|>{\raggedright\arraybackslash}p{11.4cm}|}
+\hline
+\STtieude{Câu} & \STtieude{Đáp án} & \STtieude{Hướng dẫn ngắn}\\ \hline
+\endhead
+1 & B (13) & Tổng 6 số $=15\times 6=90$; còn lại $90-25=65$; $65:5=13$.\\ \hline
+2 & B ($26^\circ$C) & $24+27+26+25+28=130$; $130:5=26$.\\ \hline
+3 & C (50 kg) & Tổng cũ $=40\times 4=160$; tổng mới $=42\times 5=210$; bạn mới $=210-160=50$.\\ \hline
+4 & C (32) & Tổng $=20\times 3=60$; số thứ nhất $+$ số thứ hai $=60-12=48$; số thứ nhất gấp đôi số thứ hai nên chia 48 thành 3 phần: số thứ hai $=16$, số thứ nhất $=32$.\\ \hline
+5 & 74 & Tổng $=60\times 3=180$. Gọi số thứ hai là $a$ thì số thứ nhất là $a-10$, số thứ ba là $a+16$. Tổng $=3\times a+6=180$ nên $a=58$, số thứ ba $=58+16=74$. Kiểm tra: $48+58+74=180$.\\ \hline
+6 & 17 cm & Gọi TBC của 5 cây là $m$, $m$ hơn 12 là $d$ cm. Mỗi cây trong 4 cây đầu thấp hơn $m$ là $d$ cm, tổng thiếu $4\times d$. Cây thứ năm cao hơn $m$ là 4 cm để bù lại, nên $4\times d=4$, $d=1$. TBC 5 cây $=13$ cm, cây thứ năm $=13+4=17$ cm. Kiểm tra: $(48+17):5=13$.\\ \hline
+7a & 8.05 điểm & Tổng điểm 5A $=8.0\times 38=304$; 5B $=7.5\times 42=315$; cả ba lớp $=7.8\times 100=780$ ($38+42+20=100$ học sinh). Tổng điểm 5C $=780-304-315=161$; TBC 5C $=161:20=8.05$.\\ \hline
+7b & 7.82 điểm & Tổng điểm tăng thêm $2\times 1=2$, tổng mới $=780+2=782$; sĩ số vẫn là 100 nên TBC mới $=782:100=7.82$.\\ \hline
+\end{longtable}
+\end{center}
+
+\begin{STkhung}{Gợi ý chấm điểm câu tự luận}
+\begin{itemize}
+  \item Đúng hướng đổi TBC thành tổng từng lớp và tổng chung: phần lớn số điểm.
+  \item Phép tính đúng và đủ đơn vị (điểm, học sinh).
+  \item Có câu kết luận và bước kiểm tra kết quả hợp lý.
+\end{itemize}
+\end{STkhung}
+
+\end{document}
