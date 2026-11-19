@@ -1,5 +1,7 @@
 \documentclass[../main.tex]{subfiles}
 \begin{document}
+\begingroup
+\setlength{\parindent}{0pt}\setlength{\parskip}{4pt plus 1pt}\linespread{1.15}\selectfont
 %=========================================================
 % Sổ tay kiến thức - Chủ đề 4: TRUNG BÌNH CỘNG
 % Gồm: kiến thức cần nhớ, từ vựng song ngữ, ví dụ minh họa, đề mẫu và đáp án
@@ -22,16 +24,16 @@
   arc=2pt,left=4pt,right=4pt,top=3pt,bottom=3pt}
 
 % Tiêu đề mục
-\newcommand{\STmuc}[1]{\par\bigskip\noindent{\color{STxanh}\bfseries\Large #1}\par\smallskip
-  {\color{STxanh}\hrule height 0.8pt}\par\medskip}
-\newcommand{\STmucnho}[1]{\par\medskip\noindent{\color{STxanh}\bfseries\large #1}\par\smallskip}
+\newcommand{\STmuc}[1]{\par\vspace{14pt plus 4pt}\noindent{\color{STxanh}\bfseries\Large #1}\par\nopagebreak\smallskip\nopagebreak
+  {\color{STxanh}\hrule height 0.8pt}\par\medskip\nopagebreak}
+\newcommand{\STmucnho}[1]{\par\vspace{8pt plus 2pt}\noindent{\color{STxanh}\bfseries\large #1}\par\smallskip}
 
 % Chỗ chấm điền
 \providecommand{\TTcham}[1][3cm]{\makebox[#1]{\dotfill}}
 
 % Bảng: tiêu đề cột in đậm, nền nhạt
 \newcommand{\STtieude}[1]{\textbf{#1}}
-\renewcommand{\arraystretch}{1.3}
+\renewcommand{\arraystretch}{1.4}
 
 %---------- Tiêu đề ----------
 {\centering
@@ -72,7 +74,7 @@ Từ đó suy ra hai công thức ngược, dùng rất nhiều khi ``biết TBC
 
 \STmucnho{Ba dạng trọng tâm ứng với ba hình thức thi}
 \begin{center}
-\begin{tabular}{|>{\raggedright\arraybackslash}p{4cm}|>{\raggedright\arraybackslash}p{5.6cm}|>{\raggedright\arraybackslash}p{5.6cm}|}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{4.1cm}|>{\raggedright\arraybackslash}p{5.9cm}|>{\raggedright\arraybackslash}p{5.9cm}|}
 \hline
 \STtieude{Hình thức thi} & \STtieude{Dạng bài} & \STtieude{Chìa khóa giải}\\ \hline
 Trắc nghiệm Tiếng Anh (4 câu) & TBC cơ bản, ít số hạng, đề viết bằng tiếng Anh & Đọc hiểu đề $\to$ tìm tổng $\to$ bớt/thêm số $\to$ chia\\ \hline
@@ -80,6 +82,7 @@ Trắc nghiệm Tiếng Anh (4 câu) & TBC cơ bản, ít số hạng, đề vi�
 Tự luận (1 câu) & TBC thay đổi khi thêm/bớt số liệu, hoặc kết hợp nhiều nhóm đối tượng & Tổng chung : số lượng chung, trình bày từng bước và giải thích\\ \hline
 \end{tabular}
 \end{center}
+\vspace{2pt}
 
 \STmucnho{Quy trình 4 bước giải mọi bài TBC}
 \begin{enumerate}
@@ -106,7 +109,7 @@ trắc nghiệm tiếng Anh về trung bình cộng.
 
 \STmucnho{Thuật ngữ cốt lõi}
 \begin{center}
-\begin{tabular}{|>{\raggedright\arraybackslash}p{4.8cm}|>{\raggedright\arraybackslash}p{4.6cm}|>{\raggedright\arraybackslash}p{5.8cm}|}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{4.8cm}|>{\raggedright\arraybackslash}p{4.8cm}|>{\raggedright\arraybackslash}p{6.3cm}|}
 \hline
 \STtieude{English} & \STtieude{Tiếng Việt} & \STtieude{Ghi chú}\\ \hline
 average / mean & trung bình cộng & ``average'' là từ gặp nhiều nhất trong đề\\ \hline
@@ -117,10 +120,11 @@ overall / combined average & TBC chung của cả nhóm & phải tính qua tổn
 missing number & số còn thiếu / số chưa biết & thường tìm bằng Tổng $-$ các số đã biết\\ \hline
 \end{tabular}
 \end{center}
+\vspace{2pt}
 
 \STmucnho{Từ chỉ thay đổi và so sánh}
 \begin{center}
-\begin{tabular}{|>{\raggedright\arraybackslash}p{4.8cm}|>{\raggedright\arraybackslash}p{4.6cm}|>{\raggedright\arraybackslash}p{5.8cm}|}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{4.8cm}|>{\raggedright\arraybackslash}p{4.8cm}|>{\raggedright\arraybackslash}p{6.3cm}|}
 \hline
 \STtieude{English} & \STtieude{Tiếng Việt} & \STtieude{Ví dụ}\\ \hline
 add / include / join & thêm vào & A new student joins the group.\\ \hline
@@ -133,6 +137,7 @@ difference & hiệu / chênh lệch & the difference between two numbers\\ \hlin
 equal to / the same as & bằng & Two numbers are equal.\\ \hline
 \end{tabular}
 \end{center}
+\vspace{2pt}
 
 \begin{STluuy}{Lưu ý}
 ``more than'' là \textbf{hơn một lượng} (phép cộng), còn ``times'' / ``twice'' là
@@ -141,7 +146,7 @@ equal to / the same as & bằng & Two numbers are equal.\\ \hline
 
 \STmucnho{Từ vựng ngữ cảnh Toán -- Khoa học}
 \begin{center}
-\begin{tabular}{|>{\raggedright\arraybackslash}p{7.6cm}|>{\raggedright\arraybackslash}p{7.6cm}|}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{8.2cm}|>{\raggedright\arraybackslash}p{8.2cm}|}
 \hline
 \STtieude{English} & \STtieude{Tiếng Việt}\\ \hline
 score / mark & điểm số\\ \hline
@@ -154,6 +159,7 @@ data / data set & số liệu / bộ số liệu\\ \hline
 grade / class / student & khối / lớp / học sinh\\ \hline
 \end{tabular}
 \end{center}
+\vspace{2pt}
 
 \STmucnho{Mẫu câu hỏi thường gặp}
 \begin{itemize}
@@ -233,7 +239,7 @@ Dạng biến thể thường gặp của dạng 3 là \textbf{thêm một số}
 
 \STmucnho{Tóm tắt cách chọn hướng giải}
 \begin{center}
-\begin{tabular}{|>{\raggedright\arraybackslash}p{7.6cm}|>{\raggedright\arraybackslash}p{7.6cm}|}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{8.2cm}|>{\raggedright\arraybackslash}p{8.2cm}|}
 \hline
 \STtieude{Nếu đề có dấu hiệu} & \STtieude{Hướng giải}\\ \hline
 Biết TBC, hỏi một số hoặc TBC các số còn lại & Đổi ra tổng, bớt số đã biết, chia lại\\ \hline
@@ -242,6 +248,7 @@ Nhiều lớp/nhóm, mỗi nhóm một TBC & Tính tổng từng nhóm, cộng l
 Thêm hoặc bớt một số liệu & Cập nhật cả tổng lẫn số lượng trước khi chia\\ \hline
 \end{tabular}
 \end{center}
+\vspace{2pt}
 
 %=========================================================
 \STmuc{4. Đề mẫu Toán \& Khoa học}
@@ -255,13 +262,14 @@ Theo ma trận đề (8 đề, mỗi đề 7 câu: 4 trắc nghiệm + 2 điền
 \end{STkhung}
 
 \begin{center}
-\begin{tabular}{|>{\raggedright\arraybackslash}p{1.8cm}|>{\raggedright\arraybackslash}p{3.6cm}|>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{4.6cm}|}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{1.8cm}|>{\raggedright\arraybackslash}p{3.6cm}|>{\raggedright\arraybackslash}p{4.9cm}|>{\raggedright\arraybackslash}p{5.2cm}|}
 \hline
 \STtieude{Đề} & \STtieude{Phần 2 gồm} & \STtieude{Các phần còn lại} & \STtieude{Mục tiêu của đề}\\ \hline
 Đề số 1 & Trung bình cộng; Bài toán về tuổi & Phần 1: chủ đề 1, 2, 3, 8. Phần 3: Chuyển động & Kiểm tra tư duy nền tảng, tạo phản xạ khởi đầu\\ \hline
 Đề số 4 & Bài toán công việc chung; Trung bình cộng & Phần 1: chủ đề 2, 8, 13, 1. Phần 3: Giả thiết tạm (nâng cao) & Nâng cao tư duy giả thiết tạm và năng suất làm việc\\ \hline
 \end{tabular}
 \end{center}
+\vspace{2pt}
 
 \noindent\textbf{Hệ quả khi ôn:} đề thi thử đòi hỏi nhất ở TBC là dạng 2 (tìm số chưa biết từ TBC và quan hệ hơn kém), nên làm kỹ Câu 5 và Câu 6 bên dưới.
 
@@ -302,8 +310,7 @@ Theo ma trận đề (8 đề, mỗi đề 7 câu: 4 trắc nghiệm + 2 điền
 %=========================================================
 \STmuc{5. Đáp án và hướng dẫn}
 %=========================================================
-\begin{center}
-\begin{longtable}{|>{\centering\arraybackslash}p{1.2cm}|>{\centering\arraybackslash}p{2.6cm}|>{\raggedright\arraybackslash}p{11.4cm}|}
+\begin{longtable}{|>{\centering\arraybackslash}p{1.3cm}|>{\centering\arraybackslash}p{2.7cm}|>{\raggedright\arraybackslash}p{11.9cm}|}
 \hline
 \STtieude{Câu} & \STtieude{Đáp án} & \STtieude{Hướng dẫn ngắn}\\ \hline
 \endhead
@@ -316,7 +323,6 @@ Theo ma trận đề (8 đề, mỗi đề 7 câu: 4 trắc nghiệm + 2 điền
 7a & 8.05 điểm & Tổng điểm 5A $=8.0\times 38=304$; 5B $=7.5\times 42=315$; cả ba lớp $=7.8\times 100=780$ ($38+42+20=100$ học sinh). Tổng điểm 5C $=780-304-315=161$; TBC 5C $=161:20=8.05$.\\ \hline
 7b & 7.82 điểm & Tổng điểm tăng thêm $2\times 1=2$, tổng mới $=780+2=782$; sĩ số vẫn là 100 nên TBC mới $=782:100=7.82$.\\ \hline
 \end{longtable}
-\end{center}
 
 \begin{STkhung}{Gợi ý chấm điểm câu tự luận}
 \begin{itemize}
@@ -326,4 +332,5 @@ Theo ma trận đề (8 đề, mỗi đề 7 câu: 4 trắc nghiệm + 2 điền
 \end{itemize}
 \end{STkhung}
 
+\endgroup
 \end{document}
