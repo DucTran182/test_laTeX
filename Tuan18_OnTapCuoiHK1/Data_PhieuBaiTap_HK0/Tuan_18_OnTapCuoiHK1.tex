@@ -36,10 +36,10 @@
 \definecolor{OThong}{RGB}{245,150,175}\definecolor{OTla}{RGB}{125,195,120}
 \definecolor{OTtim}{RGB}{185,160,225}\definecolor{OTnau}{RGB}{120,75,35}
 \tikzset{
-  OTo/.style={draw=black!80,thick,rounded corners=3pt,minimum width=0.95cm,minimum height=0.8cm,inner sep=0pt,font=\sffamily\bfseries\large},
-  OTotron/.style={draw=black!80,thick,circle,minimum size=1.0cm,inner sep=0pt,font=\sffamily\bfseries\large},
-  OTgach/.style={draw=OTcamdam,thick,fill=OTcam!35,minimum width=1.5cm,minimum height=0.8cm,inner sep=0pt,font=\sffamily\bfseries\large},
-  OTthe/.style={draw=OTxanhdam,thick,rounded corners=5pt,fill=OTxanh!20,minimum width=1.3cm,minimum height=0.95cm,inner sep=0pt,font=\sffamily\bfseries\Large},
+  OTo/.style={draw=black!80,thick,rounded corners=3pt,minimum width=0.95cm,minimum height=0.8cm,inner sep=0pt,font=\large},
+  OTotron/.style={draw=black!80,thick,circle,minimum size=1.0cm,inner sep=0pt,font=\large},
+  OTgach/.style={draw=OTcamdam,thick,fill=OTcam!35,minimum width=1.5cm,minimum height=0.8cm,inner sep=0pt,font=\large},
+  OTthe/.style={draw=OTxanhdam,thick,rounded corners=5pt,fill=OTxanh!20,minimum width=1.3cm,minimum height=0.95cm,inner sep=0pt,font=\Large},
 }
 
 % Dãy ô số: \OTday{a,b,,d,...} (để trống = ô cần điền)
@@ -48,9 +48,9 @@
 
 % Bảng số liền trước / ở giữa / liền sau: \OTlt{tiêu đề}{kiểu 1,2,3}{a/b,c/d,...}
 \providecommand{\OTlt}{}\renewcommand{\OTlt}[3]{%
-  \begin{tikzpicture}[font=\sffamily\bfseries\large]
+  \begin{tikzpicture}[font=\large]
     \draw[thick,rounded corners=6pt,fill=black!4] (0,0.55) rectangle (4.3,-6.1);
-    \node[draw,thick,rounded corners=4pt,fill=OTxanh!25,minimum width=3.7cm,minimum height=0.8cm,font=\sffamily\bfseries] at (2.15,0.0) {#1};
+    \node[draw,thick,rounded corners=4pt,fill=OTxanh!25,minimum width=3.7cm,minimum height=0.8cm,font=\normalsize] at (2.15,0.0) {#1};
     \foreach \a/\b [count=\k] in {#3}{%
       \ifnum#2=1 \node[OTo,fill=white] at (1.0,-1.1*\k) {}; \node at (2.4,-1.1*\k) {\a};\fi
       \ifnum#2=2 \node at (0.7,-1.1*\k) {\a}; \node[OTo,fill=white] at (2.15,-1.1*\k) {}; \node at (3.6,-1.1*\k) {\b};\fi
@@ -63,7 +63,7 @@
     \foreach \a in {90,162,234,306,18}{%
       \begin{scope}[rotate=\a]\draw[fill=#2,draw=black!70,thick] (0.52,0) ellipse (0.4 and 0.3);\end{scope}}
     \draw[fill=white,draw=black!70,thick] (0,0) circle (0.42);
-    \node[font=\sffamily\bfseries\large] at (0,0) {#1};
+    \node[font=\large] at (0,0) {#1};
   \end{tikzpicture}}
 
 % Trái tim ghi số: \OTtim{số}
@@ -75,7 +75,7 @@
       .. controls (0.4,0.88) and (0.95,0.72) .. (0.95,0.32)
       .. controls (0.95,-0.05) and (0.2,-0.45) .. (0,-0.62) -- cycle;
     \fill[white,opacity=0.6] (-0.55,0.45) ellipse (0.14 and 0.08);
-    \node[font=\sffamily\bfseries\large] at (0,0.12) {#1};
+    \node[font=\large] at (0,0.12) {#1};
   \end{tikzpicture}}
 
 % Quả bí ngô có phép tính: \OTbingo{phép tính}
@@ -86,7 +86,7 @@
     \draw[OTcamdam,thin] (-0.25,0.52) .. controls (-0.3,0) .. (-0.25,-0.52) (0.25,0.52) .. controls (0.3,0) .. (0.25,-0.52);
     \draw[draw=OTnau,fill=OTnau!70!OTla,thick,rounded corners=1.5pt] (-0.07,0.58)--(-0.05,0.9)--(0.14,0.95)--(0.13,0.58)--cycle;
     \draw[draw=OTla!50!black,fill=OTla,thick] (0.14,0.78) .. controls (0.5,1.05) and (0.7,0.8) .. (0.45,0.68) .. controls (0.35,0.72) .. (0.14,0.78);
-    \node[fill=white,rounded corners=2pt,inner sep=2pt,font=\sffamily\bfseries\large] at (0,-0.03) {#1};
+    \node[fill=white,rounded corners=2pt,inner sep=2pt,font=\large] at (0,-0.03) {#1};
   \end{tikzpicture}}
 
 % Cây tách số: \OTtach{số}{trái}{phải}
@@ -105,7 +105,7 @@
     \draw[draw=OTcam,line width=0.6pt] (0,0) circle (0.98);
     \foreach \k in {1,...,60}{\draw[black!55,line width=0.3pt] ({90-6*\k}:0.98)--({90-6*\k}:0.93);}
     \foreach \k in {1,...,12}{\draw[black!75,line width=0.8pt] ({90-30*\k}:0.98)--({90-30*\k}:0.88);}
-    \foreach \k in {1,...,12}{\node[font=\sffamily\bfseries\fontsize{7}{8}\selectfont] at ({90-30*\k}:0.77) {\k};}
+    \foreach \k in {1,...,12}{\node[font=\fontsize{7}{8}\selectfont] at ({90-30*\k}:0.77) {\k};}
     \ifnum#1=1
       \pgfmathsetmacro{\OTag}{90-30*(#2+#3/60)}\pgfmathsetmacro{\OTam}{90-6*#3}
       \draw[line width=2.8pt,line cap=round,black!85] (0,0)--(\OTag:0.36);
@@ -116,7 +116,7 @@
 
 % Chuỗi phép tính: \OTchuoi{số đầu}{phép 1}{phép 2}
 \providecommand{\OTchuoi}{}\renewcommand{\OTchuoi}[3]{%
-  \begin{tikzpicture}[font=\sffamily\bfseries\large]
+  \begin{tikzpicture}[font=\large]
     \node[OTotron,fill=OTvang] (a) at (0,0) {#1};
     \node[OTo,minimum width=1.1cm,minimum height=0.95cm] (b) at (4.2,0) {};
     \node[OTo,minimum width=1.1cm,minimum height=0.95cm] (c) at (8.4,0) {};
@@ -126,7 +126,7 @@
 
 % Cột phép tính trong khung bo tròn: \OTcotpt{a,b,c,d,e}
 \providecommand{\OTcotpt}{}\renewcommand{\OTcotpt}[1]{%
-  \begin{tikzpicture}[font=\sffamily\large]
+  \begin{tikzpicture}[font=\large]
     \draw[thick,rounded corners=10pt,fill=black!3] (0,0.3) rectangle (5.3,-4.7);
     \foreach \pt [count=\k] in {#1}{\node[anchor=west] at (0.3,-0.9*\k+0.45) {$\pt =$\ \rule{1.4cm}{0.5pt}};}
   \end{tikzpicture}}
@@ -146,14 +146,14 @@
 \providecommand{\OTtia}{}\renewcommand{\OTtia}[3]{%
   \draw[thick,-latex] (-0.35,0)--({#1*#3+0.55},0);
   \foreach \k in {0,#2,...,#1}{\draw[thick] ({\k*#3},-0.12)--({\k*#3},0.12);
-    \node[font=\sffamily\bfseries\small] at ({\k*#3},-0.45) {\k};}}
+    \node[font=\small] at ({\k*#3},-0.45) {\k};}}
 % Cung nhảy trên tia số: \OTcung{từ}{đến}{độ dài đơn vị}{nhãn}{hướng: bend left/right}
 \providecommand{\OTcung}{}\renewcommand{\OTcung}[5]{%
-  \draw[-latex,very thick,OTxanhdam] ({#1*#3},0.14) to[#5=65] node[above=1pt,font=\sffamily\bfseries\small,fill=white,inner sep=1pt]{#4} ({#2*#3},0.14);}
+  \draw[-latex,very thick,OTxanhdam] ({#1*#3},0.14) to[#5=65] node[above=1pt,font=\small,fill=white,inner sep=1pt]{#4} ({#2*#3},0.14);}
 
 % Ngôi nhà số: \OTnhaso{số mái}{cửa sổ trái}{cửa sổ phải}
 \providecommand{\OTnhaso}{}\renewcommand{\OTnhaso}[3]{%
-  \begin{tikzpicture}[font=\sffamily\bfseries\large]
+  \begin{tikzpicture}[font=\large]
     \draw[thick,fill=OTcam!30,draw=OTcamdam,line join=round] (-1.15,1.4)--(0,2.5)--(1.15,1.4)--cycle;
     \draw[thick,fill=OTvangnhat,draw=black!75] (-0.95,0) rectangle (0.95,1.4);
     \node at (0,1.78) {#1};
@@ -181,7 +181,7 @@
 
 % Bảng cộng: \OTbangcong{các số cột}{các số hàng}
 \providecommand{\OTbangcong}{}\renewcommand{\OTbangcong}[2]{%
-  \begin{tikzpicture}[font=\sffamily\bfseries\large]
+  \begin{tikzpicture}[font=\large]
     \node[draw=black!80,thick,fill=OTvang,minimum width=1.3cm,minimum height=0.9cm] (g) at (0,0) {$+$};
     \foreach \c [count=\i] in {#1}{\node[draw=black!80,thick,fill=OTxanh!30,minimum width=1.3cm,minimum height=0.9cm] at (1.3*\i,0) {\c};}
     \foreach \r [count=\j] in {#2}{\node[draw=black!80,thick,fill=OTxanh!30,minimum width=1.3cm,minimum height=0.9cm] at (0,-0.9*\j) {\r};
@@ -189,19 +189,116 @@
   \end{tikzpicture}}
 
 % Thẻ phép tính để tô màu: \OTthepc{phép tính}
-\providecommand{\OTthepc}{}\renewcommand{\OTthepc}[1]{\node[draw=black!70,very thick,rounded corners=6pt,fill=white,minimum width=2.4cm,minimum height=1.15cm,font=\sffamily\bfseries\large] {#1};}
+\providecommand{\OTthepc}{}\renewcommand{\OTthepc}[1]{\node[draw=black!70,very thick,rounded corners=6pt,fill=white,minimum width=2.4cm,minimum height=1.15cm,font=\large] {#1};}
 
 % Một dòng phép tính điền ô: \OTpt{...} (chữ số cùng font)
 \providecommand{\OTb}{}\renewcommand{\OTb}{\OTovuong[0.55cm]}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ---- Tàu hỏa và ếch con (tham khảo phiếu Tuần 16) ----
+\definecolor{OTxam}{RGB}{232,236,242}
+% Toa tàu và đầu tàu
+\providecommand{\OTtoa}{}\renewcommand{\OTtoa}[2]{% #1 = vị trí x, #2 = số
+  \draw[thick,rounded corners=2pt] (#1,0.35) rectangle ++(1.3,1.0);
+  \node[font=\large] at (#1+0.65,0.85) {#2};
+  \draw[thick,rounded corners=2pt] (#1-0.05,0.12) rectangle ++(1.4,0.23);
+  \draw[thick,fill=white] (#1+0.33,0.08) circle (0.2) (#1+0.97,0.08) circle (0.2);}
+\providecommand{\OTdautau}{}\renewcommand{\OTdautau}[2]{% #1 = vị trí x, #2 = hướng (1: mũi bên trái, -1: mũi bên phải)
+  \begin{scope}[shift={(#1+0.75,0)},xscale=#2]
+    \draw[thick,rounded corners=2pt] (-0.75,0.35) rectangle (0,0.85);
+    \draw[thick,rounded corners=2pt] (-0.6,0.85) rectangle (-0.35,1.15);
+    \draw[thick,rounded corners=2pt] (0,0.35) rectangle (0.65,1.5);
+    \draw[thick,rounded corners=2pt] (-0.1,1.5) rectangle (0.75,1.68);
+    \draw[thick,rounded corners=1pt] (0.15,1.0) rectangle (0.5,1.32);
+    \draw[thick,rounded corners=2pt] (-0.8,0.12) rectangle (0.7,0.35);
+    \draw[thick,fill=white] (-0.55,0.08) circle (0.2) (-0.12,0.08) circle (0.2) (0.4,0.12) circle (0.3);
+  \end{scope}}
+% Chú ếch con ngồi (tâm tại gốc tọa độ, cao khoảng 1,4cm, rộng khoảng 1,6cm)
+\providecommand{\OTech}{}\renewcommand{\OTech}{%
+  \begin{scope}[line join=round]
+  % --- chân sau gập hai bên ---
+  \foreach \s in {-1,1}{%
+    \begin{scope}[xscale=\s]
+      \fill[OTla!85!black,draw=green!35!black,thick] (0.28,-0.55) .. controls (0.95,-0.6) and (0.95,0.05) .. (0.55,0.02) .. controls (0.35,0.0) and (0.25,-0.3) .. cycle;
+      % bàn chân sau có 3 ngón
+      \fill[OTla!85!black,draw=green!35!black,thick] (0.45,-0.55) .. controls (0.7,-0.62) .. (0.92,-0.58)
+        .. controls (0.98,-0.62) and (0.96,-0.68) .. (0.9,-0.67) .. controls (0.75,-0.66) .. (0.62,-0.66)
+        .. controls (0.55,-0.7) .. (0.45,-0.68) -- cycle;
+    \end{scope}}
+  % --- thân ---
+  \fill[OTla,draw=green!35!black,thick] (0,-0.62) .. controls (-0.55,-0.62) and (-0.6,-0.1) .. (-0.5,0.15)
+     -- (0.5,0.15) .. controls (0.6,-0.1) and (0.55,-0.62) .. (0,-0.62);
+  % bụng
+  \fill[yellow!35!green!25] (0,-0.28) ellipse (0.28 and 0.3);
+  % --- chân trước ---
+  \foreach \s in {-1,1}{%
+    \begin{scope}[xscale=\s]
+      \fill[OTla,draw=green!35!black,thick] (0.24,0.0) .. controls (0.32,-0.3) .. (0.28,-0.58) -- (0.16,-0.58) .. controls (0.18,-0.3) .. (0.14,-0.05) -- cycle;
+      \fill[OTla,draw=green!35!black,thick] (0.22,-0.6) ellipse (0.12 and 0.05);
+    \end{scope}}
+  % --- đầu ---
+  \fill[OTla,draw=green!35!black,thick] (0,0.33) ellipse (0.66 and 0.36);
+  % mắt lồi
+  \foreach \x in {-0.33,0.33}{%
+    \fill[OTla,draw=green!35!black,thick] (\x,0.68) circle (0.21);
+    \fill[white] (\x,0.69) circle (0.14);
+    \fill[black] (\x+0.02,0.68) circle (0.075);
+    \fill[white] (\x+0.05,0.71) circle (0.025);}
+  % đốm trên đầu
+  \fill[green!45!black,opacity=0.5] (-0.08,0.52) circle (0.045) (0.1,0.55) circle (0.035) (0.0,0.6) circle (0.03);
+  % má hồng
+  \fill[pink!85] (-0.45,0.27) ellipse (0.1 and 0.06) (0.45,0.27) ellipse (0.1 and 0.06);
+  % miệng cười rộng
+  \draw[green!25!black,thick,line cap=round] (-0.42,0.33) .. controls (-0.2,0.08) and (0.2,0.08) .. (0.42,0.33);
+  % lỗ mũi
+  \fill[green!25!black] (-0.06,0.45) circle (0.018) (0.06,0.45) circle (0.018);
+  \end{scope}}
+
+% Ô kết quả nhỏ (chữ đỏ khi có đáp án mẫu)
+\providecommand{\OTkq}{}\renewcommand{\OTkq}[1]{\fbox{\rule{0pt}{0.55cm}\makebox[0.55cm]{\textcolor{red}{#1}}}}
+% Cộng qua 10 bằng cách tách số: \OTqv{a}{b}{c}{d}{kết quả}{nhãn}   (b = c + d, a + c = 10)
+\providecommand{\OTqv}{}\renewcommand{\OTqv}[6]{%
+  \begin{tikzpicture}[font=\large]
+    \node[font=\small,text=OTcamdam,anchor=east] at (-0.2,-0.55) {#6};
+    \node (a) at (0,0) {#1}; \node at (0.6,0) {$+$};
+    \node[OTotron,minimum size=0.85cm,fill=OTvang] (b) at (1.35,0) {#2};
+    \node[OTotron,minimum size=0.75cm,fill=white] (c) at (0.7,-1.15) {\textcolor{red}{#3}};
+    \node[OTotron,minimum size=0.75cm,fill=white] (d) at (2.0,-1.15) {\textcolor{red}{#4}};
+    \draw[thick] (b)--(c) (b)--(d);
+    \node[anchor=west] at (2.8,-0.55) {$#1+$\OTkq{#3}$+$\OTkq{#4}$=10+$\OTkq{#4}$=$\OTkq{#5}};
+  \end{tikzpicture}}
+% Trừ qua 10 bằng cách tách số: a - b = a - c - d = 10 - d  (a - c = 10)
+\providecommand{\OTqvt}{}\renewcommand{\OTqvt}[6]{%
+  \begin{tikzpicture}[font=\large]
+    \node[font=\small,text=OTcamdam,anchor=east] at (-0.2,-0.55) {#6};
+    \node (a) at (0,0) {#1}; \node at (0.6,0) {$-$};
+    \node[OTotron,minimum size=0.85cm,fill=OTvang] (b) at (1.35,0) {#2};
+    \node[OTotron,minimum size=0.75cm,fill=white] (c) at (0.7,-1.15) {\textcolor{red}{#3}};
+    \node[OTotron,minimum size=0.75cm,fill=white] (d) at (2.0,-1.15) {\textcolor{red}{#4}};
+    \draw[thick] (b)--(c) (b)--(d);
+    \node[anchor=west] at (2.8,-0.55) {$#1-$\OTkq{#3}$-$\OTkq{#4}$=10-$\OTkq{#4}$=$\OTkq{#5}};
+  \end{tikzpicture}}
+% Chuỗi phép tính có mẫu: \OTchuoim{số đầu}{phép 1}{phép 2}{kq 1}{kq 2}
+\providecommand{\OTchuoim}{}\renewcommand{\OTchuoim}[5]{%
+  \begin{tikzpicture}[font=\large]
+    \node[font=\small,text=OTcamdam,anchor=east] at (-0.7,0) {Mẫu};
+    \node[OTotron,fill=OTvang] (a) at (0,0) {#1};
+    \node[OTo,minimum width=1.1cm,minimum height=0.95cm] (b) at (4.2,0) {\textcolor{red}{#4}};
+    \node[OTo,minimum width=1.1cm,minimum height=0.95cm] (c) at (8.4,0) {\textcolor{red}{#5}};
+    \draw[-latex,thick] (a.east)--node[above=2pt,fill=white,inner sep=1pt]{#2} (b.west);
+    \draw[-latex,thick] (b.east)--node[above=2pt,fill=white,inner sep=1pt]{#3} (c.west);
+  \end{tikzpicture}}
+% Đặt tính dọc: \OTdt{số 1}{dấu}{số 2}{kết quả}
+\providecommand{\OTdt}{}\renewcommand{\OTdt}[4]{%
+  {\large$\begin{array}{c@{\ }r} & #1\\ #2 & #3\\ \hline & \rule{0pt}{0.8cm}\makebox[1.0cm][r]{\textcolor{red}{#4}}\end{array}$}}
+%%%%%%%%%%%%%%%%%%%%%%%
 % BUỔI 1
 %%%%%%%%%%%%%%%%%%%%%%%
 \hktuan{1}{18}
 \par\medskip
 {\centering
         {\color{mauchinh!120}\bfseries\Large PHIẾU BÀI TẬP TOÁN TƯ DUY CẤP ĐỘ A}\\[3pt]
-        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: ÔN TẬP CUỐI HỌC KÌ 1\\[2pt] PHẠM VI 20 (BUỔI 1)}\par}
+        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: ÔN TẬP CUỐI HỌC KÌ 1\\[2pt] PHẠM VI 20: CỘNG, TRỪ QUA 10 (BUỔI 1)}\par}
 \vspace{6pt}
 \TTthongtin
 
@@ -217,48 +314,38 @@
 \begin{bt}
     Nối hai trái tim với nhau để có tổng bằng $10$.
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
-    \begin{tikzpicture}[font=\sffamily]
+    \begin{tikzpicture}[font=\normalsize]
         \foreach \so/\y in {2/0,7/-1.55,9/-3.1,4/-4.65,5/-6.2}{\node at (0,\y) {\OTtim{\so}};\fill (1.25,\y) circle (2.5pt);}
         \foreach \so/\y in {6/0,5/-1.55,3/-3.1,8/-4.65,1/-6.2}{\node at (8,\y) {\OTtim{\so}};\fill (6.75,\y) circle (2.5pt);}
     \end{tikzpicture}\par}
 \end{bt}
-\OTdang{DẠNG 2. CỘNG, TRỪ TRONG PHẠM VI 20}
+\OTdang{DẠNG 2. CỘNG, TRỪ QUA 10 BẰNG CÁCH TÁCH SỐ}
 \begin{bt}
-    Viết phép tính theo các bước nhảy trên tia số rồi tính.
+    Cộng qua 10 bằng cách tách số (làm theo mẫu).
     \par\nopagebreak\vspace{6pt}\nopagebreak{\centering
-    \begin{tikzpicture}[font=\sffamily\bfseries]
-        \OTtia{20}{1}{0.62}
-        \OTcung{8}{10}{0.62}{+2}{bend left}\OTcung{10}{13}{0.62}{+3}{bend left}
-        \node[anchor=west,font=\sffamily\bfseries\large] at (-0.3,-1.25) {8 + 5 = \rule{1.2cm}{0.5pt}};
-    \end{tikzpicture}\\[10pt]
-    \begin{tikzpicture}[font=\sffamily\bfseries]
-        \OTtia{20}{1}{0.62}
-        \OTcung{15}{10}{0.62}{$-5$}{bend right}\OTcung{10}{8}{0.62}{$-2$}{bend right}
-        \node[anchor=west,font=\sffamily\bfseries\large] at (-0.3,-1.25) {15 $-$ 7 = \rule{1.2cm}{0.5pt}};
-    \end{tikzpicture}\\[10pt]
-    \begin{tikzpicture}[font=\sffamily\bfseries]
-        \OTtia{20}{1}{0.62}
-        \node[anchor=west,font=\sffamily\bfseries\large] at (-0.3,-1.25) {Tự nhảy: 9 + 6 (nhảy từ 9 lên 10 rồi nhảy tiếp) = \rule{1.2cm}{0.5pt}};
-    \end{tikzpicture}\par}
+    \OTqv{8}{5}{2}{3}{13}{Mẫu}\\[4pt]
+    \OTqv{9}{6}{}{}{}{}\\[4pt]
+    \OTqv{7}{8}{}{}{}{}\\[4pt]
+    \OTqv{6}{9}{}{}{}{}\par}
 \end{bt}
 \begin{bt}
-    Cộng qua 10: điền số thích hợp vào ô trống.
-    \begin{listEX}
-        \item $8+5=8+\OTovuong+3=10+\OTovuong=\OTovuong$
-        \item $9+6=9+\OTovuong+5=10+\OTovuong=\OTovuong$
-        \item $7+8=7+\OTovuong+5=10+\OTovuong=\OTovuong$
-        \item $6+9=\OTovuong+9=\OTovuong+\OTovuong=\OTovuong$
-    \end{listEX}
+    Tách số hạng thứ hai để cộng với số hạng thứ nhất được $10$, rồi điền số thích hợp vào ô trống.
+    \par\nopagebreak\vspace{6pt}\nopagebreak{\centering
+    \OTqv{7}{8}{3}{}{}{}\\[4pt]
+    \OTqv{9}{4}{1}{}{}{}\\[4pt]
+    \OTqv{8}{6}{2}{}{}{}\\[4pt]
+    \OTqv{5}{9}{5}{}{}{}\par}
 \end{bt}
 \begin{bt}
-    Trừ qua 10: điền số thích hợp vào ô trống.
-    \begin{listEX}
-        \item $14-6=14-4-\OTovuong=10-\OTovuong=\OTovuong$
-        \item $13-5=13-3-\OTovuong=10-\OTovuong=\OTovuong$
-        \item $16-9=16-6-\OTovuong=10-\OTovuong=\OTovuong$
-        \item $12-8=12-\OTovuong-\OTovuong=\OTovuong$
-    \end{listEX}
+    Trừ qua 10 bằng cách tách số rồi điền số thích hợp vào ô trống.
+    \par\nopagebreak\vspace{6pt}\nopagebreak{\centering
+    \OTqvt{14}{6}{4}{2}{8}{Mẫu}\\[4pt]
+    \OTqvt{13}{5}{3}{}{}{}\\[4pt]
+    \OTqvt{16}{9}{6}{}{}{}\\[4pt]
+    \OTqvt{12}{8}{2}{}{}{}\\[4pt]
+    \OTqvt{15}{7}{5}{}{}{}\par}
 \end{bt}
+\OTdang{DẠNG 3. CỘNG, TRỪ TRONG PHẠM VI 20}
 \begin{bt}
     Điền kết quả vào bảng cộng.
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
@@ -267,7 +354,7 @@
 \begin{bt}
     Nối phép tính với kết quả đúng.
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
-    \begin{tikzpicture}[font=\sffamily\bfseries\large]
+    \begin{tikzpicture}[font=\large]
         \foreach \e/\y in {9+5/0,16-7/-1.3,8+8/-2.6,12-4/-3.9,7+6/-5.2}{
             \node[draw=black!80,thick,rounded corners=5pt,fill=OTvangnhat,minimum width=2.8cm,minimum height=0.85cm] at (0,\y) {\e};
             \fill (1.7,\y) circle (2.5pt);}
@@ -286,7 +373,7 @@
 \begin{bt}
     Tính kết quả phép tính ghi trên mỗi quả bí ngô rồi điền vào ô trống.
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
-    \begin{tikzpicture}[font=\sffamily\bfseries\large]
+    \begin{tikzpicture}[font=\large]
         \foreach \e [count=\k] in {3+7,4+6,8+7,8+5,11+5,12+5}{
             \pgfmathtruncatemacro{\cot}{mod(\k-1,3)}\pgfmathtruncatemacro{\hang}{div(\k-1,3)}
             \begin{scope}[shift={(5.4*\cot,-2.1*\hang)}]
@@ -295,7 +382,7 @@
             \end{scope}}
     \end{tikzpicture}\par}
 \end{bt}
-\OTdang{DẠNG 3. TÌM SỐ CÒN THIẾU, SO SÁNH, ĐIỀN DẤU}
+\OTdang{DẠNG 4. TÌM SỐ CÒN THIẾU, SO SÁNH, ĐIỀN DẤU}
 \begin{bt}
     Tìm số còn thiếu (điền vào ô trống).
     \par\nopagebreak\vspace{6pt}\nopagebreak{\centering
@@ -309,7 +396,7 @@
 \begin{bt}
     Điền dấu $>$, $<$, $=$ thích hợp vào ô trống.
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
-    \begin{tikzpicture}[font=\sffamily\bfseries\large]
+    \begin{tikzpicture}[font=\large]
         \foreach \a/\b [count=\k] in {7+5/13,15 $-$ 6/8,9+8/17,14 $-$ 5/10,6+7/7+6,16 $-$ 8/9,12 $-$ 3/4+5,18 $-$ 9/8+2,5+9/20 $-$ 6}{
             \pgfmathtruncatemacro{\cot}{mod(\k-1,3)}\pgfmathtruncatemacro{\hang}{div(\k-1,3)}
             \begin{scope}[shift={(5.5*\cot,-1.25*\hang)}]
@@ -322,7 +409,7 @@
 \begin{bt}
     Điền dấu $+$ hoặc $-$ thích hợp vào ô trống.
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
-    \begin{tikzpicture}[font=\sffamily\bfseries\large]
+    \begin{tikzpicture}[font=\large]
         \foreach \a/\b/\c [count=\k] in {9/4/13,15/6/9,8/7/15,17/9/8,6/6/12,14/4/10}{
             \pgfmathtruncatemacro{\cot}{mod(\k-1,3)}\pgfmathtruncatemacro{\hang}{div(\k-1,3)}
             \begin{scope}[shift={(5.4*\cot,-1.25*\hang)}]
@@ -331,15 +418,38 @@
             \end{scope}}
     \end{tikzpicture}\par}
 \end{bt}
-\OTdang{DẠNG 4. VẬN DỤNG VÀ MỞ RỘNG}
+\OTdang{DẠNG 5. SƠ ĐỒ PHÉP TÍNH}
 \begin{bt}
-    Hoàn thành sơ đồ phép tính sau.
+    Hoàn thành sơ đồ phép tính sau (làm theo mẫu).
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
-        \OTchuoi{5}{$+\,4$}{$-\,3$}\\[10pt]
+        \OTchuoim{5}{$+\,4$}{$-\,3$}{9}{6}\\[10pt]
         \OTchuoi{12}{$+\,5$}{$-\,7$}\\[10pt]
         \OTchuoi{9}{$+\,6$}{$-\,8$}\\[10pt]
         \OTchuoi{18}{$-\,8$}{$+\,7$}\par}
 \end{bt}
+%%%%%%%%%%%%%%%%%%%%%%%
+% BUỔI 2
+%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\TTdatlaibai
+{\centering
+        {\color{mauchinh!120}\bfseries\Large PHIẾU BÀI TẬP TOÁN TƯ DUY CẤP ĐỘ A}\\[3pt]
+        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: ÔN TẬP CUỐI HỌC KÌ 1\\[2pt] PHẠM VI 20: ĐẶT TÍNH, VẬN DỤNG (BUỔI 2)}\par}
+\vspace{6pt}
+\TTthongtin
+
+\OTdang{DẠNG 1. ĐẶT TÍNH RỒI TÍNH (KHÔNG NHỚ)}
+\begin{bt}
+    Đặt tính rồi tính (làm theo mẫu).
+    \par\nopagebreak\vspace{6pt}\nopagebreak{\centering
+    \OTdt{12}{+}{5}{17}\hfill\OTdt{14}{+}{3}{}\hfill\OTdt{16}{+}{2}{}\hfill\OTdt{11}{+}{8}{}\hfill\OTdt{13}{+}{6}{}\hfill\OTdt{10}{+}{9}{}\par}
+\end{bt}
+\begin{bt}
+    Đặt tính rồi tính (làm theo mẫu).
+    \par\nopagebreak\vspace{6pt}\nopagebreak{\centering
+    \OTdt{17}{-}{5}{12}\hfill\OTdt{19}{-}{7}{}\hfill\OTdt{15}{-}{4}{}\hfill\OTdt{18}{-}{6}{}\hfill\OTdt{16}{-}{3}{}\hfill\OTdt{14}{-}{2}{}\par}
+\end{bt}
+\OTdang{DẠNG 2. VẬN DỤNG VÀ MỞ RỘNG}
 \begin{bt}
     Tháp số: số ở mỗi viên gạch bằng tổng hai số ở hai viên gạch ngay bên dưới. Điền số còn thiếu vào ô trống.
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
@@ -348,13 +458,13 @@
             \node[OTgach] at (0,0) {3};\node[OTgach] at (1.6,0) {4};\node[OTgach] at (3.2,0) {5};
             \node[OTgach] at (0.8,0.85) {};\node[OTgach] at (2.4,0.85) {};
             \node[OTgach] at (1.6,1.7) {};
-            \node[font=\sffamily\bfseries] at (1.6,-0.7) {a)};
+            \node[font=\normalsize] at (1.6,-0.7) {a)};
         \end{scope}
         \begin{scope}[shift={(7,0)}]
             \node[OTgach] at (0,0) {2};\node[OTgach] at (1.6,0) {};\node[OTgach] at (3.2,0) {4};
             \node[OTgach] at (0.8,0.85) {8};\node[OTgach] at (2.4,0.85) {};
             \node[OTgach] at (1.6,1.7) {18};
-            \node[font=\sffamily\bfseries] at (1.6,-0.7) {b)};
+            \node[font=\normalsize] at (1.6,-0.7) {b)};
         \end{scope}
     \end{tikzpicture}\par}
 \end{bt}
@@ -376,28 +486,76 @@
 \begin{bt}
     Quan sát tranh rồi viết phép tính thích hợp.
     \par\nopagebreak\vspace{6pt}\nopagebreak{\centering
-    \begin{tikzpicture}[font=\sffamily\bfseries\large]
+    \begin{tikzpicture}[font=\large]
         \draw[rounded corners=8pt,thick,gray!70,fill=black!3] (-0.5,0.8) rectangle (12.4,-1.0);
         \begin{scope}[shift={(-0.2,0)}]\OThang{\OTtao}{9}{0}\end{scope}
         \node at (6.2,0) {$+$};
         \begin{scope}[shift={(6.3,0)}]\OThang{\OTtao}{5}{0}\end{scope}
         \node[anchor=west] at (-0.3,-1.9) {Phép tính: \rule{1.2cm}{0.5pt} $+$ \rule{1.2cm}{0.5pt} $=$ \rule{1.2cm}{0.5pt}};
     \end{tikzpicture}\\[12pt]
-    \begin{tikzpicture}[font=\sffamily\bfseries\large]
+    \begin{tikzpicture}[font=\large]
         \draw[rounded corners=8pt,thick,gray!70,fill=black!3] (-0.5,0.8) rectangle (12.4,-1.0);
         \begin{scope}[shift={(-0.2,0)}]\OThang{\OTbongbay}{14}{6}\end{scope}
-        \node[anchor=west,font=\sffamily\small] at (1.0,-0.75) {(các quả bóng bị gạch chéo là đã bay mất)};
+        \node[anchor=west,font=\small] at (1.0,-0.75) {(các quả bóng bị gạch chéo là đã bay mất)};
         \node[anchor=west] at (-0.3,-1.9) {Phép tính: \rule{1.2cm}{0.5pt} $-$ \rule{1.2cm}{0.5pt} $=$ \rule{1.2cm}{0.5pt}};
     \end{tikzpicture}\par}
 \end{bt}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% BUỔI 2
+\begin{bt}
+    Đố vui: viết số thích hợp vào chỗ chấm.
+    \begin{listEX}
+        \item Số liền sau của số 14 là: \TTcham[2cm]
+        \item Số liền trước của số 10 là: \TTcham[2cm]
+        \item Số nào cộng với 6 được 15? \TTcham[2cm]
+        \item Số nào trừ đi 5 được 9? \TTcham[2cm]
+        \item Số lớn nhất có một chữ số cộng với số bé nhất có một chữ số (khác 0) bằng: \TTcham[2cm]
+    \end{listEX}
+\end{bt}
+\OTdang{DẠNG 3. GIẢI TOÁN CÓ LỜI VĂN}
+\begin{bt}
+    Giải các bài toán sau.
+    \begin{listEX}
+        \item Hà có 8 quả bóng bay, mẹ mua thêm cho Hà 7 quả bóng bay. Hỏi Hà có tất cả bao nhiêu quả bóng bay?
+        \OTkhungpt
+        \item Trong vườn có 15 con gà, có 6 con gà chạy ra ngoài cổng. Hỏi trong vườn còn lại bao nhiêu con gà?
+        \OTkhungpt
+        \item Lan có 9 viên bi, Nam có 8 viên bi. Hỏi hai bạn có tất cả bao nhiêu viên bi?
+        \OTkhungpt
+    \end{listEX}
+\end{bt}
+\OTdang{DẠNG 4. TỔNG HỢP}
+\begin{bt}
+    Khoanh tròn vào chữ cái đặt trước đáp án đúng.
+    \par\nopagebreak
+    \begin{listEX}
+        \item Kết quả của phép tính $7+8$ là:\OTchon{$14$}{$15$}{$16$}
+        \item Kết quả của phép tính $13-5$ là:\OTchon{$7$}{$8$}{$9$}
+        \item Số liền sau của $19$ là:\OTchon{$18$}{$20$}{$10$}
+        \item Số nào dưới đây là số lẻ?\OTchon{$12$}{$16$}{$17$}
+        \item $9+\ldots=15$. Số điền vào chỗ chấm là:\OTchon{$5$}{$6$}{$7$}
+    \end{listEX}
+\end{bt}
+\begin{bt}
+    Đúng ghi Đ, sai ghi S vào ô trống.
+    \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
+    \renewcommand{\arraystretch}{1.75}
+    \begin{tabular}{|>{\raggedright\arraybackslash}p{8.8cm}|>{\centering\arraybackslash}p{2.6cm}|}
+        \hline
+        $8+7=15$ & \OTovuong \\ \hline
+        $14-6=7$ & \OTovuong \\ \hline
+        $9+9=18$ & \OTovuong \\ \hline
+        $17-8=9$ & \OTovuong \\ \hline
+        $12+6=17$ & \OTovuong \\ \hline
+        $20-5=15$ & \OTovuong \\ \hline
+    \end{tabular}\par}
+\end{bt}
+%%%%%%%%%%%%%%%%%%%%%%%
+% BUỔI 3
 %%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \TTdatlaibai
 {\centering
         {\color{mauchinh!120}\bfseries\Large PHIẾU BÀI TẬP TOÁN TƯ DUY CẤP ĐỘ A}\\[3pt]
-        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: ÔN TẬP CUỐI HỌC KÌ 1\\[2pt] PHẠM VI 100 (BUỔI 2)}\par}
+        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: ÔN TẬP CUỐI HỌC KÌ 1\\[2pt] PHẠM VI 100: SỐ VÀ PHÉP TÍNH (BUỔI 3)}\par}
 \vspace{6pt}
 \TTthongtin
 
@@ -421,7 +579,7 @@
 \begin{bt}
     Điền dấu $>$, $<$, $=$ thích hợp vào ô trống.
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
-    \begin{tikzpicture}[font=\sffamily\bfseries\large]
+    \begin{tikzpicture}[font=\large]
         \foreach \a/\b [count=\k] in {12/21,14/14,12 + 2/15,1 + 2 + 3/6,99/98,100/99,48/50,50/30 + 20,16 $-$ 6/9}{
             \pgfmathtruncatemacro{\cot}{mod(\k-1,3)}\pgfmathtruncatemacro{\hang}{div(\k-1,3)}
             \begin{scope}[shift={(5.5*\cot,-1.25*\hang)}]
@@ -439,9 +597,21 @@
         \OThoa{16}{white}\hfill\OThoa{11}{white}\hfill\OThoa{22}{white}\hfill\OThoa{93}{white}\hfill\OThoa{70}{white}\end{minipage}\par}
 \end{bt}
 \begin{bt}
+    Ếch con chỉ nhảy lên những hòn đá ghi số chẵn. Tô màu đường đi giúp ếch con về lá sen.
+    \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
+    \begin{tikzpicture}[font=\large]
+        \foreach \hang [count=\i] in {{12,13,58,60,72,25},{24,30,46,31,84,47},{59,61,73,38,96,85},{97,39,51,50,65,77},{89,15,27,64,76,88}}{
+            \foreach \so [count=\j] in \hang{\node[draw=gray!70,very thick,fill=OTxam,ellipse,minimum width=1.25cm,minimum height=1.0cm] at (1.45*\j,-1.15*\i) {\so};}}
+        \begin{scope}[shift={(-0.4,-1.05)},scale=0.85]\OTech\end{scope}
+        \node[font=\small,text=green!40!black] at (-0.4,-1.95) {Ếch con};
+        \fill[OTla,draw=green!40!black,very thick] (10.15,-5.75) -- ++(25:0.6) arc (25:335:0.6) -- cycle;
+        \node[font=\small,text=green!40!black] at (10.15,-6.6) {Lá sen};
+    \end{tikzpicture}\par}
+\end{bt}
+\begin{bt}
     Sắp xếp các số theo thứ tự \textbf{từ bé đến lớn}.
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
-    \begin{tikzpicture}[font=\sffamily\bfseries\Large]
+    \begin{tikzpicture}[font=\Large]
         \foreach \a/\b/\c/\d [count=\k] in {27/72/17/70,45/54/40/5,88/8/80/18}{
             \node[OTthe] at (0,-1.7*\k) {\a};\node[OTthe] at (1.6,-1.7*\k) {\b};
             \node[OTthe] at (3.2,-1.7*\k) {\c};\node[OTthe] at (4.8,-1.7*\k) {\d};
@@ -449,15 +619,6 @@
             \foreach \x in {0,1,2,3}{\node[OTo,minimum width=1.2cm,minimum height=0.95cm] at ({7.4+1.7*\x},-1.7*\k) {};}
             \foreach \x in {0,1,2}{\node at ({8.25+1.7*\x},-1.7*\k) {$<$};}}
     \end{tikzpicture}\par}
-\end{bt}
-\begin{bt}
-    Viết số thích hợp vào chỗ chấm.
-    \begin{listEX}
-        \item Số gồm 7 chục và 4 đơn vị là: \TTcham[2cm]
-        \item Số tròn chục liền sau số 40 là: \TTcham[2cm]
-        \item Số lớn nhất có một chữ số là: \TTcham[2cm]
-        \item Số bé nhất có hai chữ số là: \TTcham[2cm]
-    \end{listEX}
 \end{bt}
 \OTdang{DẠNG 2. CỘNG, TRỪ TRONG PHẠM VI 100}
 \begin{bt}
@@ -468,15 +629,15 @@
         \OTcotpt{50+50,100-60,30+20+10,90-30-20,40+10+30}\par}
 \end{bt}
 \begin{bt}
-    Điền số thích hợp vào ô trống.
-    \begin{listEX}
-        \item $43+5=40+3+5=40+\OTovuong=\OTovuong$
-        \item $62+7=60+2+7=60+\OTovuong=\OTovuong$
-        \item $85-4=80+5-4=80+\OTovuong=\OTovuong$
-        \item $79-6=70+9-6=70+\OTovuong=\OTovuong$
-        \item $34+20=30+20+4=\OTovuong+4=\OTovuong$
-        \item $68-30=60-30+8=\OTovuong+8=\OTovuong$
-    \end{listEX}
+    Tính nhẩm: chữ số hàng đơn vị giống nhau thì kết quả cũng có chữ số hàng đơn vị giống nhau. Làm theo mẫu.
+    \par\nopagebreak\vspace{6pt}\nopagebreak{\centering
+    \renewcommand{\arraystretch}{1.7}
+    \begin{tabular}{*{4}{>{\centering\arraybackslash}p{0.23\linewidth}}}
+        $3+5=8$ & $4+2=6$ & $9-4=5$ & $8-3=5$ \\
+        $23+5=\textcolor{red}{28}$ & $24+2=\OTovuong$ & $29-4=\OTovuong$ & $28-3=\OTovuong$ \\
+        $43+5=\OTovuong$ & $54+2=\OTovuong$ & $59-4=\OTovuong$ & $68-3=\OTovuong$ \\
+        $63+5=\OTovuong$ & $74+2=\OTovuong$ & $89-4=\OTovuong$ & $98-3=\OTovuong$ \\
+    \end{tabular}\par}
 \end{bt}
 \begin{bt}
     Tính nhẩm (cộng số có hai chữ số).
@@ -495,21 +656,44 @@
 \begin{bt}
     Viết phép tính theo các bước nhảy trên tia số rồi tính.
     \par\nopagebreak\vspace{6pt}\nopagebreak{\centering
-    \begin{tikzpicture}[font=\sffamily\bfseries]
+    \begin{tikzpicture}[font=\normalsize]
         \OTtia{100}{10}{0.115}
         \OTcung{30}{50}{0.115}{+20}{bend left}\OTcung{50}{70}{0.115}{+20}{bend left}
-        \node[anchor=west,font=\sffamily\bfseries\large] at (-0.3,-1.25) {30 + 40 = \rule{1.2cm}{0.5pt}};
+        \node[anchor=west,font=\large] at (-0.3,-1.25) {30 + 40 = \rule{1.2cm}{0.5pt}};
     \end{tikzpicture}\\[12pt]
-    \begin{tikzpicture}[font=\sffamily\bfseries]
+    \begin{tikzpicture}[font=\normalsize]
         \OTtia{100}{10}{0.115}
         \OTcung{90}{70}{0.115}{$-20$}{bend right}\OTcung{70}{40}{0.115}{$-30$}{bend right}
-        \node[anchor=west,font=\sffamily\bfseries\large] at (-0.3,-1.25) {90 $-$ 50 = \rule{1.2cm}{0.5pt}};
+        \node[anchor=west,font=\large] at (-0.3,-1.25) {90 $-$ 50 = \rule{1.2cm}{0.5pt}};
     \end{tikzpicture}\\[12pt]
-    \begin{tikzpicture}[font=\sffamily\bfseries]
+    \begin{tikzpicture}[font=\normalsize]
         \OTtia{100}{10}{0.115}
-        \node[anchor=west,font=\sffamily\bfseries\large] at (-0.3,-1.25) {Tự nhảy: 20 + 60 = \rule{1.2cm}{0.5pt} \qquad 80 $-$ 50 = \rule{1.2cm}{0.5pt}};
+        \node[anchor=west,font=\large] at (-0.3,-1.25) {Tự nhảy: 20 + 60 = \rule{1.2cm}{0.5pt} \qquad 80 $-$ 50 = \rule{1.2cm}{0.5pt}};
     \end{tikzpicture}\par}
 \end{bt}
+\OTdang{DẠNG 3. ĐẶT TÍNH RỒI TÍNH (KHÔNG NHỚ)}
+\begin{bt}
+    Đặt tính rồi tính (phép cộng không nhớ, làm theo mẫu).
+    \par\nopagebreak\vspace{6pt}\nopagebreak{\centering
+    \OTdt{23}{+}{5}{28}\hfill\OTdt{34}{+}{12}{}\hfill\OTdt{45}{+}{23}{}\hfill\OTdt{52}{+}{6}{}\hfill\OTdt{41}{+}{37}{}\hfill\OTdt{63}{+}{34}{}\par}
+\end{bt}
+\begin{bt}
+    Đặt tính rồi tính (phép trừ không nhớ, làm theo mẫu).
+    \par\nopagebreak\vspace{6pt}\nopagebreak{\centering
+    \OTdt{59}{-}{6}{53}\hfill\OTdt{78}{-}{25}{}\hfill\OTdt{86}{-}{42}{}\hfill\OTdt{95}{-}{30}{}\hfill\OTdt{47}{-}{5}{}\hfill\OTdt{69}{-}{36}{}\par}
+\end{bt}
+%%%%%%%%%%%%%%%%%%%%%%%
+% BUỔI 4
+%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\TTdatlaibai
+{\centering
+        {\color{mauchinh!120}\bfseries\Large PHIẾU BÀI TẬP TOÁN TƯ DUY CẤP ĐỘ A}\\[3pt]
+        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: ÔN TẬP CUỐI HỌC KÌ 1\\[2pt] PHẠM VI 100: VẬN DỤNG VÀ TỔNG HỢP (BUỔI 4)}\par}
+\vspace{6pt}
+\TTthongtin
+
+\OTdang{DẠNG 1. CỘNG, TRỪ NÂNG CAO}
 \begin{bt}
     Điền số thích hợp vào bảng.
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
@@ -524,21 +708,10 @@
         70 & & & \\ \hline
     \end{tabular}\par}
 \end{bt}
-\OTdang{DẠNG 3. TÌM SỐ CÒN THIẾU, SO SÁNH PHÉP TÍNH}
-\begin{bt}
-    Tìm số còn thiếu (điền vào ô trống).
-    \par\nopagebreak\vspace{6pt}\nopagebreak{\centering
-    \renewcommand{\arraystretch}{2.0}
-    \begin{tabular}{*{3}{>{\centering\arraybackslash}p{0.3\linewidth}}}
-        $\OTovuong[0.7cm]+30=80$ & $70-\OTovuong[0.7cm]=40$ & $25+\OTovuong[0.7cm]=29$ \\
-        $58-\OTovuong[0.7cm]=53$ & $40+\OTovuong[0.7cm]=90$ & $\OTovuong[0.7cm]-20=50$ \\
-        $\OTovuong[0.7cm]+6=36$ & $90-\OTovuong[0.7cm]=60$ & $\OTovuong[0.7cm]-4=45$ \\
-    \end{tabular}\par}
-\end{bt}
 \begin{bt}
     Điền dấu $>$, $<$, $=$ thích hợp vào ô trống.
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
-    \begin{tikzpicture}[font=\sffamily\bfseries\large]
+    \begin{tikzpicture}[font=\large]
         \foreach \a/\b [count=\k] in {30+20/60,80 $-$ 30/50,45+4/54,76 $-$ 6/70,40+30/90 $-$ 10,58 $-$ 8/30+20,62+7/69,99 $-$ 9/80+9,35+20/55}{
             \pgfmathtruncatemacro{\cot}{mod(\k-1,3)}\pgfmathtruncatemacro{\hang}{div(\k-1,3)}
             \begin{scope}[shift={(5.5*\cot,-1.25*\hang)}]
@@ -548,7 +721,6 @@
             \end{scope}}
     \end{tikzpicture}\par}
 \end{bt}
-\OTdang{DẠNG 4. VẬN DỤNG VÀ MỞ RỘNG}
 \begin{bt}
     Hoàn thành sơ đồ phép tính sau.
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
@@ -565,28 +737,27 @@
             \node[OTgach] at (0,0) {10};\node[OTgach] at (1.6,0) {20};\node[OTgach] at (3.2,0) {30};
             \node[OTgach] at (0.8,0.85) {};\node[OTgach] at (2.4,0.85) {};
             \node[OTgach] at (1.6,1.7) {};
-            \node[font=\sffamily\bfseries] at (1.6,-0.7) {a)};
+            \node[font=\normalsize] at (1.6,-0.7) {a)};
         \end{scope}
         \begin{scope}[shift={(7,0)}]
             \node[OTgach] at (0,0) {10};\node[OTgach] at (1.6,0) {};\node[OTgach] at (3.2,0) {20};
             \node[OTgach] at (0.8,0.85) {40};\node[OTgach] at (2.4,0.85) {};
             \node[OTgach] at (1.6,1.7) {90};
-            \node[font=\sffamily\bfseries] at (1.6,-0.7) {b)};
+            \node[font=\normalsize] at (1.6,-0.7) {b)};
         \end{scope}
     \end{tikzpicture}\par}
 \end{bt}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% BUỔI 3
-%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-\TTdatlaibai
-{\centering
-        {\color{mauchinh!120}\bfseries\Large PHIẾU BÀI TẬP TOÁN TƯ DUY CẤP ĐỘ A}\\[3pt]
-        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ: ÔN TẬP CUỐI HỌC KÌ 1\\[2pt] THỜI GIAN, HÌNH HỌC VÀ TỔNG HỢP (BUỔI 3)}\par}
-\vspace{6pt}
-\TTthongtin
-
-\OTdang{DẠNG 1. XEM ĐỒNG HỒ}
+\begin{bt}
+    Điền số thích hợp vào các toa tàu.
+    \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
+    \begin{tikzpicture}[scale=1.05,transform shape]
+        \begin{scope}[shift={(0,6)}]\OTdautau{0}{1}\foreach \x/\so in {1/47,2/48,3/,4/,5/}{\OTtoa{0.25+1.5*\x}{\so}}\end{scope}
+        \begin{scope}[shift={(0,4)}]\OTdautau{0}{1}\foreach \x/\so in {1/,2/62,3/64,4/,5/}{\OTtoa{0.25+1.5*\x}{\so}}\end{scope}
+        \begin{scope}[shift={(0,2)}]\foreach \x/\so in {0/35,1/40,2/,3/,4/}{\OTtoa{0.1+1.5*\x}{\so}}\OTdautau{7.6}{-1}\end{scope}
+        \begin{scope}[shift={(0,0)}]\foreach \x/\so in {0/,1/,2/50,3/60,4/}{\OTtoa{0.1+1.5*\x}{\so}}\OTdautau{7.6}{-1}\end{scope}
+    \end{tikzpicture}\par}
+\end{bt}
+\OTdang{DẠNG 2. XEM ĐỒNG HỒ VÀ HÌNH HỌC}
 \begin{bt}
     Đồng hồ chỉ mấy giờ?
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
@@ -600,7 +771,7 @@
 \begin{bt}
     Nối đồng hồ với giờ tương ứng.
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
-    \begin{tikzpicture}[font=\sffamily\bfseries\large]
+    \begin{tikzpicture}[font=\large]
         \foreach \h/\m/\y in {2/0/0,8/30/-2.5,5/0/-5.0}{
             \node at (0,\y) {\OTdh{\h}{\m}};\fill (1.35,\y) circle (2.5pt);}
         \foreach \t/\y in {{5 giờ}/-0.4,{2 giờ}/-2.1,{8 giờ 30 phút}/-4.9}{
@@ -628,7 +799,6 @@
             {\centering\OTdh{3}{0}\hspace{1.2cm}\OTdh{6}{15}\hspace{1.2cm}\OTdh{3}{30}\par}
     \end{listEX}
 \end{bt}
-\OTdang{DẠNG 2. HÌNH HỌC}
 \begin{bt}
     Đếm số hình rồi điền vào bảng.
     \par\nopagebreak\vspace{4pt}\nopagebreak{\centering
@@ -649,7 +819,18 @@
         \textbf{Số lượng} & & & & \\ \hline
     \end{tabular}\par}
 \end{bt}
-\OTdang{DẠNG 3. TỔNG HỢP}
+\OTdang{DẠNG 3. GIẢI TOÁN VÀ TỔNG HỢP}
+\begin{bt}
+    Giải các bài toán sau.
+    \begin{listEX}
+        \item Lớp 1A có 30 bạn nam và 20 bạn nữ. Hỏi lớp 1A có tất cả bao nhiêu bạn?
+        \OTkhungpt
+        \item Nhà bà có 45 quả trứng, hôm nay bà mua thêm 4 quả trứng. Hỏi nhà bà có tất cả bao nhiêu quả trứng?
+        \OTkhungpt
+        \item Trường em có 70 cái ghế, cô lao công đã chuyển đi 30 cái ghế. Hỏi trường em còn lại bao nhiêu cái ghế?
+        \OTkhungpt
+    \end{listEX}
+\end{bt}
 \begin{bt}
     Khoanh tròn vào chữ cái đặt trước đáp án đúng.
     \par\nopagebreak
@@ -676,14 +857,12 @@
     \end{tabular}\par}
 \end{bt}
 \begin{bt}
-    Giải các bài toán sau.
+    Viết số thích hợp vào chỗ chấm.
     \begin{listEX}
-        \item Hà có 8 quả bóng bay, mẹ mua thêm cho Hà 7 quả bóng bay. Hỏi Hà có tất cả bao nhiêu quả bóng bay?
-        \OTkhungpt
-        \item Trong vườn có 15 con gà, có 6 con gà chạy ra ngoài cổng. Hỏi trong vườn còn lại bao nhiêu con gà?
-        \OTkhungpt
-        \item Lớp 1A có 30 bạn nam và 20 bạn nữ. Hỏi lớp 1A có tất cả bao nhiêu bạn?
-        \OTkhungpt
+        \item Số gồm 7 chục và 4 đơn vị là: \TTcham[2cm]
+        \item Số tròn chục liền sau số 40 là: \TTcham[2cm]
+        \item Số lớn nhất có một chữ số là: \TTcham[2cm]
+        \item Số bé nhất có hai chữ số là: \TTcham[2cm]
     \end{listEX}
 \end{bt}
 \begin{center}
