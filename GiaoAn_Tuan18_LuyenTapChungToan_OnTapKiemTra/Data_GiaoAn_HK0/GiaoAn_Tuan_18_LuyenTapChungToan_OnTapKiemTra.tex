@@ -27,142 +27,199 @@
 \definecolor{GAkem}{RGB}{255,246,228}\definecolor{GAda}{RGB}{255,226,208}
 \definecolor{GAtim}{RGB}{213,198,236}\definecolor{GAxam}{RGB}{110,115,130}
 
-%---------- Hình vẽ nhỏ bằng TikZ (mỗi hình cao khoảng 1 cm, tâm ở gốc tọa độ) ----------
-% Chim cánh cụt quàng khăn
-\tikzset{pics/gapenguin/.style={code={\begin{scope}[line join=round]
-  \fill[GAxanhd!85] (-0.33,0.05) .. controls (-0.62,-0.03) and (-0.6,-0.32) .. (-0.4,-0.3) -- cycle;
-  \fill[GAxanhd!85] (0.33,0.05) .. controls (0.62,-0.03) and (0.6,-0.32) .. (0.4,-0.3) -- cycle;
-  \fill[GAcam] (-0.18,-0.49) ellipse (0.14 and 0.055);\fill[GAcam] (0.18,-0.49) ellipse (0.14 and 0.055);
-  \path[top color=GAxanh!60!GAxanhd,bottom color=GAxanhd,draw=GAxanhd!70!black,line width=0.4pt] (0,-0.03) ellipse (0.37 and 0.47);
-  \fill[white] (0,-0.12) ellipse (0.23 and 0.33);
-  \fill[white] (-0.1,0.22) ellipse (0.1 and 0.12);\fill[white] (0.1,0.22) ellipse (0.1 and 0.12);
-  \fill[black!70] (-0.09,0.23) circle (0.03);\fill[black!70] (0.09,0.23) circle (0.03);
-  \fill[GAcam] (-0.06,0.16) -- (0.06,0.16) -- (0,0.07) -- cycle;
-  \draw[GAdo,line width=2.6pt,line cap=round] (-0.26,0.02) to[bend right=22] (0.26,0.02);
-  \draw[GAdod,line width=0.4pt] (-0.3,0.05) to[bend right=22] (0.3,0.05);
-  \fill[GAdo,rounded corners=1pt] (0.1,0.0) rectangle (0.2,-0.2);
-  \fill[GAhong,opacity=0.7] (-0.2,0.15) circle (0.04);\fill[GAhong,opacity=0.7] (0.2,0.15) circle (0.04);
+%---------- Hình vẽ nhỏ bằng TikZ (mỗi hình cao khoảng 1 cm, tâm ở gốc tọa độ; có đổ bóng, đổ màu mềm) ----------
+% Bóng đổ dưới chân vật: \GAbongdo{nửa chiều rộng}{độ cao y}
+\providecommand{\GAbongdo}{}\renewcommand{\GAbongdo}[2]{\fill[GAxam,opacity=0.07] (0,#2) ellipse (#1*1.15 and 0.075);\fill[GAxam,opacity=0.09] (0,#2) ellipse (#1 and 0.055);\fill[GAxam,opacity=0.12] (0,#2) ellipse (#1*0.8 and 0.035);}
+% Điểm sáng bóng: \GAsang{x}{y}{rx}{ry}{góc}
+\providecommand{\GAsang}{}\renewcommand{\GAsang}[5]{\fill[white,opacity=0.62,rotate around={#5:(#1,#2)}] (#1,#2) ellipse (#3 and #4);}
+% Quả cầu bóng mềm: \GAcau{màu}{x}{y}{bán kính}
+\providecommand{\GAcau}{}\renewcommand{\GAcau}[4]{\colorlet{GAtmpc}{#1}\shade[inner color=GAtmpc!30!white,outer color=GAtmpc] (#2,#3) circle (#4);\draw[GAtmpc!75!GAxam,line width=0.25pt] (#2,#3) circle (#4);\fill[white,opacity=0.6] (#2-0.34*#4,#3+0.36*#4) ellipse ({0.24*#4} and {0.15*#4});}
+% Mắt tròn có điểm sáng: \GAmat{x}{y}{bán kính}
+\providecommand{\GAmat}{}\renewcommand{\GAmat}[3]{\fill[black!78] (#1,#2) circle (#3);\fill[white] (#1+0.32*#3,#2+0.34*#3) circle (0.36*#3);}
+
+% Chim cánh cụt đội bịt tai, quàng khăn
+\tikzset{pics/gapenguin/.style={code={\begin{scope}[line join=round,line cap=round]
+  \GAbongdo{0.36}{-0.52}
+  \foreach \sx in {-1,1}{\begin{scope}[xscale=\sx]
+    \shadedraw[top color=GAcam!60,bottom color=GAcamd,draw=GAcamd!70!black,line width=0.3pt] (0.06,-0.47) .. controls (0.16,-0.58) and (0.32,-0.57) .. (0.36,-0.49) .. controls (0.3,-0.42) and (0.14,-0.41) .. (0.06,-0.47);
+    \shadedraw[left color=GAxanhd!70!black,right color=GAxanhd!85,draw=GAxanhd!45!black,line width=0.3pt] (0.31,0.12) .. controls (0.6,0.05) and (0.66,-0.26) .. (0.5,-0.32) .. controls (0.42,-0.2) and (0.35,-0.1) .. (0.3,-0.1) -- cycle;
+  \end{scope}}
+  \shadedraw[inner color=GAxanhd!80,outer color=GAxanhd!50!black,draw=GAxanhd!40!black,line width=0.35pt] (0,-0.03) ellipse (0.38 and 0.47);
+  \shade[inner color=white,outer color=GAkem!70!GAxanh] (0,-0.12) ellipse (0.25 and 0.34);
+  \fill[white] (-0.1,0.22) ellipse (0.11 and 0.13);\fill[white] (0.1,0.22) ellipse (0.11 and 0.13);
+  \GAmat{-0.095}{0.235}{0.032}\GAmat{0.095}{0.235}{0.032}
+  \shadedraw[top color=GAcam!50,bottom color=GAcamd,draw=GAcamd!70!black,line width=0.25pt] (-0.07,0.16) .. controls (-0.03,0.19) and (0.03,0.19) .. (0.07,0.16) .. controls (0.04,0.09) and (-0.04,0.09) .. (-0.07,0.16);
+  \fill[GAhong,opacity=0.75] (-0.2,0.15) circle (0.04);\fill[GAhong,opacity=0.75] (0.2,0.15) circle (0.04);
+  % bịt tai và khăn
+  \draw[GAxanh!85!white,line width=1.2pt] (-0.34,0.28) to[out=70,in=110,looseness=1.6] (0.34,0.28);
+  \foreach \sx in {-1,1}{\GAcau{GAhong!90}{\sx*0.35}{0.27}{0.1}}
+  \draw[GAdo,line width=3pt] (-0.28,0.0) to[bend right=24] (0.28,0.0);
+  \draw[white,line width=0.7pt,dash pattern=on 2pt off 2.5pt] (-0.27,0.0) to[bend right=24] (0.27,0.0);
+  \shadedraw[top color=GAdo!70,bottom color=GAdod,draw=GAdod!80!black,line width=0.25pt,rounded corners=1pt] (0.1,-0.01) rectangle (0.22,-0.22);
+  \draw[white,line width=0.6pt] (0.1,-0.1) -- (0.22,-0.1);
   \end{scope}}}}
 % Quả cầu Noel
-\tikzset{pics/gaqua/.style={code={\begin{scope}
-  \fill[GAvangd] (-0.09,0.3) rectangle (0.09,0.4);\draw[GAvangd,line width=0.6pt] (0,0.43) circle (0.05);
-  \path[top color=GAcam!60,bottom color=GAdo,draw=GAdod,line width=0.4pt] (0,-0.05) circle (0.36);
-  \begin{scope}\clip (0,-0.05) circle (0.36);
-    \fill[white,opacity=0.8] (-0.4,0.0) .. controls (-0.2,0.07) and (0.2,-0.1) .. (0.4,-0.03) -- (0.4,-0.12) .. controls (0.2,-0.19) and (-0.2,-0.02) .. (-0.4,-0.09) -- cycle;
-    \foreach \x in {-0.24,-0.08,0.08,0.24}{\fill[white,opacity=0.8] (\x,-0.2) circle (0.025);}
+\tikzset{pics/gaqua/.style={code={\begin{scope}[line cap=round]
+  \GAbongdo{0.3}{-0.46}
+  \shadedraw[top color=GAvang,bottom color=GAvangd,draw=GAvangd!70!black,line width=0.3pt,rounded corners=1pt] (-0.09,0.3) rectangle (0.09,0.4);
+  \draw[GAvangd!70!black,line width=0.3pt] (-0.09,0.34) -- (0.09,0.34);
+  \draw[GAvangd!80!black,line width=0.6pt] (0,0.4) to[out=90,in=0] (-0.05,0.5) to[out=180,in=90] (-0.1,0.44);
+  \GAcau{GAdo!75!GAcam}{0}{-0.05}{0.37}
+  \draw[GAdod!85,line width=0.35pt] (0,-0.05) circle (0.37);
+  \begin{scope}\clip (0,-0.05) circle (0.37);
+    \fill[white,opacity=0.85] (-0.4,0.02) .. controls (-0.2,0.1) and (0.2,-0.1) .. (0.4,-0.02) -- (0.4,-0.1) .. controls (0.2,-0.18) and (-0.2,0.0) .. (-0.4,-0.08) -- cycle;
+    \foreach \x/\y in {-0.27/-0.19,-0.1/-0.22,0.08/-0.22,0.25/-0.19,-0.18/0.12,0.0/0.1,0.18/0.12}{\fill[white,opacity=0.85] (\x,\y) circle (0.026);}
   \end{scope}
-  \fill[white,opacity=0.55] (-0.16,0.14) ellipse (0.045 and 0.09);\end{scope}}}}
-% Tuần lộc
+  \GAsang{-0.16}{0.15}{0.05}{0.1}{30}
+  \end{scope}}}}
+% Tuần lộc đeo chuông
 \tikzset{pics/galoc/.style={code={\begin{scope}[line join=round,line cap=round]
-  \draw[GAnaud,line width=1.6pt] (-0.2,-0.1) -- (-0.36,-0.33) (-0.27,-0.1) -- (-0.17,-0.34) (0.18,-0.1) -- (0.3,-0.34) (0.25,-0.1) -- (0.4,-0.3);
-  \draw[GAnaud,line width=1.6pt] (-0.3,0.0) .. controls (-0.42,0.05) and (-0.44,-0.02) .. (-0.42,-0.08);
-  \path[top color=GAnau,bottom color=GAnau!80!GAnaud,draw=GAnaud,line width=0.4pt] (-0.03,-0.03) ellipse (0.33 and 0.17);
-  \path[fill=GAnau,draw=GAnaud,line width=0.4pt] (0.18,0.05) -- (0.3,0.0) -- (0.4,0.3) -- (0.28,0.34) -- cycle;
-  \path[fill=GAnau,draw=GAnaud,line width=0.4pt] (0.38,0.3) ellipse (0.14 and 0.1);
-  \fill[GAnaud] (0.2,0.36) ellipse (0.06 and 0.035);
-  \draw[GAnaud,line width=1pt] (0.33,0.39) -- (0.28,0.55) -- (0.2,0.62) (0.28,0.55) -- (0.34,0.64) (0.42,0.4) -- (0.46,0.56) -- (0.4,0.64) (0.46,0.56) -- (0.53,0.62);
-  \fill[GAdod] (0.5,0.29) circle (0.045);\fill[black!70] (0.4,0.33) circle (0.02);
-  \fill[GAla] (0.26,0.2) circle (0.04);\fill[GAdo] (0.26,0.2) circle (0.02);
+  \GAbongdo{0.42}{-0.36}
+  \foreach \lw/\cc in {2.4/GAnaud,1.7/GAnau!85!GAnaud}{\draw[\cc,line width=\lw pt] (-0.2,-0.1) -- (-0.33,-0.32) (-0.27,-0.1) -- (-0.15,-0.33) (0.17,-0.1) -- (0.28,-0.33) (0.24,-0.1) -- (0.4,-0.3);}
+  \foreach \x/\y in {-0.33/-0.34,-0.15/-0.35,0.28/-0.35,0.4/-0.32}{\fill[GAnaud!70!black] (\x,\y) circle (0.03);}
+  \shadedraw[inner color=white,outer color=GAkem!60!GAnau,draw=GAnau!60,line width=0.25pt] (-0.36,0.02) .. controls (-0.5,0.08) and (-0.5,-0.04) .. (-0.45,-0.08) .. controls (-0.4,-0.04) .. (-0.34,-0.04) -- cycle;
+  \shadedraw[top color=GAnau!70,bottom color=GAnau!80!GAnaud,draw=GAnaud!70,line width=0.3pt] (-0.03,-0.03) ellipse (0.34 and 0.17);
+  \shade[top color=white,bottom color=GAkem!60!GAnau,opacity=0.9] (0.0,-0.09) ellipse (0.22 and 0.08);
+  \shadedraw[top color=GAnau!85,bottom color=GAnau!85!GAnaud,draw=GAnaud!70,line width=0.3pt] (0.17,0.05) -- (0.3,0.0) -- (0.4,0.3) -- (0.28,0.34) -- cycle;
+  \shadedraw[top color=GAnau!70,bottom color=GAnau!90!GAnaud,draw=GAnaud!70,line width=0.3pt] (0.39,0.3) ellipse (0.14 and 0.1);
+  \shadedraw[top color=GAnau!70,bottom color=GAnau!90!GAnaud,draw=GAnaud!70,line width=0.3pt,rotate around={-30:(0.2,0.38)}] (0.2,0.38) ellipse (0.05 and 0.09);
+  \foreach \lw/\cc in {2.2/GAnaud!85,1.5/GAkem!70!GAnau}{\draw[\cc,line width=\lw pt] (0.33,0.38) -- (0.29,0.54) -- (0.21,0.64) (0.29,0.54) -- (0.35,0.65) (0.43,0.39) -- (0.47,0.55) -- (0.41,0.65) (0.47,0.55) -- (0.54,0.62);}
+  \GAcau{GAdo}{0.52}{0.29}{0.05}
+  \GAmat{0.4}{0.33}{0.022}
+  \draw[GAla!80!GAlad,line width=1.6pt] (0.2,0.2) to[bend right=15] (0.3,0.2);
+  \GAcau{GAvang}{0.26}{0.15}{0.035}
   \end{scope}}}}
 % Bánh pudding Noel
 \tikzset{pics/gabanh/.style={code={\begin{scope}[line join=round]
-  \fill[GAkem!80!GAnau] (0,-0.3) ellipse (0.43 and 0.1);
-  \path[top color=GAnau!70!GAnaud,bottom color=GAnaud,draw=GAnaud!80!black,line width=0.4pt] (-0.36,-0.28) .. controls (-0.38,0.2) and (0.38,0.2) .. (0.36,-0.28) -- cycle;
-  \fill[GAkem,draw=GAkem!70!GAnau,line width=0.4pt] (-0.3,0.04) .. controls (-0.2,0.24) and (0.2,0.24) .. (0.3,0.04) .. controls (0.27,-0.05) and (0.22,-0.02) .. (0.2,0.04) .. controls (0.17,-0.1) and (0.1,-0.08) .. (0.08,0.0) .. controls (0.0,-0.08) and (-0.1,-0.06) .. (-0.12,0.02) .. controls (-0.16,-0.06) and (-0.24,-0.04) .. (-0.25,0.03) -- cycle;
-  \fill[GAla,draw=GAlad,line width=0.4pt] (0,0.2) .. controls (-0.1,0.33) and (-0.22,0.3) .. (-0.25,0.22) .. controls (-0.18,0.16) and (-0.08,0.16) .. (0,0.2);
-  \fill[GAla,draw=GAlad,line width=0.4pt] (0,0.2) .. controls (0.1,0.33) and (0.22,0.3) .. (0.25,0.22) .. controls (0.18,0.16) and (0.08,0.16) .. (0,0.2);
-  \foreach \x/\y in {-0.04/0.24,0.04/0.24,0.0/0.3}{\fill[GAdo,draw=GAdod,line width=0.3pt] (\x,\y) circle (0.04);}
+  \GAbongdo{0.42}{-0.34}
+  \shadedraw[top color=white,bottom color=GAkem!70!GAnau,draw=GAnau!50,line width=0.3pt] (0,-0.3) ellipse (0.44 and 0.1);
+  \shadedraw[inner color=GAnau!60!GAnaud,outer color=GAnaud!85!black,draw=GAnaud!70!black,line width=0.3pt] (-0.36,-0.28) .. controls (-0.38,0.2) and (0.38,0.2) .. (0.36,-0.28) .. controls (0.2,-0.34) and (-0.2,-0.34) .. (-0.36,-0.28);
+  \foreach \x/\y in {-0.18/-0.12,0.05/-0.18,0.2/-0.08,-0.05/-0.02,0.12/0.03,-0.24/0.0}{\fill[GAnaud!55!black,opacity=0.8] (\x,\y) ellipse (0.03 and 0.02);}
+  \GAsang{-0.2}{0.06}{0.04}{0.09}{35}
+  \shadedraw[top color=white,bottom color=GAkem,draw=GAkem!60!GAnau,line width=0.3pt] (-0.31,0.05) .. controls (-0.2,0.26) and (0.2,0.26) .. (0.31,0.05) .. controls (0.28,-0.05) and (0.23,-0.03) .. (0.21,0.04) .. controls (0.19,-0.12) and (0.11,-0.1) .. (0.09,0.0) .. controls (0.02,-0.08) and (-0.08,-0.06) .. (-0.1,0.02) .. controls (-0.14,-0.07) and (-0.24,-0.05) .. (-0.25,0.03) .. controls (-0.28,0.0) .. cycle;
+  \foreach \s in {-1,1}{\begin{scope}[xscale=\s]\shadedraw[left color=GAla,right color=GAlad,draw=GAlad!70!black,line width=0.25pt] (0,0.2) .. controls (0.08,0.34) and (0.22,0.32) .. (0.26,0.23) .. controls (0.18,0.15) and (0.08,0.15) .. (0,0.2);\draw[GAlad!70!black,line width=0.25pt] (0.02,0.2) -- (0.2,0.24);\end{scope}}
+  \foreach \x/\y in {-0.05/0.23,0.05/0.23,0.0/0.3}{\GAcau{GAdo}{\x}{\y}{0.042}}
   \end{scope}}}}
-% Kẹo mút (kẹo xoáy tròn)
-\tikzset{pics/gakeo/.style={code={\begin{scope}
-  \draw[GAnau!60,line width=1.7pt,line cap=round] (0,-0.12) -- (0,-0.5);
-  \fill[white] (0,0.12) circle (0.3);
-  \foreach \a in {0,45,...,315}{\fill[GAdo] (0,0.12) -- ++(\a:0.3) arc (\a:\a+22.5:0.3) -- cycle;}
-  \draw[GAdod,line width=0.4pt] (0,0.12) circle (0.3);
-  \fill[white,opacity=0.5] (-0.12,0.24) ellipse (0.04 and 0.07);\end{scope}}}}
-% Bánh cupcake
+% Kẹo mút xoáy có nơ
+\tikzset{pics/gakeo/.style={code={\begin{scope}[line cap=round]
+  \GAbongdo{0.14}{-0.52}
+  \draw[GAnau!55!GAkem,line width=2pt] (0,-0.14) -- (0,-0.5);\draw[white,opacity=0.7,line width=0.5pt] (-0.03,-0.16) -- (-0.03,-0.48);
+  \shade[inner color=white,outer color=GAhong!40] (0,0.13) circle (0.31);
+  \begin{scope}\clip (0,0.13) circle (0.3);
+    \foreach \a in {0,60,...,300}{\fill[GAdo!85] (0,0.13) -- ++(\a:0.5) arc (\a:\a+30:0.5) -- cycle;}
+    \foreach \a in {0,60,...,300}{\draw[GAdod!60,line width=0.3pt] (0,0.13) to[bend left=18] ++(\a+15:0.35);}
+  \end{scope}
+  \draw[GAdod!80,line width=0.4pt] (0,0.13) circle (0.3);
+  \shade[inner color=white,outer color=GAhong!50,opacity=0.0] (0,0.13) circle (0.01);
+  \GAsang{-0.12}{0.26}{0.045}{0.09}{35}
+  \foreach \s in {-1,1}{\shadedraw[left color=GAla,right color=GAlad,draw=GAlad!70!black,line width=0.25pt] (0,-0.17) .. controls (\s*0.1,-0.07) and (\s*0.2,-0.1) .. (\s*0.19,-0.2) .. controls (\s*0.12,-0.25) and (\s*0.05,-0.2) .. (0,-0.17);}
+  \GAcau{GAla!80!GAlad}{0}{-0.17}{0.03}
+  \end{scope}}}}
+% Bánh cupcake kem xoáy
 \tikzset{pics/gacup/.style={code={\begin{scope}[line join=round]
-  \fill[GAhong,draw=GAhongd,line width=0.4pt] (-0.28,0.0) -- (0.28,0.0) -- (0.2,-0.38) -- (-0.2,-0.38) -- cycle;
-  \foreach \x in {-0.16,-0.05,0.05,0.16}{\draw[GAhongd,line width=0.4pt] (\x*1.3,0.0) -- (\x,-0.38);}
-  \fill[GAkem,draw=GAnau,line width=0.4pt] (0,0.0) ellipse (0.31 and 0.1);
-  \fill[GAkem,draw=GAnau,line width=0.4pt] (0,0.12) ellipse (0.23 and 0.09);
-  \fill[GAkem,draw=GAnau,line width=0.4pt] (0,0.23) ellipse (0.15 and 0.08);
-  \fill[GAdo,draw=GAdod,line width=0.3pt] (0.02,0.36) circle (0.06);\draw[GAlad,line width=0.5pt] (0.02,0.42) -- (0.07,0.5);
-  \foreach \x/\y/\c in {-0.14/0.03/GAxanh,0.12/0.05/GAvangd,-0.05/0.14/GAla,0.06/0.2/GAhongd}{\fill[\c] (\x,\y) circle (0.02);}
+  \GAbongdo{0.28}{-0.4}
+  \shadedraw[left color=GAhong!70,right color=GAhongd!80,draw=GAhongd!80,line width=0.3pt] (-0.29,0.0) -- (0.29,0.0) -- (0.21,-0.38) -- (-0.21,-0.38) -- cycle;
+  \foreach \x in {-0.18,-0.09,0,0.09,0.18}{\draw[GAhongd!90!black,line width=0.3pt] (\x*1.45,0.0) -- (\x*1.0,-0.38);}
+  \foreach \y/\rx/\ry in {0.0/0.32/0.1,0.12/0.25/0.09,0.23/0.17/0.08}{\shadedraw[top color=white,bottom color=GAhong!40!GAkem,draw=GAhongd!60,line width=0.3pt] (0,\y) ellipse ({\rx} and {\ry});}
+  \shadedraw[top color=white,bottom color=GAhong!40!GAkem,draw=GAhongd!60,line width=0.3pt] (-0.08,0.3) .. controls (-0.04,0.38) and (0.04,0.38) .. (0.08,0.3) -- cycle;
+  \GAcau{GAdo}{0.02}{0.38}{0.065}
+  \draw[GAlad,line width=0.5pt] (0.02,0.44) to[bend left=20] (0.08,0.53);
+  \foreach \x/\y/\c/\a in {-0.16/0.03/GAxanh/20,0.14/0.05/GAvangd/-30,-0.06/0.14/GAla/60,0.08/0.2/GAhongd/-10,-0.2/0.13/GAvangd/40,0.2/0.13/GAxanh/70}{\draw[\c,line width=1.2pt,line cap=round] (\x,\y) -- ++(\a:0.04);}
   \end{scope}}}}
 % Mũ ông già Noel
 \tikzset{pics/gamu/.style={code={\begin{scope}[line join=round]
-  \fill[GAdo,draw=GAdod,line width=0.4pt] (-0.4,-0.12) .. controls (-0.38,0.3) and (0.0,0.42) .. (0.28,0.2) .. controls (0.3,0.12) and (0.32,0.05) .. (0.4,-0.12) -- cycle;
-  \fill[white,draw=GAxam!40,line width=0.4pt,rounded corners=3pt] (-0.46,-0.3) rectangle (0.46,-0.1);
-  \fill[white,draw=GAxam!40,line width=0.4pt] (0.3,0.22) circle (0.09);\end{scope}}}}
-% Cây thông Noel
+  \GAbongdo{0.42}{-0.31}
+  \shadedraw[left color=GAdo!85,right color=GAdod!80,draw=GAdod,line width=0.3pt] (-0.4,-0.12) .. controls (-0.4,0.3) and (0.0,0.44) .. (0.28,0.2) .. controls (0.3,0.12) and (0.32,0.05) .. (0.4,-0.12) -- cycle;
+  \draw[GAdod!85,line width=0.4pt] (-0.1,0.0) .. controls (0.0,0.12) and (0.1,0.12) .. (0.2,0.05);
+  \GAsang{-0.2}{0.05}{0.04}{0.12}{50}
+  \shadedraw[top color=white,bottom color=GAkem!70!GAxam,draw=GAxam!35,line width=0.3pt,rounded corners=4pt] (-0.47,-0.3) rectangle (0.47,-0.09);
+  \foreach \x in {-0.4,-0.28,-0.16,-0.04,0.08,0.2,0.32,0.42}{\fill[white,opacity=0.9] (\x,-0.095) circle (0.035);\fill[white,opacity=0.9] (\x+0.04,-0.295) circle (0.03);}
+  \GAcau{GAxanh!22!white}{0.3}{0.23}{0.1}
+  \end{scope}}}}
+% Cây thông Noel có dây đèn
 \tikzset{pics/gacay/.style={code={\begin{scope}[line join=round]
-  \fill[GAnaud!80] (-0.06,-0.5) rectangle (0.06,-0.3);
-  \foreach \y/\w in {-0.1/0.34,0.08/0.28,0.24/0.2}{\path[top color=GAla,bottom color=GAlad!75,draw=GAlad,line width=0.4pt] (0,\y+0.3) -- (\w,\y-0.12) -- (-\w,\y-0.12) -- cycle;}
-  \node[star,star points=5,star point ratio=2.2,fill=GAvang,draw=GAvangd,line width=0.3pt,inner sep=0pt,minimum size=0.17cm] at (0,0.58) {};
-  \foreach \x/\y/\c in {-0.12/-0.2/GAdo,0.14/-0.16/GAvang,0.0/0.0/GAhong,-0.08/0.14/GAxanh,0.08/0.2/GAdo}{\fill[\c] (\x,\y) circle (0.035);}
+  \GAbongdo{0.28}{-0.52}
+  \shadedraw[left color=GAnau!80,right color=GAnaud,draw=GAnaud!70,line width=0.25pt] (-0.07,-0.5) rectangle (0.07,-0.3);
+  \foreach \y/\w in {-0.12/0.36,0.07/0.29,0.23/0.21}{\shadedraw[left color=GAla,right color=GAlad!80,draw=GAlad!70!black,line width=0.3pt] (0,\y+0.32) -- (\w,\y-0.12) .. controls (\w/2,\y-0.17) and (-\w/2,\y-0.17) .. (-\w,\y-0.12) -- cycle;}
+  \draw[GAvangd,line width=0.6pt] (-0.25,-0.17) to[bend right=20] (0.2,-0.03) (-0.18,0.02) to[bend right=20] (0.15,0.14) (-0.12,0.2) to[bend right=20] (0.1,0.27);
+  \foreach \x/\y/\c in {-0.2/-0.19/GAdo,0.0/-0.13/GAxanh,0.17/-0.06/GAvang,-0.12/0.03/GAhong,0.1/0.13/GAdo,-0.05/0.21/GAxanh,0.07/0.27/GAvang}{\GAcau{\c}{\x}{\y}{0.034}}
+  \node[star,star points=5,star point ratio=2.2,top color=GAvang!60,bottom color=GAvangd,draw=GAvangd!70!black,line width=0.3pt,inner sep=0pt,minimum size=0.2cm] at (0,0.6) {};
   \end{scope}}}}
 % Bánh gừng đội mũ
 \tikzset{pics/gagung/.style={code={\begin{scope}[line join=round,line cap=round]
-  \foreach \lw/\cc in {8.4/GAnaud,6.2/GAnau}{%
+  \GAbongdo{0.3}{-0.4}
+  \foreach \lw/\cc in {9.2/GAnaud!85,7.2/GAnau!85!GAnaud,5.0/GAnau}{%
     \draw[\cc,line width=\lw pt] (-0.08,0.12) -- (-0.3,0.2) (0.08,0.12) -- (0.3,0.2) (-0.07,-0.08) -- (-0.2,-0.36) (0.07,-0.08) -- (0.2,-0.36) (0,0.14) -- (0,-0.1);
-    \fill[\cc] (0,0.3) circle (0.17);}
-  \fill[GAdo,draw=GAdod,line width=0.3pt] (-0.16,0.36) .. controls (-0.14,0.55) and (0.08,0.58) .. (0.2,0.42) -- cycle;
-  \fill[white] (-0.18,0.33) rectangle (0.18,0.4);\fill[white] (0.17,0.5) circle (0.04);
-  \fill[black!65] (-0.06,0.28) circle (0.018);\fill[black!65] (0.06,0.28) circle (0.018);
-  \draw[GAdod,line width=0.5pt] (-0.06,0.2) to[bend right=40] (0.06,0.2);
-  \foreach \y/\c in {0.06/GAdo,-0.04/GAla}{\fill[\c] (0,\y) circle (0.025);}
-  \draw[white,line width=0.8pt,dash pattern=on 0.5pt off 2pt] (-0.22,0.22) -- (-0.28,0.2) (0.22,0.22) -- (0.28,0.2) (-0.19,-0.3) -- (-0.2,-0.35) (0.19,-0.3) -- (0.2,-0.35);
+    \fill[\cc] (0,0.3) circle (0.17+\lw/130-0.045);}
+  \draw[white,line width=1pt,dash pattern=on 0.2pt off 2.4pt] (-0.12,0.14) -- (-0.29,0.2) (0.12,0.14) -- (0.29,0.2) (-0.08,-0.1) -- (-0.2,-0.34) (0.08,-0.1) -- (0.2,-0.34);
+  \draw[white,line width=0.9pt] (-0.34,0.19) -- (-0.34,0.22) (0.34,0.19) -- (0.34,0.22);
+  \shadedraw[left color=GAdo!85,right color=GAdod,draw=GAdod,line width=0.3pt] (-0.17,0.37) .. controls (-0.14,0.58) and (0.08,0.6) .. (0.2,0.43) -- cycle;
+  \shadedraw[top color=white,bottom color=GAkem!70!GAxam,draw=GAxam!30,line width=0.25pt,rounded corners=2pt] (-0.2,0.33) rectangle (0.2,0.41);
+  \GAcau{GAxanh!22!white}{0.19}{0.53}{0.045}
+  \GAmat{-0.065}{0.28}{0.022}\GAmat{0.065}{0.28}{0.022}
+  \draw[GAdod,line width=0.5pt] (-0.06,0.2) to[bend right=45] (0.06,0.2);
+  \fill[GAhong,opacity=0.8] (-0.1,0.23) circle (0.025);\fill[GAhong,opacity=0.8] (0.1,0.23) circle (0.025);
+  \foreach \y/\c in {0.07/GAdo,-0.03/GAla}{\GAcau{\c}{0}{\y}{0.028}}
+  \shade[left color=GAdo!70,right color=GAdod!80] (-0.1,0.13) -- (0,0.1) -- (-0.1,0.07) -- cycle;\shade[left color=GAdod!80,right color=GAdo!70] (0.1,0.13) -- (0,0.1) -- (0.1,0.07) -- cycle;
   \end{scope}}}}
 % Ông già Noel
 \tikzset{pics/gaong/.style={code={\begin{scope}[line join=round]
-  \fill[GAdo,draw=GAdod,line width=0.4pt] (-0.42,-0.5) .. controls (-0.42,-0.2) and (-0.3,-0.12) .. (0,-0.12) .. controls (0.3,-0.12) and (0.42,-0.2) .. (0.42,-0.5) -- cycle;
-  \fill[GAda,draw=GAcamd!50,line width=0.3pt] (0,-0.02) ellipse (0.24 and 0.22);
-  \foreach \x/\y in {-0.2/-0.1,-0.12/-0.22,0/-0.27,0.12/-0.22,0.2/-0.1}{\fill[white,draw=GAxam!35,line width=0.3pt] (\x,\y) circle (0.1);}
-  \fill[GAda] (0,0) ellipse (0.18 and 0.15);
-  \fill[white,draw=GAxam!35,line width=0.3pt] (-0.07,-0.1) ellipse (0.09 and 0.045);\fill[white,draw=GAxam!35,line width=0.3pt] (0.07,-0.1) ellipse (0.09 and 0.045);
-  \fill[GAhongd] (0,-0.04) circle (0.04);
-  \fill[black!65] (-0.09,0.04) circle (0.025);\fill[black!65] (0.09,0.04) circle (0.025);
-  \fill[GAhong,opacity=0.8] (-0.16,-0.03) circle (0.035);\fill[GAhong,opacity=0.8] (0.16,-0.03) circle (0.035);
-  \fill[GAdo,draw=GAdod,line width=0.4pt] (-0.25,0.13) .. controls (-0.25,0.5) and (0.0,0.6) .. (0.28,0.4) .. controls (0.12,0.38) and (0.18,0.2) .. (0.25,0.13) -- cycle;
-  \fill[white,draw=GAxam!40,line width=0.3pt,rounded corners=2pt] (-0.29,0.08) rectangle (0.29,0.2);
-  \fill[white,draw=GAxam!40,line width=0.3pt] (0.3,0.4) circle (0.07);\end{scope}}}}
-% Người tuyết
+  \GAbongdo{0.4}{-0.52}
+  \shadedraw[left color=GAdo!90,right color=GAdod!85,draw=GAdod,line width=0.3pt] (-0.42,-0.5) .. controls (-0.42,-0.2) and (-0.3,-0.12) .. (0,-0.12) .. controls (0.3,-0.12) and (0.42,-0.2) .. (0.42,-0.5) -- cycle;
+  \shadedraw[top color=white,bottom color=GAkem!60!GAxam,draw=GAxam!30,line width=0.25pt,rounded corners=3pt] (-0.26,-0.36) rectangle (0.26,-0.2);
+  \shade[inner color=GAda,outer color=GAhong!70!GAda] (0,-0.02) ellipse (0.24 and 0.22);
+  \foreach \x/\y in {-0.21/-0.1,-0.15/-0.2,-0.07/-0.27,0.07/-0.27,0.15/-0.2,0.21/-0.1,0/-0.3}{\GAcau{GAxanh!22!white}{\x}{\y}{0.1}}
+  \shade[inner color=GAda,outer color=GAda!85!GAhong] (0,0.0) ellipse (0.18 and 0.15);
+  \foreach \s in {-1,1}{\shadedraw[inner color=white,outer color=GAxam!12!white,draw=GAxam!25,line width=0.2pt,rotate around={\s*18:(\s*0.08,-0.1)}] (\s*0.08,-0.1) ellipse (0.1 and 0.05);}
+  \GAcau{GAhongd}{0}{-0.04}{0.045}
+  \GAmat{-0.09}{0.05}{0.026}\GAmat{0.09}{0.05}{0.026}
+  \draw[GAxam!50,line width=0.7pt,line cap=round] (-0.14,0.1) -- (-0.05,0.11) (0.05,0.11) -- (0.14,0.1);
+  \fill[GAhong,opacity=0.75] (-0.16,-0.02) circle (0.035);\fill[GAhong,opacity=0.75] (0.16,-0.02) circle (0.035);
+  \shadedraw[left color=GAdo!90,right color=GAdod!85,draw=GAdod,line width=0.3pt] (-0.25,0.13) .. controls (-0.25,0.5) and (0.0,0.62) .. (0.28,0.4) .. controls (0.12,0.38) and (0.18,0.2) .. (0.25,0.13) -- cycle;
+  \shadedraw[top color=white,bottom color=GAkem!60!GAxam,draw=GAxam!30,line width=0.25pt,rounded corners=3pt] (-0.29,0.07) rectangle (0.29,0.2);
+  \GAcau{GAxanh!22!white}{0.3}{0.4}{0.07}
+  \end{scope}}}}
+% Người tuyết quàng khăn
 \tikzset{pics/gatuyet/.style={code={\begin{scope}[line join=round,line cap=round]
-  \draw[GAnaud,line width=0.9pt] (-0.2,-0.1) -- (-0.45,0.02) (0.2,-0.1) -- (0.45,0.02);
-  \path[top color=white,bottom color=GAxanh!50,draw=GAxanhd!70,line width=0.4pt] (0,-0.24) circle (0.26);
-  \path[top color=white,bottom color=GAxanh!40,draw=GAxanhd!70,line width=0.4pt] (0,0.14) circle (0.19);
-  \fill[GAla!70!GAlad,draw=GAlad,line width=0.3pt] (-0.16,0.25) .. controls (-0.14,0.5) and (0.14,0.5) .. (0.16,0.25) -- cycle;
-  \fill[white] (0,0.5) circle (0.04);
-  \fill[GAdo] (-0.2,0.24) rectangle (0.2,0.29);
-  \draw[GAdo,line width=2.2pt] (-0.16,0.02) to[bend right=20] (0.16,0.02);
-  \fill[GAdo] (0.07,0.0) rectangle (0.14,-0.14);
-  \fill[GAcamd] (0.0,0.13) -- (0.15,0.1) -- (0.0,0.08) -- cycle;
-  \fill[black!65] (-0.06,0.17) circle (0.02);\fill[black!65] (0.06,0.17) circle (0.02);
-  \foreach \y in {-0.16,-0.26,-0.36}{\fill[GAxam] (0,\y) circle (0.02);}
+  \GAbongdo{0.3}{-0.5}
+  \foreach \s in {-1,1}{\draw[GAnaud,line width=1.1pt] (\s*0.2,-0.1) -- (\s*0.46,0.03) (\s*0.38,-0.01) -- (\s*0.46,0.1) (\s*0.38,-0.01) -- (\s*0.47,-0.04);}
+  \GAcau{GAxanh!22!white}{0}{-0.25}{0.27}
+  \GAcau{GAxanh!22!white}{0}{0.14}{0.2}
+  \shadedraw[left color=GAla!85,right color=GAlad!85,draw=GAlad!80!black,line width=0.25pt] (-0.17,0.26) .. controls (-0.15,0.52) and (0.15,0.52) .. (0.17,0.26) -- cycle;
+  \shadedraw[top color=GAla,bottom color=GAlad,draw=GAlad!80!black,line width=0.25pt,rounded corners=1pt] (-0.23,0.23) rectangle (0.23,0.3);
+  \GAcau{GAxanh!22!white}{0}{0.51}{0.045}
+  \draw[GAdo,line width=3pt] (-0.17,0.02) to[bend right=22] (0.17,0.02);
+  \draw[white,line width=0.7pt,dash pattern=on 2pt off 2.4pt] (-0.16,0.02) to[bend right=22] (0.16,0.02);
+  \shadedraw[top color=GAdo!70,bottom color=GAdod,draw=GAdod,line width=0.25pt,rounded corners=1pt] (0.06,0.0) rectangle (0.15,-0.17);
+  \shadedraw[left color=GAcam,right color=GAcamd,draw=GAcamd!80!black,line width=0.25pt] (0.0,0.16) -- (0.18,0.12) -- (0.0,0.08) -- cycle;
+  \GAmat{-0.07}{0.19}{0.024}\GAmat{0.07}{0.19}{0.024}
+  \fill[GAhong,opacity=0.7] (-0.12,0.12) circle (0.03);\fill[GAhong,opacity=0.7] (0.12,0.12) circle (0.03);
+  \foreach \y in {-0.14,-0.25,-0.36}{\GAcau{GAxam}{0}{\y}{0.025}}
   \end{scope}}}}
 % Chú ong
 \tikzset{pics/gaong2/.style={code={\begin{scope}[line join=round,line cap=round]
-  \fill[GAxanh!55,draw=GAxanhd!60,line width=0.3pt,rotate around={-25:(-0.08,0.2)}] (-0.08,0.2) ellipse (0.1 and 0.2);
-  \fill[GAxanh!55,draw=GAxanhd!60,line width=0.3pt,rotate around={25:(0.12,0.2)}] (0.12,0.2) ellipse (0.1 and 0.2);
-  \draw[GAnaud,line width=0.5pt] (0.3,0.15) -- (0.38,0.32) (0.36,0.08) -- (0.5,0.2);
-  \path[top color=GAvang,bottom color=GAvangd,draw=GAnaud,line width=0.4pt] (0,0) ellipse (0.36 and 0.24);
-  \begin{scope}\clip (0,0) ellipse (0.36 and 0.24);
-    \fill[GAnaud!80] (-0.17,-0.3) rectangle (-0.07,0.3);\fill[GAnaud!80] (0.0,-0.3) rectangle (0.1,0.3);\end{scope}
-  \fill[GAvang!60!GAcam] (0.28,0.05) circle (0.13);
-  \fill[black!65] (0.32,0.09) circle (0.02);
-  \draw[GAnaud,line width=0.5pt] (0.27,0.0) to[bend right=40] (0.35,0.0);
-  \draw[GAnaud,line width=1pt] (-0.36,0) -- (-0.45,-0.03);\end{scope}}}}
+  \foreach \a/\x in {-30/-0.08,30/0.14}{\begin{scope}[rotate around={\a:(\x,0.2)}]\shadedraw[inner color=white,outer color=GAxanh!60,draw=GAxanhd!55,line width=0.25pt,opacity=0.85] (\x,0.2) ellipse (0.1 and 0.22);\draw[GAxanhd!50,line width=0.2pt] (\x,0.05) -- (\x,0.36);\end{scope}}
+  \draw[GAnaud!80,line width=0.5pt] (0.3,0.14) to[bend left=20] (0.36,0.34) (0.36,0.1) to[bend left=20] (0.52,0.2);
+  \GAcau{GAnaud}{0.36}{0.35}{0.03}\GAcau{GAnaud}{0.53}{0.21}{0.03}
+  \shadedraw[top color=GAvang,bottom color=GAvangd,draw=GAnaud!80,line width=0.3pt] (0,0) ellipse (0.37 and 0.25);
+  \begin{scope}\clip (0,0) ellipse (0.37 and 0.25);\fill[GAnaud!75] (-0.19,-0.3) rectangle (-0.08,0.3);\fill[GAnaud!75] (0.0,-0.3) rectangle (0.11,0.3);\fill[GAnaud!75] (-0.4,-0.3) rectangle (-0.3,0.3);\end{scope}
+  \GAsang{-0.1}{0.12}{0.12}{0.03}{0}
+  \fill[GAnaud!80] (-0.36,0) -- (-0.46,-0.02) -- (-0.36,-0.05) -- cycle;
+  \GAcau{GAvang!60!GAcam}{0.28}{0.05}{0.14}
+  \GAmat{0.33}{0.09}{0.03}
+  \draw[GAnaud,line width=0.5pt] (0.27,-0.01) to[bend right=45] (0.36,-0.01);
+  \fill[GAhong,opacity=0.8] (0.24,0.0) circle (0.025);
+  \end{scope}}}}
 % Bông hoa có chữ: \GAhoa{chữ}{màu cánh}{màu viền}
-\newcommand{\GAhoa}[3]{\begin{tikzpicture}
-  \foreach \a in {0,36,...,324}{\begin{scope}[rotate=\a]\path[fill=#2,draw=#3,line width=0.5pt] (0,0.78) ellipse (0.22 and 0.36);\draw[#3!70,line width=0.3pt] (0,0.62) -- (0,0.92);\end{scope}}
-  \path[fill=white,draw=#3,line width=0.5pt] (0,0) circle (0.58);
+\providecommand{\GAhoa}{}\renewcommand{\GAhoa}[3]{\begin{tikzpicture}
+  \foreach \a in {0,36,...,324}{\begin{scope}[rotate=\a]\shadedraw[inner color=white,outer color=#2,draw=#3!80,line width=0.4pt] (0,0.78) ellipse (0.22 and 0.36);\draw[#3!60,line width=0.3pt,line cap=round] (0,0.58) -- (0,0.95);\draw[#3!40,line width=0.25pt] (0,0.62) -- (0.07,0.8) (0,0.62) -- (-0.07,0.8);\end{scope}}
+  \shadedraw[inner color=white,outer color=#2!25!white,draw=#3!80,line width=0.5pt] (0,0) circle (0.58);\draw[#3!50,line width=0.3pt] (0,0) circle (0.5);
   \node[font=\Large\bfseries,text=black!75] at (0,0) {#1};
 \end{tikzpicture}}
 % Bông hoa có dấu thanh: \GAdau{loại}{màu cánh}{màu viền}
-\newcommand{\GAhoadau}[4]{\begin{tikzpicture}
-  \foreach \a in {0,45,...,315}{\begin{scope}[rotate=\a]\path[fill=#3,draw=#4,line width=0.5pt] (0,0.72) ellipse (0.24 and 0.34);\end{scope}}
-  \path[fill=white,draw=#4,line width=0.5pt] (0,0) circle (0.56);
+\providecommand{\GAhoadau}{}\renewcommand{\GAhoadau}[4]{\begin{tikzpicture}
+  \foreach \a in {0,45,...,315}{\begin{scope}[rotate=\a]\shadedraw[inner color=white,outer color=#3,draw=#4!80,line width=0.4pt] (0,0.72) ellipse (0.24 and 0.34);\draw[#4!60,line width=0.3pt,line cap=round] (0,0.55) -- (0,0.88);\end{scope}}
+  \shadedraw[inner color=white,outer color=#3!25!white,draw=#4!80,line width=0.5pt] (0,0) circle (0.56);\draw[#4!50,line width=0.3pt] (0,0) circle (0.49);
   \begin{scope}[line width=1.6pt,line cap=round,black!70]
   \ifcase#1\or \draw (-0.14,-0.14) -- (0.14,0.18);\or \draw (-0.14,0.18) -- (0.14,-0.14);\or \draw (-0.12,0.14) to[out=90,in=180] (0,0.24) to[out=0,in=90] (0.1,0.12) to[out=-90,in=90] (0,0.02);\fill (0,-0.14) circle (0.03);\or \draw (-0.22,0.0) to[out=60,in=180] (-0.05,0.14) to[out=0,in=180] (0.05,-0.02) to[out=0,in=-120] (0.22,0.1);\or \fill (0,-0.02) circle (0.06);\fi
   \end{scope}
@@ -170,38 +227,38 @@
 
 %---------- Nhóm hình và các hàng phép tính ----------
 % \GAnhom{n}{hình}: vẽ n hình (n = 1..6) xếp thành 1 hoặc 2 hàng
-\newcommand{\GAnhom}[2]{%
-  \ifcase#1\def\GAds{}\or\def\GAds{0.45/0}\or\def\GAds{0.2/0,1.0/0}\or\def\GAds{0/0,0.8/0,1.6/0}%
-  \or\def\GAds{0.4/0.45,1.2/0.45,0.4/-0.45,1.2/-0.45}\or\def\GAds{0/0.45,0.8/0.45,1.6/0.45,0.4/-0.45,1.2/-0.45}%
-  \or\def\GAds{0/0.45,0.8/0.45,1.6/0.45,0/-0.45,0.8/-0.45,1.6/-0.45}\fi
-  \foreach \px/\py in \GAds{\pic[scale=0.84] at (\px,\py) {#2};}}
+\providecommand{\GAnhom}{}\renewcommand{\GAnhom}[2]{%
+  \ifcase#1\def\GAds{}\or\def\GAds{0.45/0}\or\def\GAds{0.2/0,1.08/0}\or\def\GAds{0/0,0.88/0,1.76/0}%
+  \or\def\GAds{0.4/0.48,1.28/0.48,0.4/-0.48,1.28/-0.48}\or\def\GAds{0/0.48,0.88/0.48,1.76/0.48,0.44/-0.48,1.32/-0.48}%
+  \or\def\GAds{0/0.48,0.88/0.48,1.76/0.48,0/-0.48,0.88/-0.48,1.76/-0.48}\fi
+  \foreach \px/\py in \GAds{\pic[scale=0.95] at (\px,\py) {#2};}}
 % Dấu + - = vẽ bằng nét tròn đầu
-\newcommand{\GAcong}{\draw[line width=2.4pt,line cap=round,black!65] (-0.2,0)--(0.2,0) (0,-0.2)--(0,0.2);}
-\newcommand{\GAtru}{\draw[line width=2.4pt,line cap=round,black!65] (-0.2,0)--(0.2,0);}
-\newcommand{\GAbang}{\draw[line width=2.4pt,line cap=round,black!65] (-0.2,0.08)--(0.2,0.08) (-0.2,-0.08)--(0.2,-0.08);}
+\providecommand{\GAcong}{}\renewcommand{\GAcong}{\draw[line width=2.4pt,line cap=round,black!65] (-0.2,0)--(0.2,0) (0,-0.2)--(0,0.2);}
+\providecommand{\GAtru}{}\renewcommand{\GAtru}{\draw[line width=2.4pt,line cap=round,black!65] (-0.2,0)--(0.2,0);}
+\providecommand{\GAbang}{}\renewcommand{\GAbang}{\draw[line width=2.4pt,line cap=round,black!65] (-0.2,0.08)--(0.2,0.08) (-0.2,-0.08)--(0.2,-0.08);}
 % Một hàng phép tính bằng hình: \GAhang{số hình trái}{hình}{số hình phải}{c hoặc t}
-\newcommand{\GAhang}[4]{\begin{tikzpicture}
-  \draw[rounded corners=7pt,line width=0.9pt,GAxanhd!80,fill=white] (0,-1) rectangle (8.4,1);
-  \begin{scope}[shift={(0.6,0)}]\GAnhom{#1}{#2}\end{scope}
-  \begin{scope}[shift={(3.5,0)}]\csname GA#4\endcsname\end{scope}
-  \begin{scope}[shift={(4.2,0)}]\GAnhom{#3}{#2}\end{scope}
-  \begin{scope}[shift={(6.9,0)}]\GAbang\end{scope}
-  \node[draw=GAxanhd,rounded corners=3pt,minimum size=0.95cm,line width=0.8pt] at (7.7,0) {};
+\providecommand{\GAhang}{}\renewcommand{\GAhang}[4]{\begin{tikzpicture}
+  \draw[rounded corners=7pt,line width=0.9pt,GAxanhd!80,fill=white] (0,-1.08) rectangle (8.4,1.08);
+  \begin{scope}[shift={(0.55,0)}]\GAnhom{#1}{#2}\end{scope}
+  \begin{scope}[shift={(3.55,0)}]\csname GA#4\endcsname\end{scope}
+  \begin{scope}[shift={(4.3,0)}]\GAnhom{#3}{#2}\end{scope}
+  \begin{scope}[shift={(6.95,0)}]\GAbang\end{scope}
+  \node[draw=GAxanhd,rounded corners=3pt,minimum size=0.95cm,line width=0.8pt] at (7.75,0) {};
 \end{tikzpicture}}
 % Hàng so sánh bằng hình: \GAhangss{số hình trái}{hình}{số hình phải}
-\newcommand{\GAhangss}[3]{\begin{tikzpicture}
-  \draw[rounded corners=7pt,line width=0.9pt,GAxanhd!80,fill=white] (0,-1) rectangle (8.4,1);
+\providecommand{\GAhangss}{}\renewcommand{\GAhangss}[3]{\begin{tikzpicture}
+  \draw[rounded corners=7pt,line width=0.9pt,GAxanhd!80,fill=white] (0,-1.08) rectangle (8.4,1.08);
   \begin{scope}[shift={(0.55,0)}]\GAnhom{#1}{#2}\end{scope}
   \node[draw=GAxanhd,rounded corners=3pt,minimum size=0.95cm,line width=0.8pt] at (3.65,0) {};
   \begin{scope}[shift={(4.6,0)}]\GAnhom{#3}{#2}\end{scope}
 \end{tikzpicture}}
 % Tranh để HS lập phép trừ: n hình, k hình bị gạch
-\newcommand{\GAtranhtru}[3]{\begin{tikzpicture}
+\providecommand{\GAtranhtru}{}\renewcommand{\GAtranhtru}[3]{\begin{tikzpicture}
   \foreach \k in {1,...,#1}{\begin{scope}[shift={(0.85*\k,0)}]\pic[scale=0.85] at (0,0) {#3};
     \pgfmathtruncatemacro{\gach}{#1-#2}\ifnum\k>\gach\draw[GAdod,line width=1.8pt,line cap=round] (-0.3,-0.3)--(0.3,0.3);\fi\end{scope}}
 \end{tikzpicture}}
 % Tranh để HS lập phép cộng: hai nhóm trong hai khung
-\newcommand{\GAtranhcong}[3]{\begin{tikzpicture}
+\providecommand{\GAtranhcong}{}\renewcommand{\GAtranhcong}[3]{\begin{tikzpicture}
   \draw[GAhongd,rounded corners=8pt,dashed,line width=0.9pt] (-0.35,-0.6) rectangle (0.85*#1+0.05,0.6);
   \foreach \k in {1,...,#1}{\pic[scale=0.85] at (0.85*\k-0.5,0) {#3};}
   \begin{scope}[shift={(0.85*#1+0.9,0)}]
@@ -209,11 +266,11 @@
   \foreach \k in {1,...,#2}{\pic[scale=0.85] at (0.85*\k-0.5,0) {#3};}\end{scope}
 \end{tikzpicture}}
 % Bảng phép tính dạng thẻ màu: \GAthe{phép tính}{màu}
-\newcommand{\GAthe}[2]{\tikz\node[draw=#2!75!black,fill=#2!55,rounded corners=6pt,line width=0.8pt,minimum width=2.8cm,minimum height=1.15cm,font=\LARGE\bfseries]{#1};}
+\providecommand{\GAthe}{}\renewcommand{\GAthe}[2]{\tikz\node[draw=#2!75!black,fill=#2!55,rounded corners=6pt,line width=0.8pt,minimum width=2.8cm,minimum height=1.15cm,font=\LARGE\bfseries]{#1};}
 % Dãy ô số: \GAdayso{a,b,,d,...} (để trống = ô trống)
-\newcommand{\GAdayso}[1]{\begin{tikzpicture}\foreach \x [count=\k] in {#1}{\node[draw=GAxanhd,fill=GAxanh!25,rounded corners=3pt,line width=0.8pt,minimum width=1.1cm,minimum height=0.9cm,font=\Large] at (1.25*\k,0) {\x};}\end{tikzpicture}}
+\providecommand{\GAdayso}{}\renewcommand{\GAdayso}[1]{\begin{tikzpicture}\foreach \x [count=\k] in {#1}{\node[draw=GAxanhd,fill=GAxanh!25,rounded corners=3pt,line width=0.8pt,minimum width=1.1cm,minimum height=0.9cm,font=\Large] at (1.25*\k,0) {\x};}\end{tikzpicture}}
 % Dãy hình quy luật: các hình cách nhau, ô cuối trống
-\newcommand{\GAdayhinh}[1]{\begin{tikzpicture}\foreach \h [count=\k] in {#1}{\draw[GAxanhd,rounded corners=4pt,line width=0.8pt,fill=white] (1.15*\k-0.55,-0.55) rectangle (1.15*\k+0.55,0.55);\def\GAtmp{-}\ifx\h\GAtmp\else\pic[scale=0.8] at (1.15*\k,0) {\h};\fi}\end{tikzpicture}}
+\providecommand{\GAdayhinh}{}\renewcommand{\GAdayhinh}[1]{\begin{tikzpicture}\foreach \h [count=\k] in {#1}{\draw[GAxanhd,rounded corners=4pt,line width=0.8pt,fill=white] (1.15*\k-0.55,-0.55) rectangle (1.15*\k+0.55,0.55);\def\GAtmp{-}\ifx\h\GAtmp\else\pic[scale=0.8] at (1.15*\k,0) {\h};\fi}\end{tikzpicture}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                       BUỔI 1
@@ -295,12 +352,13 @@
     \item \textbf{Vòng 2 -- Làm ngược lại:} HS A nói kết quả, HS B tìm phép tính. Ví dụ: \GAloi{Đố bạn phép tính nào có kết quả bằng 5?} HS B nói \GAloi{$2 + 3 = 5$} hoặc \GAloi{$4 + 1 = 5$}, \GAloi{$5 - 0 = 5$}\dots
     \item HS trả lời đúng được 1 điểm cộng (1 sao) cho nhóm. Nếu HS B chưa trả lời được, bạn trong nhóm được giơ tay hỗ trợ và nhóm vẫn được nửa điểm.
 \end{itemize}
+\colorlet{GAtocA}{GAcamd!85}\colorlet{GAtocAd}{GAcamd!60!black}\colorlet{GAtocB}{GAnaud!85}\colorlet{GAtocBd}{GAnaud!60!black}
 \begin{center}
-\begin{tikzpicture}[scale=0.9]
+\begin{tikzpicture}[scale=1.0]
   \newcommand{\GAbe}[3]{% #1 màu tóc, #2 màu tóc đậm, #3 kiểu tóc (1: bím hai bên, 2: tóc ngang vai)
     \ifnum#3=1
       \foreach \sx in {-1,1}{\begin{scope}[xscale=\sx]\fill[#1,draw=#2,line width=0.4pt,rotate around={22:(1.45,0.95)}] (1.45,0.95) ellipse (0.36 and 0.75);\fill[#2] (1.2,1.5) circle (0.1);\end{scope}}
-      \fill[#1,draw=#2,line width=0.4pt] (0,1.95) ellipse (1.32 and 1.25);
+      \shadedraw[inner color=#1!70!white,outer color=#1,draw=#2,line width=0.4pt] (0,1.95) ellipse (1.32 and 1.25);
     \else
       \fill[#1,draw=#2,line width=0.4pt] (-1.3,0.2) .. controls (-1.7,2.9) and (1.7,2.9) .. (1.3,0.2) .. controls (0.9,0.45) and (-0.9,0.45) .. (-1.3,0.2);
     \fi
@@ -309,18 +367,18 @@
       \fill[GAkem!85!GAxam] (-2,-1) rectangle (2,1);\fill[GAvang] (-2,-1) rectangle (-0.95,1);\fill[GAvang] (0.95,-1) rectangle (2,1);\end{scope}
     \fill[GAda] (-0.3,0.62) .. controls (-0.2,0.32) and (0.2,0.32) .. (0.3,0.62) -- cycle;
     \fill[GAda,draw=GAhongd!60,line width=0.4pt] (-1.0,1.6) circle (0.18);\fill[GAda,draw=GAhongd!60,line width=0.4pt] (1.0,1.6) circle (0.18);
-    \path[fill=GAda,draw=GAhongd!60,line width=0.4pt] (0,1.7) ellipse (1.02 and 0.95);
-    \fill[#1] (-1.03,1.78) .. controls (-1.0,2.95) and (1.0,2.95) .. (1.03,1.78) .. controls (0.75,2.35) and (0.3,2.3) .. (0.0,1.98) .. controls (-0.35,2.25) and (-0.8,2.35) .. (-1.03,1.78);
+    \shadedraw[inner color=GAda!35!white,outer color=GAda,draw=GAhongd!55,line width=0.4pt] (0,1.7) ellipse (1.02 and 0.95);
+    \shade[left color=#1!80!#2,right color=#1!85!white] (-1.03,1.78) .. controls (-1.0,2.95) and (1.0,2.95) .. (1.03,1.78) .. controls (0.75,2.35) and (0.3,2.3) .. (0.0,1.98) .. controls (-0.35,2.25) and (-0.8,2.35) .. (-1.03,1.78);\draw[white,opacity=0.5,line width=2.2pt,line cap=round] (-0.65,2.45) to[bend left=22] (-0.1,2.62);\draw[white,opacity=0.35,line width=1pt,line cap=round] (0.15,2.62) to[bend left=15] (0.45,2.55);\draw[#2!70,line width=0.35pt] (0.0,1.98) .. controls (0.05,2.3) and (0.1,2.5) .. (0.2,2.7) (-0.35,2.15) .. controls (-0.5,2.35) and (-0.7,2.5) .. (-0.85,2.5);
     \foreach \sx in {-1,1}{\begin{scope}[xscale=\sx]
-      \fill[white,draw=#2!70,line width=0.5pt] (0.4,1.62) ellipse (0.2 and 0.24);\fill[#2!70!black] (0.41,1.6) circle (0.125);\fill[white] (0.45,1.67) circle (0.04);
-      \draw[#2!70!black,line width=0.8pt,line cap=round] (0.2,1.78) -- (0.15,1.84) (0.28,1.84) -- (0.26,1.91);
+      \fill[white,draw=#2!70,line width=0.5pt] (0.4,1.62) ellipse (0.2 and 0.24);\shade[inner color=#1!60!white,outer color=#2!70!black] (0.41,1.6) circle (0.135);\fill[black!80] (0.41,1.6) circle (0.07);\fill[white] (0.46,1.68) circle (0.04);\fill[white,opacity=0.7] (0.37,1.54) circle (0.02);
+      \draw[#2!70!black,line width=1pt,line cap=round] (0.22,1.8) -- (0.15,1.86) (0.3,1.85) -- (0.27,1.93) (0.4,1.87) -- (0.42,1.95);\draw[#2!80!black,line width=1.2pt,line cap=round] (0.18,2.08) to[bend left=25] (0.68,2.04);
       \fill[GAdo,opacity=0.35] (0.68,1.28) ellipse (0.2 and 0.13);\end{scope}}
-    \fill[GAhongd!70] (0,1.42) ellipse (0.07 and 0.045);
+    \fill[GAhongd!70] (0,1.42) ellipse (0.07 and 0.045);\draw[GAhongd!80,line width=0.5pt] (0.05,1.55) to[bend left=20] (0.0,1.45);
     \fill[GAdod!85] (-0.3,1.2) .. controls (-0.2,0.78) and (0.2,0.78) .. (0.3,1.2) .. controls (0.1,1.12) and (-0.1,1.12) .. (-0.3,1.2);
     \fill[white] (-0.2,1.18) .. controls (-0.1,1.12) and (0.1,1.12) .. (0.2,1.18) -- (0.18,1.1) .. controls (0.05,1.07) and (-0.05,1.07) .. (-0.18,1.1) -- cycle;
-    \fill[GAhong] (0,0.93) ellipse (0.13 and 0.06);}
-  \begin{scope}[shift={(-2.1,0)}]\GAbe{GAcamd!85}{GAcamd!60!black}{1}\end{scope}
-  \begin{scope}[shift={(2.9,0)}]\GAbe{GAnaud!85}{GAnaud!60!black}{2}\end{scope}
+    \fill[GAhong] (0,0.93) ellipse (0.13 and 0.06);\fill[white,opacity=0.5] (-0.1,1.17) ellipse (0.06 and 0.02);}
+  \begin{scope}[shift={(-2.1,0)}]\GAbe{GAtocA}{GAtocAd}{1}\end{scope}
+  \begin{scope}[shift={(2.9,0)}]\GAbe{GAtocB}{GAtocBd}{2}\end{scope}
   % bong bóng nói
   \draw[GAxanhd,line width=0.9pt,fill=white] (-4.2,3.95) ellipse (2.0 and 0.95);
   \fill[white] (-3.75,3.05) -- (-3.0,2.65) -- (-3.2,3.1) -- cycle;
