@@ -17,6 +17,9 @@
     \textbf{Họ và Tên HS:}\dotfill & \textbf{Lớp:}\dotfill & \textbf{Ngày:}\dotfill \\
     \hline
   \end{tabular}\par\medskip}
+\makeatletter
+\providecommand{\TTdatlaibai}{\@ifundefined{c@bt}{}{\setcounter{bt}{0}}}
+\makeatother
 \providecommand{\TTbatdauhinh}{}\renewcommand{\TTbatdauhinh}{\par\nopagebreak\vspace{4pt}\nopagebreak}
 
 \usetikzlibrary{arrows.meta,shapes.geometric,calc,positioning}
@@ -189,11 +192,6 @@
 %=========================================================
 %        BỐ CỤC CHUNG
 %=========================================================
-% Băng tiêu đề phần: \PHphan{tiêu đề}
-\providecommand{\PHphan}{}\renewcommand{\PHphan}[1]{%
-  \par\vspace{6pt}\noindent\begin{tikzpicture}
-    \node[anchor=west,inner xsep=9pt,inner ysep=4pt,text width=\dimexpr\linewidth-18pt\relax,fill=PHbien!35,draw=PHbien,thick,rounded corners=7pt,font=\sffamily\bfseries\large,text=PHbiendam!60!black] at (0,0) {#1};
-  \end{tikzpicture}\par\nopagebreak\vspace{2pt}}
 % Khoảng cách giữa các hàng hình
 \providecommand{\PHcach}{}\renewcommand{\PHcach}{\par\vspace{5pt}}
 
@@ -363,20 +361,130 @@
     \PHbieuthuc{2.4}{0}{#2}{#3}{#4}{#5}
   \end{tikzpicture}}
 
+
+%=========================================================
+%        HÌNH BỔ SUNG CHO BUỔI 2 (Toán cộng - trừ, Tiếng Việt)
+%=========================================================
+% Quả cam
+\providecommand{\PHquacam}{}\renewcommand{\PHquacam}{%
+  \shade[inner color=PHcam!45!white,outer color=PHcam!95!orange,draw=orange!60!PHnau,thin] (0,-0.05) circle (0.33);
+  \fill[PHxanhdam!80] (0,0.28) circle (0.025);
+  \fill[PHxanh,draw=PHxanhdam,thin] (0.02,0.29) .. controls (0.1,0.46) and (0.26,0.42) .. (0.28,0.34) .. controls (0.2,0.25) and (0.08,0.27) .. (0.02,0.29);
+  \fill[white,opacity=0.5] (-0.14,0.07) ellipse (0.045 and 0.09);}
+% Bí ngô
+\providecommand{\PHbingo}{}\renewcommand{\PHbingo}{%
+  \shade[inner color=PHcam!50!white,outer color=PHcam!95!orange,draw=orange!60!PHnau,thin] (-0.2,-0.05) ellipse (0.2 and 0.3);
+  \shade[inner color=PHcam!50!white,outer color=PHcam!95!orange,draw=orange!60!PHnau,thin] (0.2,-0.05) ellipse (0.2 and 0.3);
+  \shade[inner color=PHcam!50!white,outer color=PHcam!95!orange,draw=orange!60!PHnau,thin] (0,-0.05) ellipse (0.22 and 0.3);
+  \draw[orange!60!PHnau,thin] (-0.1,0.24) .. controls (-0.14,0.0) .. (-0.1,-0.32) (0.1,0.24) .. controls (0.14,0.0) .. (0.1,-0.32);
+  \fill[PHxanhdam!85,rounded corners=1.5pt] (-0.04,0.24) -- (-0.03,0.4) -- (0.06,0.44) -- (0.05,0.24) -- cycle;
+  \draw[PHxanhdam,thick,line cap=round] (0.05,0.34) .. controls (0.2,0.4) and (0.22,0.3) .. (0.14,0.28);}
+% Quả lê
+\providecommand{\PHle}{}\renewcommand{\PHle}{%
+  \shade[inner color=PHvang!60!white,outer color=PHxanh!70!PHvang,draw=PHxanhdam!70!PHvangdam,thin]
+    (0,0.36) .. controls (0.1,0.36) and (0.12,0.2) .. (0.18,0.08) .. controls (0.4,-0.08) and (0.34,-0.4) .. (0,-0.4) .. controls (-0.34,-0.4) and (-0.4,-0.08) .. (-0.18,0.08) .. controls (-0.12,0.2) and (-0.1,0.36) .. (0,0.36);
+  \draw[PHnaudam,thick,line cap=round] (0,0.36) -- (0.03,0.48);
+  \fill[PHxanh,draw=PHxanhdam,thin] (0.04,0.44) .. controls (0.12,0.56) and (0.26,0.52) .. (0.28,0.46) .. controls (0.2,0.38) and (0.1,0.4) .. (0.04,0.44);
+  \fill[white,opacity=0.5] (-0.16,-0.12) ellipse (0.05 and 0.12);
+  \fill[PHnau,opacity=0.5] (0.05,-0.15) circle (0.012) (-0.05,-0.05) circle (0.012) (0.12,-0.25) circle (0.012);}
+% Hai chiếc lá
+\providecommand{\PHla}{}\renewcommand{\PHla}{%
+  \foreach \r/\dx in {18/0.05,-25/-0.05}{\begin{scope}[rotate=\r,shift={(\dx,0)}]
+    \shade[top color=PHxanh!90!white,bottom color=PHxanhdam!80!PHxanh,draw=PHxanhdam,thin] (0,-0.38) .. controls (-0.34,-0.12) and (-0.26,0.28) .. (0,0.4) .. controls (0.26,0.28) and (0.34,-0.12) .. (0,-0.38);
+    \draw[PHxanhdam,thin] (0,-0.36) -- (0,0.3);
+    \foreach \y in {-0.2,-0.05,0.1}{\draw[PHxanhdam!80,very thin] (0,\y) -- (-0.14,\y+0.1) (0,\y) -- (0.14,\y+0.1);}
+  \end{scope}}}
+% Mèo (đầu)
+\providecommand{\PHmeo}{}\renewcommand{\PHmeo}{%
+  \foreach \s in {1,-1}{\begin{scope}[xscale=\s]
+    \fill[PHcam!90!PHnau,draw=PHnau,thin] (0.14,0.2) -- (0.36,0.46) -- (0.4,0.08) -- cycle;
+    \fill[PHhong] (0.2,0.2) -- (0.34,0.37) -- (0.36,0.14) -- cycle;
+  \end{scope}}
+  \shade[inner color=PHcam!35!white,outer color=PHcam,draw=PHnau,thin] (0,0) ellipse (0.42 and 0.34);
+  \draw[PHnau,thin,line cap=round] (-0.06,0.3) -- (-0.05,0.2) (0,0.32) -- (0,0.2) (0.06,0.3) -- (0.05,0.2);
+  \fill[white] (0,-0.1) ellipse (0.2 and 0.12);
+  \fill[PHnaudam] (-0.15,0.05) ellipse (0.045 and 0.06) (0.15,0.05) ellipse (0.045 and 0.06);
+  \fill[white] (-0.14,0.07) circle (0.013) (0.16,0.07) circle (0.013);
+  \fill[PHhong!90!PHdo] (0,-0.03) -- (-0.04,0.01) -- (0.04,0.01) -- cycle;
+  \draw[PHnaudam,thin,line cap=round] (0,-0.03) -- (0,-0.07) (-0.07,-0.1) arc (200:340:0.07);
+  \draw[PHxam!70,thin] (-0.2,-0.05) -- (-0.46,-0.02) (-0.2,-0.09) -- (-0.46,-0.12) (0.2,-0.05) -- (0.46,-0.02) (0.2,-0.09) -- (0.46,-0.12);}
+% Chim (quay phải)
+\providecommand{\PHchim}{}\renewcommand{\PHchim}{%
+  \fill[PHbien!80!PHbiendam,draw=PHbiendam,thin] (-0.28,-0.02) -- (-0.5,0.14) -- (-0.46,-0.08) -- (-0.5,-0.2) -- cycle;
+  \draw[PHcam!90!PHnau,line width=1.2pt,line cap=round] (-0.04,-0.28) -- (-0.04,-0.4) (0.08,-0.28) -- (0.08,-0.4) (-0.04,-0.4) -- (-0.1,-0.4) (0.08,-0.4) -- (0.02,-0.4);
+  \shade[top color=PHbien!70!white,bottom color=PHbien,draw=PHbiendam,thin] (0,-0.02) ellipse (0.33 and 0.27);
+  \fill[PHbien!25!white] (0.04,-0.12) ellipse (0.22 and 0.13);
+  \fill[PHbien!80!PHbiendam,draw=PHbiendam,thin] (-0.06,0.0) .. controls (-0.2,0.12) and (-0.26,-0.14) .. (-0.1,-0.2) .. controls (0.0,-0.18) and (0.04,-0.06) .. (-0.06,0.0);
+  \fill[PHcam,draw=PHnau,thin] (0.31,0.08) -- (0.5,0.02) -- (0.31,-0.02) -- cycle;
+  \fill[white] (0.17,0.1) circle (0.05); \fill[PHnaudam] (0.185,0.1) circle (0.028);
+  \fill[PHhong!80,opacity=0.7] (0.1,0.0) circle (0.035);}
+% Cờ đỏ sao vàng
+\providecommand{\PHco}{}\renewcommand{\PHco}{%
+  \draw[PHxam,line width=1.6pt,line cap=round] (-0.36,-0.42) -- (-0.36,0.44);
+  \fill[PHvang,draw=PHvangdam,thin] (-0.36,0.46) circle (0.04);
+  \fill[PHdo,draw=PHdodam,thin] (-0.34,0.38) .. controls (-0.1,0.5) and (0.1,0.26) .. (0.4,0.38) -- (0.4,-0.1) .. controls (0.1,-0.22) and (-0.1,0.02) .. (-0.34,-0.08) -- cycle;
+  \node[star,star points=5,star point ratio=2.4,fill=PHvang,inner sep=0pt,minimum size=0.22cm] at (0.02,0.16) {};}
+% Bọ rùa
+\providecommand{\PHbo}{}\renewcommand{\PHbo}{%
+  \draw[PHxam!80,thin,line cap=round] (-0.12,0.24) -- (-0.2,0.38) (0.12,0.24) -- (0.2,0.38) (-0.3,0.1) -- (-0.42,0.16) (0.3,0.1) -- (0.42,0.16) (-0.3,-0.1) -- (-0.42,-0.16) (0.3,-0.1) -- (0.42,-0.16);
+  \shade[inner color=PHdo!50!white,outer color=PHdo,draw=PHdodam,thin] (0,-0.05) ellipse (0.3 and 0.34);
+  \fill[PHxam!85!black] (0,0.25) ellipse (0.16 and 0.12);
+  \draw[PHdodam!80,thin] (0,0.2) -- (0,-0.38);
+  \fill[PHxam!85!black] (-0.14,0.06) circle (0.045) (0.14,0.06) circle (0.045) (-0.15,-0.14) circle (0.04) (0.15,-0.14) circle (0.04) (0,-0.26) circle (0.03);
+  \fill[white] (-0.06,0.27) circle (0.025) (0.06,0.27) circle (0.025);}
+% Bóng bay để tô màu, có phép tính: \PHbongbay{phép tính}
+\providecommand{\PHbongbay}{}\renewcommand{\PHbongbay}[1]{%
+  \draw[PHxam!60,thin] (0,-1.15) .. controls (0.12,-1.45) and (-0.12,-1.6) .. (0.05,-1.9);
+  \fill[white,draw=PHkhung!90!black,thick] (0,0) ellipse (1.0 and 1.15);
+  \fill[white,draw=PHkhung!90!black,thick] (0,-1.17) -- (-0.1,-1.3) -- (0.1,-1.3) -- cycle;
+  \node[font=\sffamily\bfseries\Large] at (0,0.0) {#1};}
+% Dấu thanh: \PHdauthanh{1 sắc|2 huyền|3 ngã|4 nặng}
+\providecommand{\PHdauthanh}{}\renewcommand{\PHdauthanh}[1]{%
+  \begin{scope}[line width=2.6pt,line cap=round,PHxam!85!black]
+  \ifcase#1\or \draw (-0.13,-0.14) -- (0.13,0.14);%
+  \or \draw (-0.13,0.14) -- (0.13,-0.14);%
+  \or \draw (-0.2,-0.02) .. controls (-0.12,0.18) and (-0.04,0.12) .. (0,0) .. controls (0.05,-0.12) and (0.12,-0.18) .. (0.2,0.02);%
+  \or \fill (0,0) circle (0.09);\fi
+  \end{scope}}
+% Ô chữ có chỗ trống: \PHdienam{vật}{phần trước}{dấu 0-4}{phần sau}
+\providecommand{\PHdienam}{}\renewcommand{\PHdienam}[4]{%
+  \begin{tikzpicture}
+    \draw[PHkhung,thick,rounded corners=12pt,fill=PHnen] (-2.5,-1.5) rectangle (2.5,1.3);
+    \begin{scope}[shift={(0,0.4)},scale=1.8]#1\end{scope}
+    \node[font=\LARGE,anchor=east] (a) at (-0.05,-0.95) {#2};
+    \node[PHo,minimum size=0.85cm,anchor=west] (b) at (a.east) {};
+    \node[font=\LARGE,anchor=west] at (b.east) {#4};
+    \ifnum#3>0\begin{scope}[shift={($(b.north)+(0,0.25)$)},scale=0.7]\PHdauthanh{#3}\end{scope}\fi
+  \end{tikzpicture}}
+% Ô tranh + tên (để khoanh): \PHtenvat{vật}{tên}
+\providecommand{\PHtenvat}{}\renewcommand{\PHtenvat}[2]{%
+  \begin{tikzpicture}
+    \draw[PHkhung,thick,rounded corners=12pt,fill=PHnen] (-2.5,-1.5) rectangle (2.5,1.3);
+    \begin{scope}[shift={(0,0.4)},scale=1.8]#1\end{scope}
+    \node[font=\LARGE] at (0,-0.95) {#2};
+  \end{tikzpicture}}
+% Hàng phép cộng để HS viết: \PHcongviet{vật 1}{a}{vật 2}{b}
+\providecommand{\PHcongviet}{}\renewcommand{\PHcongviet}[4]{%
+  \begin{tikzpicture}[font=\sffamily\Large]
+    \PHkhung{15.6}{1.5}
+    \begin{scope}[shift={(0.4,0)}]\PHday{#1}{#2}{0}\end{scope}
+    \node[font=\sffamily\bfseries\LARGE] at (1.1*#2+0.3,0) {$+$};
+    \begin{scope}[shift={(1.1*#2+1.2,0)}]\PHday{#3}{#4}{0}\end{scope}
+    \PHbieuthuc{10.6}{0}{}{$+$}{}{}
+  \end{tikzpicture}\par}
+
 %=========================================================
 %                  PHIẾU TOÁN
 %=========================================================
-\hktuan{1}{18}
+\hktuan{1}{17}
 \par\medskip
 {\centering
-        {\color{mauchinh!120}\bfseries\Large PHIẾU BÀI TẬP TOÁN PRE1 -- TUẦN 18}\\[3pt]
-        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ 18: LUYỆN TẬP CHUNG TOÁN}\\[3pt]
-        {\color{mauchinh!120}\large Ôn tập phép cộng, phép trừ trong phạm vi 6}\par}
+        {\color{mauchinh!120}\bfseries\Large PHIẾU BÀI TẬP TOÁN PRE1 -- TUẦN 17}\\[3pt]
+        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ 18: LUYỆN TẬP CHUNG TOÁN}\par}
 \vspace{6pt}
 \TTthongtin
 
 %---------------------------------------------------------
-\PHphan{PHẦN 1. KHỞI ĐỘNG: ĐẾM VÀ CỘNG}
 
 \begin{bt}
     Bé hãy đếm và viết số vào ô trống.
@@ -396,7 +504,6 @@
 \end{bt}
 
 %---------------------------------------------------------
-\PHphan{PHẦN 2. LÀM QUEN PHÉP TRỪ QUA HÌNH ẢNH}
 
 \begin{bt}
     Bé hãy gạch bớt số hình theo phép tính rồi viết số còn lại vào ô trống (làm theo mẫu).
@@ -449,7 +556,6 @@
 
 \newpage
 %---------------------------------------------------------
-\PHphan{PHẦN 3. LUYỆN TẬP PHÉP TRỪ}
 
 \begin{bt}
     Bé hãy nhảy lùi trên tia số rồi viết kết quả (hai tia số cuối bé tự vẽ các bước nhảy lùi).
@@ -518,7 +624,6 @@
 
 \newpage
 %---------------------------------------------------------
-\PHphan{PHẦN 4. VUI HỌC: CỘNG, TRỪ, SO SÁNH}
 
 \begin{bt}
     Bé hãy nhìn hình rồi chọn dấu $+$ hoặc $-$ điền vào ô tròn.
@@ -589,14 +694,122 @@
     \end{tikzpicture}\par}
 \end{bt}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       BUỔI 2 - TOÁN
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\TTdatlaibai
+{\centering
+        {\color{mauchinh!120}\bfseries\Large PHIẾU BÀI TẬP TOÁN PRE1 -- TUẦN 18}\\[3pt]
+        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ 18: LUYỆN TẬP CHUNG TOÁN}\\[3pt]
+        {\color{mauchinh!120}\large Ôn tập phép cộng, phép trừ đơn giản (Buổi 2)}\par}
+\vspace{6pt}
+\TTthongtin
+
 \begin{bt}
-    Bé hãy vẽ 5 quả bóng bay, gạch bớt 3 quả rồi viết phép trừ.
+    Bé hãy tính nhẩm rồi viết kết quả vào ô trống.
     \TTbatdauhinh
     {\centering
-    \begin{tikzpicture}[font=\sffamily\Large]
-      \PHkhung{15.6}{2.6}
-      \foreach \i in {1,...,5}{\draw[PHkhung!60,dashed,thin] (1.5*\i-0.9,0) circle (0.55);}
-      \PHbieuthuc{10.6}{0}{}{$-$}{}{}
+    \PHodien{\PHcay}{2}{$+$}{3}{}\hfill\PHodien{\PHqua{PHhong}}{5}{$-$}{1}{}\par\vspace{6pt}
+    \PHodien{\PHtuyet}{1}{$+$}{4}{}\hfill\PHodien{\PHkeo}{6}{$-$}{2}{}\par\vspace{6pt}
+    \PHodien{\PHchuong{PHbien}}{3}{$+$}{3}{}\hfill\PHodien{\PHtat}{4}{$-$}{0}{}\par\vspace{6pt}
+    \PHodien{\PHnon}{0}{$+$}{5}{}\hfill\PHodien{\PHbanh}{3}{$-$}{3}{}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy nhìn hình rồi viết phép tính thích hợp (phép cộng hoặc phép trừ).
+    \TTbatdauhinh
+    {\centering
+    \PHcongviet{\PHtao}{3}{\PHtao}{2}\PHcach
+    \PHphep{\PHcay}{5}{2}{}{}{}\PHcach
+    \PHcongviet{\PHqua{PHxanh}}{2}{\PHqua{PHvang}}{2}\PHcach
+    \PHphep{\PHchuong{PHdo}}{4}{1}{}{}{}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy điền số còn thiếu vào ô trống.
+    \TTbatdauhinh
+    {\centering
+    \PHodien{\PHkeo}{3}{$+$}{}{5}\hfill\PHodien{\PHtuyet}{}{$+$}{2}{4}\par\vspace{6pt}
+    \PHodien{\PHcay}{5}{$-$}{}{2}\hfill\PHodien{\PHtat}{}{$-$}{1}{3}\par}
+\end{bt}
+
+\newpage
+\begin{bt}
+    Bé hãy xem tranh, đọc bài toán rồi viết phép tính thích hợp.
+    \TTbatdauhinh
+    {\raggedright\sffamily
+    a)\ Bé có 3 quả táo. Mẹ cho bé thêm 2 quả táo. Hỏi bé có tất cả mấy quả táo?\par\vspace{3pt}}
+    {\centering\PHcongviet{\PHtao}{3}{\PHtao}{2}\par\vspace{8pt}}
+    {\raggedright\sffamily
+    b)\ Trên cành có 5 chú chim. Có 2 chú chim bay đi. Hỏi trên cành còn mấy chú chim?\par\vspace{3pt}}
+    {\centering\PHphep{\PHchim}{5}{2}{}{}{}\par\vspace{8pt}}
+    {\raggedright\sffamily
+    c)\ Trong giỏ có 2 hộp quà. Ông già Noel bỏ thêm 4 hộp quà. Hỏi trong giỏ có tất cả mấy hộp quà?\par\vspace{3pt}}
+    {\centering\PHcongviet{\PHqua{PHhong}}{2}{\PHqua{PHbien}}{4}\par\vspace{8pt}}
+    {\raggedright\sffamily
+    d)\ Bé có 6 chiếc kẹo. Bé cho bạn 3 chiếc. Hỏi bé còn mấy chiếc kẹo?\par\vspace{3pt}}
+    {\centering\PHphep{\PHkeo}{6}{3}{}{}{}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy tô màu những quả bóng bay có kết quả \textbf{bằng 3}.
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}
+      \foreach \e [count=\k] in {1 $+$ 2,5 $-$ 1,2 $+$ 2,5 $-$ 2,3 $+$ 0,6 $-$ 4,1 $+$ 3,4 $-$ 1}{
+        \pgfmathtruncatemacro{\cot}{mod(\k-1,4)}\pgfmathtruncatemacro{\hang}{div(\k-1,4)}
+        \begin{scope}[shift={(4.2*\cot+1.0,-3.8*\hang)}]\PHbongbay{\e}\end{scope}}
+    \end{tikzpicture}\par}
+\end{bt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                  PHIẾU TIẾNG VIỆT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\TTdatlaibai
+{\centering
+        {\color{mauchinh!120}\bfseries\Large PHIẾU BÀI TẬP TIẾNG VIỆT PRE1 -- TUẦN 18}\\[3pt]
+        {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ 18: LUYỆN TẬP CHUNG TIẾNG VIỆT}\par}
+\vspace{6pt}
+\TTthongtin
+
+\begin{bt}
+    Bé hãy điền chữ cái thích hợp vào ô trống.
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}
+      \node[fill=PHxam!12,rounded corners=10pt,minimum width=15cm,minimum height=1cm,font=\sffamily\bfseries\LARGE,text=PHxam!80!black] {a \quad e \quad i \quad o \quad u \quad ê \quad ơ};
+    \end{tikzpicture}\par\vspace{6pt}
+    \PHdienam{\PHla}{l}{1}{}\hfill\PHdienam{\PHmeo}{m}{2}{o}\hfill\PHdienam{\PHchim}{ch}{0}{m}\par\vspace{6pt}
+    \PHdienam{\PHle}{l}{0}{}\hfill\PHdienam{\PHnon}{m}{3}{}\hfill\PHdienam{\PHco}{c}{2}{}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy khoanh vào tên vật có chứa chữ \textbf{i}.
+    \TTbatdauhinh
+    {\centering
+    \PHtenvat{\PHquacam}{quả cam}\hfill\PHtenvat{\PHchim}{con chim}\hfill\PHtenvat{\PHbingo}{quả bí}\par\vspace{6pt}
+    \PHtenvat{\PHle}{quả lê}\hfill\PHtenvat{\PHmeo}{con mèo}\hfill\PHtenvat{\PHnon}{cái mũ}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy nối tranh với dấu thanh có trong tên.
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}
+      \foreach \vat/\ten/\x in {\PHla/lá/0,\PHco/cờ/4.2,\PHnon/mũ/8.4,\PHbo/bọ/12.6}{
+        \begin{scope}[shift={(\x,2.6)}]
+          \begin{scope}[scale=1.9]\vat\end{scope}
+          \node[draw=PHkhung!90!black,thick,fill=white,rounded corners=2pt,minimum width=1.7cm,minimum height=0.8cm,font=\LARGE] at (0,-1.1) {\ten};
+        \end{scope}
+        \fill[PHkhung!90!black] (\x,0.95) circle (2.5pt);}
+      \foreach \d/\x in {3/0,4/4.2,2/8.4,1/12.6}{
+        \begin{scope}[shift={(\x,-1.0)}]
+          \draw[PHkhung,thick,fill=PHnen] (0,0) circle (0.75);
+          \begin{scope}[scale=1.5]\PHdauthanh{\d}\end{scope}
+        \end{scope}
+        \fill[PHkhung!90!black] (\x,-0.1) circle (2.5pt);}
     \end{tikzpicture}\par}
 \end{bt}
 
@@ -620,5 +833,10 @@
 % Bài 15: Đ; S; S; Đ.   Bài 16: 5-2=3; 4-2=2; 4-4=0; 6-5=1 (ô trống: 2; 4; 0; 5).
 % Bài 17: đường đi qua các ô 4-2, 5-3, 3-1, 6-4, 5-3, 4-2, 3-1, 6-4.
 % Bài 18: bé tự vẽ 5 quả bóng, gạch 3 quả: 5 - 3 = 2.
+% --- BUỔI 2 (Toán): Bài 1: 5; 4; 5; 4; 6; 4; 5; 0.  Bài 2: 3+2=5; 5-2=3; 2+2=4; 4-1=3.
+% Bài 3: 2; 2; 3; 4.  Bài 4: 3+2=5; 5-2=3; 2+4=6; 6-3=3.
+% Bài 5: tô các bóng 1+2, 5-2, 3+0, 4-1.
+% --- Tiếng Việt: Bài 1: lá (a, sắc); mèo (e, huyền); chim (i); lê (ê); mũ (u, ngã); cờ (ơ, huyền).
+% Bài 2: khoanh con chim, quả bí.  Bài 3: lá - sắc; cờ - huyền; mũ - ngã; bọ - nặng.
 %=========================================================
 \end{document}
