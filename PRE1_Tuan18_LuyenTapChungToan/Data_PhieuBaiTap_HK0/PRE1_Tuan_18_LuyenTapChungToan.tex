@@ -759,7 +759,38 @@
     \begin{tikzpicture}
       \foreach \e [count=\k] in {1 $+$ 2,5 $-$ 1,2 $+$ 2,5 $-$ 2,3 $+$ 0,6 $-$ 4,1 $+$ 3,4 $-$ 1}{
         \pgfmathtruncatemacro{\cot}{mod(\k-1,4)}\pgfmathtruncatemacro{\hang}{div(\k-1,4)}
-        \begin{scope}[shift={(4.2*\cot+1.0,-3.8*\hang)}]\PHbongbay{\e}\end{scope}}
+        \begin{scope}[shift={(4.2*\cot+1.0,-3.4*\hang)}]\PHbongbay{\e}\end{scope}}
+    \end{tikzpicture}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy cộng bằng ngón tay rồi viết kết quả vào ô trống.
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}[font=\sffamily\Large]
+      \foreach \a/\b [count=\k] in {1/2,3/2,2/2,4/1}{%
+        \pgfmathtruncatemacro{\cot}{mod(\k-1,2)}\pgfmathtruncatemacro{\hang}{div(\k-1,2)}
+        \begin{scope}[shift={(8.0*\cot,-2.2*\hang)}]
+          \draw[PHkhung,thick,rounded corners=10pt,fill=PHnen] (-0.7,-1.0) rectangle (7.0,1.0);
+          \begin{scope}[shift={(0.3,0.0)},scale=1.55]\PHtay{\a}\end{scope}
+          \node[font=\sffamily\bfseries\LARGE] at (1.8,0) {$+$};
+          \begin{scope}[shift={(3.2,0.0)},scale=1.55]\PHtay{\b}\end{scope}
+          \node[font=\sffamily\bfseries\LARGE] at (4.5,0) {$=$};
+          \node[PHo] at (5.7,0) {};
+        \end{scope}}
+    \end{tikzpicture}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy so sánh rồi điền dấu $>$, $<$, $=$ vào ô tròn.
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}[font=\sffamily\bfseries\Large]
+      \foreach \l/\r [count=\k] in {2 $+$ 1/4 $-$ 1,3 $+$ 2/6 $-$ 2}{
+        \begin{scope}[shift={(8.0*\k-8.0,0)}]
+          \draw[PHkhung,thick,rounded corners=10pt,fill=PHnen] (-0.5,-0.65) rectangle (7.2,0.65);
+          \node[anchor=east] at (2.4,0) {\l};\node[PHotron,minimum size=0.9cm] at (3.35,0) {};\node[anchor=west] at (4.3,0) {\r};
+        \end{scope}}
     \end{tikzpicture}\par}
 \end{bt}
 
@@ -836,6 +867,7 @@
 % --- BUỔI 2 (Toán): Bài 1: 5; 4; 5; 4; 6; 4; 5; 0.  Bài 2: 3+2=5; 5-2=3; 2+2=4; 4-1=3.
 % Bài 3: 2; 2; 3; 4.  Bài 4: 3+2=5; 5-2=3; 2+4=6; 6-3=3.
 % Bài 5: tô các bóng 1+2, 5-2, 3+0, 4-1.
+% Bài 6 (ngón tay cộng): 1+2=3; 3+2=5; 2+2=4; 4+1=5.  Bài 7 (so sánh): = ; > .
 % --- Tiếng Việt: Bài 1: lá (a, sắc); mèo (e, huyền); chim (i); lê (ê); mũ (u, ngã); cờ (ơ, huyền).
 % Bài 2: khoanh con chim, quả bí.  Bài 3: lá - sắc; cờ - huyền; mũ - ngã; bọ - nặng.
 %=========================================================
