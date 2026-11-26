@@ -1,0 +1,558 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+%=========================================================
+% TĐ_GiaoAn_PRE1_HK1_Tuan18_LuyenTapChungToan_OnTapKiemTra
+% Giáo án Toán PRE1 - Tuần 18: LUYỆN TẬP CHUNG TOÁN (Buổi 1), ÔN TẬP - KIỂM TRA CUỐI HỌC KỲ 1 (Buổi 2)
+% Bản biên soạn lại: đánh số hoạt động, thêm câu hỏi gợi mở, phân hóa HS, bài tập bổ sung
+% Soạn theo mẫu (\hktuan, \subsection, hd, vd, luuy)
+% Toàn bộ hình vẽ bằng TikZ (màu pastel), chữ và số dùng đúng font của main.tex
+%=========================================================
+
+%---------- Lệnh dùng riêng cho giáo án ----------
+% Tiêu đề mục nhỏ trong một hoạt động
+\providecommand{\GAmucnho}{}\renewcommand{\GAmucnho}[1]{\par\addvspace{4pt}\noindent{\color{mauchinh}\bfseries #1}\par\nopagebreak\addvspace{2pt}}
+% Lời GV nói với HS (in nghiêng, có dấu ngoặc kép)
+\providecommand{\GAloi}{}\renewcommand{\GAloi}[1]{\textit{“#1”}}
+% Ô trống để HS điền
+\providecommand{\GAobox}{}\renewcommand{\GAobox}{\tikz[baseline=-0.1cm]\node[draw=GAxanhd,rounded corners=3pt,minimum size=0.8cm,line width=0.8pt,fill=white]{};}
+
+%---------- Bảng màu pastel ----------
+\definecolor{GAxanh}{RGB}{178,215,241}\definecolor{GAxanhd}{RGB}{104,150,196}
+\definecolor{GAhong}{RGB}{250,205,212}\definecolor{GAhongd}{RGB}{222,140,158}
+\definecolor{GAdo}{RGB}{240,150,150}\definecolor{GAdod}{RGB}{200,95,100}
+\definecolor{GAcam}{RGB}{252,203,150}\definecolor{GAcamd}{RGB}{222,150,85}
+\definecolor{GAvang}{RGB}{255,238,165}\definecolor{GAvangd}{RGB}{230,195,90}
+\definecolor{GAla}{RGB}{187,226,182}\definecolor{GAlad}{RGB}{105,165,105}
+\definecolor{GAnau}{RGB}{214,168,130}\definecolor{GAnaud}{RGB}{150,105,75}
+\definecolor{GAkem}{RGB}{255,246,228}\definecolor{GAda}{RGB}{255,226,208}
+\definecolor{GAtim}{RGB}{213,198,236}\definecolor{GAxam}{RGB}{110,115,130}
+
+%---------- Hình vẽ nhỏ bằng TikZ (mỗi hình cao khoảng 1 cm, tâm ở gốc tọa độ) ----------
+% Chim cánh cụt quàng khăn
+\tikzset{pics/gapenguin/.style={code={\begin{scope}[line join=round]
+  \fill[GAxanhd!85] (-0.33,0.05) .. controls (-0.62,-0.03) and (-0.6,-0.32) .. (-0.4,-0.3) -- cycle;
+  \fill[GAxanhd!85] (0.33,0.05) .. controls (0.62,-0.03) and (0.6,-0.32) .. (0.4,-0.3) -- cycle;
+  \fill[GAcam] (-0.18,-0.49) ellipse (0.14 and 0.055);\fill[GAcam] (0.18,-0.49) ellipse (0.14 and 0.055);
+  \path[top color=GAxanh!60!GAxanhd,bottom color=GAxanhd,draw=GAxanhd!70!black,line width=0.4pt] (0,-0.03) ellipse (0.37 and 0.47);
+  \fill[white] (0,-0.12) ellipse (0.23 and 0.33);
+  \fill[white] (-0.1,0.22) ellipse (0.1 and 0.12);\fill[white] (0.1,0.22) ellipse (0.1 and 0.12);
+  \fill[black!70] (-0.09,0.23) circle (0.03);\fill[black!70] (0.09,0.23) circle (0.03);
+  \fill[GAcam] (-0.06,0.16) -- (0.06,0.16) -- (0,0.07) -- cycle;
+  \draw[GAdo,line width=2.6pt,line cap=round] (-0.26,0.02) to[bend right=22] (0.26,0.02);
+  \draw[GAdod,line width=0.4pt] (-0.3,0.05) to[bend right=22] (0.3,0.05);
+  \fill[GAdo,rounded corners=1pt] (0.1,0.0) rectangle (0.2,-0.2);
+  \fill[GAhong,opacity=0.7] (-0.2,0.15) circle (0.04);\fill[GAhong,opacity=0.7] (0.2,0.15) circle (0.04);
+  \end{scope}}}}
+% Quả cầu Noel
+\tikzset{pics/gaqua/.style={code={\begin{scope}
+  \fill[GAvangd] (-0.09,0.3) rectangle (0.09,0.4);\draw[GAvangd,line width=0.6pt] (0,0.43) circle (0.05);
+  \path[top color=GAcam!60,bottom color=GAdo,draw=GAdod,line width=0.4pt] (0,-0.05) circle (0.36);
+  \begin{scope}\clip (0,-0.05) circle (0.36);
+    \fill[white,opacity=0.8] (-0.4,0.0) .. controls (-0.2,0.07) and (0.2,-0.1) .. (0.4,-0.03) -- (0.4,-0.12) .. controls (0.2,-0.19) and (-0.2,-0.02) .. (-0.4,-0.09) -- cycle;
+    \foreach \x in {-0.24,-0.08,0.08,0.24}{\fill[white,opacity=0.8] (\x,-0.2) circle (0.025);}
+  \end{scope}
+  \fill[white,opacity=0.55] (-0.16,0.14) ellipse (0.045 and 0.09);\end{scope}}}}
+% Tuần lộc
+\tikzset{pics/galoc/.style={code={\begin{scope}[line join=round,line cap=round]
+  \draw[GAnaud,line width=1.6pt] (-0.2,-0.1) -- (-0.36,-0.33) (-0.27,-0.1) -- (-0.17,-0.34) (0.18,-0.1) -- (0.3,-0.34) (0.25,-0.1) -- (0.4,-0.3);
+  \draw[GAnaud,line width=1.6pt] (-0.3,0.0) .. controls (-0.42,0.05) and (-0.44,-0.02) .. (-0.42,-0.08);
+  \path[top color=GAnau,bottom color=GAnau!80!GAnaud,draw=GAnaud,line width=0.4pt] (-0.03,-0.03) ellipse (0.33 and 0.17);
+  \path[fill=GAnau,draw=GAnaud,line width=0.4pt] (0.18,0.05) -- (0.3,0.0) -- (0.4,0.3) -- (0.28,0.34) -- cycle;
+  \path[fill=GAnau,draw=GAnaud,line width=0.4pt] (0.38,0.3) ellipse (0.14 and 0.1);
+  \fill[GAnaud] (0.2,0.36) ellipse (0.06 and 0.035);
+  \draw[GAnaud,line width=1pt] (0.33,0.39) -- (0.28,0.55) -- (0.2,0.62) (0.28,0.55) -- (0.34,0.64) (0.42,0.4) -- (0.46,0.56) -- (0.4,0.64) (0.46,0.56) -- (0.53,0.62);
+  \fill[GAdod] (0.5,0.29) circle (0.045);\fill[black!70] (0.4,0.33) circle (0.02);
+  \fill[GAla] (0.26,0.2) circle (0.04);\fill[GAdo] (0.26,0.2) circle (0.02);
+  \end{scope}}}}
+% Bánh pudding Noel
+\tikzset{pics/gabanh/.style={code={\begin{scope}[line join=round]
+  \fill[GAkem!80!GAnau] (0,-0.3) ellipse (0.43 and 0.1);
+  \path[top color=GAnau!70!GAnaud,bottom color=GAnaud,draw=GAnaud!80!black,line width=0.4pt] (-0.36,-0.28) .. controls (-0.38,0.2) and (0.38,0.2) .. (0.36,-0.28) -- cycle;
+  \fill[GAkem,draw=GAkem!70!GAnau,line width=0.4pt] (-0.3,0.04) .. controls (-0.2,0.24) and (0.2,0.24) .. (0.3,0.04) .. controls (0.27,-0.05) and (0.22,-0.02) .. (0.2,0.04) .. controls (0.17,-0.1) and (0.1,-0.08) .. (0.08,0.0) .. controls (0.0,-0.08) and (-0.1,-0.06) .. (-0.12,0.02) .. controls (-0.16,-0.06) and (-0.24,-0.04) .. (-0.25,0.03) -- cycle;
+  \fill[GAla,draw=GAlad,line width=0.4pt] (0,0.2) .. controls (-0.1,0.33) and (-0.22,0.3) .. (-0.25,0.22) .. controls (-0.18,0.16) and (-0.08,0.16) .. (0,0.2);
+  \fill[GAla,draw=GAlad,line width=0.4pt] (0,0.2) .. controls (0.1,0.33) and (0.22,0.3) .. (0.25,0.22) .. controls (0.18,0.16) and (0.08,0.16) .. (0,0.2);
+  \foreach \x/\y in {-0.04/0.24,0.04/0.24,0.0/0.3}{\fill[GAdo,draw=GAdod,line width=0.3pt] (\x,\y) circle (0.04);}
+  \end{scope}}}}
+% Kẹo mút (kẹo xoáy tròn)
+\tikzset{pics/gakeo/.style={code={\begin{scope}
+  \draw[GAnau!60,line width=1.7pt,line cap=round] (0,-0.12) -- (0,-0.5);
+  \fill[white] (0,0.12) circle (0.3);
+  \foreach \a in {0,45,...,315}{\fill[GAdo] (0,0.12) -- ++(\a:0.3) arc (\a:\a+22.5:0.3) -- cycle;}
+  \draw[GAdod,line width=0.4pt] (0,0.12) circle (0.3);
+  \fill[white,opacity=0.5] (-0.12,0.24) ellipse (0.04 and 0.07);\end{scope}}}}
+% Bánh cupcake
+\tikzset{pics/gacup/.style={code={\begin{scope}[line join=round]
+  \fill[GAhong,draw=GAhongd,line width=0.4pt] (-0.28,0.0) -- (0.28,0.0) -- (0.2,-0.38) -- (-0.2,-0.38) -- cycle;
+  \foreach \x in {-0.16,-0.05,0.05,0.16}{\draw[GAhongd,line width=0.4pt] (\x*1.3,0.0) -- (\x,-0.38);}
+  \fill[GAkem,draw=GAnau,line width=0.4pt] (0,0.0) ellipse (0.31 and 0.1);
+  \fill[GAkem,draw=GAnau,line width=0.4pt] (0,0.12) ellipse (0.23 and 0.09);
+  \fill[GAkem,draw=GAnau,line width=0.4pt] (0,0.23) ellipse (0.15 and 0.08);
+  \fill[GAdo,draw=GAdod,line width=0.3pt] (0.02,0.36) circle (0.06);\draw[GAlad,line width=0.5pt] (0.02,0.42) -- (0.07,0.5);
+  \foreach \x/\y/\c in {-0.14/0.03/GAxanh,0.12/0.05/GAvangd,-0.05/0.14/GAla,0.06/0.2/GAhongd}{\fill[\c] (\x,\y) circle (0.02);}
+  \end{scope}}}}
+% Mũ ông già Noel
+\tikzset{pics/gamu/.style={code={\begin{scope}[line join=round]
+  \fill[GAdo,draw=GAdod,line width=0.4pt] (-0.4,-0.12) .. controls (-0.38,0.3) and (0.0,0.42) .. (0.28,0.2) .. controls (0.3,0.12) and (0.32,0.05) .. (0.4,-0.12) -- cycle;
+  \fill[white,draw=GAxam!40,line width=0.4pt,rounded corners=3pt] (-0.46,-0.3) rectangle (0.46,-0.1);
+  \fill[white,draw=GAxam!40,line width=0.4pt] (0.3,0.22) circle (0.09);\end{scope}}}}
+% Cây thông Noel
+\tikzset{pics/gacay/.style={code={\begin{scope}[line join=round]
+  \fill[GAnaud!80] (-0.06,-0.5) rectangle (0.06,-0.3);
+  \foreach \y/\w in {-0.1/0.34,0.08/0.28,0.24/0.2}{\path[top color=GAla,bottom color=GAlad!75,draw=GAlad,line width=0.4pt] (0,\y+0.3) -- (\w,\y-0.12) -- (-\w,\y-0.12) -- cycle;}
+  \node[star,star points=5,star point ratio=2.2,fill=GAvang,draw=GAvangd,line width=0.3pt,inner sep=0pt,minimum size=0.17cm] at (0,0.58) {};
+  \foreach \x/\y/\c in {-0.12/-0.2/GAdo,0.14/-0.16/GAvang,0.0/0.0/GAhong,-0.08/0.14/GAxanh,0.08/0.2/GAdo}{\fill[\c] (\x,\y) circle (0.035);}
+  \end{scope}}}}
+% Bánh gừng đội mũ
+\tikzset{pics/gagung/.style={code={\begin{scope}[line join=round,line cap=round]
+  \foreach \lw/\cc in {8.4/GAnaud,6.2/GAnau}{%
+    \draw[\cc,line width=\lw pt] (-0.08,0.12) -- (-0.3,0.2) (0.08,0.12) -- (0.3,0.2) (-0.07,-0.08) -- (-0.2,-0.36) (0.07,-0.08) -- (0.2,-0.36) (0,0.14) -- (0,-0.1);
+    \fill[\cc] (0,0.3) circle (0.17);}
+  \fill[GAdo,draw=GAdod,line width=0.3pt] (-0.16,0.36) .. controls (-0.14,0.55) and (0.08,0.58) .. (0.2,0.42) -- cycle;
+  \fill[white] (-0.18,0.33) rectangle (0.18,0.4);\fill[white] (0.17,0.5) circle (0.04);
+  \fill[black!65] (-0.06,0.28) circle (0.018);\fill[black!65] (0.06,0.28) circle (0.018);
+  \draw[GAdod,line width=0.5pt] (-0.06,0.2) to[bend right=40] (0.06,0.2);
+  \foreach \y/\c in {0.06/GAdo,-0.04/GAla}{\fill[\c] (0,\y) circle (0.025);}
+  \draw[white,line width=0.8pt,dash pattern=on 0.5pt off 2pt] (-0.22,0.22) -- (-0.28,0.2) (0.22,0.22) -- (0.28,0.2) (-0.19,-0.3) -- (-0.2,-0.35) (0.19,-0.3) -- (0.2,-0.35);
+  \end{scope}}}}
+% Ông già Noel
+\tikzset{pics/gaong/.style={code={\begin{scope}[line join=round]
+  \fill[GAdo,draw=GAdod,line width=0.4pt] (-0.42,-0.5) .. controls (-0.42,-0.2) and (-0.3,-0.12) .. (0,-0.12) .. controls (0.3,-0.12) and (0.42,-0.2) .. (0.42,-0.5) -- cycle;
+  \fill[GAda,draw=GAcamd!50,line width=0.3pt] (0,-0.02) ellipse (0.24 and 0.22);
+  \foreach \x/\y in {-0.2/-0.1,-0.12/-0.22,0/-0.27,0.12/-0.22,0.2/-0.1}{\fill[white,draw=GAxam!35,line width=0.3pt] (\x,\y) circle (0.1);}
+  \fill[GAda] (0,0) ellipse (0.18 and 0.15);
+  \fill[white,draw=GAxam!35,line width=0.3pt] (-0.07,-0.1) ellipse (0.09 and 0.045);\fill[white,draw=GAxam!35,line width=0.3pt] (0.07,-0.1) ellipse (0.09 and 0.045);
+  \fill[GAhongd] (0,-0.04) circle (0.04);
+  \fill[black!65] (-0.09,0.04) circle (0.025);\fill[black!65] (0.09,0.04) circle (0.025);
+  \fill[GAhong,opacity=0.8] (-0.16,-0.03) circle (0.035);\fill[GAhong,opacity=0.8] (0.16,-0.03) circle (0.035);
+  \fill[GAdo,draw=GAdod,line width=0.4pt] (-0.25,0.13) .. controls (-0.25,0.5) and (0.0,0.6) .. (0.28,0.4) .. controls (0.12,0.38) and (0.18,0.2) .. (0.25,0.13) -- cycle;
+  \fill[white,draw=GAxam!40,line width=0.3pt,rounded corners=2pt] (-0.29,0.08) rectangle (0.29,0.2);
+  \fill[white,draw=GAxam!40,line width=0.3pt] (0.3,0.4) circle (0.07);\end{scope}}}}
+% Người tuyết
+\tikzset{pics/gatuyet/.style={code={\begin{scope}[line join=round,line cap=round]
+  \draw[GAnaud,line width=0.9pt] (-0.2,-0.1) -- (-0.45,0.02) (0.2,-0.1) -- (0.45,0.02);
+  \path[top color=white,bottom color=GAxanh!50,draw=GAxanhd!70,line width=0.4pt] (0,-0.24) circle (0.26);
+  \path[top color=white,bottom color=GAxanh!40,draw=GAxanhd!70,line width=0.4pt] (0,0.14) circle (0.19);
+  \fill[GAla!70!GAlad,draw=GAlad,line width=0.3pt] (-0.16,0.25) .. controls (-0.14,0.5) and (0.14,0.5) .. (0.16,0.25) -- cycle;
+  \fill[white] (0,0.5) circle (0.04);
+  \fill[GAdo] (-0.2,0.24) rectangle (0.2,0.29);
+  \draw[GAdo,line width=2.2pt] (-0.16,0.02) to[bend right=20] (0.16,0.02);
+  \fill[GAdo] (0.07,0.0) rectangle (0.14,-0.14);
+  \fill[GAcamd] (0.0,0.13) -- (0.15,0.1) -- (0.0,0.08) -- cycle;
+  \fill[black!65] (-0.06,0.17) circle (0.02);\fill[black!65] (0.06,0.17) circle (0.02);
+  \foreach \y in {-0.16,-0.26,-0.36}{\fill[GAxam] (0,\y) circle (0.02);}
+  \end{scope}}}}
+% Chú ong
+\tikzset{pics/gaong2/.style={code={\begin{scope}[line join=round,line cap=round]
+  \fill[GAxanh!55,draw=GAxanhd!60,line width=0.3pt,rotate around={-25:(-0.08,0.2)}] (-0.08,0.2) ellipse (0.1 and 0.2);
+  \fill[GAxanh!55,draw=GAxanhd!60,line width=0.3pt,rotate around={25:(0.12,0.2)}] (0.12,0.2) ellipse (0.1 and 0.2);
+  \draw[GAnaud,line width=0.5pt] (0.3,0.15) -- (0.38,0.32) (0.36,0.08) -- (0.5,0.2);
+  \path[top color=GAvang,bottom color=GAvangd,draw=GAnaud,line width=0.4pt] (0,0) ellipse (0.36 and 0.24);
+  \begin{scope}\clip (0,0) ellipse (0.36 and 0.24);
+    \fill[GAnaud!80] (-0.17,-0.3) rectangle (-0.07,0.3);\fill[GAnaud!80] (0.0,-0.3) rectangle (0.1,0.3);\end{scope}
+  \fill[GAvang!60!GAcam] (0.28,0.05) circle (0.13);
+  \fill[black!65] (0.32,0.09) circle (0.02);
+  \draw[GAnaud,line width=0.5pt] (0.27,0.0) to[bend right=40] (0.35,0.0);
+  \draw[GAnaud,line width=1pt] (-0.36,0) -- (-0.45,-0.03);\end{scope}}}}
+% Bông hoa có chữ: \GAhoa{chữ}{màu cánh}{màu viền}
+\newcommand{\GAhoa}[3]{\begin{tikzpicture}
+  \foreach \a in {0,36,...,324}{\begin{scope}[rotate=\a]\path[fill=#2,draw=#3,line width=0.5pt] (0,0.78) ellipse (0.22 and 0.36);\draw[#3!70,line width=0.3pt] (0,0.62) -- (0,0.92);\end{scope}}
+  \path[fill=white,draw=#3,line width=0.5pt] (0,0) circle (0.58);
+  \node[font=\Large\bfseries,text=black!75] at (0,0) {#1};
+\end{tikzpicture}}
+% Bông hoa có dấu thanh: \GAdau{loại}{màu cánh}{màu viền}
+\newcommand{\GAhoadau}[4]{\begin{tikzpicture}
+  \foreach \a in {0,45,...,315}{\begin{scope}[rotate=\a]\path[fill=#3,draw=#4,line width=0.5pt] (0,0.72) ellipse (0.24 and 0.34);\end{scope}}
+  \path[fill=white,draw=#4,line width=0.5pt] (0,0) circle (0.56);
+  \begin{scope}[line width=1.6pt,line cap=round,black!70]
+  \ifcase#1\or \draw (-0.14,-0.14) -- (0.14,0.18);\or \draw (-0.14,0.18) -- (0.14,-0.14);\or \draw (-0.12,0.14) to[out=90,in=180] (0,0.24) to[out=0,in=90] (0.1,0.12) to[out=-90,in=90] (0,0.02);\fill (0,-0.14) circle (0.03);\or \draw (-0.22,0.0) to[out=60,in=180] (-0.05,0.14) to[out=0,in=180] (0.05,-0.02) to[out=0,in=-120] (0.22,0.1);\or \fill (0,-0.02) circle (0.06);\fi
+  \end{scope}
+\end{tikzpicture}}
+
+%---------- Nhóm hình và các hàng phép tính ----------
+% \GAnhom{n}{hình}: vẽ n hình (n = 1..6) xếp thành 1 hoặc 2 hàng
+\newcommand{\GAnhom}[2]{%
+  \ifcase#1\def\GAds{}\or\def\GAds{0.45/0}\or\def\GAds{0.2/0,1.0/0}\or\def\GAds{0/0,0.8/0,1.6/0}%
+  \or\def\GAds{0.4/0.45,1.2/0.45,0.4/-0.45,1.2/-0.45}\or\def\GAds{0/0.45,0.8/0.45,1.6/0.45,0.4/-0.45,1.2/-0.45}%
+  \or\def\GAds{0/0.45,0.8/0.45,1.6/0.45,0/-0.45,0.8/-0.45,1.6/-0.45}\fi
+  \foreach \px/\py in \GAds{\pic[scale=0.84] at (\px,\py) {#2};}}
+% Dấu + - = vẽ bằng nét tròn đầu
+\newcommand{\GAcong}{\draw[line width=2.4pt,line cap=round,black!65] (-0.2,0)--(0.2,0) (0,-0.2)--(0,0.2);}
+\newcommand{\GAtru}{\draw[line width=2.4pt,line cap=round,black!65] (-0.2,0)--(0.2,0);}
+\newcommand{\GAbang}{\draw[line width=2.4pt,line cap=round,black!65] (-0.2,0.08)--(0.2,0.08) (-0.2,-0.08)--(0.2,-0.08);}
+% Một hàng phép tính bằng hình: \GAhang{số hình trái}{hình}{số hình phải}{c hoặc t}
+\newcommand{\GAhang}[4]{\begin{tikzpicture}
+  \draw[rounded corners=7pt,line width=0.9pt,GAxanhd!80,fill=white] (0,-1) rectangle (8.4,1);
+  \begin{scope}[shift={(0.6,0)}]\GAnhom{#1}{#2}\end{scope}
+  \begin{scope}[shift={(3.5,0)}]\csname GA#4\endcsname\end{scope}
+  \begin{scope}[shift={(4.2,0)}]\GAnhom{#3}{#2}\end{scope}
+  \begin{scope}[shift={(6.9,0)}]\GAbang\end{scope}
+  \node[draw=GAxanhd,rounded corners=3pt,minimum size=0.95cm,line width=0.8pt] at (7.7,0) {};
+\end{tikzpicture}}
+% Hàng so sánh bằng hình: \GAhangss{số hình trái}{hình}{số hình phải}
+\newcommand{\GAhangss}[3]{\begin{tikzpicture}
+  \draw[rounded corners=7pt,line width=0.9pt,GAxanhd!80,fill=white] (0,-1) rectangle (8.4,1);
+  \begin{scope}[shift={(0.55,0)}]\GAnhom{#1}{#2}\end{scope}
+  \node[draw=GAxanhd,rounded corners=3pt,minimum size=0.95cm,line width=0.8pt] at (3.65,0) {};
+  \begin{scope}[shift={(4.6,0)}]\GAnhom{#3}{#2}\end{scope}
+\end{tikzpicture}}
+% Tranh để HS lập phép trừ: n hình, k hình bị gạch
+\newcommand{\GAtranhtru}[3]{\begin{tikzpicture}
+  \foreach \k in {1,...,#1}{\begin{scope}[shift={(0.85*\k,0)}]\pic[scale=0.85] at (0,0) {#3};
+    \pgfmathtruncatemacro{\gach}{#1-#2}\ifnum\k>\gach\draw[GAdod,line width=1.8pt,line cap=round] (-0.3,-0.3)--(0.3,0.3);\fi\end{scope}}
+\end{tikzpicture}}
+% Tranh để HS lập phép cộng: hai nhóm trong hai khung
+\newcommand{\GAtranhcong}[3]{\begin{tikzpicture}
+  \draw[GAhongd,rounded corners=8pt,dashed,line width=0.9pt] (-0.35,-0.6) rectangle (0.85*#1+0.05,0.6);
+  \foreach \k in {1,...,#1}{\pic[scale=0.85] at (0.85*\k-0.5,0) {#3};}
+  \begin{scope}[shift={(0.85*#1+0.9,0)}]
+  \draw[GAxanhd,rounded corners=8pt,dashed,line width=0.9pt] (-0.35,-0.6) rectangle (0.85*#2+0.05,0.6);
+  \foreach \k in {1,...,#2}{\pic[scale=0.85] at (0.85*\k-0.5,0) {#3};}\end{scope}
+\end{tikzpicture}}
+% Bảng phép tính dạng thẻ màu: \GAthe{phép tính}{màu}
+\newcommand{\GAthe}[2]{\tikz\node[draw=#2!75!black,fill=#2!55,rounded corners=6pt,line width=0.8pt,minimum width=2.8cm,minimum height=1.15cm,font=\LARGE\bfseries]{#1};}
+% Dãy ô số: \GAdayso{a,b,,d,...} (để trống = ô trống)
+\newcommand{\GAdayso}[1]{\begin{tikzpicture}\foreach \x [count=\k] in {#1}{\node[draw=GAxanhd,fill=GAxanh!25,rounded corners=3pt,line width=0.8pt,minimum width=1.1cm,minimum height=0.9cm,font=\Large] at (1.25*\k,0) {\x};}\end{tikzpicture}}
+% Dãy hình quy luật: các hình cách nhau, ô cuối trống
+\newcommand{\GAdayhinh}[1]{\begin{tikzpicture}\foreach \h [count=\k] in {#1}{\draw[GAxanhd,rounded corners=4pt,line width=0.8pt,fill=white] (1.15*\k-0.55,-0.55) rectangle (1.15*\k+0.55,0.55);\def\GAtmp{-}\ifx\h\GAtmp\else\pic[scale=0.8] at (1.15*\k,0) {\h};\fi}\end{tikzpicture}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       BUỔI 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setcounter{section}{3} % không chỉnh sửa
+\hktuan{1}{18}
+\par\medskip
+\begin{center}
+        {\color{mauchinh!120}\bfseries\Large LUYỆN TẬP CHUNG TOÁN (BUỔI 1)}
+\end{center}
+
+\subsection{MỤC TIÊU CẦN ĐẠT}
+\begin{itemize}
+    \item \textbf{Kiến thức:} HS ôn tập phép cộng, phép trừ trong phạm vi 5 (qua tranh và qua số).
+    \item \textbf{Kiến thức:} HS nhận biết và viết đúng dấu cộng $(+)$, dấu trừ $(-)$, dấu bằng $(=)$; lập được phép cộng, phép trừ phù hợp với tranh hoặc tình huống.
+    \item \textbf{Năng lực:} HS nói được một câu trọn vẹn khi đố bạn và khi giải thích cách làm; biết hợp tác, thay phiên khi chơi.
+    \item \textbf{Phẩm chất:} HS hào hứng, tự tin, trung thực khi báo điểm, biết cổ vũ bạn.
+\end{itemize}
+
+\subsection{TIẾN TRÌNH DẠY HỌC}
+\textbf{Đồ dùng dạy học:} bút, khăn ẩm, phiếu bài tập, giáo án, con dấu, hộp màu, bảng con, thẻ số từ 0 đến 5, thẻ dấu $+$, $-$, $=$ (có băng dính hoặc nam châm), kẹo hoặc đồ vật thật để minh họa, laptop/TV, loa.
+
+\begin{luuy}
+    \textbf{Cách tính điểm cả buổi:} lớp chia thành 2 nhóm, mỗi nhóm có một “cây ngôi sao” trên bảng. HS trả lời đúng, làm nhanh, hợp tác tốt đều được dán sao. Cuối buổi nhóm nhiều sao nhất được khen thưởng.
+\end{luuy}
+
+%---------------------------------------------------------
+\subsubsection{HOẠT ĐỘNG 1: SỬA BÀI TẬP VỀ NHÀ}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 10 phút
+        \item HS nhận ra và sửa được lỗi sai trong bài tập về nhà; ổn định lớp.
+    \end{itemize}
+\end{hd}
+\begin{itemize}
+    \item GV sửa bài tập về nhà, số lượng bài tùy tình hình mỗi lớp.
+    \item Gợi ý trò chơi \textbf{“Thám tử tìm lỗi”}: GV chọn 2 -- 3 bài làm có lỗi thường gặp (che tên HS), chiếu lên TV và hỏi: \GAloi{Bạn thám tử nào tìm ra chỗ sai?} HS giơ tay chỉ lỗi và nói cách sửa.
+    \item GV khen cả bạn tìm ra lỗi và tinh thần dũng cảm sửa sai; ghi lại lỗi chung của lớp để nhắc lại trong phần luyện tập.
+\end{itemize}
+
+%---------------------------------------------------------
+\subsubsection{HOẠT ĐỘNG 2: KHỞI ĐỘNG -- ÔN TẬP PHÉP CỘNG, PHÉP TRỪ}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 10 phút
+        \item Tạo không khí vui vẻ; gợi lại ý nghĩa “thêm vào” (cộng) và “bớt đi” (trừ).
+    \end{itemize}
+\end{hd}
+\begin{itemize}
+    \item GV cho HS khởi động bằng bài hát \textbf{“Chị Ong Nâu”}, vừa hát vừa vỗ tay hoặc vẫy hai tay như đôi cánh ong: \url{https://youtu.be/VLmDPFiJ2GE?si=A-fkLkx1wVT8YdMK}
+    \item Hết bài hát, GV dùng câu hỏi gợi mở để dẫn vào bài:
+    \begin{itemize}
+        \item[--] \GAloi{Có 2 chú ong đang bay. Có thêm 3 chú ong bay đến. Bây giờ có mấy chú ong?} (HS đếm bằng ngón tay: 5 chú)
+        \item[--] \GAloi{Trong 5 chú ong, 2 chú bay về tổ. Còn lại mấy chú?} (3 chú)
+        \item[--] \GAloi{Khi thêm vào em dùng dấu gì? Khi bớt đi em dùng dấu gì?}
+    \end{itemize}
+\end{itemize}
+\begin{center}
+\begin{tikzpicture}
+  \foreach \x/\y in {0/0.15,1.1/-0.15}{\pic[scale=1.2] at (\x,\y) {gaong2};}
+  \begin{scope}[shift={(2.3,0)}]\GAcong\end{scope}
+  \foreach \x/\y in {3.4/0.15,4.5/-0.15,5.6/0.15}{\pic[scale=1.2] at (\x,\y) {gaong2};}
+  \begin{scope}[shift={(6.8,0)}]\GAbang\end{scope}
+  \node[draw=GAxanhd,rounded corners=3pt,minimum size=0.95cm,line width=0.8pt] at (7.6,0) {};
+\end{tikzpicture}
+\end{center}
+
+%---------------------------------------------------------
+\subsubsection{HOẠT ĐỘNG 3: TRÒ CHƠI “ĐỐ BẠN”}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 20 phút
+        \item HS tìm được kết quả phép cộng, phép trừ trong phạm vi 5 và làm ngược lại: từ kết quả tìm phép tính.
+    \end{itemize}
+\end{hd}
+\begin{itemize}
+    \item GV chia lớp thành 2 nhóm. Mỗi lượt có 2 HS (mỗi nhóm một bạn) lên “đố” nhau.
+    \item \textbf{Vòng 1 -- Tìm kết quả:} HS A ra một phép cộng hoặc trừ trong phạm vi 5, ví dụ \GAloi{Đố bạn $2 + 3$ bằng mấy?} HS B trả lời \GAloi{$2 + 3 = 5$}, đọc cả phép tính \textit{“hai cộng ba bằng năm”}.
+    \item \textbf{Vòng 2 -- Làm ngược lại:} HS A nói kết quả, HS B tìm phép tính. Ví dụ: \GAloi{Đố bạn phép tính nào có kết quả bằng 5?} HS B nói \GAloi{$2 + 3 = 5$} hoặc \GAloi{$4 + 1 = 5$}, \GAloi{$5 - 0 = 5$}\dots
+    \item HS trả lời đúng được 1 điểm cộng (1 sao) cho nhóm. Nếu HS B chưa trả lời được, bạn trong nhóm được giơ tay hỗ trợ và nhóm vẫn được nửa điểm.
+\end{itemize}
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+  \newcommand{\GAbe}[3]{% #1 màu tóc, #2 màu tóc đậm, #3 kiểu tóc (1: bím hai bên, 2: tóc ngang vai)
+    \ifnum#3=1
+      \foreach \sx in {-1,1}{\begin{scope}[xscale=\sx]\fill[#1,draw=#2,line width=0.4pt,rotate around={22:(1.45,0.95)}] (1.45,0.95) ellipse (0.36 and 0.75);\fill[#2] (1.2,1.5) circle (0.1);\end{scope}}
+      \fill[#1,draw=#2,line width=0.4pt] (0,1.95) ellipse (1.32 and 1.25);
+    \else
+      \fill[#1,draw=#2,line width=0.4pt] (-1.3,0.2) .. controls (-1.7,2.9) and (1.7,2.9) .. (1.3,0.2) .. controls (0.9,0.45) and (-0.9,0.45) .. (-1.3,0.2);
+    \fi
+    \fill[GAda] (-0.2,0.45) rectangle (0.2,0.95);
+    \begin{scope}\clip (-1.55,-0.5) .. controls (-1.5,0.4) and (-0.9,0.55) .. (-0.3,0.62) -- (0.3,0.62) .. controls (0.9,0.55) and (1.5,0.4) .. (1.55,-0.5) -- cycle;
+      \fill[GAkem!85!GAxam] (-2,-1) rectangle (2,1);\fill[GAvang] (-2,-1) rectangle (-0.95,1);\fill[GAvang] (0.95,-1) rectangle (2,1);\end{scope}
+    \fill[GAda] (-0.3,0.62) .. controls (-0.2,0.32) and (0.2,0.32) .. (0.3,0.62) -- cycle;
+    \fill[GAda,draw=GAhongd!60,line width=0.4pt] (-1.0,1.6) circle (0.18);\fill[GAda,draw=GAhongd!60,line width=0.4pt] (1.0,1.6) circle (0.18);
+    \path[fill=GAda,draw=GAhongd!60,line width=0.4pt] (0,1.7) ellipse (1.02 and 0.95);
+    \fill[#1] (-1.03,1.78) .. controls (-1.0,2.95) and (1.0,2.95) .. (1.03,1.78) .. controls (0.75,2.35) and (0.3,2.3) .. (0.0,1.98) .. controls (-0.35,2.25) and (-0.8,2.35) .. (-1.03,1.78);
+    \foreach \sx in {-1,1}{\begin{scope}[xscale=\sx]
+      \fill[white,draw=#2!70,line width=0.5pt] (0.4,1.62) ellipse (0.2 and 0.24);\fill[#2!70!black] (0.41,1.6) circle (0.125);\fill[white] (0.45,1.67) circle (0.04);
+      \draw[#2!70!black,line width=0.8pt,line cap=round] (0.2,1.78) -- (0.15,1.84) (0.28,1.84) -- (0.26,1.91);
+      \fill[GAdo,opacity=0.35] (0.68,1.28) ellipse (0.2 and 0.13);\end{scope}}
+    \fill[GAhongd!70] (0,1.42) ellipse (0.07 and 0.045);
+    \fill[GAdod!85] (-0.3,1.2) .. controls (-0.2,0.78) and (0.2,0.78) .. (0.3,1.2) .. controls (0.1,1.12) and (-0.1,1.12) .. (-0.3,1.2);
+    \fill[white] (-0.2,1.18) .. controls (-0.1,1.12) and (0.1,1.12) .. (0.2,1.18) -- (0.18,1.1) .. controls (0.05,1.07) and (-0.05,1.07) .. (-0.18,1.1) -- cycle;
+    \fill[GAhong] (0,0.93) ellipse (0.13 and 0.06);}
+  \begin{scope}[shift={(-2.1,0)}]\GAbe{GAcamd!85}{GAcamd!60!black}{1}\end{scope}
+  \begin{scope}[shift={(2.9,0)}]\GAbe{GAnaud!85}{GAnaud!60!black}{2}\end{scope}
+  % bong bóng nói
+  \draw[GAxanhd,line width=0.9pt,fill=white] (-4.2,3.95) ellipse (2.0 and 0.95);
+  \fill[white] (-3.75,3.05) -- (-3.0,2.65) -- (-3.2,3.1) -- cycle;
+  \draw[GAxanhd,line width=0.9pt,line join=round] (-3.82,3.04) -- (-3.0,2.65) -- (-3.2,3.12);
+  \node[align=center,font=\bfseries] at (-4.2,3.95) {Đố bạn $2+3$\\ bằng mấy?};
+  % bong bóng nghĩ
+  \foreach \cx/\cy/\r in {2.1/4.3/0.55,2.9/4.55/0.62,3.7/4.3/0.55,3.0/3.95/0.62,2.55/3.95/0.5,3.45/3.95/0.5}{\draw[GAxanhd,line width=0.9pt,fill=white] (\cx,\cy) circle (\r);}
+  \foreach \cx/\cy/\r in {2.1/4.3/0.55,2.9/4.55/0.62,3.7/4.3/0.55,3.0/3.95/0.62,2.55/3.95/0.5,3.45/3.95/0.5}{\fill[white] (\cx,\cy) circle (\r-0.03);}
+  \draw[GAxanhd,line width=0.9pt,fill=white] (1.95,3.15) circle (0.13);\draw[GAxanhd,line width=0.9pt,fill=white] (1.75,2.85) circle (0.2);
+  \node[font=\bfseries] at (2.9,4.2) {$2+3=5$};
+\end{tikzpicture}
+\end{center}
+\begin{luuy}
+    Phân hóa: HS nhút nhát được chọn “thẻ phép tính” trong hộp để đố (không phải nghĩ ra phép tính); HS nhanh được thử thách: \GAloi{Bạn nào tìm được tất cả phép cộng có kết quả bằng 5?} Sau mỗi lượt, GV hỏi một HS: \GAloi{Vì sao em biết kết quả là 5?} để HS nói được cách làm (đếm thêm, dùng ngón tay, dùng tranh).
+\end{luuy}
+
+%---------------------------------------------------------
+\subsubsection{HOẠT ĐỘNG 4: LUYỆN TẬP}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 40 phút
+        \item HS thực hiện được các bài tập cộng, trừ trong phạm vi 5 trong PBT; viết đúng các dấu và lập được phép tính.
+    \end{itemize}
+\end{hd}
+\GAmucnho{a) Hướng dẫn viết dấu và đọc phép tính (5 phút)}
+\begin{itemize}
+    \item GV làm mẫu trên bảng cách viết các dấu: dấu $+$ (nét ngang rồi nét sổ), dấu $-$ (một nét ngang), dấu $=$ (hai nét ngang song song, bằng nhau). HS tập viết lên bảng con hoặc viết “trên không”.
+    \item GV cho HS đọc: $2 + 3 = 5$ đọc là \textit{“hai cộng ba bằng năm”}; $5 - 2 = 3$ đọc là \textit{“năm trừ hai bằng ba”}.
+\end{itemize}
+\begin{center}
+\begin{tikzpicture}
+  \foreach \x/\t in {0/c,3/t,6/b}{
+    \draw[GAxanhd!80,rounded corners=6pt,line width=0.8pt,fill=GAxanh!20] (\x-1.1,-0.95) rectangle (\x+1.1,0.95);}
+  \begin{scope}[shift={(0,0)},scale=2.3]\GAcong\end{scope}
+  \begin{scope}[shift={(3,0)},scale=2.3]\GAtru\end{scope}
+  \begin{scope}[shift={(6,0)},scale=2.3]\GAbang\end{scope}
+  \node[circle,fill=GAdo,text=white,inner sep=1pt,font=\scriptsize\bfseries] at (-0.5,0.2) {1};
+  \node[circle,fill=GAdo,text=white,inner sep=1pt,font=\scriptsize\bfseries] at (0.2,0.62) {2};
+  \node[circle,fill=GAdo,text=white,inner sep=1pt,font=\scriptsize\bfseries] at (2.45,0.2) {1};
+  \node[circle,fill=GAdo,text=white,inner sep=1pt,font=\scriptsize\bfseries] at (5.45,0.38) {1};
+  \node[circle,fill=GAdo,text=white,inner sep=1pt,font=\scriptsize\bfseries] at (5.45,-0.38) {2};
+  \node[font=\bfseries] at (0,-1.3) {dấu cộng};\node[font=\bfseries] at (3,-1.3) {dấu trừ};\node[font=\bfseries] at (6,-1.3) {dấu bằng};
+\end{tikzpicture}
+\end{center}
+\GAmucnho{b) Luyện tập trong PBT (30 phút)}
+\textbf{Bài 1.} Thực hiện phép tính (phép cộng). \textit{Gợi ý: đếm số hình bên trái, đếm thêm số hình bên phải, rồi viết kết quả.}
+\par\nopagebreak\vspace{4pt}
+{\centering
+\GAhang{4}{gakeo}{1}{cong}\hfill\GAhang{2}{gamu}{1}{cong}\\[5pt]
+\GAhang{3}{gacay}{1}{cong}\hfill\GAhang{2}{gagung}{3}{cong}\\[5pt]
+\GAhang{2}{gaong}{2}{cong}\hfill\GAhang{1}{gatuyet}{1}{cong}\par}
+\medskip
+\textbf{Bài 2.} Thực hiện phép tính (phép trừ). \textit{Gợi ý: có tất cả bao nhiêu hình bên trái, bớt đi bao nhiêu hình bên phải thì còn lại bao nhiêu.}
+\par\nopagebreak\vspace{4pt}
+{\centering
+\GAhang{5}{gapenguin}{1}{tru}\hfill\GAhang{5}{gaqua}{2}{tru}\\[5pt]
+\GAhang{3}{galoc}{1}{tru}\hfill\GAhang{5}{gabanh}{3}{tru}\\[5pt]
+\GAhang{3}{gakeo}{3}{tru}\hfill\GAhang{4}{gacup}{2}{tru}\par}
+\medskip
+\begin{minipage}{\linewidth}\textbf{Bài 3 (bài thêm).} Nhìn tranh, viết phép tính thích hợp vào ô trống.
+\par\nopagebreak\vspace{4pt}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c|}
+  \hline
+  \GAtranhcong{3}{2}{gaong2} & \GAobox\ \raisebox{0.05cm}{\Large $+$}\ \GAobox\ \raisebox{0.05cm}{\Large $=$}\ \GAobox \\ \hline
+  \GAtranhtru{5}{2}{gacup} & \GAobox\ \raisebox{0.05cm}{\Large $-$}\ \GAobox\ \raisebox{0.05cm}{\Large $=$}\ \GAobox \\ \hline
+  \GAtranhcong{2}{2}{gaqua} & \GAobox\ \raisebox{0.05cm}{\Large $+$}\ \GAobox\ \raisebox{0.05cm}{\Large $=$}\ \GAobox \\ \hline
+  \GAtranhtru{4}{3}{gakeo} & \GAobox\ \raisebox{0.05cm}{\Large $-$}\ \GAobox\ \raisebox{0.05cm}{\Large $=$}\ \GAobox \\ \hline
+\end{tabular}
+\end{center}
+\end{minipage}\par\medskip
+\textbf{Bài 4 (bài thêm).} Điền dấu $+$ hoặc $-$ vào ô trống.
+\par\nopagebreak\vspace{4pt}
+\begin{center}
+\Large
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{ccc}
+  $2\ \GAobox\ 3 = 5$ \hspace{1cm} & $5\ \GAobox\ 2 = 3$ \hspace{1cm} & $4\ \GAobox\ 0 = 4$ \\
+  $1\ \GAobox\ 1 = 2$ & $4\ \GAobox\ 4 = 0$ & $3\ \GAobox\ 1 = 2$ \\
+\end{tabular}
+\end{center}
+\begin{luuy}
+    GV đi quanh lớp, chú ý các lỗi thường gặp: viết dấu $+$ thiếu nét sổ hoặc dấu $-$ quá dài; nhầm khi nào cộng, khi nào trừ (hỏi lại: \GAloi{Hình nhiều lên hay ít đi?}); quên phép tính có số 0 ($5 + 0 = 5$, $2 - 0 = 2$) hoặc kết quả bằng 0 ($3 - 3 = 0$). HS xong sớm làm Bài 3, Bài 4; HS chậm được dùng que tính hoặc ngón tay. GV chấm nhanh và đóng dấu cho HS làm đúng.
+\end{luuy}
+
+%---------------------------------------------------------
+\subsubsection{HOẠT ĐỘNG 5: CỦNG CỐ -- GIAO BÀI TẬP VỀ NHÀ}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 10 phút
+        \item HS nhắc lại nội dung bài học; GV đánh giá nhanh mức độ hiểu bài.
+    \end{itemize}
+\end{hd}
+\begin{itemize}
+    \item GV cho HS nhắc lại nội dung bài học trước khi về. Chơi nhanh \textbf{“Giơ thẻ dấu”}: GV nói tình huống (\GAloi{Mẹ cho thêm 2 viên kẹo}, \GAloi{Em ăn mất 1 cái bánh}), HS giơ thẻ $+$ hoặc $-$.
+    \item GV đếm sao, tuyên dương nhóm thắng cuộc và những bạn có tiến bộ.
+    \item GV tùy theo tình hình HS mỗi lớp để giao bài tập về nhà phù hợp.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       BUỔI 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\setcounter{subsection}{0}
+\begin{center}
+        {\color{mauchinh!120}\bfseries\Large ÔN TẬP -- KIỂM TRA CUỐI HỌC KỲ 1 (BUỔI 2)}
+\end{center}
+
+\subsection{MỤC TIÊU CẦN ĐẠT}
+\begin{itemize}
+    \item \textbf{Kiến thức:} HS ôn tập phép cộng, phép trừ trong phạm vi 5.
+    \item \textbf{Kiến thức:} HS so sánh được các số trong phạm vi 10; làm được các bài toán về quy luật.
+    \item \textbf{Kiến thức:} HS nhận biết được các âm và các dấu thanh đã học.
+    \item \textbf{Năng lực:} HS tự làm bài kiểm tra theo yêu cầu, không nhìn bài bạn.
+    \item \textbf{Phẩm chất:} HS trung thực, tự giác, bình tĩnh khi làm bài.
+\end{itemize}
+
+\subsection{TIẾN TRÌNH DẠY HỌC}
+\textbf{Đồ dùng dạy học:} giáo án, bút bảng, PPT trình chiếu, PBT, đề kiểm tra, các thẻ chữ cái, bảng con, hình ảnh, những bông hoa có âm và dấu thanh, kẹo thưởng.
+
+%---------------------------------------------------------
+\subsubsection{HOẠT ĐỘNG 1: SỬA BÀI TẬP VỀ NHÀ}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 10 phút
+        \item HS sửa được lỗi sai trong bài tập về nhà; ổn định lớp.
+    \end{itemize}
+\end{hd}
+\begin{itemize}
+    \item GV sửa bài tập về nhà, số lượng bài tùy tình hình mỗi lớp.
+    \item Có thể dùng lại trò chơi “Thám tử tìm lỗi” ở buổi 1 cho các lỗi sai phổ biến.
+\end{itemize}
+
+%---------------------------------------------------------
+\subsubsection{HOẠT ĐỘNG 2: ÔN TẬP PHÉP CỘNG VÀ PHÉP TRỪ TRONG PHẠM VI 5}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 10 phút
+        \item HS tính nhanh, chính xác các phép cộng, trừ trong phạm vi 5.
+    \end{itemize}
+\end{hd}
+\begin{itemize}
+    \item GV chia lớp thành 2 đội, thi đua làm các phép tính cộng, trừ trong phạm vi 5 trên bảng (chiếu PPT hoặc dán thẻ phép tính). Mỗi bạn lên viết kết quả rồi chuyền phấn cho bạn tiếp theo.
+    \item HS làm chính xác và nhanh thì được 2 điểm cộng.
+    \item Câu hỏi gợi mở: \GAloi{Số nào cộng với 0 thì kết quả vẫn là chính số đó?}, \GAloi{Hai số giống nhau trừ cho nhau thì bằng mấy?}
+\end{itemize}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{cc}
+  \GAthe{$4 + 1 =$}{GAxanh} \quad\GAthe{$5 - 5 =$}{GAhong} & \GAthe{$3 + 2 =$}{GAvang} \quad\GAthe{$4 - 1 =$}{GAla} \\
+  \GAthe{$1 + 1 =$}{GAcam} \quad\GAthe{$3 - 2 =$}{GAtim} & \GAthe{$5 + 0 =$}{GAxanh} \quad\GAthe{$4 - 4 =$}{GAhong} \\
+  \GAthe{$2 + 2 =$}{GAvang} \quad\GAthe{$2 - 0 =$}{GAla} & \\
+\end{tabular}
+\end{center}
+
+%---------------------------------------------------------
+\subsubsection{HOẠT ĐỘNG 3: LUYỆN TẬP TOÁN}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 20 phút
+        \item HS so sánh các số trong phạm vi 10; tìm được quy luật của dãy số, dãy hình.
+    \end{itemize}
+\end{hd}
+\begin{itemize}
+    \item GV cho HS thực hiện các bài tập có trong PBT. Phần bài tập gợi ý dưới đây dùng khi PBT chưa đủ, GV chọn theo tình hình lớp.
+\end{itemize}
+\textbf{Bài 1.} Điền dấu $>$, $<$ hoặc $=$ vào ô trống. \textit{(Dấu lớn hơn, bé hơn mở về phía số lớn.)}
+\par\nopagebreak\vspace{4pt}
+{\centering
+\GAhangss{3}{gacay}{5}\hfill\GAhangss{4}{gacup}{4}\\[5pt]
+\GAhangss{6}{gakeo}{2}\hfill\GAhangss{1}{gaqua}{5}\par}
+\par\vspace{4pt}
+{\Large\centering
+$7\ \GAobox\ 4 \qquad 6\ \GAobox\ 6 \qquad 9\ \GAobox\ 10 \qquad 0\ \GAobox\ 2 \qquad 8\ \GAobox\ 5$\par}
+\medskip
+\textbf{Bài 2.} Tìm quy luật rồi điền số hoặc hình còn thiếu.
+\par\nopagebreak\vspace{6pt}
+\begin{center}
+    \GAdayso{1,2,3,,5,6}\\[6pt]
+    \GAdayso{2,4,6,,10}\\[6pt]
+    \GAdayso{10,9,8,,6,5}\\[10pt]
+    \GAdayhinh{gacay,gaqua,gacay,gaqua,gacay,-}\\[6pt]
+    \GAdayhinh{gakeo,gamu,gamu,gakeo,gamu,-}
+\end{center}
+\begin{luuy}
+    Phân hóa: HS chậm được dùng tranh hoặc que tính để so sánh bằng cách ghép tương ứng 1 -- 1; HS nhanh được hỏi thêm: \GAloi{Số nào lớn hơn 7 và bé hơn 10?} hoặc tự nghĩ một dãy số có quy luật để đố bạn.
+\end{luuy}
+
+%---------------------------------------------------------
+\subsubsection{HOẠT ĐỘNG 4: ÔN TẬP TIẾNG VIỆT -- TRÒ CHƠI “HÁI HOA”}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 20 phút
+        \item HS nhận biết, đọc đúng các âm và dấu thanh đã học.
+    \end{itemize}
+\end{hd}
+\begin{itemize}
+    \item GV ôn tập cho HS các âm đã học qua trò chơi “Hái hoa”. GV chuẩn bị những bông hoa có các âm đã học và dán lên bảng.
+    \item GV tổ chức chia lớp thành hai đội, thi đua hái bông hoa có chứa âm theo yêu cầu của GV. Ví dụ: \GAloi{Hái bông hoa có âm mờ}, \GAloi{Hái bông hoa có âm u có râu}.
+    \item \textbf{Vòng 2:} HS hái hoa xong đọc to âm và nói một tiếng có âm đó (ví dụ: \textit{mẹ, tư, vui}); hái hoa có dấu thanh và đọc tên dấu.
+    \item Đội thực hiện 1 lượt đúng sẽ có 1 điểm cộng. GV tổng kết và trao thưởng kẹo cho đội chiến thắng.
+\end{itemize}
+\begin{center}
+\begin{tabular}{@{}c@{\hspace{0.3cm}}c@{\hspace{0.3cm}}c@{\hspace{0.3cm}}c@{}}
+  \GAhoa{a}{GAvang}{GAvangd} & \GAhoa{i}{GAhong}{GAhongd} & \GAhoa{e}{GAxanh}{GAxanhd} & \GAhoa{m}{GAvang}{GAvangd}\\[4pt]
+  \GAhoa{t}{GAcam}{GAcamd} & \GAhoa{v}{GAtim}{GAxanhd} & \GAhoa{u}{GAla}{GAlad} & \GAhoa{ư}{GAhong}{GAhongd}\\
+\end{tabular}
+
+\vspace{6pt}
+\begin{tabular}{@{}c@{\hspace{0.3cm}}c@{\hspace{0.3cm}}c@{\hspace{0.3cm}}c@{\hspace{0.3cm}}c@{}}
+  \GAhoadau{1}{}{GAvang}{GAvangd} & \GAhoadau{2}{}{GAhong}{GAhongd} & \GAhoadau{3}{}{GAxanh}{GAxanhd} & \GAhoadau{4}{}{GAla}{GAlad} & \GAhoadau{5}{}{GAcam}{GAcamd}\\
+  \small dấu sắc & \small dấu huyền & \small dấu hỏi & \small dấu ngã & \small dấu nặng\\
+\end{tabular}
+\end{center}
+
+%---------------------------------------------------------
+\subsubsection{HOẠT ĐỘNG 5: KIỂM TRA CUỐI HỌC KỲ 1}
+\begin{hd}
+    \begin{itemize}
+        \item Thời gian: 30 phút
+        \item HS tự làm bài kiểm tra cuối học kỳ 1 theo lời đọc đề của GV.
+    \end{itemize}
+\end{hd}
+\begin{itemize}
+    \item \textit{GV chỉ đọc đề cho HS và không chỉ bài cho HS.}
+    \item Trước khi làm: GV phát đề, nhắc HS ghi họ tên, ngồi ngay ngắn, không nhìn bài bạn. GV đọc từng câu hai lần, thật rõ ràng và chậm rãi; cho HS khoảng 2 phút làm mỗi câu rồi mới đọc câu tiếp theo.
+    \item Trong khi làm: GV đi quan sát, nhắc nhẹ HS ngồi im, giữ trật tự; không gợi ý đáp án. Với HS chưa nghe kịp, GV chỉ đọc lại đề, không giải thích thêm.
+    \item Cuối giờ: GV nhắc HS soát lại bài, thu bài, khen cả lớp đã làm bài nghiêm túc và tặng kẹo hoặc sticker động viên.
+\end{itemize}
+
+\begin{center}
+       \faGg\faGg\quad Hết \quad\faGg\faGg
+\end{center}
+\end{document}
