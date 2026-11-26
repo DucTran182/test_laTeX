@@ -42,7 +42,7 @@
     \hline
   \end{tabular}\par\medskip}
 \OTdef\OTdau[1]{%
-  \noindent\fbox{\small\bfseries\,HK1 - Ôn tập cuối kì\,}\par\medskip
+  \par\medskip
   {\centering
    {\color{mauchinh}\bfseries\Large PHIẾU BÀI TẬP TOÁN TƯ DUY CẤP ĐỘ A}\\[3pt]
    {\color{mauchinh}\bfseries\large CHỦ ĐỀ: ÔN TẬP CUỐI HỌC KÌ 1}\\[2pt]
@@ -52,9 +52,6 @@
 \makeatletter
 \providecommand{\OTdatlai}{}\renewcommand{\OTdatlai}{\@ifundefined{c@bt}{}{\setcounter{bt}{0}}}
 \makeatother
-% Chân trang: "Ôn tập cuối học kì 1 · Buổi n — Trang m"
-\def\OTbuoi{1}
-\fancyfoot[C]{\color{gray}\small Ôn tập cuối học kì 1 · Buổi \OTbuoi\ --- Trang \thepage}
 % Bắt đầu hình vẽ ngay dưới đề bài
 \OTdef\OTbd{\par\nopagebreak\vspace{3pt}\nopagebreak}
 % Bảng nhiều cột đều nhau cho các dãy phép tính
@@ -90,17 +87,17 @@
   \ifnum#1=1 \draw[red,very thick,line cap=round] (-0.17,-0.17)--(0.17,0.17) (-0.17,0.17)--(0.17,-0.17);\fi}
 % Khung 10 ô (2 hàng x 5 cột) chứa #1 quả táo
 \OTdef\OTkhung[1]{%
-  \draw[gray!70,line width=0.7pt] (0,0) rectangle (2.5,1.0);
-  \foreach \i in {1,...,4}{\draw[gray!55,thin] (0.5*\i,0)--(0.5*\i,1.0);}
-  \draw[gray!55,thin] (0,0.5)--(2.5,0.5);
+  \draw[gray!70,line width=0.7pt] (0,0) rectangle (2.25,0.9);
+  \foreach \i in {1,...,4}{\draw[gray!55,thin] (0.45*\i,0)--(0.45*\i,0.9);}
+  \draw[gray!55,thin] (0,0.45)--(2.25,0.45);
   \ifnum#1>0 \foreach \k in {1,...,#1}{\pgfmathtruncatemacro{\cc}{mod(\k-1,5)}\pgfmathtruncatemacro{\rr}{div(\k-1,5)}%
-    \begin{scope}[shift={(0.5*\cc+0.25,1.0-0.5*\rr-0.25)},scale=1.12]\OTtao\end{scope}}\fi}
+    \begin{scope}[shift={(0.45*\cc+0.225,0.9-0.45*\rr-0.225)},scale=1.0]\OTtao\end{scope}}\fi}
 % Hình "10 quả + #1 quả" trên hai khung
 \OTdef\OTphepcong[1]{%
   \begin{tikzpicture}
     \OTkhung{10}
-    \node[font=\bfseries\large] at (2.9,0.5) {+};
-    \begin{scope}[shift={(3.3,0)}]\OTkhung{#1}\end{scope}
+    \node[font=\bfseries\large] at (2.6,0.45) {+};
+    \begin{scope}[shift={(2.95,0)}]\OTkhung{#1}\end{scope}
   \end{tikzpicture}}
 % Nhóm #1 quả cà chua: xếp 5 quả mỗi hàng, góc trên trái tại gốc
 \OTdef\OTnhomcachua[1]{%
@@ -154,10 +151,10 @@
   \draw[blue!30!gray!70,line width=0.3pt] (0,0) circle (0.79);
   \foreach \t in {1,...,60}{\pgfmathtruncatemacro{\mm}{mod(\t,5)}%
     \ifnum\mm=0 \draw[line width=0.5pt] ({90-6*\t}:0.69)--({90-6*\t}:0.76);\else\draw[line width=0.2pt] ({90-6*\t}:0.73)--({90-6*\t}:0.76);\fi}
-  \foreach \n in {1,...,12}{\node[font=\fontsize{5.5}{6}\selectfont,inner sep=0pt] at ({90-30*\n}:0.55) {\n};}
+  \foreach \n in {1,...,12}{\node[font=\fontsize{5}{5}\selectfont,inner sep=0pt] at ({90-30*\n}:0.6) {\n};}
   \ifnum#3=1 \pgfmathsetmacro{\anggio}{90-30*#1-#2/2}\pgfmathsetmacro{\angphut}{90-6*#2}%
-    \draw[line width=1.9pt,line cap=round] (0,0)--(\anggio:0.4);
-    \draw[line width=1.1pt,line cap=round] (0,0)--(\angphut:0.62);\fi
+    \draw[line width=1.9pt,line cap=round] (0,0)--(\anggio:0.27);
+    \draw[line width=1.1pt,line cap=round] (0,0)--(\angphut:0.42);\fi
   \fill[red] (0,0) circle (0.045);}
 % Đồng hồ đứng riêng (cho dùng trong dòng chữ)
 \OTdef\OTdhrieng[3]{\begin{tikzpicture}\OTdh{#1}{#2}{#3}\end{tikzpicture}}
@@ -166,7 +163,7 @@
   \begin{tabular}[t]{@{}c@{\hspace{4pt}}r@{}}
     & \makebox[1.05cm][r]{\large #1}\\[1pt]
     \large #3 & \makebox[1.05cm][r]{\large #2}\\ \cline{1-2}
-    & \rule{0pt}{1.5em}\ifnum#5=1 \makebox[1.05cm][r]{\large\textcolor{OTdo}{#4}}\else\makebox[1.05cm]{}\fi
+    & \rule[-0.55cm]{0pt}{1.5em}\ifnum#5=1 \makebox[1.05cm][r]{\large\textcolor{OTdo}{#4}}\else\makebox[1.05cm]{}\fi
   \end{tabular}}
 % Các chữ số của một số tròn chục (đặt tính trong lưới): vẽ tại cột 1..3
 \OTdef\OTchuso[3]{% #1 số, #2 tọa độ y, #3 kiểu nút
@@ -224,10 +221,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                       BUỔI 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\OTdatlai
+\hktuan{1}{17}
 \OTdau{PHÉP CỘNG TRONG PHẠM VI 20 (BUỔI 1)}
 
-\OTcho{6.5cm}\OTdang{DẠNG 1. CỘNG KHÔNG NHỚ VÀ GHÉP 10}
 \OTcho{5cm}\begin{bt}
     Đếm số táo, viết phép cộng rồi điền số thích hợp vào ô trống (làm theo mẫu).
     \OTbd{\centering
@@ -259,23 +255,14 @@
     \end{OTba}
 \end{bt}
 
-\OTcho{9cm}\begin{bt}
-    a) Điền số thích hợp vào ô trống.
+\OTcho{3.5cm}\begin{bt}
+    Điền số thích hợp vào ô trống.
     \begin{OTnam}
         9 + \OTo = 10 & 8 + \OTo = 10 & 7 + \OTo = 10 & 6 + \OTo = 10 & 5 + \OTo = 10 \\
         4 + \OTo = 10 & 3 + \OTo = 10 & 2 + \OTo = 10 & 1 + \OTo = 10 & 0 + \OTo = 10 \\
     \end{OTnam}
-    \par\smallskip\noindent b) Viết số cà chua của mỗi nhóm vào ô trống rồi nối hai nhóm có tổng số cà chua bằng 10.
-    \OTbd{\centering
-    \begin{tikzpicture}
-        \foreach \n [count=\i] in {9,2,6,4,7}{%
-            \begin{scope}[shift={(0,-1.25*\i+1.25)}]\OTnhomcachua{\n}\node[OTob,minimum width=0.62cm,minimum height=0.66cm] at (3.5,-0.45) {};\end{scope}}
-        \foreach \n [count=\i] in {3,6,1,4,8}{%
-            \begin{scope}[shift={(0,-1.25*\i+1.25)}]\node[OTob,minimum width=0.62cm,minimum height=0.66cm] at (9.9,-0.45) {};\begin{scope}[shift={(10.4,0)}]\OTnhomcachua{\n}\end{scope}\end{scope}}
-    \end{tikzpicture}\par}
 \end{bt}
 
-\OTcho{12.5cm}\OTdang{DẠNG 2. CỘNG QUA 10 BẰNG CÁCH TÁCH SỐ}
 \OTcho{11cm}\begin{bt}
     Điền số thích hợp vào chỗ trống (làm theo mẫu).
     \OTbd{\centering
@@ -309,7 +296,6 @@
     \end{OTba}
 \end{bt}
 
-\OTcho{7cm}\OTdang{DẠNG 3. THỰC HÀNH CỘNG TRONG PHẠM VI 20}
 \OTcho{5.5cm}\begin{bt}
     Điền kết quả vào bảng cộng.
     \OTbd{\centering
@@ -406,11 +392,9 @@
 %                       BUỔI 2
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\setcounter{page}{1}\def\OTbuoi{2}
-\OTdatlai
+\hktuan{1}{17}
 \OTdau{PHÉP TRỪ TRONG PHẠM VI 20 (BUỔI 2)}
 
-\OTcho{5cm}\OTdang{DẠNG 1. TRỪ KHÔNG NHỚ}
 \OTcho{3.5cm}\begin{bt}
     Điền số thích hợp vào ô trống.
     \begin{OTnam}
@@ -451,7 +435,6 @@
     \end{tabular}\par}
 \end{bt}
 
-\OTcho{12.5cm}\OTdang{DẠNG 2. TRỪ QUA 10 BẰNG CÁCH TÁCH SỐ}
 \OTcho{11cm}\begin{bt}
     Điền số thích hợp vào ô trống.
     \OTbd{\centering
@@ -483,7 +466,6 @@
     \end{tikzpicture}\par}
 \end{bt}
 
-\OTcho{7cm}\OTdang{DẠNG 3. THỰC HÀNH TRỪ TRONG PHẠM VI 20}
 \OTcho{5.5cm}\begin{bt}
     Em hãy dùng các số trên ngôi nhà để viết hai phép trừ đúng.
     \OTbd{\centering
@@ -564,11 +546,10 @@
 %                       BUỔI 3
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\setcounter{page}{1}\def\OTbuoi{3}
+\hktuan{1}{17}
 \OTdatlai
 \OTdau{CÁC SỐ ĐẾN 100; CỘNG, TRỪ SỐ TRÒN CHỤC (BUỔI 3)}
 
-\OTcho{7.5cm}\OTdang{DẠNG 1. ĐỌC, VIẾT, SO SÁNH, SẮP XẾP CÁC SỐ ĐẾN 100}
 \OTcho{6cm}\begin{bt}
     Điền số còn thiếu vào ô trống.
     \OTbd{\centering
@@ -578,15 +559,6 @@
     \end{tikzpicture}\par}
 \end{bt}
 
-\OTcho{6cm}\begin{bt}
-    Đếm số que tính rồi điền số thích hợp vào ô trống.
-    \OTbd{\centering
-    \setlength{\tabcolsep}{0pt}\begin{tabular}{@{}*{4}{>{\centering\arraybackslash}p{0.25\linewidth}}@{}}
-        \OTque{4}{2} & \OTque{2}{6} & \OTque{5}{5} & \OTque{3}{7} \\[6pt]
-        \OTo\ chục \OTo\ que lẻ & \OTo\ chục \OTo\ que lẻ & \OTo\ chục \OTo\ que lẻ & \OTo\ chục \OTo\ que lẻ \\[3pt]
-        Số: \OTo\hspace{-0.5pt}\OTo & Số: \OTo\hspace{-0.5pt}\OTo & Số: \OTo\hspace{-0.5pt}\OTo & Số: \OTo\hspace{-0.5pt}\OTo \\
-    \end{tabular}\par}
-\end{bt}
 
 \OTcho{5cm}\begin{bt}
     Viết số thích hợp vào ô trống.
@@ -631,7 +603,6 @@
     \end{tikzpicture}\par}
 \end{bt}
 
-\OTcho{5cm}\OTdang{DẠNG 2. CỘNG, TRỪ CÁC SỐ TRÒN CHỤC (PHẠM VI 100)}
 \OTcho{3.5cm}\begin{bt}
     Tính nhẩm. \textit{Ghi nhớ: 3 chục + 5 chục = 8 chục, nên 30 + 50 = 80.}
     \begin{OTba}
@@ -708,11 +679,10 @@
 %                       BUỔI 4
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\setcounter{page}{1}\def\OTbuoi{4}
+\hktuan{1}{17}
 \OTdatlai
 \OTdau{ĐỒNG HỒ, HÌNH HỌC VÀ TỔNG HỢP (BUỔI 4)}
 
-\OTcho{8.5cm}\OTdang{DẠNG 1. XEM ĐỒNG HỒ}
 \OTcho{7cm}\begin{bt}
     Đồng hồ chỉ mấy giờ?
     \OTbd{\centering
@@ -760,7 +730,6 @@
     \end{tikzpicture}\par}
 \end{bt}
 
-\OTcho{7.5cm}\OTdang{DẠNG 2. HÌNH HỌC}
 \OTcho{6cm}\begin{bt}
     Đếm số hình rồi điền vào bảng.
     \OTbd{\centering
@@ -814,7 +783,6 @@
     \end{tikzpicture}\par}
 \end{bt}
 
-\OTcho{6.5cm}\OTdang{DẠNG 3. GIẢI TOÁN}
 \OTcho{5cm}\begin{bt}
     Giải các bài toán sau (phạm vi 20).
     \begin{listEX}
@@ -839,7 +807,6 @@
     \end{listEX}
 \end{bt}
 
-\OTcho{6cm}\OTdang{DẠNG 4. TỔNG HỢP}
 \OTcho{4.5cm}\begin{bt}
     Tháp số: số ở mỗi viên gạch bằng tổng hai số ở hai viên gạch ngay bên dưới. Điền số còn thiếu.
     \OTbd{\centering
