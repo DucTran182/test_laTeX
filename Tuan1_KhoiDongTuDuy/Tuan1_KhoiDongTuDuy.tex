@@ -154,9 +154,7 @@
     \draw[fill=pkHong!25,draw=pkHongD!70,rounded corners=6pt] (-0.35,-0.7) rectangle (5.35,0.8);
     \foreach \i/\c in {0/pkHongD,1/pkXanhD,2/pkVangD,3/pkLaD,4/pkTimD}{
       \HBkeo{0.5+1.05*\i}{0.32}{\c}}
-    \foreach \i in {0,...,4}{
-      \draw[dashed,pkXam!80,thick] (0.5+1.05*\i,-0.33) circle (0.24);}
-    \node[font=\footnotesize,text=pkXam!80!black] at (2.6,-1.2) {hàng trên: còn lại 5 viên $\;\cdot\;$ hàng dưới: chỗ các viên đã ăn};
+    \node[font=\footnotesize,text=pkXam!80!black] at (2.6,-0.35) {Hộp kẹo sau khi em đã ăn: còn lại 5 viên};
   \end{tikzpicture}}
 
 % --- Hình: 9 quả cam chia vào 3 đĩa ---
@@ -259,13 +257,6 @@
         \shade[ball color=\m] ({\x+0.28+0.62*\col},{0.28+0.55*\row}) circle (0.2);
         \fill[white,opacity=0.7] ({\x+0.2+0.62*\col},{0.36+0.55*\row}) ellipse (0.05 and 0.035);}
       \node[font=\footnotesize\bfseries] at (\x+1.15,-0.55) {Hộp \t};}
-  \end{tikzpicture}}
-
-% --- Hình: các thẻ số 1 đến 6 ---
-\providecommand{\HBthesau}{}\renewcommand{\HBthesau}{%
-  \begin{tikzpicture}[font=\sffamily]
-    \foreach \i/\c/\d in {1/pkHong/pkHongD,2/pkXanh/pkXanhD,3/pkVang/pkVangD,4/pkLa/pkLaD,5/pkTim/pkTimD,6/pkCam/pkCamD}{
-      \HBthe{1.3*\i}{0}{\i}{\c}{\d}}
   \end{tikzpicture}}
 
 % --- Hình: cắt hình vuông ---
@@ -556,14 +547,14 @@
 \end{ex}
 
 \begin{ex}
-  Trong các số 2, 4, 6, 9, 10, số nào ``khác nhóm''?
+  Trong các số 3, 5, 7, 8, 9, số nào ``khác nhóm'' (không cùng là số lẻ với các số còn lại)?
   \choice
-  {\True 9}
-  {2}
-  {6}
-  {10}
+  {\True 8}
+  {3}
+  {7}
+  {9}
   \loigiai{
-    Các số $2, 4, 6, 10$ đều là số chẵn, chỉ có $9$ là số lẻ nên $9$ khác nhóm.
+    Các số $3, 5, 7, 9$ đều là số lẻ, chỉ có $8$ là số chẵn nên $8$ khác nhóm.
   }
 \end{ex}
 
@@ -677,14 +668,14 @@
 \end{ex}
 
 \begin{ex}
-  Chia 5 viên kẹo cho hai bạn, mỗi bạn có ít nhất 1 viên. Có bao nhiêu cách chia?
+  Chia 5 viên kẹo thành hai phần, mỗi phần có ít nhất 1 viên (không phân biệt phần nào đưa cho bạn nào). Có bao nhiêu cách chia?
   \choice
   {\True 2}
   {3}
   {4}
   {5}
   \loigiai{
-    Không tính thứ tự hai bạn, ta có các cách chia $5$ viên kẹo thành $2$ phần (mỗi phần ít nhất $1$ viên) là: $1$ và $4$; $2$ và $3$. Vậy có $2$ cách chia.
+    Các cách chia $5$ viên kẹo thành $2$ phần (mỗi phần ít nhất $1$ viên) là: $1$ và $4$; $2$ và $3$. Vậy có $2$ cách chia.
   }
 \end{ex}
 
@@ -748,12 +739,12 @@
   \HBhinh{\HBcatvuong}
   \answerlines{4}
   \loigiai{
-    Khi cắt qua hai đỉnh đối diện của hình vuông, em được $2$ hình tam giác. Có thể cắt bằng một đường thẳng nối hai điểm giữa của hai cạnh đối diện (song song với hai cạnh còn lại) để được $2$ hình chữ nhật.
+    Khi cắt qua hai đỉnh đối diện của hình vuông, em được $2$ hình tam giác. Có thể cắt bằng một đường thẳng nối hai điểm trên hai cạnh đối diện sao cho đường cắt song song với hai cạnh còn lại (chẳng hạn nối hai điểm chính giữa) để được $2$ hình chữ nhật.
   }
 \end{bt}
 
 \begin{bt}
-  Trong hộp có không quá 10 viên kẹo. Em ăn đi một số viên, trong hộp còn lại 5 viên. Ban đầu trong hộp có thể có bao nhiêu viên? Làm sao em biết đã tìm đủ?
+  Trong hộp có không quá 10 viên kẹo. Em ăn ít nhất 1 viên, trong hộp còn lại 5 viên. Ban đầu trong hộp có thể có bao nhiêu viên? Làm sao em biết đã tìm đủ?
   \HBhinh{\HBhopkeo}
   \answerlines{4}
   \loigiai{
@@ -806,6 +797,15 @@
 \end{bt}
 
 \begin{bt}
+  An, Bình, Chi đứng thành một hàng. An không đứng cuối hàng. Chi không đứng giữa. Liệt kê \textbf{tất cả} cách xếp có thể.
+  \HBhinh{\HBhangba}
+  \answerlines{4}
+  \loigiai{
+    Có $6$ cách xếp $3$ bạn thành hàng. Loại các cách An đứng cuối (Bình--Chi--An, Chi--Bình--An) và các cách Chi đứng giữa (An--Chi--Bình, Bình--Chi--An). Còn lại $3$ cách thỏa mãn (viết từ đầu hàng đến cuối hàng): An--Bình--Chi; Bình--An--Chi; Chi--An--Bình.
+  }
+\end{bt}
+
+\begin{bt}
   Robot đi theo lệnh lặp lại: \textbf{tiến 3 ô, lùi 1 ô}. Robot bắt đầu ở ô 0.
   \HBhinh{\HBrobot}
   \par\medskip
@@ -832,25 +832,10 @@
 
 % ---------- Mức 3: vận dụng cao ----------
 \begin{bt}
-  An, Bình, Chi đứng thành một hàng. An không đứng cuối hàng. Chi không đứng giữa. Liệt kê \textbf{tất cả} cách xếp có thể.
-  \HBhinh{\HBhangba}
+  Mai có 3 chiếc áo (đỏ, xanh, vàng) và 2 chiếc quần (trắng, đen). Mỗi lần Mai chọn 1 áo và 1 quần để mặc. Mai có bao nhiêu cách phối đồ khác nhau? Liệt kê các cách.
   \answerlines{4}
   \loigiai{
-    Có $6$ cách xếp $3$ bạn thành hàng. Loại các cách An đứng cuối (Bình--Chi--An, Chi--Bình--An) và các cách Chi đứng giữa (An--Chi--Bình, Bình--Chi--An). Còn lại $3$ cách thỏa mãn (viết từ đầu hàng đến cuối hàng): An--Bình--Chi; Bình--An--Chi; Chi--An--Bình.
-  }
-\end{bt}
-
-\begin{bt}
-  Có các thẻ số 1, 2, 3, 4, 5, 6. Chọn đúng 3 thẻ khác nhau có tổng bằng 10. Có bao nhiêu cách chọn? Liệt kê các cách.
-  \HBhinh{\HBthesau}
-  \answerlines{4}
-  \loigiai{
-    Liệt kê theo thẻ có số bé nhất từ nhỏ đến lớn:
-    \begin{itemize}
-      \item Có thẻ $1$: $(1, 3, 6)$ và $(1, 4, 5)$.
-      \item Không có thẻ $1$, có thẻ $2$: $(2, 3, 5)$.
-    \end{itemize}
-    Vậy có $3$ cách chọn.
+    Với áo đỏ có $2$ cách chọn quần (trắng, đen); tương tự với áo xanh và áo vàng. Các cách là: đỏ--trắng, đỏ--đen, xanh--trắng, xanh--đen, vàng--trắng, vàng--đen. Vậy Mai có $2 + 2 + 2 = 6$ (cách) phối đồ.
   }
 \end{bt}
 
