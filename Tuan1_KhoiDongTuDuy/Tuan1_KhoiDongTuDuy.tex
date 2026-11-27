@@ -1,0 +1,915 @@
+%\documentclass[11pt,a4paper]{article}
+\documentclass[../main.tex]{subfiles}
+\usepackage[utf8]{inputenc}
+\usepackage[T5]{fontenc}
+\usepackage[vietnamese]{babel}
+\usepackage[a4paper,margin=1.35cm,headsep=4mm,footskip=7mm]{geometry}
+\usepackage{tabularx,array,enumitem,fancyhdr,lastpage,amsmath,amssymb,tikz,xcolor}
+%\usepackage[loigiai]{ex_test} % Bỏ comment nếu biên dịch độc lập file này
+
+% --- CẤU HÌNH TRANG & ĐOẠN VĂN ---
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt}
+\setlength{\headheight}{15pt}
+\renewcommand{\arraystretch}{1.28}
+\raggedbottom
+
+% --- CẤU HÌNH DANH SÁCH ---
+\setlist[itemize]{leftmargin=6mm,itemsep=1mm,topsep=1mm,parsep=0pt}
+\setlist[enumerate]{leftmargin=6mm,itemsep=1.2mm,topsep=1mm,parsep=0pt}
+
+% --- CÁC MACRO HỖ TRỢ ---
+\newcommand{\shortblank}[1]{\makebox[#1]{\dotfill}}
+
+% Tiêu đề mục có gạch chân
+\newcommand{\titansec}[1]{%
+  \vspace{2.5mm}\noindent{\large\textbf{#1}}\par\vspace{0.8mm}%
+  \hrule height 0.7pt\par\vspace{1.8mm}%
+}
+
+% Dòng kẻ chấm cho phần tự luận
+\newcounter{ansline}
+\newcommand{\answerlines}[1]{%
+  \setcounter{ansline}{0}\par\vspace{1.5mm}%
+  \loop\ifnum\value{ansline}<#1
+    \stepcounter{ansline}%
+    \noindent\makebox[\linewidth]{\dotfill}\par\vspace{1.8mm}%
+  \repeat
+}
+
+\begin{document}
+%=========================================================
+% HÌNH MINH HOẠ CHO PHẦN TỰ LUẬN (TikZ, tông màu pastel)
+%=========================================================
+\usetikzlibrary{calc,arrows.meta,shapes.geometric}
+
+% --- Bảng màu pastel ---
+\definecolor{pkHong}{HTML}{F9CFE0}\definecolor{pkHongD}{HTML}{E58AB0}
+\definecolor{pkXanh}{HTML}{C3E3F5}\definecolor{pkXanhD}{HTML}{6FB1D6}
+\definecolor{pkVang}{HTML}{FFF1B8}\definecolor{pkVangD}{HTML}{E3BF45}
+\definecolor{pkLa}{HTML}{CFEBC6}\definecolor{pkLaD}{HTML}{7CBF74}
+\definecolor{pkTim}{HTML}{DFD3F3}\definecolor{pkTimD}{HTML}{9C86CF}
+\definecolor{pkCam}{HTML}{FFDDBB}\definecolor{pkCamD}{HTML}{EB9F5C}
+\definecolor{pkGo}{HTML}{F0D9AE}\definecolor{pkGoD}{HTML}{B98B4A}
+\definecolor{pkDa}{HTML}{FFE5D2}\definecolor{pkXam}{HTML}{8A8A99}
+
+% Căn giữa hình, dính liền với đề bài phía trên
+\providecommand{\HBhinh}{}\renewcommand{\HBhinh}[1]{\par\nopagebreak\vspace{1.5mm}\nopagebreak{\centering #1\par}\vspace{1mm}}
+
+% Bạn nhỏ: \HBnguoi{x}{y}{màu áo}{màu tóc}{tỉ lệ}
+\providecommand{\HBnguoi}{}\renewcommand{\HBnguoi}[5]{%
+  \begin{scope}[shift={(#1,#2)},scale=#5]
+    \draw[fill=#3,draw=#4!85!black,thick,rounded corners=4pt] (-0.25,-0.66) rectangle (0.25,-0.1);
+    \draw[fill=pkDa,draw=pkCamD!80,thick] (0,0.14) circle (0.21);
+    \fill[#4] (-0.215,0.16) arc (180:0:0.215) -- cycle;
+    \fill[black!75] (-0.075,0.12) circle (0.022) (0.075,0.12) circle (0.022);
+    \fill[pkHongD!60] (-0.13,0.05) circle (0.035) (0.13,0.05) circle (0.035);
+    \draw[black!70,line width=0.5pt] (-0.07,0.05) .. controls (-0.03,0.0) and (0.03,0.0) .. (0.07,0.05);
+  \end{scope}}
+
+% Que tính: \HBque{x1}{y1}{x2}{y2} (đầu que đỏ ở điểm 1)
+\providecommand{\HBque}{}\renewcommand{\HBque}[4]{%
+  \draw[line width=3.4pt,line cap=round,pkGoD] (#1,#2)--(#3,#4);
+  \draw[line width=2.3pt,line cap=round,pkGo] (#1,#2)--(#3,#4);
+  \shade[ball color=red!55!pkHongD] (#1,#2) circle (0.085);}
+
+% Viên kẹo: \HBkeo{x}{y}{màu}
+\providecommand{\HBkeo}{}\renewcommand{\HBkeo}[3]{%
+  \fill[#3!70,draw=#3!40!black,thin] (#1-0.14,#2)--(#1-0.34,#2+0.12)--(#1-0.34,#2-0.12)--cycle;
+  \fill[#3!70,draw=#3!40!black,thin] (#1+0.14,#2)--(#1+0.34,#2+0.12)--(#1+0.34,#2-0.12)--cycle;
+  \shade[ball color=#3] (#1,#2) circle (0.19);
+  \draw[white,line width=0.9pt,line cap=round] (#1-0.1,#2+0.04) arc (200:110:0.12);}
+
+% Quả cam: \HBcam{x}{y}
+\providecommand{\HBcam}{}\renewcommand{\HBcam}[2]{%
+  \shade[ball color=pkCamD] (#1,#2) circle (0.21);
+  \draw[fill=pkLaD!80,draw=pkLaD!50!black,thin] (#1,#2+0.2) .. controls (#1+0.06,#2+0.36) and (#1+0.18,#2+0.34) .. (#1+0.24,#2+0.27) .. controls (#1+0.14,#2+0.2) and (#1+0.07,#2+0.19) .. (#1,#2+0.2);
+  \fill[pkCamD!60!black] (#1,#2+0.2) circle (0.018);}
+
+% Thẻ số: \HBthe{x}{y}{số}{màu nền}{màu viền}
+\providecommand{\HBthe}{}\renewcommand{\HBthe}[5]{%
+  \draw[fill=#4,draw=#5,line width=1pt,rounded corners=4pt] (#1-0.4,#2-0.5) rectangle (#1+0.4,#2+0.5);
+  \draw[white,line width=0.6pt,rounded corners=3pt] (#1-0.33,#2-0.43) rectangle (#1+0.33,#2+0.43);
+  \node[font=\sffamily\bfseries\Large,text=#5!60!black] at (#1,#2) {#3};}
+
+% --- Hình dãy số 4, 8, 12, 16, ... ---
+\providecommand{\HBdayso}{}\renewcommand{\HBdayso}{%
+  \begin{tikzpicture}[font=\sffamily]
+    \foreach \i/\n/\c/\d in {0/4/pkHong/pkHongD,1/8/pkXanh/pkXanhD,2/12/pkVang/pkVangD,3/16/pkLa/pkLaD}{
+      \HBthe{1.5*\i}{0}{\n}{\c}{\d}}
+    \foreach \i in {0,1,2}{
+      \draw[-{Stealth[length=2mm]},thick,pkTimD] (1.5*\i+0.15,0.6) to[bend left=55] (1.5*\i+1.35,0.6);
+      \node[font=\footnotesize\bfseries,text=pkTimD!70!black] at (1.5*\i+0.75,1.12) {$+4$};}
+    \foreach \i in {4,5,6}{
+      \draw[dashed,thick,pkXam,fill=white,rounded corners=4pt] (1.5*\i-0.4,-0.5) rectangle (1.5*\i+0.4,0.5);
+      \node[font=\sffamily\bfseries\Large,text=pkXam] at (1.5*\i,0) {?};}
+  \end{tikzpicture}}
+
+% --- Hình dãy hình tam giác - tròn - tròn ---
+\providecommand{\HBdayhinh}{}\renewcommand{\HBdayhinh}{%
+  \begin{tikzpicture}[font=\sffamily]
+    \foreach \i in {1,...,8}{
+      \pgfmathtruncatemacro{\m}{mod(\i,3)}
+      \ifnum\m=1
+        \draw[fill=pkHong,draw=pkHongD,thick,rounded corners=2pt] (1.0*\i-0.32,-0.25)--(1.0*\i+0.32,-0.25)--(1.0*\i,0.34)--cycle;
+        \draw[white,line width=0.7pt] (1.0*\i-0.17,-0.17)--(1.0*\i+0.17,-0.17);
+      \else
+        \shade[ball color=pkXanh] (1.0*\i,0) circle (0.3);
+        \draw[pkXanhD,thick] (1.0*\i,0) circle (0.3);
+      \fi
+      \node[font=\scriptsize,text=pkXam] at (1.0*\i,-0.65) {\i};}
+    \node[font=\Large\bfseries,text=pkXam] at (9.3,0) {$\ldots$};
+  \end{tikzpicture}}
+
+% --- Hình: các thẻ số 1 đến 9 và ba ô trống ---
+\providecommand{\HBthesoA}{}\renewcommand{\HBthesoA}{%
+  \begin{tikzpicture}[font=\sffamily]
+    \foreach \i/\c/\d in {1/pkHong/pkHongD,2/pkXanh/pkXanhD,3/pkVang/pkVangD,4/pkLa/pkLaD,5/pkTim/pkTimD,6/pkCam/pkCamD,7/pkHong/pkHongD,8/pkXanh/pkXanhD,9/pkVang/pkVangD}{
+      \HBthe{1.15*\i}{0}{\i}{\c}{\d}}
+    \begin{scope}[yshift=-1.35cm,xshift=2.2cm]
+      \foreach \i in {0,1,2}{
+        \draw[thick,rounded corners=3pt,fill=white,draw=pkXam] (2.2*\i-0.3,-0.3) rectangle (2.2*\i+0.3,0.3);}
+      \node[font=\Large\bfseries] at (1.1,0) {$+$};
+      \node[font=\Large\bfseries] at (3.3,0) {$+$};
+      \node[font=\Large\bfseries] at (5.5,0) {$=$};
+      \node[font=\Large\bfseries,fill=pkVang,draw=pkVangD,thick,rounded corners=4pt,minimum width=0.9cm,minimum height=0.6cm] at (6.4,0) {15};
+    \end{scope}
+  \end{tikzpicture}}
+
+% --- Hình: các thẻ 3, 4, 7 và số 14 ---
+\providecommand{\HBthebon}{}\renewcommand{\HBthebon}{%
+  \begin{tikzpicture}[font=\sffamily]
+    \HBthe{0}{0}{3}{pkHong}{pkHongD}
+    \HBthe{1.4}{0}{4}{pkXanh}{pkXanhD}
+    \HBthe{2.8}{0}{7}{pkLa}{pkLaD}
+    \draw[-{Stealth[length=2.5mm]},very thick,pkTimD] (3.5,0)--(5.0,0);
+    \node[star,star points=12,star point ratio=0.82,fill=pkVang,draw=pkVangD,thick,inner sep=2pt,font=\Large\bfseries] at (6.0,0) {14};
+    \node[font=\footnotesize,text=pkXam,align=center] at (1.4,-0.85) {mỗi số được dùng nhiều lần};
+  \end{tikzpicture}}
+
+% --- Hình: hộp kẹo (5 viên còn lại, các viên đã ăn) ---
+\providecommand{\HBhopkeo}{}\renewcommand{\HBhopkeo}{%
+  \begin{tikzpicture}[font=\sffamily]
+    \draw[fill=pkHong!60,draw=pkHongD,thick,rounded corners=8pt] (-0.5,-0.85) rectangle (5.5,0.95);
+    \draw[fill=pkHong!25,draw=pkHongD!70,rounded corners=6pt] (-0.35,-0.7) rectangle (5.35,0.8);
+    \foreach \i/\c in {0/pkHongD,1/pkXanhD,2/pkVangD,3/pkLaD,4/pkTimD}{
+      \HBkeo{0.5+1.05*\i}{0.32}{\c}}
+    \foreach \i in {0,...,4}{
+      \draw[dashed,pkXam!80,thick] (0.5+1.05*\i,-0.33) circle (0.24);}
+    \node[font=\footnotesize,text=pkXam!80!black] at (2.6,-1.2) {hàng trên: còn lại 5 viên $\;\cdot\;$ hàng dưới: chỗ các viên đã ăn};
+  \end{tikzpicture}}
+
+% --- Hình: 9 quả cam chia vào 3 đĩa ---
+\providecommand{\HBcamdia}{}\renewcommand{\HBcamdia}{%
+  \begin{tikzpicture}[font=\sffamily]
+    \foreach \i in {0,...,8}{\HBcam{0.58*\i-2.32}{1.5}}
+    \foreach \x/\n/\c in {-3/1/pkXanh,0/2/pkHong,3/3/pkVang}{
+      \draw[fill=\c!70,draw=\c!40!black,thick] (\x,0) ellipse (1.0 and 0.32);
+      \draw[\c!40!black,thin] (\x,0.02) ellipse (0.62 and 0.18);
+      \node[font=\footnotesize\bfseries] at (\x,-0.62) {Đĩa \n};
+      \draw[-{Stealth[length=2mm]},pkXam,dashed,thick] (0,1.1) to[out=-90,in=90] (\x,0.5);}
+  \end{tikzpicture}}
+
+% --- Hình: An, Bình, Chi đứng thành hàng ---
+\providecommand{\HBhangba}{}\renewcommand{\HBhangba}{%
+  \begin{tikzpicture}[font=\sffamily]
+    \HBnguoi{0}{0.7}{pkXanh}{pkXanhD}{1.5}
+    \HBnguoi{2.2}{0.7}{pkLa}{pkLaD}{1.5}
+    \HBnguoi{4.4}{0.7}{pkHong}{pkHongD}{1.5}
+    \node[font=\footnotesize\bfseries] at (0,-0.55) {An};
+    \node[font=\footnotesize\bfseries] at (2.2,-0.55) {Bình};
+    \node[font=\footnotesize\bfseries] at (4.4,-0.55) {Chi};
+    \foreach \x in {0,2.2,4.4}{\draw[fill=pkXam!25,draw=pkXam!70,rounded corners=2pt] (\x-0.45,-0.12) rectangle (\x+0.45,0.02);}
+    \draw[-{Stealth[length=2mm]},thick,pkTimD] (-0.8,-1.0)--(5.2,-1.0);
+    \node[font=\scriptsize,text=pkTimD!70!black,anchor=east] at (-0.9,-1.0) {đầu hàng};
+    \node[font=\scriptsize,text=pkTimD!70!black,anchor=west] at (5.3,-1.0) {cuối hàng};
+  \end{tikzpicture}}
+
+% --- Hình: cầu thang 5 bậc ---
+\providecommand{\HBcauthang}{}\renewcommand{\HBcauthang}{%
+  \begin{tikzpicture}[font=\sffamily]
+    \foreach \i/\c/\d in {1/pkHong/pkHongD,2/pkXanh/pkXanhD,3/pkVang/pkVangD,4/pkLa/pkLaD,5/pkTim/pkTimD}{
+      \draw[fill=\c,draw=\d,thick] (0.9*\i+0.2,0) rectangle (0.9*\i+1.1,0.42*\i);
+      \draw[white,line width=0.8pt] (0.9*\i+0.2,0.42*\i)--(0.9*\i+1.1,0.42*\i);
+      \node[font=\footnotesize\bfseries,text=\d!60!black] at (0.9*\i+0.65,0.42*\i-0.22) {\i};}
+    \draw[fill=pkLa!70,draw=pkLaD,thick,rounded corners=1pt] (-0.3,-0.14) rectangle (1.1,0);
+    \HBnguoi{0.5}{0.78}{pkXanh}{pkXanhD}{1.0}
+    \draw[thick,pkXam] (5.3,2.1)--(5.3,2.95);
+    \fill[pkHongD] (5.3,2.95)--(5.85,2.78)--(5.3,2.6)--cycle;
+    \node[font=\scriptsize,text=pkXam] at (0.5,-0.4) {mặt đất};
+  \end{tikzpicture}}
+
+% --- Hình: 5 bạn bắt tay ---
+\providecommand{\HBbattay}{}\renewcommand{\HBbattay}{%
+  \begin{tikzpicture}[font=\sffamily]
+    \foreach \k in {1,...,5}{\coordinate (p\k) at ({90+72*(\k-1)}:1.25);}
+    \foreach \i/\j in {1/2,2/3,3/4,4/5,5/1}{\draw[pkTimD,thick] (p\i)--(p\j);}
+    \foreach \i/\j in {1/3,2/4,3/5,4/1,5/2}{\draw[pkHongD,thick,dashed] (p\i)--(p\j);}
+    \foreach \k/\c/\d in {1/pkHong/pkHongD,2/pkXanh/pkXanhD,3/pkVang/pkVangD,4/pkLa/pkLaD,5/pkCam/pkCamD}{
+      \node[circle,draw=\d,fill=\c,very thick,minimum size=0.62cm,font=\bfseries] at (p\k) {\k};}
+  \end{tikzpicture}}
+
+% --- Hình: hàng 15 bạn, Nam thứ 5 (từ đầu), Lan thứ 4 (từ cuối) ---
+\providecommand{\HBhangmuoilam}{}\renewcommand{\HBhangmuoilam}{%
+  \begin{tikzpicture}[font=\sffamily]
+    \foreach \i in {1,...,15}{
+      \ifnum\i=5\HBnguoi{0.66*\i}{0.4}{pkXanh}{pkXanhD}{0.9}
+      \else\ifnum\i=12\HBnguoi{0.66*\i}{0.4}{pkHong}{pkHongD}{0.9}
+      \else\HBnguoi{0.66*\i}{0.4}{pkXam!22}{pkXam}{0.9}\fi\fi}
+    \draw[draw=pkXam!70,fill=pkXam!15,rounded corners=2pt] (0.1,-0.2) rectangle (10.3,-0.05);
+    \node[font=\footnotesize\bfseries,text=pkXanhD!60!black] at (3.3,1.5) {Nam};
+    \node[font=\footnotesize\bfseries,text=pkHongD!60!black] at (7.92,1.5) {Lan};
+    \draw[-{Stealth[length=1.8mm]},pkXanhD,thick] (3.3,1.3)--(3.3,0.95);
+    \draw[-{Stealth[length=1.8mm]},pkHongD,thick] (7.92,1.3)--(7.92,0.95);
+    \draw[-{Stealth[length=2mm]},thick,pkTimD] (0.1,-0.5)--(10.3,-0.5);
+    \node[font=\scriptsize,text=pkTimD!70!black,anchor=north west] at (0.1,-0.55) {đầu hàng};
+    \node[font=\scriptsize,text=pkTimD!70!black,anchor=north east] at (10.3,-0.55) {cuối hàng};
+  \end{tikzpicture}}
+
+% --- Hình: robot trên trục số ---
+\providecommand{\HBrobot}{}\renewcommand{\HBrobot}{%
+  \begin{tikzpicture}[font=\sffamily]
+    \draw[thick,pkXam!80,-{Stealth[length=2mm]}] (-0.4,0)--(11.9,0);
+    \foreach \i in {0,...,12}{
+      \draw[thick,pkXam!80] (0.9*\i,-0.07)--(0.9*\i,0.07);
+      \node[font=\scriptsize] at (0.9*\i,-0.3) {\i};}
+    \begin{scope}
+      \draw[fill=pkXanh,draw=pkXanhD,thick,rounded corners=3pt] (-0.3,0.35) rectangle (0.3,0.85);
+      \draw[fill=pkXanh!60,draw=pkXanhD,thick,rounded corners=3pt] (-0.24,0.9) rectangle (0.24,1.3);
+      \draw[thick,pkXanhD] (0,1.3)--(0,1.46); \fill[pkHongD] (0,1.5) circle (0.05);
+      \fill[pkTimD] (-0.09,1.12) circle (0.04) (0.09,1.12) circle (0.04);
+      \draw[pkXanhD,thick] (-0.08,0.98)--(0.08,0.98);
+      \fill[pkVangD] (0,0.6) circle (0.07);
+      \draw[thick,pkXanhD] (-0.12,0.35)--(-0.12,0.14) (0.12,0.35)--(0.12,0.14);
+    \end{scope}
+    \draw[-{Stealth[length=2mm]},very thick,pkLaD] (0.2,0.15) to[bend left=50] (2.7,0.15);
+    \node[font=\scriptsize\bfseries,text=pkLaD!60!black] at (1.45,1.0) {tiến 3 ô};
+    \draw[-{Stealth[length=2mm]},very thick,pkHongD] (2.7,-0.65) to[bend left=70] (1.8,-0.65);
+    \node[font=\scriptsize\bfseries,text=pkHongD!60!black] at (2.25,-1.25) {lùi 1 ô};
+  \end{tikzpicture}}
+
+% --- Hình: ba hộp bi 3, 7, 8 ---
+\providecommand{\HBhopbi}{}\renewcommand{\HBhopbi}{%
+  \begin{tikzpicture}[font=\sffamily]
+    \foreach \x/\n/\c/\d/\m/\t in {0/3/pkXanh/pkXanhD/blue!55!cyan/1,4/7/pkHong/pkHongD/red!55!pink/2,8/8/pkLa/pkLaD/green!60!black!70/3}{
+      \draw[fill=\c!70,draw=\d,thick,rounded corners=6pt] (\x-0.2,-0.2) rectangle (\x+2.5,1.4);
+      \foreach \k in {1,...,\n}{
+        \pgfmathtruncatemacro{\col}{mod(\k-1,4)}
+        \pgfmathtruncatemacro{\row}{int((\k-1)/4)}
+        \shade[ball color=\m] ({\x+0.28+0.62*\col},{0.28+0.55*\row}) circle (0.2);
+        \fill[white,opacity=0.7] ({\x+0.2+0.62*\col},{0.36+0.55*\row}) ellipse (0.05 and 0.035);}
+      \node[font=\footnotesize\bfseries] at (\x+1.15,-0.55) {Hộp \t};}
+  \end{tikzpicture}}
+
+% --- Hình: các thẻ số 1 đến 6 ---
+\providecommand{\HBthesau}{}\renewcommand{\HBthesau}{%
+  \begin{tikzpicture}[font=\sffamily]
+    \foreach \i/\c/\d in {1/pkHong/pkHongD,2/pkXanh/pkXanhD,3/pkVang/pkVangD,4/pkLa/pkLaD,5/pkTim/pkTimD,6/pkCam/pkCamD}{
+      \HBthe{1.3*\i}{0}{\i}{\c}{\d}}
+  \end{tikzpicture}}
+
+% --- Hình: cắt hình vuông ---
+\providecommand{\HBcatvuong}{}\renewcommand{\HBcatvuong}{%
+  \begin{tikzpicture}[font=\sffamily]
+    \draw[fill=pkXanh,draw=pkXanhD,very thick] (0,0) rectangle (2.2,2.2);
+    \draw[dashed,very thick,pkHongD] (0,0)--(2.2,2.2);
+    \node[font=\footnotesize] at (1.1,-0.4) {Cách 1: cắt qua hai đỉnh đối diện};
+    \draw[fill=white,draw=pkLaD,very thick,dashed] (5.4,0) rectangle (7.6,2.2);
+    \node[font=\Large\bfseries,text=pkLaD] at (6.5,1.1) {?};
+    \node[font=\footnotesize] at (6.5,-0.4) {Cách 2: em tự vẽ đường cắt};
+  \end{tikzpicture}}
+
+% --- Hình: xếp hình vuông bằng que tính ---
+\providecommand{\HBquevuong}{}\renewcommand{\HBquevuong}{%
+  \begin{tikzpicture}[font=\sffamily]
+    \foreach \n/\xo in {1/0,2/2.4,3/5.6}{
+      \foreach \c in {1,...,\n}{
+        \fill[pkVang!55] ({\xo+1.15*(\c-1)},0) rectangle ({\xo+1.15*\c},1.15);}
+      \foreach \c in {1,...,\n}{
+        \HBque{\xo+1.15*(\c-1)}{0}{\xo+1.15*\c}{0}
+        \HBque{\xo+1.15*(\c-1)}{1.15}{\xo+1.15*\c}{1.15}}
+      \foreach \c in {0,...,\n}{
+        \HBque{\xo+1.15*\c}{0}{\xo+1.15*\c}{1.15}}
+      \node[font=\footnotesize\bfseries] at ({\xo+0.575*\n},-0.45) {\n\ hình vuông};}
+  \end{tikzpicture}}
+
+% --- Hình: Nam nói số tiếp theo là 35 ---
+\providecommand{\HBnamnoi}{}\renewcommand{\HBnamnoi}{%
+  \begin{tikzpicture}[font=\sffamily]
+    \foreach \i/\n/\c/\d in {0/5/pkHong/pkHongD,1/10/pkXanh/pkXanhD,2/15/pkVang/pkVangD,3/20/pkLa/pkLaD,4/25/pkTim/pkTimD}{
+      \HBthe{1.0*\i}{0}{\n}{\c}{\d}}
+    \draw[dashed,thick,pkXam,fill=white,rounded corners=4pt] (4.6,-0.5) rectangle (5.4,0.5);
+    \node[font=\sffamily\bfseries\Large,text=pkXam] at (5.0,0) {?};
+    \HBnguoi{8.2}{0.45}{pkXanh}{pkXanhD}{1.6}
+    \draw[fill=pkVang!80,draw=pkVangD,thick,rounded corners=6pt] (6.3,1.1) rectangle (9.6,1.95);
+    \draw[fill=pkVang!80,draw=pkVangD,thick] (8.0,1.1)--(8.2,0.8)--(8.45,1.1);
+    \draw[pkVang!80,line width=2pt] (8.04,1.11)--(8.42,1.11);
+    \node[font=\footnotesize] at (7.95,1.52) {Tiếp theo là 35!};
+  \end{tikzpicture}}
+
+% --- Hình: 12 que tính ---
+\providecommand{\HBmuoihaique}{}\renewcommand{\HBmuoihaique}{%
+  \begin{tikzpicture}[font=\sffamily]
+    \draw[fill=pkVang!55,draw=pkVangD,thick,rounded corners=6pt] (-0.4,-0.25) rectangle (6.9,2.15);
+    \foreach \i in {0,...,5}{
+      \HBque{1.2*\i+0.2}{0.3}{1.2*\i+0.2}{1.1}
+      \HBque{1.2*\i+0.2}{1.2}{1.2*\i+0.2}{2.0}}
+    \node[font=\footnotesize\bfseries,text=pkXam!80!black] at (3.25,-0.55) {12 que tính};
+  \end{tikzpicture}}
+%=========================================================
+
+\hktuan{1}{1}
+\begin{center}
+  {\color{mauchinh!120}\bfseries\Large CHỦ ĐỀ 1: KHỞI ĐỘNG TƯ DUY}
+\end{center}
+\color{black}\fontfamily{qag}\selectfont
+{\bfseries Họ và tên: \shortblank{6cm}\ Lớp: \shortblank{2.5cm}\ Ngày: \shortblank{3cm}}
+
+
+\titansec{PHẦN A. TỪ VỰNG TIẾNG ANH}
+\begin{tabularx}{\linewidth}{|l|X|l|X|}
+  \hline
+  \textbf{English} & \textbf{Tiếng Việt} & \textbf{English} & \textbf{Tiếng Việt}\\\hline
+  number & số & shape & hình\\\hline
+  pattern & quy luật & compare & so sánh\\\hline
+  clue & manh mối & strategy & chiến lược\\\hline
+  check & kiểm tra & explain & giải thích\\\hline
+  same / different & giống / khác & solution & lời giải\\\hline
+  add / plus & cộng & subtract / minus & trừ\\\hline
+  more / fewer & nhiều hơn / ít hơn & total & tổng\\\hline
+  even / odd & chẵn / lẻ & next & tiếp theo\\\hline
+  triangle & hình tam giác & square & hình vuông\\\hline
+  circle & hình tròn & rectangle & hình chữ nhật\\\hline
+  side & cạnh & corner & góc\\\hline
+  first / last & đầu tiên / cuối cùng & all ways & tất cả các cách\\\hline
+\end{tabularx}
+
+
+\titansec{PHẦN B. TRẮC NGHIỆM}
+\textit{Khoanh tròn vào chữ cái đặt trước đáp án đúng. Mỗi câu chỉ có một đáp án đúng.}
+\vspace{1.5mm}
+
+% ---------- Mức 1: nhận biết ----------
+\begin{ex}
+  Số liền sau của 99 là
+  \choice
+  {98}
+  {90}
+  {101}
+  {\True 100}
+  \loigiai{
+    Số liền sau của $99$ là $99 + 1 = 100$.
+  }
+\end{ex}
+
+\begin{ex}
+  Số gồm 5 chục và 3 đơn vị là
+  \choice
+  {\True 53}
+  {35}
+  {503}
+  {8}
+  \loigiai{
+    Số gồm $5$ chục và $3$ đơn vị viết là $53$.
+  }
+\end{ex}
+
+\begin{ex}
+  Hình tam giác có mấy cạnh?
+  \choice
+  {2}
+  {4}
+  {5}
+  {\True 3}
+  \loigiai{
+    Hình tam giác có $3$ cạnh.
+  }
+\end{ex}
+
+\begin{ex}
+  Cần ít nhất bao nhiêu que tính để xếp một hình vuông?
+  \choice
+  {\True 4}
+  {3}
+  {5}
+  {6}
+  \loigiai{
+    Hình vuông có $4$ cạnh bằng nhau nên cần ít nhất $4$ que tính để xếp.
+  }
+\end{ex}
+
+\begin{ex}
+  Giá trị của $7+6+3$ là
+  \choice
+  {15}
+  {\True 16}
+  {17}
+  {14}
+  \loigiai{
+    Ta tính thuận tiện: $7 + 6 + 3 = (7 + 3) + 6 = 10 + 6 = 16$.
+  }
+\end{ex}
+
+\begin{ex}
+  Số lớn nhất trong các số 39, 93, 49, 94 là
+  \choice
+  {39}
+  {93}
+  {49}
+  {\True 94}
+  \loigiai{
+    So sánh chữ số hàng chục: $93$ và $94$ có hàng chục là $9$ (lớn nhất). So sánh tiếp hàng đơn vị thấy $4 > 3$, nên $94$ là số lớn nhất.
+  }
+\end{ex}
+
+\begin{ex}
+  Số bé nhất trong các số 56, 65, 49, 94 là
+  \choice
+  {56}
+  {\True 49}
+  {65}
+  {94}
+  \loigiai{
+    So sánh chữ số hàng chục của các số $56, 65, 49, 94$ thấy $4 < 5 < 6 < 9$, nên $49$ là số bé nhất.
+  }
+\end{ex}
+
+\begin{ex}
+  Dãy số: 5, 10, 15, 20, \ldots\ Số tiếp theo là
+  \choice
+  {22}
+  {\True 25}
+  {30}
+  {24}
+  \loigiai{
+    Quy luật của dãy: mỗi số đứng sau hơn số đứng trước $5$ đơn vị. Số tiếp theo là $20 + 5 = 25$.
+  }
+\end{ex}
+
+\begin{ex}
+  Dãy số: 20, 18, 16, 14, \ldots\ Số tiếp theo là
+  \choice
+  {13}
+  {10}
+  {11}
+  {\True 12}
+  \loigiai{
+    Quy luật của dãy: mỗi số đứng sau kém số đứng trước $2$ đơn vị. Số tiếp theo là $14 - 2 = 12$.
+  }
+\end{ex}
+
+% ---------- Mức 2: thông hiểu ----------
+\begin{ex}
+  Số cần điền vào $45+\ldots=60$ là
+  \choice
+  {\True 15}
+  {5}
+  {25}
+  {105}
+  \loigiai{
+    Số cần điền là $60 - 45 = 15$ (kiểm tra: $45 + 15 = 60$).
+  }
+\end{ex}
+
+\begin{ex}
+  Số cần điền vào $\ldots-12=30$ là
+  \choice
+  {18}
+  {32}
+  {\True 42}
+  {52}
+  \loigiai{
+    Số cần điền là $30 + 12 = 42$ (kiểm tra: $42 - 12 = 30$).
+  }
+\end{ex}
+
+\begin{ex}
+  Một số cộng với 7 bằng 15. Số đó là
+  \choice
+  {22}
+  {7}
+  {\True 8}
+  {9}
+  \loigiai{
+    Số cần tìm là $15 - 7 = 8$ (kiểm tra: $8 + 7 = 15$).
+  }
+\end{ex}
+
+\begin{ex}
+  Điền dấu: $38+5\ \ldots\ 50-8$
+  \choice
+  {$<$}
+  {$=$}
+  {\True $>$}
+  {không so sánh được}
+  \loigiai{
+    Ta có $38 + 5 = 43$ và $50 - 8 = 42$. Vì $43 > 42$ nên điền dấu $>$.
+  }
+\end{ex}
+
+\begin{ex}
+  An có 8 viên bi. Bình có nhiều hơn An 5 viên bi. Bình có
+  \choice
+  {3 viên}
+  {12 viên}
+  {14 viên}
+  {\True 13 viên}
+  \loigiai{
+    Số viên bi của Bình là $8 + 5 = 13$ (viên).
+  }
+\end{ex}
+
+\begin{ex}
+  Hộp có 15 cái kẹo. Em ăn 6 cái. Trong hộp còn
+  \choice
+  {\True 9 cái}
+  {8 cái}
+  {21 cái}
+  {10 cái}
+  \loigiai{
+    Trong hộp còn lại số cái kẹo là $15 - 6 = 9$ (cái).
+  }
+\end{ex}
+
+\begin{ex}
+  Mai hơn Lan 2 tuổi. Lan 6 tuổi. Mai bao nhiêu tuổi?
+  \choice
+  {4 tuổi}
+  {7 tuổi}
+  {9 tuổi}
+  {\True 8 tuổi}
+  \loigiai{
+    Tuổi của Mai là $6 + 2 = 8$ (tuổi).
+  }
+\end{ex}
+
+\begin{ex}
+  Dãy số: 7, 11, 15, \ldots, 23. Số còn thiếu là
+  \choice
+  {17}
+  {18}
+  {\True 19}
+  {20}
+  \loigiai{
+    Mỗi số đứng sau hơn số đứng trước $4$ đơn vị ($11-7=4$, $15-11=4$). Số còn thiếu là $15 + 4 = 19$ (kiểm tra: $19 + 4 = 23$, đúng).
+  }
+\end{ex}
+
+\begin{ex}
+  Trong các số 2, 4, 6, 9, 10, số nào ``khác nhóm''?
+  \choice
+  {\True 9}
+  {2}
+  {6}
+  {10}
+  \loigiai{
+    Các số $2, 4, 6, 10$ đều là số chẵn, chỉ có $9$ là số lẻ nên $9$ khác nhóm.
+  }
+\end{ex}
+
+\begin{ex}
+  Dãy hình: $\circ,\triangle,\triangle,\circ,\triangle,\triangle,\circ,\ldots$ Hình tiếp theo là
+  \choice
+  {$\circ$}
+  {$\square$}
+  {\True $\triangle$}
+  {$\star$}
+  \loigiai{
+    Dãy lặp lại theo nhóm $(\circ, \triangle, \triangle)$. Sau hình $\circ$ là hai hình $\triangle$, nên hình tiếp theo là $\triangle$.
+  }
+\end{ex}
+
+\begin{ex}
+  Mỗi túi có 3 quả cam. Có 4 túi như vậy. Tất cả có
+  \choice
+  {7 quả}
+  {10 quả}
+  {15 quả}
+  {\True 12 quả}
+  \loigiai{
+    Có tất cả số quả cam là $3 + 3 + 3 + 3 = 12$ (quả).
+  }
+\end{ex}
+
+\begin{ex}
+  Tú cao hơn Dũng. Dũng cao hơn Hải. Ai thấp nhất?
+  \choice
+  {\True Hải}
+  {Tú}
+  {Dũng}
+  {Không biết được}
+  \loigiai{
+    Vì Tú cao hơn Dũng và Dũng cao hơn Hải nên thứ tự từ cao đến thấp là: Tú, Dũng, Hải. Vậy Hải thấp nhất.
+  }
+\end{ex}
+
+% ---------- Mức 3: vận dụng ----------
+\begin{ex}
+  Dãy số: 1, 2, 4, 5, 7, 8, \ldots\ Số tiếp theo là
+  \choice
+  {\True 10}
+  {9}
+  {11}
+  {12}
+  \loigiai{
+    Ta có $1+1=2$, $2+2=4$, $4+1=5$, $5+2=7$, $7+1=8$. Bước tiếp theo cộng thêm $2$: $8 + 2 = 10$.
+  }
+\end{ex}
+
+\begin{ex}
+  Dãy hình lặp: $\triangle,\square,\circ,\triangle,\square,\circ,\ldots$ Hình thứ 9 là
+  \choice
+  {$\triangle$}
+  {\True $\circ$}
+  {$\square$}
+  {$\star$}
+  \loigiai{
+    Nhóm $(\triangle, \square, \circ)$ có $3$ hình. Vì $9 = 3 + 3 + 3$ nên hình thứ $9$ là hình cuối cùng của nhóm thứ $3$, tức là $\circ$.
+  }
+\end{ex}
+
+\begin{ex}
+  Hai số có tổng bằng 10, số lớn hơn số bé 2 đơn vị. Hai số đó là
+  \choice
+  {5 và 5}
+  {\True 6 và 4}
+  {7 và 3}
+  {8 và 2}
+  \loigiai{
+    Ta có $6 + 4 = 10$ và $6 - 4 = 2$. Vậy hai số đó là $6$ và $4$.
+  }
+\end{ex}
+
+\begin{ex}
+  Một hàng có 10 bạn. Hoa đứng thứ 4 tính từ đầu hàng. Phía sau Hoa có bao nhiêu bạn?
+  \choice
+  {5 bạn}
+  {7 bạn}
+  {\True 6 bạn}
+  {4 bạn}
+  \loigiai{
+    Tính từ đầu hàng đến Hoa có $4$ bạn, nên phía sau Hoa còn $10 - 4 = 6$ (bạn).
+  }
+\end{ex}
+
+\begin{ex}
+  Dãy số: 2, 3, 5, 8, 12, \ldots\ Số tiếp theo là
+  \choice
+  {16}
+  {18}
+  {15}
+  {\True 17}
+  \loigiai{
+    Số cộng thêm lần lượt là $1, 2, 3, 4$, nên bước tiếp theo cộng thêm $5$: $12 + 5 = 17$.
+  }
+\end{ex}
+
+\begin{ex}
+  Hoa đứng thứ 4 tính từ trái và thứ 3 tính từ phải của một hàng. Hàng đó có
+  \choice
+  {7 bạn}
+  {\True 6 bạn}
+  {5 bạn}
+  {8 bạn}
+  \loigiai{
+    Số bạn của cả hàng là $4 + 3 - 1 = 6$ (bạn) (vì Hoa được tính hai lần).
+  }
+\end{ex}
+
+\begin{ex}
+  Chia 5 viên kẹo cho hai bạn, mỗi bạn có ít nhất 1 viên. Có bao nhiêu cách chia?
+  \choice
+  {\True 2}
+  {3}
+  {4}
+  {5}
+  \loigiai{
+    Không tính thứ tự hai bạn, ta có các cách chia $5$ viên kẹo thành $2$ phần (mỗi phần ít nhất $1$ viên) là: $1$ và $4$; $2$ và $3$. Vậy có $2$ cách chia.
+  }
+\end{ex}
+
+\begin{ex}
+  Có 4 bạn. Mỗi hai bạn bắt tay nhau đúng một lần. Có tất cả bao nhiêu cái bắt tay?
+  \choice
+  {4}
+  {8}
+  {\True 6}
+  {12}
+  \loigiai{
+    Bạn thứ nhất bắt tay với $3$ bạn còn lại; bạn thứ hai bắt tay với $2$ bạn chưa bắt; bạn thứ ba bắt tay với $1$ bạn cuối. Có tất cả $3 + 2 + 1 = 6$ (cái bắt tay).
+  }
+\end{ex}
+
+\begin{ex}
+  Chọn hai thẻ trong bốn thẻ 1, 2, 3, 4 rồi cộng lại. Có bao nhiêu tổng khác nhau?
+  \choice
+  {4}
+  {\True 5}
+  {6}
+  {7}
+  \loigiai{
+    Các tổng có thể tạo thành là: $1+2=3$, $1+3=4$, $1+4=5$, $2+3=5$, $2+4=6$, $3+4=7$. Vậy có $5$ tổng khác nhau là $3, 4, 5, 6, 7$.
+  }
+\end{ex}
+
+
+\titansec{PHẦN C. TỰ LUẬN}
+
+% ---------- Mức 1: nhận biết - thông hiểu ----------
+\begin{bt}
+  Viết tiếp ba số và mô tả quy luật của dãy: 4, 8, 12, 16, $\ldots$
+  \HBhinh{\HBdayso}
+  \answerlines{4}
+  \loigiai{
+    Ba số tiếp theo là $20, 24, 28$. Em nghĩ như vậy vì quy luật của dãy là mỗi số đứng sau hơn số đứng trước $4$ đơn vị ($16+4=20$, $20+4=24$, $24+4=28$).
+  }
+\end{bt}
+
+\begin{bt}
+  Dãy hình lặp: $\triangle,\ \bullet,\ \bullet,\ \triangle,\ \bullet,\ \bullet,\ldots$ Hình thứ 14 là hình gì? Em tìm bằng cách nào mà không cần vẽ đủ?
+  \HBhinh{\HBdayhinh}
+  \answerlines{4}
+  \loigiai{
+    Nhóm $(\triangle, \bullet, \bullet)$ có $3$ hình lặp lại. Có $4$ nhóm đầu tiên gồm $3 + 3 + 3 + 3 = 12$ hình. Sang nhóm thứ $5$: hình thứ $13$ là $\triangle$, hình thứ $14$ là $\bullet$. Vậy hình thứ $14$ là $\bullet$.
+  }
+\end{bt}
+
+\begin{bt}
+  Nam nói: ``Dãy 5, 10, 15, 20, 25 có số tiếp theo là 35 vì các số cứ tăng dần.'' Em có đồng ý không? Vì sao?
+  \HBhinh{\HBnamnoi}
+  \answerlines{4}
+  \loigiai{
+    Em không đồng ý với Nam. Em nghĩ số tiếp theo phải là $30$ vì quy luật của dãy không chỉ là tăng dần mà mỗi số đứng sau hơn số đứng trước đúng $5$ đơn vị ($25 + 5 = 30$).
+  }
+\end{bt}
+
+\begin{bt}
+  Một hình vuông được cắt bằng một đường thẳng đi qua hai đỉnh đối diện. Em được hai hình gì? Có cách cắt khác bằng một đường thẳng để được hai hình chữ nhật không? Vẽ để kiểm tra.
+  \HBhinh{\HBcatvuong}
+  \answerlines{4}
+  \loigiai{
+    Khi cắt qua hai đỉnh đối diện của hình vuông, em được $2$ hình tam giác. Có thể cắt bằng một đường thẳng nối hai điểm giữa của hai cạnh đối diện (song song với hai cạnh còn lại) để được $2$ hình chữ nhật.
+  }
+\end{bt}
+
+\begin{bt}
+  Trong hộp có không quá 10 viên kẹo. Em ăn đi một số viên, trong hộp còn lại 5 viên. Ban đầu trong hộp có thể có bao nhiêu viên? Làm sao em biết đã tìm đủ?
+  \HBhinh{\HBhopkeo}
+  \answerlines{4}
+  \loigiai{
+    Em đã ăn ít nhất $1$ viên nên lúc đầu hộp có nhiều hơn $5$ viên, mà không quá $10$ viên. Vậy ban đầu hộp có thể có $6, 7, 8, 9$ hoặc $10$ viên. Em liệt kê lần lượt các số từ $6$ đến $10$ nên biết đã tìm đủ.
+  }
+\end{bt}
+
+\begin{bt}
+  Một hình vuông xếp bằng 4 que tính. Xếp hai hình vuông liền nhau chung một cạnh cần bao nhiêu que? Xếp ba hình vuông liền nhau theo hàng cần bao nhiêu que? Em nhận thấy quy luật gì?
+  \HBhinh{\HBquevuong}
+  \answerlines{4}
+  \loigiai{
+    Xếp $2$ hình vuông liền nhau cần $4 + 3 = 7$ que tính; xếp $3$ hình vuông liền nhau theo hàng cần $7 + 3 = 10$ que tính. Quy luật: mỗi khi xếp thêm $1$ hình vuông liền kề theo hàng, ta chỉ cần thêm $3$ que tính vì dùng chung $1$ cạnh với hình trước.
+  }
+\end{bt}
+
+\begin{bt}
+  A là số có hai chữ số. Tổng hai chữ số của A bằng 8. Chữ số hàng chục lớn hơn chữ số hàng đơn vị 4 đơn vị. A là số nào? Em kiểm tra lại bằng cách nào?
+  \answerlines{4}
+  \loigiai{
+    Số cần tìm là $62$. Kiểm tra lại: $62$ là số có hai chữ số, tổng hai chữ số là $6 + 2 = 8$, chữ số hàng chục hơn hàng đơn vị $6 - 2 = 4$ đơn vị (đúng).
+  }
+\end{bt}
+
+% ---------- Mức 2: vận dụng ----------
+\begin{bt}
+  Dùng các số 3, 4, 7 (mỗi số được dùng nhiều lần, chỉ dùng phép cộng) để viết các phép tính có kết quả bằng \textbf{14}. Liệt kê các cách.
+  \HBhinh{\HBthebon}
+  \answerlines{4}
+  \loigiai{
+    Các cách (không tính thứ tự các số hạng): $7 + 7 = 14$; $3 + 4 + 7 = 14$; $3 + 3 + 4 + 4 = 14$. Em xét theo số lần dùng số $7$: dùng hai lần thì có $7+7$; dùng một lần thì còn lại $7 = 3 + 4$; không dùng thì $14 = 3 + 3 + 4 + 4$.
+  }
+\end{bt}
+
+\begin{bt}
+  Tìm \textbf{tất cả} các số có hai chữ số mà tổng hai chữ số bằng 5. Em làm thế nào để chắc chắn không bỏ sót?
+  \answerlines{4}
+  \loigiai{
+    Cho chữ số hàng chục tăng dần từ $1$ đến $5$, ta tìm được chữ số hàng đơn vị tương ứng: $14, 23, 32, 41, 50$. Có tất cả $5$ số. Vì đã xét hết mọi hàng chục có thể từ $1$ đến $5$ nên không bỏ sót.
+  }
+\end{bt}
+
+\begin{bt}
+  Một hàng có 15 bạn. Nam đứng thứ 5 tính từ đầu hàng. Lan đứng thứ 4 tính từ cuối hàng. Có bao nhiêu bạn đứng giữa Nam và Lan?
+  \HBhinh{\HBhangmuoilam}
+  \answerlines{4}
+  \loigiai{
+    Lan đứng thứ $15 - 4 + 1 = 12$ tính từ đầu hàng. Các bạn đứng giữa Nam (thứ $5$) và Lan (thứ $12$) là các bạn thứ $6, 7, 8, 9, 10, 11$, tức là $12 - 5 - 1 = 6$ (bạn).
+  }
+\end{bt}
+
+\begin{bt}
+  Robot đi theo lệnh lặp lại: \textbf{tiến 3 ô, lùi 1 ô}. Robot bắt đầu ở ô 0.
+  \HBhinh{\HBrobot}
+  \par\medskip
+  \noindent\textbf{(a)} Sau 5 lần thực hiện trọn bộ lệnh, robot ở ô nào?
+  \answerlines{2}
+  \par
+  \noindent\textbf{(b)} Sau 3 lần trọn bộ lệnh rồi tiến thêm 3 ô, robot ở ô nào?
+  \answerlines{2}
+  \loigiai{
+    Mỗi lần thực hiện trọn bộ lệnh, robot tiến thêm $3 - 1 = 2$ ô.
+    (a) Sau $5$ lần trọn bộ lệnh, robot ở ô $2 + 2 + 2 + 2 + 2 = 10$.
+    (b) Sau $3$ lần trọn bộ lệnh, robot ở ô $2 + 2 + 2 = 6$. Tiến thêm $3$ ô nữa, robot ở ô $6 + 3 = 9$.
+  }
+\end{bt}
+
+\begin{bt}
+  Ba hộp có lần lượt 3, 7 và 8 viên bi. Em hãy chuyển bi giữa các hộp để cả ba hộp có số bi bằng nhau. Ghi lại các lần chuyển. Ít nhất phải chuyển bao nhiêu viên bi?
+  \HBhinh{\HBhopbi}
+  \answerlines{4}
+  \loigiai{
+    Tổng số bi là $3 + 7 + 8 = 18$ viên, chia đều cho $3$ hộp mỗi hộp có $18 : 3 = 6$ viên. Hộp $1$ cần thêm $3$ viên; hộp $2$ thừa $1$ viên; hộp $3$ thừa $2$ viên. Chuyển $1$ viên từ hộp $2$ sang hộp $1$ và chuyển $2$ viên từ hộp $3$ sang hộp $1$. Ít nhất phải chuyển $1 + 2 = 3$ (viên bi).
+  }
+\end{bt}
+
+% ---------- Mức 3: vận dụng cao ----------
+\begin{bt}
+  An, Bình, Chi đứng thành một hàng. An không đứng cuối hàng. Chi không đứng giữa. Liệt kê \textbf{tất cả} cách xếp có thể.
+  \HBhinh{\HBhangba}
+  \answerlines{4}
+  \loigiai{
+    Có $6$ cách xếp $3$ bạn thành hàng. Loại các cách An đứng cuối (Bình--Chi--An, Chi--Bình--An) và các cách Chi đứng giữa (An--Chi--Bình, Bình--Chi--An). Còn lại $3$ cách thỏa mãn (viết từ đầu hàng đến cuối hàng): An--Bình--Chi; Bình--An--Chi; Chi--An--Bình.
+  }
+\end{bt}
+
+\begin{bt}
+  Có các thẻ số 1, 2, 3, 4, 5, 6. Chọn đúng 3 thẻ khác nhau có tổng bằng 10. Có bao nhiêu cách chọn? Liệt kê các cách.
+  \HBhinh{\HBthesau}
+  \answerlines{4}
+  \loigiai{
+    Liệt kê theo thẻ có số bé nhất từ nhỏ đến lớn:
+    \begin{itemize}
+      \item Có thẻ $1$: $(1, 3, 6)$ và $(1, 4, 5)$.
+      \item Không có thẻ $1$, có thẻ $2$: $(2, 3, 5)$.
+    \end{itemize}
+    Vậy có $3$ cách chọn.
+  }
+\end{bt}
+
+\begin{bt}
+  Điền ba số \textbf{khác nhau} từ 1 đến 9 vào $\square+\square+\square=15$. Tìm \textbf{ít nhất 4 cách}. Hai cách chỉ đổi vị trí được tính là một cách.
+  \HBhinh{\HBthesoA}
+  \answerlines{3}
+  \loigiai{
+    Liệt kê có hệ thống từ số bé nhất tăng dần, có tất cả $8$ cách: $1+5+9=15$; $1+6+8=15$; $2+4+9=15$; $2+5+8=15$; $2+6+7=15$; $3+4+8=15$; $3+5+7=15$; $4+5+6=15$ (chọn ít nhất $4$ cách).
+  }
+\end{bt}
+
+\begin{bt}
+  Chia 9 quả cam vào 3 đĩa, mỗi đĩa có ít nhất 1 quả và số quả ở ba đĩa \textbf{khác nhau}. Tìm tất cả các bộ ba số quả (không tính thứ tự các đĩa).
+  \HBhinh{\HBcamdia}
+  \answerlines{4}
+  \loigiai{
+    Liệt kê theo số cam ở đĩa ít nhất:
+    \begin{itemize}
+      \item Đĩa ít nhất có $1$ quả: $(1, 2, 6)$ và $(1, 3, 5)$.
+      \item Đĩa ít nhất có $2$ quả: $(2, 3, 4)$.
+    \end{itemize}
+    Vậy có $3$ bộ ba thỏa mãn.
+  }
+\end{bt}
+
+\begin{bt}
+  Có 5 bạn, mỗi hai bạn bắt tay nhau đúng một lần. Em hãy tìm một cách \textbf{có hệ thống} để không bỏ sót và cho biết có bao nhiêu cái bắt tay.
+  \HBhinh{\HBbattay}
+  \answerlines{4}
+  \loigiai{
+    Đánh số $5$ bạn là $1, 2, 3, 4, 5$. Bạn $1$ bắt tay với $4$ bạn $(2,3,4,5)$; bạn $2$ bắt tay với $3$ bạn chưa bắt $(3,4,5)$; bạn $3$ bắt tay với $2$ bạn $(4,5)$; bạn $4$ bắt tay với $1$ bạn $(5)$. Tổng số cái bắt tay là $4 + 3 + 2 + 1 = 10$ (cái).
+  }
+\end{bt}
+
+\begin{bt}
+  Một cầu thang có 5 bậc. Mỗi bước bạn nhỏ chỉ được lên 1 hoặc 2 bậc. Có bao nhiêu cách khác nhau để đi từ mặt đất lên bậc thứ 5? Em hãy ghi lại các cách một cách có hệ thống.
+  \HBhinh{\HBcauthang}
+  \answerlines{5}
+  \loigiai{
+    Gọi số cách lên tới bậc $n$ là $c_n$. Bước cuối cùng là lên $1$ bậc (từ bậc $n-1$) hoặc lên $2$ bậc (từ bậc $n-2$) nên $c_n = c_{n-1} + c_{n-2}$. Ta có $c_1 = 1$, $c_2 = 2$, $c_3 = 3$, $c_4 = 5$, $c_5 = 8$. Vậy có $8$ cách, đó là (viết số bậc mỗi bước): $1\text{-}1\text{-}1\text{-}1\text{-}1$; $1\text{-}1\text{-}1\text{-}2$; $1\text{-}1\text{-}2\text{-}1$; $1\text{-}2\text{-}1\text{-}1$; $2\text{-}1\text{-}1\text{-}1$; $1\text{-}2\text{-}2$; $2\text{-}1\text{-}2$; $2\text{-}2\text{-}1$.
+  }
+\end{bt}
+
+\begin{bt}
+  Trên bàn có 12 que tính. Hai người lần lượt lấy 1 hoặc 2 que. Người lấy que cuối cùng thắng. Nếu em là người đi \textbf{sau}, em có cách nào để chắc chắn thắng không? Hãy chơi thử với bạn, ghi lại các lượt chơi và nêu quy luật.
+  \HBhinh{\HBmuoihaique}
+  \answerlines{6}
+  \loigiai{
+    Có chiến lược chắc chắn thắng cho người đi sau: mỗi lượt, nếu bạn đi trước lấy $1$ que thì em lấy $2$ que; nếu bạn lấy $2$ que thì em lấy $1$ que (để tổng số que hai người lấy trong mỗi cặp lượt luôn bằng $3$). Khi đó, số que còn lại lần lượt giảm còn $9, 6, 3, 0$, nên em luôn là người lấy que cuối cùng và thắng.
+  }
+\end{bt}
+
+\begin{bt}
+  Em tự tạo một quy luật gồm ít nhất 5 số hoặc 5 hình để bạn đoán phần tiếp theo. Nói rõ quy luật của em.
+  \answerlines{4}
+  \loigiai{
+    (Bài tập mở) Ví dụ: dãy $3, 6, 9, 12, 15, \ldots$ có quy luật là mỗi số đứng sau hơn số đứng trước $3$ đơn vị; hoặc dãy hình $\square, \triangle, \circ, \square, \triangle, \circ, \ldots$ có quy luật lặp lại nhóm $3$ hình $\square, \triangle, \circ$.
+  }
+\end{bt}
+
+\end{document}
