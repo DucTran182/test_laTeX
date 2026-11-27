@@ -47,7 +47,62 @@
     \PHhangthe{lọ}{kì}{mì}{ho}\par}
 \end{bt}
 
+%---------- LỆNH MỚI CHO BÀI ÔN TẬP (dán cùng khối "LỆNH MỚI" ở trên) ----------
+% Ô chọn từ đúng: tranh + hai từ để khoanh: \PHchon{vật}{từ 1}{từ 2}
+\providecommand{\PHchon}{}\renewcommand{\PHchon}[3]{%
+  \begin{tikzpicture}
+    \draw[PHkhung,thick,rounded corners=12pt,fill=PHnen] (-2.5,-1.8) rectangle (2.5,1.3);
+    \begin{scope}[shift={(0,0.4)},scale=1.8]#1\end{scope}
+    \node[font=\sffamily\bfseries\fontsize{24}{28}\selectfont] at (-1.2,-1.2) {#2};
+    \node[font=\sffamily\bfseries\fontsize{24}{28}\selectfont] at (1.2,-1.2) {#3};
+  \end{tikzpicture}}
+
+%---------- 4 BÀI ÔN TẬP (dán sau bài 6) ----------
+\begin{bt}
+    Bé hãy nối tranh với từ đúng.
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}
+      \foreach \vat/\x in {\PHmeo/0,\PHla/4.2,\PHco/8.4,\PHchim/12.6}{
+        \begin{scope}[shift={(\x,2.4)}]\begin{scope}[scale=1.9]\vat\end{scope}\end{scope}
+        \fill[PHkhung!90!black] (\x,1.2) circle (2.5pt);}
+      \foreach \ten/\x in {cờ/0,chim/4.2,mèo/8.4,lá/12.6}{
+        \node[draw=PHkhung!90!black,thick,fill=white,rounded corners=6pt,minimum width=2.6cm,minimum height=1.1cm,
+          font=\sffamily\bfseries\fontsize{26}{30}\selectfont] at (\x,-0.6) {\ten};
+        \fill[PHkhung!90!black] (\x,0.1) circle (2.5pt);}
+    \end{tikzpicture}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy điền chữ cái còn thiếu vào ô trống.
+    \TTbatdauhinh
+    {\centering
+    \PHdienam{\PHquacam}{c}{0}{m}\hfill\PHdienam{\PHchim}{ch}{0}{m}\hfill\PHdienam{\PHbo}{b}{4}{}\par\vspace{6pt}
+    \PHdienam{\PHbingo}{b}{1}{}\hfill\PHdienam{\PHle}{l}{0}{}\hfill\PHdienam{\PHmeo}{m}{2}{o}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy khoanh vào từ đúng với tranh.
+    \TTbatdauhinh
+    {\centering
+    \PHchon{\PHle}{lê}{lo}\hfill\PHchon{\PHnon}{mũ}{mo}\hfill\PHchon{\PHco}{cờ}{cở}\par\vspace{6pt}
+    \PHchon{\PHla}{lá}{la}\hfill\PHchon{\PHbo}{bộ}{bọ}\hfill\PHchon{\PHtao}{táo}{tảo}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy tô màu \textbf{tím} vào những từ có chữ \PHchumau{u}{PHtim}
+    và tô màu \textbf{vàng} vào những từ có chữ \PHchumau{ơ}{PHvang}.
+    \TTbatdauhinh
+    {\centering
+    \PHhangthe{củ}{mơ}{mũ}{nơ}\par\vspace{8pt}
+    \PHhangthe{bơ}{dù}{cờ}{bú}\par}
+\end{bt}
+
 %---------- ĐÁP ÁN (giáo viên) ----------
+% Ôn tập 1: tranh mèo nối "mèo"; lá nối "lá"; cờ nối "cờ"; chim nối "chim".
+% Ôn tập 2: cam (a); chim (i); bọ (o); bí (i); lê (ê); mèo (e).
+% Ôn tập 3: lê; mũ; cờ; lá; bọ; táo.
+% Ôn tập 4: tím: củ, mũ, dù, bú;  vàng: mơ, nơ, bơ, cờ.
 % Bài 4: tô ba, bà, cá, la.
 % Bài 5: tô xe, mẹ, bè, he.
 % Bài 6: hồng: bi, dì, kì, mì;  cam: bò, cỏ, lọ, ho.
