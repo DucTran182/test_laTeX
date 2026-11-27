@@ -482,6 +482,34 @@
     \node[anchor=base west,text=PHxam!45,font=\fontsize{36}{36}\selectfont] at (0.2,-0.5) {#1};
   \end{tikzpicture}\par}
 
+% Hàng khoanh chữ cái giống mẫu: \PHkhoanhchu{chữ mẫu}{8 chữ cách nhau dấu phẩy}
+\providecommand{\PHkhoanhchu}{}\renewcommand{\PHkhoanhchu}[2]{%
+  \begin{tikzpicture}[font=\sffamily\bfseries\Huge]
+    \PHkhung{15.6}{1.3}
+    \node[draw=PHvangdam,thick,fill=PHvang!60,rounded corners=6pt,minimum size=0.95cm,inner sep=0pt] at (0.5,0) {#1};
+    \draw[PHxam,thick,-{Stealth[length=2.5mm]}] (1.3,0) -- (1.9,0);
+    \foreach \c [count=\k] in {#2}{\node[text=PHxam!85!black] at (1.55*\k+1.5,0) {\c};}
+  \end{tikzpicture}\par}
+% Hàng khoanh từ giống mẫu: \PHtugiong{từ mẫu}{6 từ cách nhau dấu phẩy}
+\providecommand{\PHtugiong}{}\renewcommand{\PHtugiong}[2]{%
+  \begin{tikzpicture}[font=\LARGE]
+    \PHkhung{15.6}{1.3}
+    \node[draw=PHvangdam,thick,fill=PHvang!60,rounded corners=6pt,minimum width=2.2cm,minimum height=0.95cm,inner sep=0pt] at (1.1,0) {#1};
+    \draw[PHxam,thick,-{Stealth[length=2.5mm]}] (2.5,0) -- (3.0,0);
+    \foreach \c [count=\k] in {#2}{\node at (1.95*\k+1.9,0) {\c};}
+  \end{tikzpicture}\par}
+% Hàng ghép chữ thành từ: \PHghepchu{vật}{phụ âm}{vần}
+\providecommand{\PHghepchu}{}\renewcommand{\PHghepchu}[3]{%
+  \begin{tikzpicture}[font=\sffamily\bfseries\Huge]
+    \PHkhung{15.6}{1.6}
+    \begin{scope}[shift={(0.9,0)},scale=1.5]#1\end{scope}
+    \node[PHo,minimum size=1.1cm,fill=PHhong!45,font=\sffamily\bfseries\Huge] at (4.2,0) {#2};
+    \node[font=\sffamily\bfseries\LARGE] at (5.2,0) {$+$};
+    \node[PHo,minimum size=1.1cm,fill=PHbien!40,font=\sffamily\bfseries\Huge] at (6.2,0) {#3};
+    \node[font=\sffamily\bfseries\LARGE] at (7.2,0) {$=$};
+    \node[PHo,minimum width=2.6cm,minimum height=1.1cm] at (9.0,0) {};
+  \end{tikzpicture}\par}
+
 %=========================================================
 %                  PHIẾU TOÁN
 %=========================================================
@@ -815,6 +843,21 @@
 \TTthongtin
 
 \begin{bt}
+    Bé hãy nối tranh với từ thích hợp.
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}
+      \foreach \vat/\x in {\PHco/0,\PHmeo/4.2,\PHle/8.4,\PHchim/12.6}{
+        \draw[PHkhung,thick,rounded corners=12pt,fill=PHnen] (\x-1.8,0.9) rectangle (\x+1.8,3.4);
+        \begin{scope}[shift={(\x,2.15)},scale=1.9]\vat\end{scope}
+        \fill[PHkhung!90!black] (\x,0.55) circle (2.5pt);}
+      \foreach \ten/\x in {lê/0,chim/4.2,cờ/8.4,mèo/12.6}{
+        \node[draw=PHkhung!90!black,thick,fill=white,rounded corners=4pt,minimum width=3.0cm,minimum height=1.0cm,font=\LARGE] at (\x,-1.5) {\ten};
+        \fill[PHkhung!90!black] (\x,-0.7) circle (2.5pt);}
+    \end{tikzpicture}\par}
+\end{bt}
+
+\begin{bt}
     Bé hãy điền chữ cái thích hợp vào ô trống.
     \TTbatdauhinh
     {\centering
@@ -826,13 +869,56 @@
 \end{bt}
 
 \begin{bt}
-    Bé hãy khoanh vào tên vật có chứa chữ \textbf{i}.
+    Bé hãy khoanh tròn những chữ cái giống chữ cái mẫu.
     \TTbatdauhinh
     {\centering
-    \PHtenvat{\PHquacam}{quả cam}\hfill\PHtenvat{\PHchim}{con chim}\hfill\PHtenvat{\PHbingo}{quả bí}\par\vspace{6pt}
-    \PHtenvat{\PHle}{quả lê}\hfill\PHtenvat{\PHmeo}{con mèo}\hfill\PHtenvat{\PHnon}{cái mũ}\par}
+    \PHkhoanhchu{a}{a,o,a,e,a,u,a,ê}\PHcach
+    \PHkhoanhchu{e}{e,a,e,i,e,o,ơ,e}\PHcach
+    \PHkhoanhchu{ơ}{o,ơ,u,ơ,a,ơ,ê,ơ}\par}
 \end{bt}
 
+\newpage
+\begin{bt}
+    Bé hãy nối chữ in thường với chữ in hoa tương ứng.
+    \TTbatdauhinh
+    {\centering
+    \begin{tikzpicture}[font=\sffamily\bfseries\Huge]
+      \foreach \c/\x in {a/0,e/3.3,i/6.6,u/9.9,ê/13.2}{
+        \node[draw=PHkhung!90!black,thick,fill=PHnen,rounded corners=8pt,minimum width=2.2cm,minimum height=1.4cm] at (\x,0) {\c};
+        \fill[PHkhung!90!black] (\x,-1.0) circle (2.5pt);}
+      \foreach \c/\x in {U/0,A/3.3,Ê/6.6,I/9.9,E/13.2}{
+        \node[draw=PHkhung!90!black,thick,fill=PHvang!40,rounded corners=8pt,minimum width=2.2cm,minimum height=1.4cm] at (\x,-3.4) {\c};
+        \fill[PHkhung!90!black] (\x,-2.4) circle (2.5pt);}
+    \end{tikzpicture}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy ghép chữ cái thành từ rồi viết vào ô trống.
+    \TTbatdauhinh
+    {\centering
+    \PHghepchu{\PHla}{l}{á}\PHcach
+    \PHghepchu{\PHnon}{m}{ũ}\PHcach
+    \PHghepchu{\PHco}{c}{ờ}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy khoanh \textcolor{PHdodam}{\textbf{đỏ}} vào tranh có tên bắt đầu bằng chữ \textbf{m}, khoanh \textcolor{PHbiendam}{\textbf{xanh}} vào tranh có tên bắt đầu bằng chữ \textbf{l}.
+    \TTbatdauhinh
+    {\centering
+    \PHtenvat{\PHmeo}{mèo}\hfill\PHtenvat{\PHla}{lá}\hfill\PHtenvat{\PHnon}{mũ}\par\vspace{6pt}
+    \PHtenvat{\PHle}{lê}\hfill\PHtenvat{\PHco}{cờ}\hfill\PHtenvat{\PHchim}{chim}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy khoanh tròn những từ giống từ mẫu.
+    \TTbatdauhinh
+    {\centering
+    \PHtugiong{lá}{lá,lê,lá,mũ,lá,cờ}\PHcach
+    \PHtugiong{mèo}{mèo,cờ,mèo,lê,mũ,mèo}\PHcach
+    \PHtugiong{cờ}{cờ,lá,cờ,cờ,lê,mũ}\par}
+\end{bt}
+
+\newpage
 \begin{bt}
     Bé hãy nối tranh với dấu thanh có trong tên.
     \TTbatdauhinh
@@ -853,31 +939,19 @@
     \end{tikzpicture}\par}
 \end{bt}
 
-\newpage
 \begin{bt}
-    Bé hãy nối tranh với từ thích hợp.
+    Bé hãy giúp bạn mèo tìm đường đến quả lê: tô màu các ô có chữ \textbf{a}.
     \TTbatdauhinh
     {\centering
-    \begin{tikzpicture}
-      \foreach \vat/\x in {\PHco/0,\PHmeo/4.2,\PHle/8.4,\PHchim/12.6}{
-        \draw[PHkhung,thick,rounded corners=12pt,fill=PHnen] (\x-1.8,0.9) rectangle (\x+1.8,3.4);
-        \begin{scope}[shift={(\x,2.15)},scale=1.9]\vat\end{scope}
-        \fill[PHkhung!90!black] (\x,0.55) circle (2.5pt);}
-      \foreach \ten/\x in {quả lê/0,con chim/4.2,lá cờ/8.4,con mèo/12.6}{
-        \node[draw=PHkhung!90!black,thick,fill=white,rounded corners=4pt,minimum width=3.2cm,minimum height=1.0cm,font=\LARGE] at (\x,-1.5) {\ten};
-        \fill[PHkhung!90!black] (\x,-0.7) circle (2.5pt);}
-    \end{tikzpicture}\par}
-\end{bt}
-
-\begin{bt}
-    Bé hãy tô màu vào những ô có chữ \textbf{i}.
-    \TTbatdauhinh
-    {\centering
-    \begin{tikzpicture}[font=\sffamily\bfseries\Huge]
-      \foreach \c [count=\k] in {a,i,o,e,i,u,ê,i,ơ,a,i,e}{
-        \pgfmathtruncatemacro{\cot}{mod(\k-1,4)}\pgfmathtruncatemacro{\hang}{div(\k-1,4)}
-        \draw[PHkhung,thick,rounded corners=8pt,fill=white] (3.9*\cot-1.8,-1.6*\hang-0.7) rectangle ++(3.6,1.4);
-        \node[text=PHxam!85!black] at (3.9*\cot,-1.6*\hang) {\c};}
+    \begin{tikzpicture}[font=\sffamily\bfseries\LARGE]
+      \foreach \e [count=\k] in {a,a,o,e,u, i,a,a,ê,o, u,e,a,a,ơ, o,i,e,a,a}{
+        \pgfmathtruncatemacro{\cot}{mod(\k-1,5)}\pgfmathtruncatemacro{\hang}{div(\k-1,5)}
+        \draw[PHkhung,thick,rounded corners=7pt,fill=white] (2.15*\cot+1.9,-1.3*\hang-0.55) rectangle ++(1.95,1.1);
+        \node[text=PHxam!85!black] at (2.15*\cot+2.875,-1.3*\hang) {\e};}
+      \begin{scope}[shift={(0.7,-0.1)},scale=1.7]\PHmeo\end{scope}
+      \draw[PHxam,thick,-{Stealth[length=2.5mm]}] (1.45,0) -- (1.85,0);
+      \draw[PHxam,thick,-{Stealth[length=2.5mm]}] (12.7,-3.9) -- (13.2,-3.9);
+      \begin{scope}[shift={(14.2,-3.9)},scale=1.9]\PHle\end{scope}
     \end{tikzpicture}\par}
 \end{bt}
 
@@ -885,17 +959,10 @@
     Bé hãy đồ theo nét mờ rồi viết tiếp vào dòng.
     \TTbatdauhinh
     {\centering
-    \PHoli{i\quad i\quad i\quad i\quad i}\vspace{3pt}
-    \PHoli{e\quad e\quad e\quad e\quad e}\vspace{3pt}
-    \PHoli{bi\quad bi\quad bi\quad bi}\vspace{3pt}
-    \PHoli{lá\quad lá\quad lá\quad lá}\par}
-\end{bt}
-
-\begin{bt}
-    Bé hãy đếm và viết số vào ô trống.
-    \TTbatdauhinh
-    {\centering
-    \PHodem{\PHla}{3}{}\hfill\PHodem{\PHmeo}{2}{}\hfill\PHodem{\PHle}{4}{}\par}
+    \PHoli{a\quad a\quad a\quad a\quad a}\vspace{3pt}
+    \PHoli{o\quad o\quad o\quad o\quad o}\vspace{3pt}
+    \PHoli{lá\quad lá\quad lá\quad lá}\vspace{3pt}
+    \PHoli{mũ\quad mũ\quad mũ\quad mũ}\par}
 \end{bt}
 
 \begin{center}
@@ -922,8 +989,11 @@
 % Bài 3: 2; 2; 3; 4.  Bài 4: 3+2=5; 5-2=3; 2+4=6; 6-3=3.
 % Bài 5: tô các bóng 1+2, 5-2, 3+0, 4-1.
 % Bài 6 (ngón tay cộng): 1+2=3; 3+2=5; 2+2=4; 4+1=5.  Bài 7 (so sánh): = ; > .
-% --- Tiếng Việt: Bài 1: lá (a, sắc); mèo (e, huyền); chim (i); lê (ê); mũ (u, ngã); cờ (ơ, huyền).
-% Bài 2: khoanh con chim, quả bí. TV trang 2: Bài 4: cờ - lá cờ; mèo - con mèo; lê - quả lê; chim - con chim. Bài 5: tô 4 ô chữ i. Bài 7: 3; 2; 4.
-%  Bài 3: lá - sắc; cờ - huyền; mũ - ngã; bọ - nặng.
+% --- Tiếng Việt: Bài 1: lê - quả lê; chim; cờ; mèo (nối đúng tranh với từ).
+% Bài 2: lá (a, sắc); mèo (e, huyền); chim (i); lê (ê); mũ (u, ngã); cờ (ơ, huyền).
+% Bài 3: khoanh a / e / ơ giống mẫu.  Bài 4: a-A; e-E; i-I; u-U; ê-Ê.
+% Bài 5: lá; mũ; cờ.  Bài 6: đỏ: mèo, mũ; xanh: lá, lê.
+% Bài 7: lá (3 từ); mèo (3 từ); cờ (3 từ).  Bài 8: lá - sắc; cờ - huyền; mũ - ngã; bọ - nặng.
+% Bài 9: đường đi qua các ô chữ a (hàng 1: ô 1-2; hàng 2: ô 2-3; hàng 3: ô 3-4; hàng 4: ô 4-5).
 %=========================================================
 \end{document}
