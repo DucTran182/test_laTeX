@@ -1,0 +1,53 @@
+%=========================================================
+% BỔ SUNG PHIẾU TIẾNG VIỆT PRE1 - TUẦN 17 (3 bài mới: tô màu từ có chữ cái đã học)
+% CÁCH DÙNG:
+%   1) Dán khối "LỆNH MỚI" vào phần định nghĩa lệnh (cùng chỗ với \PHdienam, \PHtenvat...).
+%   2) Dán khối "BÀI TẬP MỚI" ngay sau bài 3 (nối tranh với dấu thanh)
+%      và trước \begin{center} \faGg\faGg\quad Hết ...
+%=========================================================
+
+%---------- LỆNH MỚI ----------
+% Thẻ từ chữ thường cỡ lớn, để bé tô màu: \PHthetu{từ}
+\providecommand{\PHthetu}{}\renewcommand{\PHthetu}[1]{%
+  \tikz[baseline=-0.6ex]\node[draw=PHkhung!90!black,thick,rounded corners=10pt,fill=white,
+    minimum width=3.3cm,minimum height=1.5cm,inner sep=2pt,
+    font=\sffamily\bfseries\fontsize{30}{34}\selectfont]{#1};}
+% Một hàng 4 thẻ từ: \PHhangthe{từ 1}{từ 2}{từ 3}{từ 4}
+\providecommand{\PHhangthe}{}\renewcommand{\PHhangthe}[4]{%
+  \PHthetu{#1}\hfill\PHthetu{#2}\hfill\PHthetu{#3}\hfill\PHthetu{#4}\par}
+% Ô chữ cái mẫu, màu để bé tô: \PHchumau{chữ}{màu}
+\providecommand{\PHchumau}{}\renewcommand{\PHchumau}[2]{%
+  \tikz[baseline=-0.6ex]\node[circle,draw=PHkhung!90!black,thick,fill=#2,
+    minimum size=1.3cm,inner sep=0pt,
+    font=\sffamily\bfseries\fontsize{30}{34}\selectfont]{#1};}
+
+%---------- BÀI TẬP MỚI ----------
+\begin{bt}
+    Bé hãy tô màu \textbf{vàng} vào những từ có chữ \PHchumau{a}{PHvang}.
+    \TTbatdauhinh
+    {\centering
+    \PHhangthe{ba}{bờ}{bà}{bé}\par\vspace{8pt}
+    \PHhangthe{cá}{cô}{la}{mì}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy tô màu \textbf{xanh} vào những từ có chữ \PHchumau{e}{PHxanh}.
+    \TTbatdauhinh
+    {\centering
+    \PHhangthe{xe}{lá}{mẹ}{bi}\par\vspace{8pt}
+    \PHhangthe{bè}{cờ}{he}{vo}\par}
+\end{bt}
+
+\begin{bt}
+    Bé hãy tô màu \textbf{hồng} vào những từ có chữ \PHchumau{i}{PHhong}
+    và tô màu \textbf{cam} vào những từ có chữ \PHchumau{o}{PHcam}.
+    \TTbatdauhinh
+    {\centering
+    \PHhangthe{bi}{bò}{dì}{cỏ}\par\vspace{8pt}
+    \PHhangthe{lọ}{kì}{mì}{ho}\par}
+\end{bt}
+
+%---------- ĐÁP ÁN (giáo viên) ----------
+% Bài 4: tô ba, bà, cá, la.
+% Bài 5: tô xe, mẹ, bè, he.
+% Bài 6: hồng: bi, dì, kì, mì;  cam: bò, cỏ, lọ, ho.
