@@ -200,11 +200,14 @@
 % --- Hình: 5 bạn bắt tay ---
 \providecommand{\HBbattay}{}\renewcommand{\HBbattay}{%
   \begin{tikzpicture}[font=\sffamily]
-    \foreach \k in {1,...,5}{\coordinate (p\k) at ({90+72*(\k-1)}:1.25);}
-    \foreach \i/\j in {1/2,2/3,3/4,4/5,5/1}{\draw[pkTimD,thick] (p\i)--(p\j);}
-    \foreach \i/\j in {1/3,2/4,3/5,4/1,5/2}{\draw[pkHongD,thick,dashed] (p\i)--(p\j);}
     \foreach \k/\c/\d in {1/pkHong/pkHongD,2/pkXanh/pkXanhD,3/pkVang/pkVangD,4/pkLa/pkLaD,5/pkCam/pkCamD}{
-      \node[circle,draw=\d,fill=\c,very thick,minimum size=0.62cm,font=\bfseries] at (p\k) {\k};}
+      \node[circle,draw=\d,fill=\c,very thick,minimum size=0.7cm,font=\bfseries] (b\k) at ({1.6*(\k-1)},0) {\k};}
+    % ví dụ: bạn 1 bắt tay với 2, 3, 4, 5
+    \draw[pkHongD,thick] (b1) to[bend left=40] (b2);
+    \draw[pkHongD,thick] (b1) to[bend left=40] (b3);
+    \draw[pkHongD,thick] (b1) to[bend left=40] (b4);
+    \draw[pkHongD,thick] (b1) to[bend left=40] (b5);
+    \node[font=\footnotesize\bfseries,text=pkHongD!60!black] at (3.2,-1.0) {Ví dụ: bạn 1 bắt tay với bạn 2, 3, 4, 5 $\rightarrow$ 4 cái bắt tay};
   \end{tikzpicture}}
 
 % --- Hình: hàng 15 bạn, Nam thứ 5 (từ đầu), Lan thứ 4 (từ cuối) ---
@@ -863,11 +866,16 @@
 \end{bt}
 
 \begin{bt}
-  Có 5 bạn, mỗi hai bạn bắt tay nhau đúng một lần. Em hãy tìm một cách \textbf{có hệ thống} để không bỏ sót và cho biết có bao nhiêu cái bắt tay.
+  Có 5 bạn đánh số 1, 2, 3, 4, 5. Mỗi hai bạn bắt tay nhau đúng một lần. Em hãy đếm số cái bắt tay theo từng bạn rồi điền vào chỗ trống.
   \HBhinh{\HBbattay}
-  \answerlines{4}
+  \par\medskip
+  \noindent Bạn 1 bắt tay với các bạn 2, 3, 4, 5: có \shortblank{1.5cm} cái bắt tay.\par
+  \noindent Bạn 2 bắt tay thêm với các bạn 3, 4, 5 (đã bắt tay bạn 1 rồi): có \shortblank{1.5cm} cái bắt tay.\par
+  \noindent Bạn 3 bắt tay thêm với các bạn 4, 5: có \shortblank{1.5cm} cái bắt tay.\par
+  \noindent Bạn 4 bắt tay thêm với bạn 5: có \shortblank{1.5cm} cái bắt tay.\par
+  \noindent Tất cả có: \shortblank{3cm} $=$ \shortblank{1.5cm} (cái bắt tay).
   \loigiai{
-    Đánh số $5$ bạn là $1, 2, 3, 4, 5$. Bạn $1$ bắt tay với $4$ bạn $(2,3,4,5)$; bạn $2$ bắt tay với $3$ bạn chưa bắt $(3,4,5)$; bạn $3$ bắt tay với $2$ bạn $(4,5)$; bạn $4$ bắt tay với $1$ bạn $(5)$. Tổng số cái bắt tay là $4 + 3 + 2 + 1 = 10$ (cái).
+    Bạn $1$ bắt tay với $4$ bạn $(2,3,4,5)$; bạn $2$ bắt tay thêm $3$ bạn $(3,4,5)$; bạn $3$ bắt tay thêm $2$ bạn $(4,5)$; bạn $4$ bắt tay thêm $1$ bạn $(5)$. Tổng số cái bắt tay là $4 + 3 + 2 + 1 = 10$ (cái).
   }
 \end{bt}
 
